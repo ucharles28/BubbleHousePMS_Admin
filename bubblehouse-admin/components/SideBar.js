@@ -18,7 +18,6 @@ const Nav = styled.div`
 
 const NavIcon = styled.a`
   margin-left: 2rem;
-  font-size: 2rem;
   height: 80px;
   display: flex;
   justify-content: flex-start;
@@ -26,7 +25,7 @@ const NavIcon = styled.a`
 `;
 
 const SidebarNav = styled.nav`
-  background: #15171c;
+  background: #ffffff;
   width: 250px;
   height: 100vh;
   display: flex;
@@ -50,7 +49,7 @@ const Sidebar = () => {
 
     return (
         <>
-            <IconContext.Provider value={{ color: '#fff' }}>
+            <IconContext.Provider value={{ color: '#' }}>
                 <Nav>
                     <Link href='#' className='hidden'>
                         <NavIcon>

@@ -1,15 +1,17 @@
 import { Checkbox, FormControlLabel, TextField, Button, Card, CardContent } from '@mui/material'
+import { SidebarRight } from 'iconsax-react'
 import Sidebar from '../../components/SideBar'
 
 
-export default function SideBar() {
+function SideBar() {
+
     return (
         <div className='font-poppins'>
             <Sidebar />
             <div className='ml-64 mt-3'>
                 <Card>
                     <CardContent>
-                        <p className='border-b-[1px] border-[#3a354125] text-lg font-medium leading-7'>Add hotel</p>
+                        <div className='border-b-[1px] border-[#3a354125] text-lg font-medium leading-7'><span>Add Hotel</span></div>
                         <div className="flex space-x-5 justify-between my-4">
                             <div className='item w-2/6 h-full'>
                                 <div className='flex flex-col items-center'>
@@ -119,3 +121,5 @@ export default function SideBar() {
         </div>
     )
 }
+
+export default SideBar;

@@ -3,15 +3,17 @@ import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import * as IoIcons from 'react-icons/io';
 import * as RiIcons from 'react-icons/ri';
-import {RiArrowDownSFill, RiArrowUpSFill} from 'react-icons/ri';
+import { Home2 } from 'iconsax-react';
+import { ArrowRight2 } from 'iconsax-react';
+import { ArrowDown2 } from 'iconsax-react';
 
 export const SidebarData = [
   {
-    title: 'Overview',
+    title: 'Dashboard',
     path: '/overview',
-    icon: <AiIcons.AiFillHome />,
-    iconClosed: <RiArrowDownSFill />,
-    iconOpened: <RiArrowUpSFill />,
+    icon: <Home2 size="16" color="#1a1a1a"/>,
+    iconClosed: <ArrowRight2 size="14" color="#1a1a1a" />,
+    iconOpened: <ArrowDown2 size="14" color="#1a1a1a" />,
 
     subNav: [
       {
@@ -27,11 +29,11 @@ export const SidebarData = [
     ]
   },
   {
-    title: 'Reports',
+    title: 'Manage Users',
     path: '/reports',
     icon: <IoIcons.IoIosPaper />,
-    iconClosed: <RiIcons.RiArrowDownSFill />,
-    iconOpened: <RiIcons.RiArrowUpSFill />,
+     iconClosed: <ArrowRight2 size="14" color="#1a1a1a" />,
+    iconOpened: <ArrowDown2 size="14" color="#1a1a1a" />,
 
     subNav: [
       {
@@ -68,8 +70,8 @@ export const SidebarData = [
     path: '/messages',
     icon: <FaIcons.FaEnvelopeOpenText />,
 
-    iconClosed: <RiIcons.RiArrowDownSFill />,
-    iconOpened: <RiIcons.RiArrowUpSFill />,
+     iconClosed: <ArrowRight2 size="14" color="#1a1a1a" />,
+    iconOpened: <ArrowDown2 size="14" color="#1a1a1a" />,
 
     subNav: [
       {

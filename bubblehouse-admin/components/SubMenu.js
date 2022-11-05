@@ -4,24 +4,28 @@ import styled from 'styled-components';
 
 const SidebarLink = styled.a`
   display: flex;
-  color: #e1e9fc;
+  color: #1a1a1a;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 15px;
   list-style: none;
-  height: 60px;
+  height: 49px;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 14px;
+  line-height: 24;
+  font-weight: 400;
+  margin-right: 17px;
+  margin-left: 7px;
 
   &:hover {
-    background: #252831;
-    border-left: 4px solid #632ce4;
+    background: #1a1a1a1a;
+    border-radius: 8px;
     cursor: pointer;
   }
 `;
 
 const SidebarLabel = styled.span`
-  margin-left: 16px;
+  margin-left: 10px;
 `;
 
 const DropdownLink = styled.a`

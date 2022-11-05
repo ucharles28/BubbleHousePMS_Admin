@@ -49,7 +49,7 @@ const SubMenu = ({ item }) => {
         <>
             <Link href={item.subNav ? '#' : item.path} onClick={item.subNav && showSubnav}>
                 <SidebarLink>
-                    <div>
+                    <div className='flex items-center justify-center'>
                         {item.icon}
                         <SidebarLabel>{item.title}</SidebarLabel>
                     </div>

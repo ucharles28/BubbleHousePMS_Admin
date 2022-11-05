@@ -1,30 +1,47 @@
 import { Checkbox, FormControlLabel, TextField, Button } from '@mui/material'
-import Head from 'next/head'
-import Image from 'next/image'
+// import { Form } from 'react-bootstrap';
+// import Head from 'next/head'
+// import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
 export default function Login() {
     return (
-        <div className='grid grid-cols-3'>
-            <div className='h-full col-span-2 bg-black'>
-                <span>hello</span>
-            </div>
-            <div className='h-full px-2 bg-white'>
-                <div className='flex grid-row-3 justify-center items-center'>
-                <div className='grid'>
-                    <div className='grid grid-rows-2'>
-                        <span className='text-2xl'>Welcome to BCloud!👋</span>
-                        <span className='text-sm'>Please sign-in to your account and start the adventure</span>
+        <div className='h-screen font-poppins'>
+            <div className='flex space-x-3 w-full h-full'>
+
+                {/* Background Image and Overlay */}
+                <div className='item w-full h-ful bg-[url(https://media.istockphoto.com/photos/downtown-cleveland-hotel-entrance-and-waiting-taxi-cab-picture-id472899538?k=20&m=472899538&s=612x612&w=0&h=ZuEBl5Pq1_cn9pUsG_jAGQmiT0UgL1jyl7TZY6w-K0g=)] object-cover'>
+                    <div className='w-full h-full flex bg-gradient-to-t from-[#1a1a1a]/80 to-[#1a1a1a]/30'>
+                        <div className='text-sm font-normal leading-6 text-white fixed bottom-0 left-0 w-full p-8'>
+                            <p>Copyright Bcloud © 2022</p>
+                        </div>
                     </div>
-                    <div className='grid grid-rows-3'>
-                        <TextField id="outlined-basic" size='small' className='justify-end' label="Email" variant="outlined" />
-                        <TextField id="outlined-basic" size='small' label="Password" variant="outlined" />
-                        <FormControlLabel control={<Checkbox size='30'/>} label="Remember me" />
+                </div>
+
+                {/* Input Field */}
+                <div className='item w-3/6 h-full bg-white'>
+                    <div className='flex justify-center items-center p-7 w-full h-full'>
+                        <div className='m-0'>
+
+                            <div className="block">
+                                <p className='block text-2xl leading-8 font-medium text-[#1a1a1a}/90'>Welcome to BCloud! &#128075;</p>
+                                <span className='block text-sm leading-5 font-normal text-[#1a1a1a]/70'>Please sign-in to your account and start the adventure</span>
+                            </div>
+
+                            <div className='flex flex-col mt-6 space-y-4 text-[#1a1a1a}'>
+                                <TextField id="outlined-basic" className='w-full' InputProps={{ sx: { height: 56 } }} label="Email" variant="outlined" />
+                                <TextField id="outlined-basic" className='w-full' InputProps={{ sx: { height: 56 } }} label="Password" variant="outlined" />
+                            </div>
+                            <div className='flex justify-between items-center'>
+                                <FormControlLabel control={<Checkbox size='small' />} label="Remember me" className='text-[12px]' />
+                                <p className='text-sm leading-6 font-normal text-[#1a1a1a]/50'>Forgot password?</p>
+                            </div>
+                            <button
+                                type="button"
+                                className="mt-7 w-full text-center justify-center font-medium flex items-center py-2 rounded-[5px] text-sm leading-6 uppercase bg-[#666666] text-white">Login</button>
+                        </div>
                     </div>
-                    <Button variant="contained">Login</Button>
                 </div>
-                </div>
-                
 
             </div>
         </div>

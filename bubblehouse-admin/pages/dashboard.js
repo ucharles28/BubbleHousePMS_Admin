@@ -96,7 +96,7 @@ function Dashboard() {
                 <div className='gap-8'>
                     <div className='grid overflow-hidden grid-cols-4 w-full h-auto items-center gap-3 p-3'>
 
-                        <div className="box rounded-lg bg-white flex justify-between items-center p-6 shadow-md">
+                        <div className="box rounded-lg bg-white flex justify-between items-center p-6 shadow">
                             <div className=''>
                                 <People size={56} />
                             </div>
@@ -106,7 +106,7 @@ function Dashboard() {
                             </div>
                         </div>
 
-                        <div className="box rounded-lg bg-white flex justify-between items-center p-6 shadow-md">
+                        <div className="box rounded-lg bg-white flex justify-between items-center p-6 shadow">
                             <div className=''>
                                 <Buildings size={56} />
                             </div>
@@ -116,7 +116,7 @@ function Dashboard() {
                             </div>
                         </div>
 
-                        <div className="box rounded-lg bg-white flex justify-between items-center p-6 shadow-md">
+                        <div className="box rounded-lg bg-white flex justify-between items-center p-6 shadow">
                             <div className=''>
                                 <Buliding size={56} />
                             </div>
@@ -126,7 +126,7 @@ function Dashboard() {
                             </div>
                         </div>
 
-                        {/* <div className="box rounded-lg bg-white flex justify-between items-center p-6 shadow-md">
+                        {/* <div className="box rounded-lg bg-white flex justify-between items-center p-6 shadow">
                             <div className=''>
                                 <Buliding size={56} />
                             </div>
@@ -140,7 +140,7 @@ function Dashboard() {
 
                     <div className='grid overflow-hidden grid-cols-4 w-full h-auto items-center gap-3 p-3'>
 
-                        <div className="box rounded-lg bg-white flex items-center p-6 shadow-md gap-5 h-[100px]">
+                        <div className="box rounded-lg bg-white flex items-center p-6 shadow gap-5 h-[100px]">
                             {/* <div className='bottom-0'>
                                 <Book size={80} color="#1a1a1a1a" />
                             </div> */}
@@ -153,7 +153,7 @@ function Dashboard() {
                             </div>
                         </div>
 
-                        <div className="box rounded-lg bg-white flex items-center p-6 shadow-md gap-5 h-[100px]">
+                        <div className="box rounded-lg bg-white flex items-center p-6 shadow gap-5 h-[100px]">
                             {/* <div className='bottom-0'>
                                 <Book size={80} color="#1a1a1a1a" />
                             </div> */}
@@ -166,7 +166,7 @@ function Dashboard() {
                             </div>
                         </div>
 
-                        <div className="box rounded-lg bg-white flex items-center p-6 shadow-md gap-5 h-[100px]">
+                        <div className="box rounded-lg bg-white flex items-center p-6 shadow gap-5 h-[100px]">
                             {/* <div className='bottom-0'>
                                 <Book size={80} color="#1a1a1a1a" />
                             </div> */}
@@ -179,7 +179,7 @@ function Dashboard() {
                             </div>
                         </div>
 
-                        {/* <div className="box rounded-lg bg-white flex items-center p-6 shadow-md gap-5 h-[100px]">|
+                        {/* <div className="box rounded-lg bg-white flex items-center p-6 shadow gap-5 h-[100px]">|
                             <div className='p-3 bg-[#1a1a1a]/10 rounded-lg justify-center'>
                                 <Slash size={42} />
                             </div>
@@ -193,7 +193,7 @@ function Dashboard() {
 
                     <div className='grid overflow-hidden grid-cols-4 w-full h-auto items-center gap-3 p-3'>
 
-                        <div className="box rounded-lg bg-white flex items-center p-6 shadow-md gap-5 h-[100px]">
+                        <div className="box rounded-lg bg-white flex items-center p-6 shadow gap-5 h-[100px]">
                             {/* <div className='bottom-0'>
                                 <Book size={80} color="#1a1a1a1a" />
                             </div> */}
@@ -206,7 +206,7 @@ function Dashboard() {
                             </div>
                         </div>
 
-                        <div className="box rounded-lg bg-white flex items-center p-6 shadow-md gap-5 h-[100px]">
+                        <div className="box rounded-lg bg-white flex items-center p-6 shadow gap-5 h-[100px]">
                             {/* <div className='bottom-0'>
                                 <Book size={80} color="#1a1a1a1a" />
                             </div> */}
@@ -219,7 +219,7 @@ function Dashboard() {
                             </div>
                         </div>
 
-                        <div className="box rounded-lg bg-white flex items-center p-6 shadow-md gap-5 h-[100px]">
+                        <div className="box rounded-lg bg-white flex items-center p-6 shadow gap-5 h-[100px]">
                             {/* <div className='bottom-0'>
                                 <Book size={80} color="#1a1a1a1a" />
                             </div> */}
@@ -232,7 +232,7 @@ function Dashboard() {
                             </div>
                         </div>
 
-                        {/* <div className="box rounded-lg bg-white flex items-center p-6 shadow-md gap-5 h-[100px]">
+                        {/* <div className="box rounded-lg bg-white flex items-center p-6 shadow gap-5 h-[100px]">
                             <div className='p-3 bg-[#1a1a1a]/10 rounded-lg justify-center'>
                                 <Slash size={42} />
                             </div>

@@ -14,7 +14,7 @@ const SidebarLink = styled.a`
   font-size: 14px;
   line-height: 24;
   font-weight: 400;
-  margin-right: 17px;
+  margin-right: 7px;
   margin-left: 7px;
 
   &:hover {
@@ -29,21 +29,23 @@ const SidebarLabel = styled.span`
 `;
 
 const DropdownLink = styled.a`
-  background: #414757;
+  background: #1a1a1a1a;
   height: 60px;
-  padding-left: 3rem;
+  padding-left: 36px;
+  margin-right: 7px;
+  margin-left: 7px;
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: #f5f5f5;
+  color: #1a1a1a;
   font-size: 14px;
-  line-height: 24;
+  line-height: 20;
   font-weight: 400;
 
-  &:hover {
-    background: #632ce4;
-    cursor: pointer;
-  }
+//   &:hover {
+//     background: #632ce4;
+//     cursor: pointer;
+//   }
 `;
 
 const SubMenu = ({ item }) => {

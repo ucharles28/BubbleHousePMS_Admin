@@ -36,7 +36,9 @@ const DropdownLink = styled.a`
   align-items: center;
   text-decoration: none;
   color: #f5f5f5;
-  font-size: 18px;
+  font-size: 14px;
+  line-height: 24;
+  font-weight: 400;
 
   &:hover {
     background: #632ce4;

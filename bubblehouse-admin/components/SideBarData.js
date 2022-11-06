@@ -21,13 +21,13 @@ export const SidebarData = [
     subNav: [
       {
         title: 'Add User',
-        path: '/users/new',
+        path: '#',
         icon: <IoIcons.IoIosPaper />,
         cName: 'sub-nav'
       },
       {
         title: 'All Users',
-        path: '/users',
+        path: '#',
         icon: <IoIcons.IoIosPaper />,
         cName: 'sub-nav'
       },
@@ -44,13 +44,13 @@ export const SidebarData = [
     subNav: [
       {
         title: 'Add Hotel',
-        path: '/hotels/new',
+        path: '#',
         icon: <IoIcons.IoIosPaper />,
         cName: 'sub-nav'
       },
       {
         title: 'All Hotels',
-        path: '/hotels',
+        path: '#',
         icon: <IoIcons.IoIosPaper />,
         cName: 'sub-nav'
       },

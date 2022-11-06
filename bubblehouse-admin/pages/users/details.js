@@ -106,7 +106,7 @@ function UserDetails() {
                 <div className='flex space-x-6 w-full h-full p-3'>
 
                     <div className="item w-3/6 h-full bg-white rounded-md">
-                        <div className='px-5 py-14 flex flex-col gap-5 justify-center'>
+                        <div className='px-5 pt-14 pb-5 flex flex-col gap-5 justify-center'>
 
                             <div className='flex flex-col justify-center items-center gap-3'>
 

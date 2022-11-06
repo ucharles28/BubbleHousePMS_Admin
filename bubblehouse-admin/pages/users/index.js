@@ -68,18 +68,20 @@ function UsersPage() {
     return (
         <div className='font-poppins'>
             <Sidebar />
-            <div className='ml-64 mt-3'>
+            <div className='ml-64'>
 
                 <div>
                     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-                        <div className='flex w-full'>
-                            <h6 className='justify-start item-center m-4'>All Users</h6>
-                            <div className='flex ml-96 justify-end item-center p-3'>
-                                <TextField size='small' id="outlined-basic" label='Search Users' variant="outlined"
+                        <div className='flex justify-between items-center w-full'>
+                            <div className='justify-start item-center m-4 text-xl font-medium leading-8'>
+                                <span>All Users</span>
+                                </div>
+                            <div className='flex ml-96 justify-end item-center p-3 gap-4'>
+                                <TextField size='small' id="outlined-basic" className="text-base leading-6 font-normal" label='Search Users' variant="outlined"
                                 />
                                 <button
                                     type="button"
-                                    className="text-white ml-3 font-medium flex items-center py-[7px] px-[22px] rounded-[5px] bg-[#666666] text-sm leading-6 uppercase hover:bg-[#1A1A1A]/50"
+                                    className="text-white font-medium flex items-center py-[7px] px-[22px] rounded-[5px] bg-[#666666] text-sm leading-6 uppercase hover:bg-[#1A1A1A]/50"
                                 >
                                     <Link href='users/new'>
                                     Add User
@@ -91,12 +93,13 @@ function UsersPage() {
                         <TableContainer sx={{ maxHeight: 440 }}>
                             <Table >
                                 <TableHead>
-                                    <TableRow>
-                                        <TableCell className="">USER</TableCell>
-                                        <TableCell className="">EMAIL</TableCell>
-                                        <TableCell className="">ROLE</TableCell>
-                                        <TableCell className="">JOINED</TableCell>
-                                        <TableCell className="">ACTION</TableCell>
+                                    <TableRow className='text-sm leading-6 font-medium uppercase text-[#1a1a1a]/80'>
+                                        <TableCell className="">User</TableCell>
+                                        <TableCell className="">Email</TableCell>
+                                        <TableCell className="">Role</TableCell>
+                                        <TableCell className="">Country</TableCell>
+                                        <TableCell className="">Joined</TableCell>
+                                        <TableCell className="">Action</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>

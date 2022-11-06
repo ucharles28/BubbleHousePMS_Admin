@@ -8,7 +8,7 @@ import { Home2, People, Buildings, ArrowRight2, ArrowDown2, Calendar, Book, Noti
 export const SidebarData = [
   {
     title: 'Dashboard',
-    path: '/',
+    path: '/dashboard',
     icon: <Home2 size="16" color="#1a1a1a" />
   },
   {
@@ -21,13 +21,13 @@ export const SidebarData = [
     subNav: [
       {
         title: 'Add User',
-        path: '#',
+        path: '/users/new',
         icon: <IoIcons.IoIosPaper />,
         cName: 'sub-nav'
       },
       {
         title: 'All Users',
-        path: '#',
+        path: '/users',
         icon: <IoIcons.IoIosPaper />,
         cName: 'sub-nav'
       },
@@ -44,13 +44,13 @@ export const SidebarData = [
     subNav: [
       {
         title: 'Add Hotel',
-        path: '#',
+        path: '/hotels',
         icon: <IoIcons.IoIosPaper />,
         cName: 'sub-nav'
       },
       {
         title: 'All Hotels',
-        path: '#',
+        path: '/hotels/new',
         icon: <IoIcons.IoIosPaper />,
         cName: 'sub-nav'
       },

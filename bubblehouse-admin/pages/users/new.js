@@ -100,7 +100,7 @@ function NewUser() {
                 <Card>
                     <CardContent>
 
-                        <div className='border-b-[1px] border-[#3a354125] text-lg font-medium leading-7'><span>Add Hotel</span></div>
+                        <div className='border-b-[1px] border-[#3a354125] text-lg font-medium leading-7'><span>Add User</span></div>
                         <div className="flex space-x-5 justify-between my-4">
                             <div className='item w-2/6 h-full'>
                                 <div className='flex flex-col items-center'>

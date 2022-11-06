@@ -89,7 +89,7 @@ function UserDetails() {
 
 
     return (
-        <div className='font-poppins bg-[#F4F5FA] h-screen'>
+        <div className='font-poppins bg-[#F4F5FA] h-full text-[#1a1a1a]'>
             <Sidebar />
             <div className='ml-64'>
                 {/* <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
@@ -173,12 +173,38 @@ function UserDetails() {
 
                             </div>
 
-                            <div className='flex flew-row gap-3 px-1'>
+                            <div className=' flex flex-col gap-3 px-1'>
 
-                                <div>
-                                    <p>User Details</p>
+                                <div className='pb-2 border-b-2 border-[#1a1a1a]/10 w-full flex'>
+                                    <p className='text-lg leading-8 font-medium'>User Details</p>
                                 </div>
 
+                                <div className='flex flex-col gap-2'>
+                                    <p className='text-sm leading-5 font-medium'>Username: <span className='text-sm font-normal leading-5 text-[#1a1a1a]/70'>@uzomacharles</span></p>
+
+                                    <p className='text-sm leading-5 font-medium'>Billing Email: <span className='text-sm font-normal leading-5 text-[#1a1a1a]/70'>uzomacharles@bcloud.com</span></p>
+
+                                    <p className='text-sm leading-5 font-medium'>Gender: <span className='text-sm font-normal leading-5 text-[#1a1a1a]/70'>Male</span></p>
+
+                                    <p className='text-sm leading-5 font-medium'>Role: <span className='text-sm font-normal leading-5 text-[#1a1a1a]/70'>Customer</span></p>
+
+                                    <p className='text-sm leading-5 font-medium'>Contact: <span className='text-sm font-normal leading-5 text-[#1a1a1a]/70'>0123456789</span></p>
+
+                                    <p className='text-sm leading-5 font-medium'>Language: <span className='text-sm font-normal leading-5 text-[#1a1a1a]/70'>English</span></p>
+
+                                    <p className='text-sm leading-5 font-medium'>Country: <span className='text-sm font-normal leading-5 text-[#1a1a1a]/70'>Nigeria</span></p>
+
+                                </div>
+
+                            </div>
+
+                            <div className="flex justify-center">
+                                <button
+                                    type="button"
+                                    className="text-white font-medium flex items-center py-[7px] px-[22px] rounded-[5px] bg-[#666666] text-sm leading-6 uppercase hover:bg-[#1A1A1A]/50"
+                                >
+                                    Edit Details
+                                </button>
                             </div>
 
                         </div>

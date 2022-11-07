@@ -30,7 +30,7 @@ export default function Login() {
         }
         const response = await post('Auth/User/SignIn', request)
         if (response.successful) {
-            router.push('users')
+            router.push('dashboard')
         } else {
             alert(response.data)
         }

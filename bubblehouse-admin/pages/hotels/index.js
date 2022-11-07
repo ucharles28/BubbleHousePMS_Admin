@@ -63,14 +63,14 @@ function HotelsPage() {
                             </div>
 
                             <div className='flex ml-96 justify-end item-center p-3'>
-                                <TextField size='small' id="outlined-basic" label='Search Users' variant="outlined"
+                                <TextField size='small' id="outlined-basic" label='Search Hotels' variant="outlined"
                                 />
                                 <button
                                     type="button"
                                     className="text-white ml-3 font-medium flex items-center py-[7px] px-[22px] rounded-[5px] bg-[#666666] text-sm leading-6 uppercase hover:bg-[#1A1A1A]/50"
                                 >
-                                    <Link href='users/new'>
-                                        Add User
+                                    <Link href='hotels/new'>
+                                        Add Hotel
                                     </Link>
                                 </button>
                             </div>

@@ -179,7 +179,7 @@ function NewHotel() {
                                             value={altPhone} onChange={(e) => setAltPhone(e.target.value)} />
                                     </div>
                                     <div className='item w-full h-full'>
-                                        <TextField className='w-full' id="outlined-basic" label="Number of Rooms" variant="outlined"
+                                        <TextField className='w-full' type="number" id="outlined-basic" label="Number of Rooms" variant="outlined"
                                             value={numberOfRooms} onChange={(e) => setNumberOfRooms(e.target.value)} />
                                     </div>
                                     <div className='item w-full h-full'>

@@ -57,43 +57,43 @@ export const SidebarData = [
 
     ]
   },
-  {
-    title: 'Manage Bookings',
-    path: '#',
-    icon: <Calendar size="16" color="#1a1a1a" />,
-    iconClosed: <ArrowRight2 size="14" color="#1a1a1a" />,
-    iconOpened: <ArrowDown2 size="14" color="#1a1a1a" />,
+  // {
+  //   title: 'Manage Bookings',
+  //   path: '#',
+  //   icon: <Calendar size="16" color="#1a1a1a" />,
+  //   iconClosed: <ArrowRight2 size="14" color="#1a1a1a" />,
+  //   iconOpened: <ArrowDown2 size="14" color="#1a1a1a" />,
 
-    subNav: [
-      {
-        title: 'Booking Request',
-        path: '#',
-        icon: <IoIcons.IoIosPaper />,
-        cName: 'sub-nav'
-      },
-      {
-        title: 'Todays Booked',
-        path: '#',
-        icon: <IoIcons.IoIosPaper />,
-        cName: 'sub-nav'
-      },
+  //   subNav: [
+  //     {
+  //       title: 'Booking Request',
+  //       path: '#',
+  //       icon: <IoIcons.IoIosPaper />,
+  //       cName: 'sub-nav'
+  //     },
+  //     {
+  //       title: 'Todays Booked',
+  //       path: '#',
+  //       icon: <IoIcons.IoIosPaper />,
+  //       cName: 'sub-nav'
+  //     },
 
-    ]
-  },
-  {
-    title: 'Book Room',
-    path: '#',
-    icon: <Book size="16" color="#1a1a1a" />
-  },
-  {
-    title: 'Notification',
-    path: '#',
-    icon: <Notification size="16" color="#1a1a1a" />
-  },
-  {
-    title: 'Settings',
-    path: '#',
-    icon: <Setting2 size="16" color="#1a1a1a" />
-  },
+  //   ]
+  // },
+  // {
+  //   title: 'Book Room',
+  //   path: '#',
+  //   icon: <Book size="16" color="#1a1a1a" />
+  // },
+  // {
+  //   title: 'Notification',
+  //   path: '#',
+  //   icon: <Notification size="16" color="#1a1a1a" />
+  // },
+  // {
+  //   title: 'Settings',
+  //   path: '#',
+  //   icon: <Setting2 size="16" color="#1a1a1a" />
+  // },
 
 ];

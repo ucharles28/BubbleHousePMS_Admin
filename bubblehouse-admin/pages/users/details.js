@@ -210,8 +210,10 @@ function UserDetails() {
                         </div>
                     </div>
 
-                    <div className='w-full h-full bg-white'>
-                        <p>Hola</p>
+                    <div className='item w-full h-full bg-white rounded-md'>
+                        <div className='p-4'>
+                            <p>Hola</p>
+                        </div>
                     </div>
 
                 </div>

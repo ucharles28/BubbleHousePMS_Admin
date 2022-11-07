@@ -16,6 +16,7 @@
     "@emotion/styled": "^11.10.5",
     "@mui/material": "^5.10.12",
     "@mui/styled-engine-sc": "^5.10.6",
+    "@netlify/plugin-nextjs": "^4.28.5",
     "bootstrap": "^5.2.2",
     "env": "^0.0.2",
     "env-cmd": "^10.1.0",

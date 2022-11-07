@@ -77,7 +77,7 @@ export default function Home() {
                         </div> */}
                         <div className='p-3 bg-[#1a1a1a]/10 rounded-lg justify-center'>
                             <Notepad2 size={42} />
-                        </div>
+                        </div> 
                         <div className='block text-left gap-3'>
                             <p className='text-2xl leading-8 font-medium'>356</p>
                             <p className='text-sm leading-5 font-normal'>Booking Request</p>

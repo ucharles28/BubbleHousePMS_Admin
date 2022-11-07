@@ -1,169 +1,92 @@
-import { Checkbox, FormControlLabel, TextField, Button, Card, CardContent, FormControl, InputLabel, Select, MenuItem, CircularProgress, Snackbar } from '@mui/material'
-import { People, Buildings, Buliding, Book, Notepad2, Calendar, Slash, Money2, CalendarAdd, StatusUp } from 'iconsax-react'
-import { forwardRef, useEffect, useRef, useState } from 'react'
-import Sidebar from '../components/SideBar'
-import { get, postData } from '../helpers/ApiRequest'
-import MuiAlert from '@mui/material/Alert';
+import { Checkbox, FormControlLabel, TextField, Button, CircularProgress, Snackbar, MuiAlert } from '@mui/material'
+import { useRouter } from 'next/router';
+import { forwardRef, useState } from 'react';
+import { post } from '../helpers/ApiRequest';
+import styles from '../styles/Home.module.css'
 
-export default function Home() {
-  return (
-    <div className='font-poppins h-full bg-[#F4F5FA]' >
-        <Sidebar />
-        <div className='ml-64'>
+export default function Default() {
 
-            <div className='gap-8'>
-                <div className='grid overflow-hidden grid-cols-4 w-full h-auto items-center gap-3 p-3'>
+    const router = useRouter()
+    const [isLoading, setIsLoading] = useState(false);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('')
+    const [alertMessage, setAlertMessage] = useState('');
 
-                    <div className="box rounded-lg bg-white flex justify-between items-center p-6 shadow">
-                        <div className=''>
-                            <People size={56} />
-                        </div>
-                        <div className='block text-right gap-3'>
-                            <p className='text-sm leading-5 font-normal'>Customer</p>
-                            <p className='text-2xl leading-8 font-medium'>100</p>
+    const Alert = forwardRef(function Alert(props, ref) {
+        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+    });
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
+    const handleLogin = async () => {
+        setIsLoading(true)
+        const request = {
+            email,
+            password
+        }
+        const response = await post('Auth/User/SignIn', request)
+        if (response.successful) {
+            router.push('users')
+        } else {
+            alert(response.data)
+        }
+        setIsLoading(false)
+    }
+
+    const showAlert = (alertMessage) => {
+        setAlertMessage(alertMessage)
+        setOpen(true)
+    }
+    return (
+        <div className='h-screen font-poppins'>
+            {/* <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                        {alertMessage}
+                    </Alert>
+                </Snackbar> */}
+            <div className='flex space-x-3 w-full h-full'>
+
+                {/* Background Image and Overlay */}
+                <div className='item w-full h-ful bg-[url(https://media.istockphoto.com/photos/downtown-cleveland-hotel-entrance-and-waiting-taxi-cab-picture-id472899538?k=20&m=472899538&s=612x612&w=0&h=ZuEBl5Pq1_cn9pUsG_jAGQmiT0UgL1jyl7TZY6w-K0g=)] object-cover'>
+                    <div className='w-full h-full flex bg-gradient-to-t from-[#1a1a1a]/80 to-[#1a1a1a]/30'>
+                        <div className='text-sm font-normal leading-6 text-white fixed bottom-0 left-0 w-full p-8'>
+                            <p>Copyright Bcloud © 2022</p>
                         </div>
                     </div>
-
-                    <div className="box rounded-lg bg-white flex justify-between items-center p-6 shadow">
-                        <div className=''>
-                            <Buildings size={56} />
-                        </div>
-                        <div className='block text-right gap-3'>
-                            <p className='text-sm leading-5 font-normal'>Hotels</p>
-                            <p className='text-2xl leading-8 font-normal'>96</p>
-                        </div>
-                    </div>
-
-                    <div className="box rounded-lg bg-white flex justify-between items-center p-6 shadow">
-                        <div className=''>
-                            <Buliding size={56} />
-                        </div>
-                        <div className='block text-right gap-3'>
-                            <p className='text-sm leading-5 font-normal'>Available Rooms</p>
-                            <p className='text-2xl leading-8 font-normal'>356</p>
-                        </div>
-                    </div>
-
-                    {/* <div className="box rounded-lg bg-white flex justify-between items-center p-6 shadow">
-                        <div className=''>
-                            <Buliding size={56} />
-                        </div>
-                        <div className='block text-right gap-3'>
-                            <p className='text-sm leading-5 font-normal'>Available Rooms</p>
-                            <p className='text-2xl leading-8 font-normal'>100</p>
-                        </div>
-                    </div> */}
-
                 </div>
 
-                <div className='grid overflow-hidden grid-cols-4 w-full h-auto items-center gap-3 p-3'>
+                {/* Input Field */}
+                <div className='item w-3/6 h-full bg-white'>
+                    <div className='flex justify-center items-center p-7 w-full h-full'>
+                        <div className='m-0'>
 
-                    <div className="box rounded-lg bg-white flex items-center p-6 shadow gap-5 h-[100px]">
-                        {/* <div className='bottom-0'>
-                            <Book size={80} color="#1a1a1a1a" />
-                        </div> */}
-                        <div className='p-3 bg-[#1a1a1a]/10 rounded-lg justify-center'>
-                            <Book size={42} />
-                        </div>
-                        <div className='block text-left gap-3'>
-                            <p className='text-2xl leading-8 font-medium'>9</p>
-                            <p className='text-sm leading-5 font-normal'>Today&#39;s Booked Room</p>
+                            <div className="block">
+                                <p className='block text-2xl leading-8 font-medium text-[#1a1a1a}/90'>Welcome to BCloud! &#128075;</p>
+                                <span className='block text-sm leading-5 font-normal text-[#1a1a1a]/70'>Please sign-in to your account and start the adventure</span>
+                            </div>
+
+                            <div className='flex flex-col mt-6 space-y-4 text-[#1a1a1a}'>
+                                <TextField id="outlined-basic" value={email} onChange={(e) => setEmail(e.target.value)} className='w-full' InputProps={{ sx: { height: 56 } }} label="Email" variant="outlined" />
+                                <TextField id="outlined-basic" type={'password'} value={password} onChange={(e) => setPassword(e.target.value)} className='w-full' InputProps={{ sx: { height: 56 } }} label="Password" variant="outlined" />
+                            </div>
+                            <div className='flex justify-between items-center'>
+                                <FormControlLabel control={<Checkbox size='small' />} label="Remember me" className='text-[12px]' />
+                                <p className='text-sm leading-6 font-normal text-[#1a1a1a]/50'>Forgot password?</p>
+                            </div>
+                            {isLoading ?  <div className='flex justify-center'><CircularProgress /></div>:
+                            <button
+                                type="button"
+                                className="mt-7 w-full text-center justify-center font-medium flex items-center py-2 rounded-[5px] text-sm leading-6 uppercase bg-[#666666] text-white" onClick={handleLogin}>Login</button>}
+
                         </div>
                     </div>
-
-                    <div className="box rounded-lg bg-white flex items-center p-6 shadow gap-5 h-[100px]">
-                        {/* <div className='bottom-0'>
-                            <Book size={80} color="#1a1a1a1a" />
-                        </div> */}
-                        <div className='p-3 bg-[#1a1a1a]/10 rounded-lg justify-center'>
-                            <Notepad2 size={42} />
-                        </div> 
-                        <div className='block text-left gap-3'>
-                            <p className='text-2xl leading-8 font-medium'>356</p>
-                            <p className='text-sm leading-5 font-normal'>Booking Request</p>
-                        </div>
-                    </div>
-
-                    <div className="box rounded-lg bg-white flex items-center p-6 shadow gap-5 h-[100px]">
-                        {/* <div className='bottom-0'>
-                            <Book size={80} color="#1a1a1a1a" />
-                        </div> */}
-                        <div className='p-3 bg-[#1a1a1a]/10 rounded-lg justify-center'>
-                            <Calendar size={42} />
-                        </div>
-                        <div className='block text-left gap-3'>
-                            <p className='text-2xl leading-8 font-medium'>109</p>
-                            <p className='text-sm leading-5 font-normal'>Running Booking</p>
-                        </div>
-                    </div>
-
-                    {/* <div className="box rounded-lg bg-white flex items-center p-6 shadow gap-5 h-[100px]">|
-                        <div className='p-3 bg-[#1a1a1a]/10 rounded-lg justify-center'>
-                            <Slash size={42} />
-                        </div>
-                        <div className='block text-left gap-3'>
-                            <p className='text-2xl leading-8 font-medium'>34</p>
-                            <p className='text-sm leading-5 font-normal'>Cancelled Booking</p>
-                        </div>
-                    </div> */}
-
                 </div>
 
-                <div className='grid overflow-hidden grid-cols-4 w-full h-auto items-center gap-3 p-3'>
-
-                    <div className="box rounded-lg bg-white flex items-center p-6 shadow gap-5 h-[100px]">
-                        {/* <div className='bottom-0'>
-                            <Book size={80} color="#1a1a1a1a" />
-                        </div> */}
-                        <div className='p-3 bg-[#1a1a1a]/10 rounded-lg justify-center'>
-                            <Money2 size={42} />
-                        </div>
-                        <div className='block text-left gap-3'>
-                            <p className='text-2xl leading-8 font-medium'>&#8358;920k</p>
-                            <p className='text-sm leading-5 font-normal'>Total Payment</p>
-                        </div>
-                    </div>
-
-                    <div className="box rounded-lg bg-white flex items-center p-6 shadow gap-5 h-[100px]">
-                        {/* <div className='bottom-0'>
-                            <Book size={80} color="#1a1a1a1a" />
-                        </div> */}
-                        <div className='p-3 bg-[#1a1a1a]/10 rounded-lg justify-center'>
-                            <CalendarAdd size={42} />
-                        </div>
-                        <div className='block text-left gap-3'>
-                            <p className='text-2xl leading-8 font-medium'>&#8358;120.3k</p>
-                            <p className='text-sm leading-5 font-normal'>Pending Payment</p>
-                        </div>
-                    </div>
-
-                    <div className="box rounded-lg bg-white flex items-center p-6 shadow gap-5 h-[100px]">
-                        {/* <div className='bottom-0'>
-                            <Book size={80} color="#1a1a1a1a" />
-                        </div> */}
-                        <div className='p-3 bg-[#1a1a1a]/10 rounded-lg justify-center'>
-                            <StatusUp size={42} />
-                        </div>
-                        <div className='block text-left gap-3'>
-                            <p className='text-2xl leading-8 font-medium'>1.2k</p>
-                            <p className='text-sm leading-5 font-normal'>Transactions</p>
-                        </div>
-                    </div>
-
-                    {/* <div className="box rounded-lg bg-white flex items-center p-6 shadow gap-5 h-[100px]">
-                        <div className='p-3 bg-[#1a1a1a]/10 rounded-lg justify-center'>
-                            <Slash size={42} />
-                        </div>
-                        <div className='block text-left gap-3'>
-                            <p className='text-2xl leading-8 font-medium'>34</p>
-                            <p className='text-sm leading-5 font-normal'>Cancelled Booking</p>
-                        </div>
-                    </div> */}
-
-                </div>
             </div>
-
         </div>
-    </div>
-)
+    )
 }

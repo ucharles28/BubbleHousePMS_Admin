@@ -1,5 +1,5 @@
-const baseUrl = 'https://localhost:7298/api/'
-// const baseUrl = 'https://test.africanvo.com/api/v1/'
+// const baseUrl = 'https://localhost:7298/api/'
+const baseUrl = 'https://uzomacharles.bsite.net/api/'
 export async function post(url = '', request = {}, token) {
   const response = await fetch(`${baseUrl}${url}`, {
     method: 'POST',

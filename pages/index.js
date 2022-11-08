@@ -2,9 +2,11 @@ import { Checkbox, FormControlLabel, TextField, Button, CircularProgress, Snackb
 import { useRouter } from 'next/router';
 import { forwardRef, useState } from 'react';
 import { post } from '../helpers/ApiRequest';
-import styles from '../styles/Home.module.css'
+import styles from '../styles/Home.module.css';
+import Image from "next/image";
+import { logo } from "../public/logo.png";
 
-export default function Default() {
+export default function Login() {
 
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false);
@@ -30,7 +32,7 @@ export default function Default() {
         }
         const response = await post('Auth/User/SignIn', request)
         if (response.successful) {
-            router.push('users')
+            router.push('dashboard')
         } else {
             alert(response.data)
         }
@@ -51,11 +53,11 @@ export default function Default() {
             <div className='flex space-x-3 w-full h-full'>
 
                 {/* Background Image and Overlay */}
-                <div className='item w-full h-ful bg-[url(https://media.istockphoto.com/photos/downtown-cleveland-hotel-entrance-and-waiting-taxi-cab-picture-id472899538?k=20&m=472899538&s=612x612&w=0&h=ZuEBl5Pq1_cn9pUsG_jAGQmiT0UgL1jyl7TZY6w-K0g=)] object-cover'>
-                    <div className='w-full h-full flex bg-gradient-to-t from-[#1a1a1a]/80 to-[#1a1a1a]/30'>
-                        <div className='text-sm font-normal leading-6 text-white fixed bottom-0 left-0 w-full p-8'>
+                <div className='item w-full h-full bg-[url(https://interiordesign.net/wp-content/uploads/2021/03/Interior-Design-Ace-Hotel-Kyoto-Kengo-Kuma-Associates-Commune-Design-idx210201_kk01.jpg)] object-fill'>
+                    <div className='w-full h-full flex bg-gradient-to-t from-[#1a1a1a]/80 to-[#1a1a1a]/10'>
+                        {/* <div className='text-sm font-normal leading-6 text-white fixed bottom-0 left-0 w-full p-8'>
                             <p>Copyright Bcloud © 2022</p>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 
@@ -65,7 +67,8 @@ export default function Default() {
                         <div className='m-0'>
 
                             <div className="block">
-                                <p className='block text-2xl leading-8 font-medium text-[#1a1a1a}/90'>Welcome to BCloud! &#128075;</p>
+                                <Image src="/logo.png" width={120} height={120} className="mb-10 m-auto" />
+                                <p className='block text-xl leading-8 font-medium text-[#1a1a1a}/90'>Welcome to BCloud! &#128075;</p>
                                 <span className='block text-sm leading-5 font-normal text-[#1a1a1a]/70'>Please sign-in to your account and start the adventure</span>
                             </div>
 
@@ -75,14 +78,18 @@ export default function Default() {
                             </div>
                             <div className='flex justify-between items-center'>
                                 <FormControlLabel control={<Checkbox size='small' />} label="Remember me" className='text-[12px]' />
-                                <p className='text-sm leading-6 font-normal text-[#1a1a1a]/50'>Forgot password?</p>
+                                <p className='text-xs leading-6 font-normal text-[#1a1a1a]/50'>Forgot password?</p>
                             </div>
-                            {isLoading ?  <div className='flex justify-center'><CircularProgress /></div>:
-                            <button
-                                type="button"
-                                className="mt-7 w-full text-center justify-center font-medium flex items-center py-2 rounded-[5px] text-sm leading-6 uppercase bg-[#666666] text-white" onClick={handleLogin}>Login</button>}
+                            {isLoading ? <div className='flex justify-center'><CircularProgress /></div> :
+                                <button
+                                    type="button"
+                                    className="mt-7 w-full text-center justify-center font-medium flex items-center py-2 rounded-[5px] text-sm leading-6 uppercase bg-[#F5C400] hover:bg-[#ffcc00] text-[#1a1a1a]" onClick={handleLogin}>Login</button>}
 
+                            <div className='text-sm font-normal leading-6 w-full text-center mt-10'>
+                                <p>Copyright Bcloud © 2022</p>
+                            </div>
                         </div>
+
                     </div>
                 </div>
 

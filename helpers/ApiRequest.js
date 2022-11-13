@@ -1,5 +1,5 @@
 // const baseUrl = 'https://localhost:7298/api/'
-const baseUrl = 'https://uzomacharles.bsite.net/api/'
+const baseUrl = 'https://bcloud.azurewebsites.net/api/'
 export async function post(url = '', request = {}, token) {
   const response = await fetch(`${baseUrl}${url}`, {
     method: 'POST',

@@ -6,6 +6,7 @@ import { AiOutlineClose } from 'react-icons/ai';
 // import { SidebarData } from './SidebarData';
 import SubMenu from './SubMenu';
 import { IconContext } from 'react-icons/lib';
+import Image from "next/image";
 
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
@@ -101,7 +102,7 @@ const SidebarData = [
       },
 
     ]
-  },
+  }
   // {
   //   title: 'Manage Bookings',
   //   path: '#',
@@ -165,6 +166,8 @@ const Sidebar = () => {
                                 <AiOutlineClose onClick={showSidebar} />
                             </NavIcon>
                         </Link>
+                        <Image src="/logo.png" width={120} height={120} className="mb-6 ml-6" />
+
                         {SidebarData && SidebarData.map((item, index) => {
                             return <SubMenu item={item} key={index} />;
                         })}

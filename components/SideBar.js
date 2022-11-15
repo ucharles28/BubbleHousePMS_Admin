@@ -59,7 +59,7 @@ const SidebarData = [
   },
   {
     title: 'Manage Users',
-    path: '/users',
+    path: '#',
     icon: <People size="16" color="#1a1a1a" />,
     iconClosed: <ArrowRight2 size="14" color="#1a1a1a" />,
     iconOpened: <ArrowDown2 size="14" color="#1a1a1a" />,
@@ -82,7 +82,7 @@ const SidebarData = [
   },
   {
     title: 'Manage Hotels',
-    path: '/hotels',
+    path: '#',
     icon: <Buildings size="16" color="#1a1a1a" />,
     iconClosed: <ArrowRight2 size="14" color="#1a1a1a" />,
     iconOpened: <ArrowDown2 size="14" color="#1a1a1a" />,
@@ -90,13 +90,37 @@ const SidebarData = [
     subNav: [
       {
         title: 'Add Hotel',
-        path: '/hotels',
+        path: '/hotels/new',
         icon: <IoIcons.IoIosPaper />,
         cName: 'sub-nav'
       },
       {
         title: 'All Hotels',
-        path: '/hotels/new',
+        path: '/hotels',
+        icon: <IoIcons.IoIosPaper />,
+        cName: 'sub-nav'
+      },
+      {
+        title: 'Add Room Type',
+        path: '/roomstypes/new',
+        icon: <IoIcons.IoIosPaper />,
+        cName: 'sub-nav'
+      },
+      {
+        title: 'All Room Types',
+        path: '/roomstype',
+        icon: <IoIcons.IoIosPaper />,
+        cName: 'sub-nav'
+      },
+      {
+        title: 'Add Room',
+        path: '/rooms/new',
+        icon: <IoIcons.IoIosPaper />,
+        cName: 'sub-nav'
+      },
+      {
+        title: 'All Rooms',
+        path: '/rooms',
         icon: <IoIcons.IoIosPaper />,
         cName: 'sub-nav'
       },
@@ -144,9 +168,10 @@ const SidebarData = [
 
 ];
 
+
+
 const Sidebar = () => {
     const [sidebar, setSidebar] = useState(false);
-
     const showSidebar = () => setSidebar(!sidebar);
 
     return (
@@ -169,7 +194,7 @@ const Sidebar = () => {
                         <Image src="/logo.png" width={120} height={120} className="mb-6 ml-6" />
 
                         {SidebarData && SidebarData.map((item, index) => {
-                            return <SubMenu item={item} key={index} />;
+                            return (<SubMenu item={item} key={index} />);
                         })}
                     </SidebarWrap>
                 </SidebarNav>

@@ -11,42 +11,42 @@ import MuiAlert from '@mui/material/Alert'
 import Link from 'next/link'
 
 
-function UsersPage() {
+function RoomsPage() {
 
-    const getAllUsers = async () => {
+    const getAllRooms = async () => {
         setIsLoading(true)
-        const response = await get('User')
+        const response = await get('Room')
         if (response.successful) {
-            var list = response.data.map((user) => {
-                const obj = {
-                    user: user.fullName,
-                    email: user.email,
-                    joined: user.createdDate,
-                }
-                switch (user.accountType) {
-                    case 0:
-                        obj.role = 'Customer'
-                        break;
-                    case 1:
-                        obj.role = 'Admin'
-                        break;
-                    case 2:
-                        obj.role = 'Manager'
-                        break;
-                    case 3:
-                        obj.role = 'Staff'
-                        break;
-                }
-                return obj;
-            })
-            setRows(list)
+            // var list = response.data.map((user) => {
+            //     const obj = {
+            //         user: user.fullName,
+            //         email: user.email,
+            //         joined: user.createdDate,
+            //     }
+            //     switch (user.accountType) {
+            //         case 0:
+            //             obj.role = 'Customer'
+            //             break;
+            //         case 1:
+            //             obj.role = 'Admin'
+            //             break;
+            //         case 2:
+            //             obj.role = 'Manager'
+            //             break;
+            //         case 3:
+            //             obj.role = 'Staff'
+            //             break;
+            //     }
+            //     return obj;
+            // })
+            setRows(response.data)
         }
         setIsLoading(false)
 
     }
 
     useEffect(() => {
-        getAllUsers()
+        getAllRooms()
     }, [])
 
    const handleChangePage = (event, newPage) => {
@@ -74,17 +74,17 @@ function UsersPage() {
                     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
                         <div className='flex justify-between items-center w-full'>
                             <div className='justify-start item-center m-4 text-xl font-medium leading-8'>
-                                <span>All Users</span>
+                                <span>All Rooms</span>
                                 </div>
                             <div className='flex ml-96 justify-end item-center p-3 gap-4'>
-                                <TextField size='small' id="outlined-basic" className="text-base leading-6 font-normal" label='Search Users' variant="outlined"
+                                <TextField size='small' id="outlined-basic" className="text-base leading-6 font-normal" label='Search Rooms' variant="outlined"
                                 />
                                 <button
                                     type="button"
                                     className="text-white font-medium flex items-center py-[7px] px-[22px] rounded-[5px] bg-[#666666] text-sm leading-6 uppercase hover:bg-[#1A1A1A]/50"
                                 >
-                                    <Link href='users/new'>
-                                    Add User
+                                    <Link href='rooms/new'>
+                                    Add Room
                                     </Link>
                                 </button>
                             </div>
@@ -94,12 +94,12 @@ function UsersPage() {
                             <Table >
                                 <TableHead>
                                     <TableRow className='text-sm leading-6 font-medium uppercase text-[#1a1a1a]/80'>
-                                        <TableCell className="">User</TableCell>
-                                        <TableCell className="">Email</TableCell>
-                                        <TableCell className="">Role</TableCell>
-                                        <TableCell className="">Country</TableCell>
-                                        <TableCell className="">Joined</TableCell>
-                                        <TableCell className="">Action</TableCell>
+                                        <TableCell className=""></TableCell>
+                                        <TableCell className="">Type</TableCell>
+                                        <TableCell className="">Cost (₦)</TableCell>
+                                        <TableCell className="">Room Number</TableCell>
+                                        <TableCell className="">Status</TableCell>
+                                        {/* <TableCell className="">Action</TableCell> */}
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -116,27 +116,29 @@ function UsersPage() {
                                             </TableCell>
 
                                             <TableCell></TableCell>
+                                            <TableCell></TableCell>
                                         </TableRow>
                                     ) :
                                         rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                             .map((row, index) => {
                                                 return (
                                                     <TableRow key={index}>
+                                                        
                                                         <TableCell>
-                                                            {/* <Typography color="textSecondary" variant="body2">{row.displayName}</Typography> */}
-                                                            {row.user}
+                                                            {index + 1}
                                                         </TableCell>
                                                         <TableCell >
-                                                            {row.email}
+                                                            {row.roomType.name}
                                                         </TableCell>
-                                                        <TableCell>{row.role}</TableCell>
-                                                        <TableCell>{row.joined}</TableCell>
-                                                        <TableCell>
+                                                        <TableCell>{row.roomType.price}</TableCell>
+                                                        <TableCell>{row.roomNumber}</TableCell>
+                                                        <TableCell>{row.statusText}</TableCell>
+                                                        {/* <TableCell>
                                                             <Link href="#">
                                                                 <Eye />
                                                             </Link>
 
-                                                        </TableCell>
+                                                        </TableCell> */}
                                                     </TableRow>
                                                 );
                                             })}
@@ -160,4 +162,4 @@ function UsersPage() {
     )
 }
 
-export default UsersPage;
+export default RoomsPage;

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
+
 
 const SidebarLink = styled.a`
   display: flex;
@@ -23,6 +24,7 @@ const SidebarLink = styled.a`
     cursor: pointer;
   }
 `;
+
 
 const SidebarLabel = styled.span`
   margin-left: 10px;
@@ -51,12 +53,20 @@ const DropdownLink = styled.a`
 const SubMenu = ({ item }) => {
     const [subnav, setSubnav] = useState(false);
 
-    const showSubnav = () => setSubnav(!subnav);
+    const showSubnav = (e, subNav) => {
+        e.stopPropagation();
+        if (subNav) {
+            setSubnav(!subnav);
+
+        }
+    }
+
+
 
     return (
         <>
-            <Link href={item.subNav ? '#' : item.path} onClick={item.subNav && showSubnav}>
-                <SidebarLink>
+            <Link href={item.subNav ? '#' : item.path} passHref>
+                <SidebarLink onClick={(e) => showSubnav(e, item.subNav)}>
                     <div className='flex items-center justify-center'>
                         {item.icon}
                         <SidebarLabel>{item.title}</SidebarLabel>

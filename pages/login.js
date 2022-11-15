@@ -32,7 +32,6 @@ export default function Login() {
         }
         const response = await post('Auth/User/SignIn', request)
         if (response.successful) {
-            localStorage.setItem('user', response.data)
             router.push('dashboard')
         } else {
             alert(response.data)

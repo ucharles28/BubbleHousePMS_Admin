@@ -24,3 +24,26 @@ a {
     background: black;
   }
 } */
+
+
+.sidebar_link {
+  display: flex;
+  color: #1a1a1a;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  list-style: none;
+  height: 49px;
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 24;
+  font-weight: 400;
+  margin-right: 7px;
+  margin-left: 7px;
+}
+
+.sidebar_link:hover {
+  background: #1a1a1a1a;
+    border-radius: 8px;
+    cursor: pointer;
+}

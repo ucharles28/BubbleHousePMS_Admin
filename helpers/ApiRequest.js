@@ -48,7 +48,7 @@ export async function post(url = '', request = {}, token) {
 }
 
 export async function put(url = '', request = {}, token) {
-  const response = await fetch(`https://test.africanvo.com/api/v1/${url}`, {
+  const response = await fetch(`${baseUrl}${url}`, {
     method: 'PUT',
     // mode: 'cors',
     cache: 'no-cache',

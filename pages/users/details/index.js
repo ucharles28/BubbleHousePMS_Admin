@@ -15,18 +15,39 @@ function UserDetails() {
 
 
     const getUser = async () => {
-        const response = await get(`User/${id}`, request)
-        if (response.successful) {
-            setSelectedUser(response.data)
-        } else {
-            alert(response.data)
+        if (id) {
+            const response = await get(`User/${id}`)
+            if (response.successful) {
+                setSelectedUser(response.data)
+            } else {
+                alert(response.data)
+            }
+            setIsLoading(false)
         }
-        setIsLoading(false)
     }
 
     useEffect(() => {
-
+        getUser()
     }, [id])
+
+    const getRole = (value) => {
+        let role = ''
+        switch (value) {
+            case 0:
+                role = 'Customer';
+                break;
+            case 1:
+                role = 'Admin';
+                break;
+            case 2:
+                role = 'Manager';
+                break;
+            case 3:
+                role = 'Staff';
+                break;
+        }
+        return role;
+    }
 
 
     return (
@@ -65,91 +86,92 @@ function UserDetails() {
                                 </div>
 
                             </div>
-                            {!isLoading ? <>
-                                <div className='flex flew-row justify-between gap-3 px-1'>
+                            {!isLoading ?
+                                selectedUser && <>
+                                    <div className='flex flew-row justify-between gap-3 px-1'>
 
-                                    <div className='flex items-center gap-2'>
-                                        <div className='p-3 bg-[#1a1a1a]/10 rounded-lg justify-center'>
-                                            <Money2 />
+                                        <div className='flex items-center gap-2'>
+                                            <div className='p-3 bg-[#1a1a1a]/10 rounded-lg justify-center'>
+                                                <Money2 />
+                                            </div>
+                                            <div className='block text-left gap-2'>
+                                                <p className='text-lg leading-8 font-medium'>&#8358;920k</p>
+                                                <p className='text-xs leading-5 font-normal'>Total Payment</p>
+                                            </div>
                                         </div>
-                                        <div className='block text-left gap-2'>
-                                            <p className='text-lg leading-8 font-medium'>&#8358;920k</p>
-                                            <p className='text-xs leading-5 font-normal'>Total Payment</p>
+
+                                        <div className='flex items-center gap-2'>
+                                            <div className='p-3 bg-[#1a1a1a]/10 rounded-lg justify-center'>
+                                                <Book />
+                                            </div>
+                                            <div className='block text-left gap-2'>
+                                                <p className='text-lg leading-8 font-medium'>12</p>
+                                                <p className='text-xs leading-5 font-normal'>Total Bookings</p>
+                                            </div>
                                         </div>
-                                    </div>
-
-                                    <div className='flex items-center gap-2'>
-                                        <div className='p-3 bg-[#1a1a1a]/10 rounded-lg justify-center'>
-                                            <Book />
-                                        </div>
-                                        <div className='block text-left gap-2'>
-                                            <p className='text-lg leading-8 font-medium'>12</p>
-                                            <p className='text-xs leading-5 font-normal'>Total Bookings</p>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <div className='flex flew-row justify-between gap-3 px-1'>
-
-                                    <div className='flex items-center gap-2'>
-                                        <div className='p-3 bg-[#1a1a1a]/10 rounded-lg justify-center'>
-                                            <Calendar />
-                                        </div>
-                                        <div className='block text-left gap-2'>
-                                            <p className='text-lg leading-8 font-medium'>1</p>
-                                            <p className='text-xs leading-5 font-normal'>Running Booking</p>
-                                        </div>
-                                    </div>
-
-                                    <div className='flex items-center gap-2'>
-                                        <div className='p-3 bg-[#1a1a1a]/10 rounded-lg justify-center'>
-                                            <Notepad2 />
-                                        </div>
-                                        <div className='block text-left gap-2'>
-                                            <p className='text-lg leading-8 font-medium'>0</p>
-                                            <p className='text-xs leading-5 font-normal'>Booking Request</p>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <div className=' flex flex-col gap-3 px-1'>
-
-                                    <div className='pb-2 border-b-2 border-[#1a1a1a]/10 w-full flex'>
-                                        <p className='text-lg leading-8 font-medium'>User Details</p>
-                                    </div>
-
-                                    <div className='flex flex-col gap-2'>
-                                        <p className='text-sm leading-5 font-medium'>Username: <span className='text-sm font-normal leading-5 text-[#1a1a1a]/70'>@uzomacharles</span></p>
-
-                                        <p className='text-sm leading-5 font-medium'>Billing Email: <span className='text-sm font-normal leading-5 text-[#1a1a1a]/70'>uzomacharles@bcloud.com</span></p>
-
-                                        <p className='text-sm leading-5 font-medium'>Gender: <span className='text-sm font-normal leading-5 text-[#1a1a1a]/70'>Male</span></p>
-
-                                        <p className='text-sm leading-5 font-medium'>Role: <span className='text-sm font-normal leading-5 text-[#1a1a1a]/70'>Customer</span></p>
-
-                                        <p className='text-sm leading-5 font-medium'>Contact: <span className='text-sm font-normal leading-5 text-[#1a1a1a]/70'>0123456789</span></p>
-
-                                        <p className='text-sm leading-5 font-medium'>Language: <span className='text-sm font-normal leading-5 text-[#1a1a1a]/70'>English</span></p>
-
-                                        <p className='text-sm leading-5 font-medium'>Country: <span className='text-sm font-normal leading-5 text-[#1a1a1a]/70'>Nigeria</span></p>
 
                                     </div>
 
-                                </div>
+                                    <div className='flex flew-row justify-between gap-3 px-1'>
 
-                                <div className="flex justify-center">
-                                    <button
-                                        type="button"
-                                        className="text-white font-medium flex items-center py-[7px] px-[22px] rounded-[5px] bg-[#666666] text-sm leading-6 uppercase hover:bg-[#1A1A1A]/50"
-                                    >
-                                        Edit Details
-                                    </button>
-                                </div>
+                                        <div className='flex items-center gap-2'>
+                                            <div className='p-3 bg-[#1a1a1a]/10 rounded-lg justify-center'>
+                                                <Calendar />
+                                            </div>
+                                            <div className='block text-left gap-2'>
+                                                <p className='text-lg leading-8 font-medium'>1</p>
+                                                <p className='text-xs leading-5 font-normal'>Running Booking</p>
+                                            </div>
+                                        </div>
 
-                            </> : 
-                            <div className='flex justify-center'><CircularProgress /></div>}
+                                        <div className='flex items-center gap-2'>
+                                            <div className='p-3 bg-[#1a1a1a]/10 rounded-lg justify-center'>
+                                                <Notepad2 />
+                                            </div>
+                                            <div className='block text-left gap-2'>
+                                                <p className='text-lg leading-8 font-medium'>0</p>
+                                                <p className='text-xs leading-5 font-normal'>Booking Request</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div className=' flex flex-col gap-3 px-1'>
+
+                                        <div className='pb-2 border-b-2 border-[#1a1a1a]/10 w-full flex'>
+                                            <p className='text-lg leading-8 font-medium'>User Details</p>
+                                        </div>
+
+                                        <div className='flex flex-col gap-2'>
+                                            <p className='text-sm leading-5 font-medium'>Username: <span className='text-sm font-normal leading-5 text-[#1a1a1a]/70'>{selectedUser.username}</span></p>
+
+                                            <p className='text-sm leading-5 font-medium'>Billing Email: <span className='text-sm font-normal leading-5 text-[#1a1a1a]/70'>{selectedUser.email}</span></p>
+
+                                            <p className='text-sm leading-5 font-medium'>Gender: <span className='text-sm font-normal leading-5 text-[#1a1a1a]/70'>{selectedUser.gender}</span></p>
+
+                                            <p className='text-sm leading-5 font-medium'>Role: <span className='text-sm font-normal leading-5 text-[#1a1a1a]/70'>{getRole(selectedUser.accountType)}</span></p>
+
+                                            <p className='text-sm leading-5 font-medium'>Contact: <span className='text-sm font-normal leading-5 text-[#1a1a1a]/70'>{selectedUser.phoneNumber}</span></p>
+
+                                            {/* <p className='text-sm leading-5 font-medium'>Language: <span className='text-sm font-normal leading-5 text-[#1a1a1a]/70'>English</span></p> */}
+
+                                            {/* <p className='text-sm leading-5 font-medium'>Country: <span className='text-sm font-normal leading-5 text-[#1a1a1a]/70'>Nigeria</span></p> */}
+
+                                        </div>
+
+                                    </div>
+
+                                    {/* <div className="flex justify-center">
+                                        <button
+                                            type="button"
+                                            className="text-white font-medium flex items-center py-[7px] px-[22px] rounded-[5px] bg-[#666666] text-sm leading-6 uppercase hover:bg-[#1A1A1A]/50"
+                                        >
+                                            Edit Details
+                                        </button>
+                                    </div> */}
+
+                                </> :
+                                <div className='flex justify-center'><CircularProgress /></div>}
 
 
                         </div>

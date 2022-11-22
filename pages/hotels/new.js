@@ -25,6 +25,8 @@ function NewHotel() {
         formData.append("ImageFile", hotelImageFile)
         formData.append("NumberOfRooms", numberOfRooms)
         formData.append("ManagerId", selectedManager)
+        formData.append("Longitude", longitude)
+        formData.append("Latitude", latitude)
 
         const response = await postData('hotel', formData)
         if (response.successful) {
@@ -58,14 +60,65 @@ function NewHotel() {
         reader.readAsDataURL(e.target.files[0]);
     };
 
+    const loadScript = (url, callback) => {
+        console.log('got here')
+
+        let script = document.createElement("script");
+        script.type = "text/javascript";
+
+        if (script.readyState) {
+            script.onreadystatechange = function () {
+                if (script.readyState === "loaded" || script.readyState === "complete") {
+                    script.onreadystatechange = null;
+                    callback();
+                }
+            };
+        } else {
+            script.onload = () => callback();
+        }
+
+        script.src = url;
+        document.getElementsByTagName("head")[0].appendChild(script);
+    };
+
+    function handleScriptLoad(updateAddress, inputRef) {
+        console.log('got here')
+        autoCompleteRef.current = new window.google.maps.places.Autocomplete(
+            textboxRef.current,
+            { types: ["address"], componentRestrictions: { country: "ng" } }
+        );
+        autoCompleteRef.current.setFields(["address_components", "formatted_address", "geometry"]);
+        autoCompleteRef.current.addListener("place_changed", () =>
+            handlePlaceSelect(updateAddress)
+        );
+    }
+
+    async function handlePlaceSelect(updateAddress) {
+        const addressObject = autoCompleteRef.current.getPlace();
+        console.log(addressObject)
+        setLatitude(addressObject.geometry.location.lat())
+        setLongitude(addressObject.geometry.location.lng())
+        const query = addressObject.formatted_address;
+        updateAddress(query);
+    }
+
     useEffect(() => {
         getAllManagers();
+        loadScript(
+            `https://maps.googleapis.com/maps/api/js?key=AIzaSyB8QN-9BQ2Gto1h0GfSOG78AzL-qHhDyPg&libraries=places`,
+            () => handleScriptLoad(setAddress, inputRef)
+        );
     }, [])
 
+
     //states
+    const autoCompleteRef = useRef(null);
+    const textboxRef = useRef(null);
     const inputRef = useRef(null);
     const [hotelName, setHotelName] = useState('');
     const [description, setDescription] = useState('');
+    const [longitude, setLongitude] = useState();
+    const [latitude, setLatitude] = useState();
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
     const [email, setEmail] = useState('');
@@ -159,8 +212,11 @@ function NewHotel() {
                                             value={description} onChange={(e) => setDescription(e.target.value)} />
                                     </div>
                                     <div className='item w-full h-full'>
-                                        <TextField className='w-full' id="outlined-basic" label="Address" variant="outlined"
-                                            value={address} onChange={(e) => setAddress(e.target.value)} />
+                                        {/* <TextField className='w-full' id="outlined-basic" label="Address" variant="outlined"
+                                            value={address} onChange={(e) => setAddress(e.target.value)} /> */}
+                                        <input type="text"
+                                        value={address}
+                                        onChange={event => setAddress(event.target.value)} ref={textboxRef} className='w-full border-2 text-md p-3 rounded focus:border-blue-400' placeholder='Enter address...' />
                                     </div>
                                     <div className='item w-full h-full'>
                                         <TextField className='w-full' id="outlined-basic" label="State/City" variant="outlined"
@@ -204,7 +260,7 @@ function NewHotel() {
                                         >
                                             Save Change
                                         </button> :
-                                        <CircularProgress color="inherit" />}
+                                            <CircularProgress color="inherit" />}
                                         <button
                                             type="button"
                                             className="text-[#666666] font-medium flex items-center py-[7px] px-[22px] rounded-[5px] border-[#666666] border-[1.2px] text-sm leading-6 uppercase hover:bg-[#666666] hover:text-white"

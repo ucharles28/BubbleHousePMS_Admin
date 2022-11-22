@@ -22,6 +22,7 @@ function UsersPage() {
                     user: user.fullName,
                     email: user.email,
                     joined: user.createdDate,
+                    id: user.id,
                 }
                 switch (user.accountType) {
                     case 0:
@@ -49,7 +50,7 @@ function UsersPage() {
         getAllUsers()
     }, [])
 
-   const handleChangePage = (event, newPage) => {
+    const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
 
@@ -75,7 +76,7 @@ function UsersPage() {
                         <div className='flex justify-between items-center w-full'>
                             <div className='justify-start item-center m-4 text-xl font-medium leading-8'>
                                 <span>All Users</span>
-                                </div>
+                            </div>
                             <div className='flex ml-96 justify-end item-center p-3 gap-4'>
                                 <TextField size='small' id="outlined-basic" className="text-base leading-6 font-normal" label='Search Users' variant="outlined"
                                 />
@@ -84,7 +85,7 @@ function UsersPage() {
                                     className="text-white font-medium flex items-center py-[7px] px-[22px] rounded-[5px] bg-[#666666] text-sm leading-6 uppercase hover:bg-[#1A1A1A]/50"
                                 >
                                     <Link href='users/new'>
-                                    Add User
+                                        Add User
                                     </Link>
                                 </button>
                             </div>
@@ -94,10 +95,10 @@ function UsersPage() {
                             <Table >
                                 <TableHead>
                                     <TableRow className='text-sm leading-6 font-medium uppercase text-[#1a1a1a]/80'>
+                                        <TableCell className="">S/N</TableCell>
                                         <TableCell className="">User</TableCell>
                                         <TableCell className="">Email</TableCell>
                                         <TableCell className="">Role</TableCell>
-                                        <TableCell className="">Country</TableCell>
                                         <TableCell className="">Joined</TableCell>
                                         <TableCell className="">Action</TableCell>
                                     </TableRow>
@@ -123,7 +124,9 @@ function UsersPage() {
                                                 return (
                                                     <TableRow key={index}>
                                                         <TableCell>
-                                                            {/* <Typography color="textSecondary" variant="body2">{row.displayName}</Typography> */}
+                                                            {index + 1}
+                                                        </TableCell>
+                                                        <TableCell>
                                                             {row.user}
                                                         </TableCell>
                                                         <TableCell >
@@ -132,7 +135,12 @@ function UsersPage() {
                                                         <TableCell>{row.role}</TableCell>
                                                         <TableCell>{row.joined}</TableCell>
                                                         <TableCell>
-                                                            <Link href="#">
+                                                            <Link href={{
+                                                                pathname: `/users/details`,
+                                                                query: {
+                                                                    id: row.id
+                                                                }
+                                                            }}>
                                                                 <Eye />
                                                             </Link>
 

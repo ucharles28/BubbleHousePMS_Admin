@@ -108,7 +108,7 @@ const SidebarData = [
       },
       {
         title: 'All Room Types',
-        path: '/roomtype',
+        path: '/roomtypes',
         icon: <IoIcons.IoIosPaper />,
         cName: 'sub-nav'
       },

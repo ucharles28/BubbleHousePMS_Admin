@@ -96,21 +96,25 @@ export async function postData(url = '', request = {}, token) {
     body: request,
   })
     .then(async (res) => {
-      // const text = await res.text();
-      console.log('response message', res)
-      if (res.status === 401) {
-        // console.log()
-        const response = await get(`Auth/RenewToken/${token}`, '')
-        if (response.successful) {
-          localStorage.setItem('token', response.data.token);
-          localStorage.setItem('tokenExpiryDate', response.data.tokenExpiryDate);
-          localStorage.setItem('user', JSON.stringify(response.data));
-        }
-        return await postData(url, request, response.data.Token);
-      }
+      // if (!res.ok){
+      //   const text = await res.text();
+      //   console.log('response message', res)
+      // }
+      // if (res.status === 401) {
+      //   // console.log()
+      //   const response = await get(`Auth/RenewToken/${token}`, '')
+      //   if (response.successful) {
+      //     localStorage.setItem('token', response.data.token);
+      //     localStorage.setItem('tokenExpiryDate', response.data.tokenExpiryDate);
+      //     localStorage.setItem('user', JSON.stringify(response.data));
+      //   }
+      //   return await postData(url, request, response.data.Token);
+      // }
+      console.log('got here')
+      debugger
       const responseObject = {
         successful: res.ok,
-        data: await res?.json(),
+        data: res.ok ? await res.json() : await res.text(),
       };
       return responseObject;
     })

@@ -23,10 +23,10 @@ function NewHotel() {
         formData.append("PhoneNumber", phone)
         formData.append("AltPhoneNumber", altPhone)
         formData.append("ImageFile", hotelImageFile)
-        formData.append("NumberOfRooms", numberOfRooms)
+        formData.append("NumberOfRooms", numberOfRooms ? numberOfRooms : 0)
         formData.append("ManagerId", selectedManager)
-        formData.append("Longitude", longitude)
-        formData.append("Latitude", latitude)
+        formData.append("Longitude", longitude ? longitude : 0)
+        formData.append("Latitude", latitude ? latitude : 0)
 
         const response = await postData('hotel', formData)
         if (response.successful) {
@@ -257,6 +257,7 @@ function NewHotel() {
                                             type="button"
                                             className="text-white font-medium flex items-center py-[7px] px-[22px] rounded-[5px] bg-[#666666] text-sm leading-6 uppercase hover:bg-[#1A1A1A]/50"
                                             onClick={saveHotel}
+                                            disabled={!hotelName || !description || !address || !email || !phone || !numberOfRooms || !selectedManager}
                                         >
                                             Save Change
                                         </button> :

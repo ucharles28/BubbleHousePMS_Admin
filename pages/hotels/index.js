@@ -9,6 +9,8 @@ import Sidebar from '../../components/SideBar'
 import { get, postData } from '../../helpers/ApiRequest'
 import MuiAlert from '@mui/material/Alert'
 import Link from 'next/link'
+import { FiEdit3 } from 'react-icons/fi';
+
 
 
 
@@ -57,7 +59,7 @@ function HotelsPage() {
                                     type="button"
                                     className="text-[#666666] font-medium flex items-center py-[7px] px-[22px] rounded-[5px] border-[#666666] border-[1.2px] text-sm leading-6 uppercase hover:bg-[#666666] hover:text-white"
                                 >
-                                    <ExportCurve size={20}/>
+                                    <ExportCurve size={20} />
                                     <span className='ml-2'>EXPORT</span>
                                 </button>
                             </div>
@@ -86,6 +88,7 @@ function HotelsPage() {
                                         <TableCell className="">MANAGER</TableCell>
                                         <TableCell className="">ROOMS</TableCell>
                                         <TableCell className="">AVAILABLE ROOMS</TableCell>
+                                        <TableCell className="">ACTION</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -120,6 +123,16 @@ function HotelsPage() {
                                                         <TableCell>{row.manager.fullName}</TableCell>
                                                         <TableCell>{row.numberOfRooms}</TableCell>
                                                         <TableCell>{row.availableRooms}</TableCell>
+                                                        <TableCell><p className="text-gray-500 flex items-center gap-2">
+                                                            <Link href={{
+                                                                pathname: `/hotels/details`,
+                                                                query: {
+                                                                    id: row.id
+                                                                }
+                                                            }}>
+                                                                <FiEdit3 size={18} className='hover:text-gray-900 cursor-pointer' />
+                                                            </Link>
+                                                        </p></TableCell>
                                                     </TableRow>
                                                 );
                                             })}

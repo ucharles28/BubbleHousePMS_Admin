@@ -27,6 +27,7 @@ function NewHotel() {
         formData.append("ManagerId", selectedManager)
         formData.append("Longitude", longitude ? longitude : 0)
         formData.append("Latitude", latitude ? latitude : 0)
+        formData.append("IsFeatured", isFeatured === "Yes")
 
         const response = await postData('hotel', formData)
         if (response.successful) {
@@ -130,6 +131,7 @@ function NewHotel() {
     const [hotelImageFile, setHotelImageFile] = useState();
     const [hotelImageSrc, setHotelImageSrc] = useState();
     const [isLoading, setIsLoading] = useState(false);
+    const [isFeatured, setIsFeatured] = useState();
 
     return (
         <div className='font-poppins'>
@@ -215,8 +217,8 @@ function NewHotel() {
                                         {/* <TextField className='w-full' id="outlined-basic" label="Address" variant="outlined"
                                             value={address} onChange={(e) => setAddress(e.target.value)} /> */}
                                         <input type="text"
-                                        value={address}
-                                        onChange={event => setAddress(event.target.value)} ref={textboxRef} className='w-full border-2 text-md p-3 rounded focus:border-blue-400' placeholder='Enter address...' />
+                                            value={address}
+                                            onChange={event => setAddress(event.target.value)} ref={textboxRef} className='w-full border-2 text-md p-3 rounded focus:border-blue-400' placeholder='Enter address...' />
                                     </div>
                                     <div className='item w-full h-full'>
                                         <TextField className='w-full' id="outlined-basic" label="State/City" variant="outlined"
@@ -248,6 +250,21 @@ function NewHotel() {
                                                 onChange={handleChange}
                                             >
                                                 {managers.map((manager) => <MenuItem value={manager.id}>{manager.fullName}</MenuItem>)}
+                                            </Select>
+                                        </FormControl>
+                                    </div>
+
+                                    <div className='item w-full h-full'>
+                                        <FormControl fullWidth>
+                                            <InputLabel id="demo-simple-select-label"></InputLabel>
+                                            <Select
+                                                labelId="demo-simple-select-label"
+                                                id="demo-simple-select"
+                                                value={isFeatured}
+                                                onChange={(event) => setIsFeatured(event.target.value)}
+                                            >
+                                                <MenuItem value="Yes">Yes</MenuItem>
+                                                <MenuItem value="No">No</MenuItem>
                                             </Select>
                                         </FormControl>
                                     </div>

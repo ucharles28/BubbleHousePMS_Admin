@@ -14,10 +14,13 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
+    "@headlessui/react": "^1.7.11",
+    "@heroicons/react": "^2.0.16",
     "@mui/material": "^5.10.12",
     "@mui/styled-engine-sc": "^5.10.6",
     "@netlify/plugin-nextjs": "^4.28.5",
     "bootstrap": "^5.2.2",
+    "classnames": "^2.3.2",
     "env": "^0.0.2",
     "env-cmd": "^10.1.0",
     "iconsax-react": "^0.0.8",
@@ -26,7 +29,9 @@
     "react-bootstrap": "^2.5.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.6.0",
-    "styled-components": "^5.3.6"
+    "react-router-dom": "^6.8.1",
+    "styled-components": "^5.3.6",
+    "universal-cookie": "^4.0.4"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",

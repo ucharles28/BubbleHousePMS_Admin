@@ -1,14 +1,14 @@
+import { forwardRef, use, useEffect, useRef, useState } from 'react';
 import {
     Card, CardContent, CardHeader, Paper, TableCell,
     TablePagination, TableRow, Table,
     TableContainer, TableHead, CircularProgress, TableBody, TextField
 } from '@mui/material'
 import { SidebarRight, Eye } from 'iconsax-react'
-import { forwardRef, use, useEffect, useRef, useState } from 'react'
-import Sidebar from '../../components/SideBar'
 import { get, postData } from '../../helpers/ApiRequest'
 import MuiAlert from '@mui/material/Alert'
 import Link from 'next/link'
+import Layout from '../../components/Layout'
 
 
 function UsersPage() {
@@ -67,40 +67,41 @@ function UsersPage() {
 
 
     return (
-        <div className='font-poppins'>
-            <Sidebar />
-            <div className='ml-64'>
+        <div className='h-screen font-poppins'>
+            <Layout>
+                <div className='w-full h-screen py-6 flex flex-col gap-6'>
 
-                <div>
-                    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-                        <div className='flex justify-between items-center w-full'>
-                            <div className='justify-start item-center m-4 text-xl font-medium leading-8'>
-                                <span>All Users</span>
-                            </div>
-                            <div className='flex ml-96 justify-end item-center p-3 gap-4'>
-                                <TextField size='small' id="outlined-basic" className="text-base leading-6 font-normal" label='Search Users' variant="outlined"
-                                />
+                    <div className='flex w-full'>
+                        <p className='w-full block text-xl md:text-2xl font-medium text-[#1A1A1A] leading-8'>
+                            Users
+                        </p>
+
+                        <div className='flex item-center justify-end gap-4 w-full'>
+                            <TextField size='small' id="outlined-basic" className="z-0 bg-white text-base leading-6 font-normal" label='Search Users' variant="outlined"
+                            />
+                            <Link href='users/new'>
                                 <button
                                     type="button"
-                                    className="text-white font-medium flex items-center py-[7px] px-[22px] rounded-[5px] bg-[#666666] text-sm leading-6 uppercase hover:bg-[#1A1A1A]/50"
+                                    className="bg-[#666666] hover:bg-[#1A1A1A]/50 uppercase text-white font-medium leading-6 rounded-md text-xs md:text-sm py-2.5 px-5 text-center"
                                 >
-                                    <Link href='users/new'>
-                                        Add User
-                                    </Link>
+                                    Add User
                                 </button>
-                            </div>
-
+                            </Link>
                         </div>
+                    </div>
+
+                    {/* <Paper sx={{ width: '100%', overflow: 'hidden' }}> */}
+                    <div className='bg-white border border-gray-50 shadow rounded-lg w-full overflow-hidden h-auto py-1 px-2'>
                         <TableContainer sx={{ maxHeight: 440 }}>
                             <Table >
                                 <TableHead>
-                                    <TableRow className='text-sm leading-6 font-medium uppercase text-[#1a1a1a]/80'>
-                                        <TableCell className="">S/N</TableCell>
-                                        <TableCell className="">User</TableCell>
-                                        <TableCell className="">Email</TableCell>
-                                        <TableCell className="">Role</TableCell>
-                                        <TableCell className="">Joined</TableCell>
-                                        <TableCell className="">Action</TableCell>
+                                    <TableRow className='text-sm leading-6 font-[600] uppercase text-[#1a1a1a]'>
+                                        <TableCell className="w-10">S/N</TableCell>
+                                        <TableCell className=" ">User</TableCell>
+                                        <TableCell className=" ">Email</TableCell>
+                                        <TableCell className=" ">Role</TableCell>
+                                        <TableCell className=" ">Joined</TableCell>
+                                        <TableCell className="w-36">Action</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -111,7 +112,7 @@ function UsersPage() {
                                             <TableCell></TableCell>
 
                                             <TableCell >
-                                                <div className="tableLoadingProgressDiv">
+                                                <div className="flex items-center justify-center tableLoadingProgressDiv">
                                                     <CircularProgress color="inherit" />
                                                 </div>
                                             </TableCell>
@@ -123,7 +124,7 @@ function UsersPage() {
                                             .map((row, index) => {
                                                 return (
                                                     <TableRow key={index}>
-                                                        <TableCell>
+                                                        <TableCell className='w-10'>
                                                             {index + 1}
                                                         </TableCell>
                                                         <TableCell>
@@ -134,14 +135,14 @@ function UsersPage() {
                                                         </TableCell>
                                                         <TableCell>{row.role}</TableCell>
                                                         <TableCell>{row.joined}</TableCell>
-                                                        <TableCell>
+                                                        <TableCell className='w-36'>
                                                             <Link href={{
                                                                 pathname: `/users/details`,
                                                                 query: {
                                                                     id: row.id
                                                                 }
                                                             }}>
-                                                                <Eye />
+                                                                <Eye className='text-[#636363]' />
                                                             </Link>
 
                                                         </TableCell>
@@ -160,10 +161,10 @@ function UsersPage() {
                             onPageChange={handleChangePage}
                             onRowsPerPageChange={handleChangeRowsPerPage}
                         />
-                    </Paper>
+                    </div>
+                    {/* </Paper> */}
                 </div>
-
-            </div>
+            </Layout>
         </div>
     )
 }

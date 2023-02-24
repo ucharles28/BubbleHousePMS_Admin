@@ -54,7 +54,7 @@ export default function Login() {
 
                 {/* Background Image and Overlay */}
                 <div className='item w-full h-full bg-[url(https://interiordesign.net/wp-content/uploads/2021/03/Interior-Design-Ace-Hotel-Kyoto-Kengo-Kuma-Associates-Commune-Design-idx210201_kk01.jpg)] object-fill'>
-                    <div className='w-full h-full flex bg-gradient-to-t from-[#1a1a1a]/80 to-[#1a1a1a]/10'>
+                    <div className='w-full h-full flex bg-gradient-to-t from-[#1a1a1a]/90 to-[#1a1a1a]/20'>
                         {/* <div className='text-sm font-normal leading-6 text-white fixed bottom-0 left-0 w-full p-8'>
                             <p>Copyright Bcloud © 2022</p>
                         </div> */}

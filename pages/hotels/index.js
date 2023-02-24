@@ -3,13 +3,13 @@ import {
     TablePagination, TableRow, Table,
     TableContainer, TableHead, CircularProgress, TableBody, TextField
 } from '@mui/material'
-import { ExportCurve } from 'iconsax-react'
-import { forwardRef, use, useEffect, useRef, useState } from 'react'
-import Sidebar from '../../components/SideBar'
+import { Edit2, Export } from 'iconsax-react'
+import { forwardRef, use, useEffect, useRef, useState } from 'react';
 import { get, postData } from '../../helpers/ApiRequest'
 import MuiAlert from '@mui/material/Alert'
 import Link from 'next/link'
 import { FiEdit3 } from 'react-icons/fi';
+import Layout from '../../components/Layout';
 
 
 
@@ -46,49 +46,50 @@ function HotelsPage() {
 
 
     return (
-        <div className='font-poppins'>
-            <Sidebar />
-            <div className='ml-64 mt-3'>
+        <div className='h-full font-poppins'>
+            <Layout>
 
-                <div>
-                    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-                        <div className='flex w-full'>
-                            {/* <h6 className='justify-start item-center m-4'>All Users</h6> */}
-                            <div className='flex justify-start item-center p-3'>
+                <div className='w-full h-screen py-6 flex flex-col gap-6'>
+
+                    <div className='flex w-full'>
+                        <p className='w-full block text-xl md:text-2xl font-medium text-[#1A1A1A] leading-8'>
+                            Hotels
+                        </p>
+
+                        <div className='flex item-center justify-end gap-4 w-full'>
+                            <TextField size='small' id="outlined-basic" className="z-0 bg-white text-base leading-6 font-normal" label='Search Hotels' variant="outlined"
+                            />
+                            <button
+                                type="button"
+                                className="text-[#666666] font-medium flex gap-1 items-center py-2 px-5 rounded-md border-[#666666] border-[1.2px] text-xs md:text-sm leading-6 uppercase hover:bg-[#666666] hover:text-white"
+                            >
+                                <Export size={18} />
+                                Export
+                            </button>
+                            <Link href='hotels/new'>
                                 <button
                                     type="button"
-                                    className="text-[#666666] font-medium flex items-center py-[7px] px-[22px] rounded-[5px] border-[#666666] border-[1.2px] text-sm leading-6 uppercase hover:bg-[#666666] hover:text-white"
+                                    className="bg-[#666666] hover:bg-[#1A1A1A]/50 uppercase text-white font-medium leading-6 rounded-md text-xs md:text-sm py-2.5 px-5 text-center"
                                 >
-                                    <ExportCurve size={20} />
-                                    <span className='ml-2'>EXPORT</span>
+                                    Add Hotel
                                 </button>
-                            </div>
-
-                            <div className='flex ml-96 justify-end item-center p-3'>
-                                <TextField size='small' id="outlined-basic" label='Search Hotels' variant="outlined"
-                                />
-                                <button
-                                    type="button"
-                                    className="text-white ml-3 font-medium flex items-center py-[7px] px-[22px] rounded-[5px] bg-[#666666] text-sm leading-6 uppercase hover:bg-[#1A1A1A]/50"
-                                >
-                                    <Link href='hotels/new'>
-                                        Add Hotel
-                                    </Link>
-                                </button>
-                            </div>
-
+                            </Link>
                         </div>
-                        <TableContainer sx={{ maxHeight: 440 }}>
+                    </div>
+
+                    <div className='bg-white border border-gray-50 shadow rounded-lg w-full overflow-auto h-auto py-1 px-2'>
+                        <TableContainer >
                             <Table >
                                 <TableHead>
-                                    <TableRow>
-                                        <TableCell className="">HOTEL NAME </TableCell>
-                                        <TableCell className="">EMAIL</TableCell>
-                                        <TableCell className="">PHONE</TableCell>
-                                        <TableCell className="">MANAGER</TableCell>
-                                        <TableCell className="">ROOMS</TableCell>
-                                        <TableCell className="">AVAILABLE ROOMS</TableCell>
-                                        <TableCell className="">ACTION</TableCell>
+                                    <TableRow className='text-sm leading-6 font-[600] uppercase text-[#1a1a1a]'>
+                                        <TableCell className="w-10">S/N</TableCell>
+                                        <TableCell className="">Hotel Name</TableCell>
+                                        <TableCell className="">Email</TableCell>
+                                        <TableCell className="">Phone</TableCell>
+                                        {/* <TableCell className="">MANAGER</TableCell> */}
+                                        <TableCell className="">Number of Rooms</TableCell>
+                                        <TableCell className="">Available Rooms</TableCell>
+                                        <TableCell className="w-28">Action</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -99,7 +100,7 @@ function HotelsPage() {
                                             <TableCell></TableCell>
 
                                             <TableCell >
-                                                <div className="tableLoadingProgressDiv">
+                                                <div className="flex items-center justify-center tableLoadingProgressDiv">
                                                     <CircularProgress color="inherit" />
                                                 </div>
                                             </TableCell>
@@ -113,26 +114,37 @@ function HotelsPage() {
                                             .map((row, index) => {
                                                 return (
                                                     <TableRow key={index}>
+                                                        <TableCell className='w-10'>
+                                                            {index + 1}
+                                                        </TableCell>
                                                         <TableCell>
                                                             {row.name}
                                                         </TableCell>
                                                         <TableCell >
                                                             {row.email}
                                                         </TableCell>
-                                                        <TableCell>{row.phoneNumber}</TableCell>
-                                                        <TableCell>{row.manager.fullName}</TableCell>
-                                                        <TableCell>{row.numberOfRooms}</TableCell>
-                                                        <TableCell>{row.availableRooms}</TableCell>
-                                                        <TableCell><p className="text-gray-500 flex items-center gap-2">
+                                                        <TableCell>
+                                                            {row.phoneNumber}
+                                                        </TableCell>
+                                                        {/* <TableCell>{row.manager.fullName}</TableCell> */}
+                                                        <TableCell className='text-center'>
+                                                            {row.numberOfRooms}
+                                                        </TableCell>
+                                                        <TableCell className='text-center'>
+                                                            {row.availableRooms}
+                                                        </TableCell>
+                                                        <TableCell className='w-28'>
+                                                            {/* <p className="text-gray-500 flex items-center gap-2"> */}
                                                             <Link href={{
                                                                 pathname: `/hotels/details`,
                                                                 query: {
                                                                     id: row.id
                                                                 }
                                                             }}>
-                                                                <FiEdit3 size={18} className='hover:text-gray-900 cursor-pointer' />
+                                                                <Edit2 size={18} className='text-[#636363]' />
                                                             </Link>
-                                                        </p></TableCell>
+                                                            {/* </p> */}
+                                                        </TableCell>
                                                     </TableRow>
                                                 );
                                             })}
@@ -148,10 +160,10 @@ function HotelsPage() {
                             onPageChange={handleChangePage}
                             onRowsPerPageChange={handleChangeRowsPerPage}
                         />
-                    </Paper>
+                    </div>
                 </div>
 
-            </div>
+            </Layout>
         </div>
     )
 }

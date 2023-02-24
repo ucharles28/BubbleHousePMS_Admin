@@ -5,7 +5,7 @@ import {
 } from '@mui/material'
 import { SidebarRight, Eye } from 'iconsax-react'
 import { forwardRef, use, useEffect, useRef, useState } from 'react'
-import Sidebar from '../../components/SideBar'
+import Layout from '../../components/Layout'
 import { get, postData } from '../../helpers/ApiRequest'
 import MuiAlert from '@mui/material/Alert'
 import Link from 'next/link'
@@ -49,7 +49,7 @@ function RoomsPage() {
         getAllRooms()
     }, [])
 
-   const handleChangePage = (event, newPage) => {
+    const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
 
@@ -66,35 +66,43 @@ function RoomsPage() {
 
 
     return (
-        <div className='font-poppins'>
-            <Sidebar />
-            <div className='ml-64'>
+        <div className='h-full font-poppins'>
+            <Layout>
 
-                <div>
-                    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-                        <div className='flex justify-between items-center w-full'>
-                            <div className='justify-start item-center m-4 text-xl font-medium leading-8'>
-                                <span>All Rooms</span>
-                                </div>
-                            <div className='flex ml-96 justify-end item-center p-3 gap-4'>
-                                <TextField size='small' id="outlined-basic" className="text-base leading-6 font-normal" label='Search Rooms' variant="outlined"
-                                />
+                <div className='w-full h-screen py-6 flex flex-col gap-6'>
+
+                    <div className='flex w-full'>
+                        <p className='w-full block text-xl md:text-2xl font-medium text-[#1A1A1A] leading-8'>
+                            Rooms
+                        </p>
+
+                        <div className='flex item-center justify-end gap-4 w-full'>
+                            <TextField size='small' id="outlined-basic" className="z-0 bg-white text-base leading-6 font-normal" label='Search Rooms' variant="outlined"
+                            />
+                            {/* <button
+                                type="button"
+                                className="text-[#666666] font-medium flex gap-1 items-center py-2 px-5 rounded-md border-[#666666] border-[1.2px] text-xs md:text-sm leading-6 uppercase hover:bg-[#666666] hover:text-white"
+                            >
+                                <Export size={18} />
+                                Export
+                            </button> */}
+                            <Link href='hotels/new'>
                                 <button
                                     type="button"
-                                    className="text-white font-medium flex items-center py-[7px] px-[22px] rounded-[5px] bg-[#666666] text-sm leading-6 uppercase hover:bg-[#1A1A1A]/50"
+                                    className="bg-[#666666] hover:bg-[#1A1A1A]/50 uppercase text-white font-medium leading-6 rounded-md text-xs md:text-sm py-2.5 px-5 text-center"
                                 >
-                                    <Link href='rooms/new'>
                                     Add Room
-                                    </Link>
                                 </button>
-                            </div>
-
+                            </Link>
                         </div>
-                        <TableContainer sx={{ maxHeight: 440 }}>
+                    </div>
+
+                    <div className='bg-white border border-gray-50 shadow rounded-lg w-full overflow-auto h-auto py-1 px-2'>
+                        <TableContainer >
                             <Table >
                                 <TableHead>
                                     <TableRow className='text-sm leading-6 font-medium uppercase text-[#1a1a1a]/80'>
-                                        <TableCell className=""></TableCell>
+                                        <TableCell className="w-10">S/N</TableCell>
                                         <TableCell className="">Type</TableCell>
                                         <TableCell className="">Cost (₦)</TableCell>
                                         <TableCell className="">Room Number</TableCell>
@@ -123,8 +131,8 @@ function RoomsPage() {
                                             .map((row, index) => {
                                                 return (
                                                     <TableRow key={index}>
-                                                        
-                                                        <TableCell>
+
+                                                        <TableCell className='w-10'>
                                                             {index + 1}
                                                         </TableCell>
                                                         <TableCell >
@@ -154,10 +162,10 @@ function RoomsPage() {
                             onPageChange={handleChangePage}
                             onRowsPerPageChange={handleChangeRowsPerPage}
                         />
-                    </Paper>
+                    </div>
                 </div>
 
-            </div>
+            </Layout>
         </div>
     )
 }

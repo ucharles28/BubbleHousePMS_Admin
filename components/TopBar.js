@@ -9,11 +9,20 @@ export default function TopBar({ showNav, setShowNav }) {
             className={`bg-white z-10 border-b-[1.5px] border-[#E4E4E4] fixed w-full h-16 flex justify-between items-center transition-all duration-[400ms] ${showNav ? "pl-72" : ""
                 }`}
         >
-            <div className="pl-4 md:pl-8">
-                <HambergerMenu
+            <div className="pl-4 md:pl-6">
+                {/* <HambergerMenu
                     className="h-7 w-7 text-gray-700 cursor-pointer"
                     onClick={() => setShowNav(!showNav)}
-                />
+                /> */}
+                <svg className="h-7 w-7 text-gray-700 cursor-pointer" onClick={() => setShowNav(!showNav)} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="style=linear">
+                        <g id="menu-hotdog">
+                            <path id="vector" d="M5 6H19" stroke="#000000" strokeWidth="1.5" stroke-linecap="round" />
+                            <path id="vector_2" d="M3 12H21" stroke="#000000" strokeWidth="1.5" stroke-linecap="round" />
+                            <path id="vector_3" d="M5 18H19" stroke="#000000" strokeWidth="1.5" stroke-linecap="round" />
+                        </g>
+                    </g>
+                </svg>
             </div>
             <div className="flex items-center gap-4 pr-4 md:pr-8">
                 <Popover className="relative">

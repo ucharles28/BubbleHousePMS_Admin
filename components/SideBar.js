@@ -194,7 +194,7 @@ import { forwardRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from 'next/image';
-import { Home2, Setting2, Profile2User, Notification, Buildings2, Notepad2, Calendar } from 'iconsax-react';
+import { Home2, Setting2, Profile2User, Notification, Buildings2, Notepad2, Calendar, Note, Messages2 } from 'iconsax-react';
 
 const SideBar = forwardRef(({ showNav }, ref) => {
     const router = useRouter();
@@ -252,7 +252,7 @@ const SideBar = forwardRef(({ showNav }, ref) => {
                         <Calendar className="h-5 w-5" variant="Bold" />
                         <p className="">Bookings</p>
                     </div>
-                </Link> 
+                </Link>
 
                 <Link href="/dashboard">
                     <div
@@ -261,8 +261,20 @@ const SideBar = forwardRef(({ showNav }, ref) => {
                             : "text-[#636363] hover:bg-[#FFF7D8] hover:text-[#D4AA00] rounded-xl"
                             }`}
                     >
-                        <Home2 className="h-5 w-5" variant="Bold" />
+                        <Notepad2 className="h-5 w-5" variant="Bold" />
                         <p className="">Book room</p>
+                    </div>
+                </Link>
+
+                <Link href="/chats">
+                    <div
+                        className={`px-5 py-3 text-center cursor-pointer flex items-center gap-3 transition-colors ${router.pathname == "/chats"
+                            ? "bg-[#fff7d8] text-[#D4AA00] rounded-xl"
+                            : "text-[#636363] hover:bg-[#FFF7D8] hover:text-[#D4AA00] rounded-xl"
+                            }`}
+                    >
+                        <Messages2 className="h-5 w-5" variant="Bold" />
+                        <p className="">Chats</p>
                     </div>
                 </Link>
 

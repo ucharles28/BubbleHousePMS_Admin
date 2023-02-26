@@ -259,7 +259,7 @@ function NewHotel() {
                                             onClick={saveHotel}
                                             disabled={!hotelName || !description || !address || !email || !phone || !numberOfRooms || !selectedManager}
                                         >
-                                            {isLoading ? <CircularProgress size={20} color="inherit" /> : 'Save'}
+                                            {isLoading ? <CircularProgress size={24} color="inherit" /> : 'Save'}
                                         </button>
                                         
                                         <button

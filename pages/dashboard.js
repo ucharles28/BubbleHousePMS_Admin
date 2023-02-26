@@ -91,12 +91,12 @@ function Dashboard() {
     return (
         <div className='h-full font-poppins'>
             <Layout>
-                <div className='w-full h-full py-6 flex flex-col gap-6'>
+                <div className='w-full h-screen py-6 flex flex-col gap-6'>
                     <p className='w-full block text-xl md:text-2xl font-medium text-[#1A1A1A] leading-8'>
                         Overview
                     </p>
 
-                    <div className='grid md:grid-cols-4 grid-cols-2 w-full h-auto items-center gap-4'>
+                    <div className='grid md:grid-cols-4 grid-cols-2 w-full h-auto items-center gap-x-2 gap-y-3'>
 
                         <div className="box rounded-2xl bg-white border-[1.5px] border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
                             <div className='p-4 bg-[#fff7d8] rounded-full justify-center'>

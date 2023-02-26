@@ -77,7 +77,7 @@ function UsersPage() {
                         </p>
 
                         <div className='flex item-center justify-end gap-4 w-full'>
-                            <TextField size='small' id="outlined-basic" className="z-0 bg-white text-base leading-6 font-normal" label='Search Users' variant="outlined"
+                            <TextField size='small' id="outlined-basic" className="z-0 bg-white text-sm leading-6 font-normal" label='Search Users' variant="outlined"
                             />
                             <Link href='users/new'>
                                 <button
@@ -95,13 +95,23 @@ function UsersPage() {
                         <TableContainer sx={{ maxHeight: 440 }}>
                             <Table >
                                 <TableHead>
-                                    <TableRow className='text-sm leading-6 font-[600] uppercase text-[#1a1a1a]'>
+                                    <TableRow
+                                        sx={{
+                                            color: "#1A1A1A",
+                                            "& th": {
+                                                fontSize: "12px",
+                                                fontWeight: "550",
+                                                letterSpacing: "0.20px"
+                                            }
+                                        }}
+                                        className='text-xs leading-6 font-[600] uppercase text-[#1a1a1a]'
+                                    >
                                         <TableCell className="w-10">S/N</TableCell>
                                         <TableCell className=" ">User</TableCell>
                                         <TableCell className=" ">Email</TableCell>
                                         <TableCell className=" ">Role</TableCell>
                                         <TableCell className=" ">Joined</TableCell>
-                                        <TableCell className="w-36">Action</TableCell>
+                                        <TableCell className="w-20">Action</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -135,7 +145,7 @@ function UsersPage() {
                                                         </TableCell>
                                                         <TableCell>{row.role}</TableCell>
                                                         <TableCell>{row.joined}</TableCell>
-                                                        <TableCell className='w-36'>
+                                                        <TableCell className='w-20'>
                                                             <Link href={{
                                                                 pathname: `/users/details`,
                                                                 query: {

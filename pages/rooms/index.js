@@ -101,7 +101,17 @@ function RoomsPage() {
                         <TableContainer >
                             <Table >
                                 <TableHead>
-                                    <TableRow className='text-sm leading-6 font-medium uppercase text-[#1a1a1a]/80'>
+                                    <TableRow
+                                        sx={{
+                                            color: "#1A1A1A",
+                                            "& th": {
+                                                fontSize: "12px",
+                                                fontWeight: "550",
+                                                letterSpacing: "0.20px"
+                                            }
+                                        }}
+                                        className='text-xs leading-6 font-[600] uppercase text-[#1a1a1a]'
+                                    >
                                         <TableCell className="w-10">S/N</TableCell>
                                         <TableCell className="">Type</TableCell>
                                         <TableCell className="">Cost (₦)</TableCell>

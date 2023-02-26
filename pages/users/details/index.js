@@ -1,8 +1,8 @@
 import { CircularProgress } from '@mui/material'
-import { SidebarRight, Money2, Book, Calendar, Notepad2 } from 'iconsax-react'
+import { SidebarRight, Money2, Book, Calendar, Notepad2, ArrowLeft2 } from 'iconsax-react'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import Sidebar from '../../../components/SideBar'
+import Layout from '../../../components/Layout'
 import { get } from '../../../helpers/ApiRequest'
 // import MuiAlert from '@mui/material/Alert';
 
@@ -49,11 +49,15 @@ function UserDetails() {
         return role;
     }
 
+    const goBack = () => {
+        router.back()
+    }
+
+    const router = useRouter()
 
     return (
-        <div className='font-poppins bg-[#F4F5FA] h-full text-[#1a1a1a]'>
-            <Sidebar />
-            <div className='ml-64'>
+        <div className='h-full font-poppins'>
+            <Layout>
                 {/* <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                     <Alert onClose={handleClose} severity={alertType} sx={{ width: '100%' }}>
                         {alertMessage}
@@ -65,9 +69,20 @@ function UserDetails() {
                 {/* <div className='border-b-[1px] border-[#3a354125] text-lg font-medium leading-7'>
                     <span>Add Hotel</span>
                 </div> */}
-                <div className='flex space-x-6 w-full h-full p-3'>
+                <div className='w-full h-screen py-6 flex flex-col gap-6'>
 
-                    <div className="item w-3/6 h-full bg-white rounded-md">
+                    <div className='flex justify-between w-full'>
+                        <p className='w-full block text-xl font-medium text-[#1A1A1A] leading-8'>
+                            User Details
+                        </p>
+
+                        <div onClick={goBack} className="px-2 py-1 rounded-lg flex items-center cursor-pointer bg-white hover:bg-[#f9f9f9] border-2 border-[#E4E4E4] text-gray-600 hover:text-gray-800">
+                            <ArrowLeft2 size={17} />
+                            <span className="text-sm font-medium leading-6">Back</span>
+                        </div>
+                    </div>
+
+                    <div className="item w-full md:w-2/6 h-full bg-white rounded-md">
                         <div className='px-5 pt-14 pb-5 flex flex-col gap-5 justify-center'>
 
                             <div className='flex flex-col justify-center items-center gap-3'>
@@ -177,17 +192,9 @@ function UserDetails() {
                         </div>
                     </div>
 
-                    {/* <div className='item w-full h-full bg-white rounded-md'>
-                        <div className='p-4'>
-                            <p>Hola</p>
-                        </div>
-                    </div> */}
-
                 </div>
-                {/* </CardContent>
-                </Card> */}
 
-            </div>
+            </Layout>
         </div>
     )
 }

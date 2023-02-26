@@ -27,7 +27,7 @@ export default function TopBar({ showNav, setShowNav }) {
             <div className="flex items-center gap-4 pr-4 md:pr-8">
                 <Popover className="relative">
                     <Popover.Button className="outline-none cursor-pointer text-gray-700 hover:text-[#D4AA00] focus:text-[#D4AA00]">
-                        <Notification className="h-6 w-6" />
+                        <Notification className="h-5 w-5" />
                     </Popover.Button>
                     <Transition
                         as={Fragment}
@@ -39,68 +39,65 @@ export default function TopBar({ showNav, setShowNav }) {
                         leaveTo="transform scale-95"
                     >
                         <Popover.Panel className="absolute -right-16 sm:right-4 z-50 mt-2 bg-white border border-[#E4E4E4] shadow-sm rounded-md max-w-xs sm:max-w-sm w-screen">
-                            <div className="relative p-3">
+                            <div className="relative p-3 flex flex-col gap-4">
                                 <div className="flex justify-between items-center w-full">
-                                    <p className="text-gray-700 font-medium">Notifications</p>
+                                    <p className="text-[#1a1a1a] font-medium">Notifications</p>
                                     <Link href="/notifications">
                                         <p className="text-sm text-gray-500 hover:underline">
                                             View all
                                         </p>
                                     </Link>
                                 </div>
-                                <div className="mt-4 grid gap-4 grid-cols-1 overflow-hidden">
-                                    <div className="flex">
-                                        <div className="rounded-full shrink-0 bg-green-200 h-8 w-8 flex items-center justify-center">
-                                            <DirectNotification className="h-4 w-4 text-green-600" />
+                                <div className="grid grid-cols-1 overflow-hidden w-full h-auto gap-3">
+
+                                    <Link href='/notifications'>
+                                        <div className='bg:white w-full rounded-md flex items-start gap-2 cursor-pointer'>
+                                            <div className="rounded-full shrink-0 bg-green-200 h-8 w-8 flex items-center justify-center">
+                                                <DirectNotification className="h-4 w-4 text-green-600" />
+                                            </div>
+                                            <div className='flex flex-col w-full '>
+                                                <p className='text-sm text-[#1a1a1a] hover:text-[#D4AA00] font-medium italic leading-6'>New Notification</p>
+                                                <p className='text-xs text-[#636363] leading-5'>Ipsum ad pariatur voluptate elit sunt.</p>
+                                            </div>
                                         </div>
-                                        <div className="ml-4">
-                                            <p className="font-medium text-gray-700">
-                                                Notification Title
-                                            </p>
-                                            <p className="text-sm text-gray-500 truncate">
-                                                Test Notification text for design
-                                            </p>
+                                    </Link>
+
+                                    <Link href='/notifications'>
+                                        <div className='bg:white w-full rounded-md flex items-start gap-2 cursor-pointer'>
+                                            <div className="rounded-full shrink-0 bg-green-200 h-8 w-8 flex items-center justify-center">
+                                                <DirectNotification className="h-4 w-4 text-green-600" />
+                                            </div>
+                                            <div className='flex flex-col w-full '>
+                                                <p className='text-sm text-[#1a1a1a] hover:text-[#D4AA00] font-medium italic leading-6'>New Notification</p>
+                                                <p className='text-xs text-[#636363] leading-5'>Ipsum ad pariatur voluptate elit sunt.</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="flex">
-                                        <div className="rounded-full shrink-0 bg-green-200 h-8 w-8 flex items-center justify-center">
-                                            <DirectNotification className="h-4 w-4 text-green-600" />
+                                    </Link>
+
+                                    <Link href='/notifications'>
+                                        <div className='bg:white w-full rounded-md flex items-start gap-2 cursor-pointer'>
+                                            <div className="rounded-full shrink-0 bg-green-200 h-8 w-8 flex items-center justify-center">
+                                                <DirectNotification className="h-4 w-4 text-green-600" />
+                                            </div>
+                                            <div className='flex flex-col w-full '>
+                                                <p className='text-sm text-[#1a1a1a] hover:text-[#D4AA00] font-medium italic leading-6'>New Notification</p>
+                                                <p className='text-xs text-[#636363] leading-5'>Ipsum ad pariatur voluptate elit sunt.</p>
+                                            </div>
                                         </div>
-                                        <div className="ml-4">
-                                            <p className="font-medium text-gray-700">
-                                                Notification Title
-                                            </p>
-                                            <p className="text-sm text-gray-500 truncate">
-                                                Test Notification text for design
-                                            </p>
+                                    </Link>
+
+                                    <Link href='/notifications'>
+                                        <div className='bg:white w-full rounded-md flex items-start gap-2 cursor-pointer'>
+                                            <div className="rounded-full shrink-0 bg-green-200 h-8 w-8 flex items-center justify-center">
+                                                <DirectNotification className="h-4 w-4 text-green-600" />
+                                            </div>
+                                            <div className='flex flex-col w-full '>
+                                                <p className='text-sm text-[#1a1a1a] hover:text-[#D4AA00] font-medium italic leading-6'>New Notification</p>
+                                                <p className='text-xs text-[#636363] leading-5'>Ipsum ad pariatur voluptate elit sunt.</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="flex">
-                                        <div className="rounded-full shrink-0 bg-green-200 h-8 w-8 flex items-center justify-center">
-                                            <DirectNotification className="h-4 w-4 text-green-600" />
-                                        </div>
-                                        <div className="ml-4">
-                                            <p className="font-medium text-gray-700">
-                                                Notification Title
-                                            </p>
-                                            <p className="text-sm text-gray-500 truncate">
-                                                Test Notification text for design
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div className="flex">
-                                        <div className="rounded-full shrink-0 bg-green-200 h-8 w-8 flex items-center justify-center">
-                                            <DirectNotification className="h-4 w-4 text-green-600" />
-                                        </div>
-                                        <div className="ml-4">
-                                            <p className="font-medium text-gray-700">
-                                                Notification Title
-                                            </p>
-                                            <p className="text-sm text-gray-500 truncate">
-                                                Test Notification text for design
-                                            </p>
-                                        </div>
-                                    </div>
+                                    </Link>
+
                                 </div>
                             </div>
                         </Popover.Panel>
@@ -115,7 +112,7 @@ export default function TopBar({ showNav, setShowNav }) {
                                 className="rounded-full object-cover w-8 h-8 border border-yellow-300 shadow-sm"
                                 alt="avatar"
                             />
-                            <p className="hidden md:block font-medium text-gray-700 gap-1 md:flex items-center">
+                            <p className="hidden md:block font-normal text-sm text-[#1a1a1a] gap-1 md:flex items-center">
                                 Super Admin
                                 {/* <ArrowDown2 className="h-4 w-4 text-gray-800" /> */}
                             </p>

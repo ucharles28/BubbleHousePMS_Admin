@@ -81,7 +81,7 @@ function NewUser() {
     const [city, setCity] = useState('');
     const [gender, setGender] = useState('');
     const [genders, setGenders] = useState(['Male', 'Female']);
-    const [userRoles, setUserRoles] = useState(['Admin', 'Manager', 'Staff']);
+    const [userRoles, setUserRoles] = useState(['Admin', 'Manager', 'Staff', 'Customer']);
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [role, setRole] = useState('');
@@ -95,7 +95,7 @@ function NewUser() {
 
 
     return (
-        <div className='h-screen font-poppins'>
+        <div className='h-full font-poppins'>
             <Layout>
                 <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                     <Alert onClose={handleClose} severity={alertType} sx={{ width: '100%' }}>
@@ -103,7 +103,7 @@ function NewUser() {
                     </Alert>
                 </Snackbar>
 
-                <div className='w-full h-full py-6 flex flex-col gap-4'>
+                <div className='w-full h-screen py-6 flex flex-col gap-4'>
 
                     <div className='flex justify-between w-full'>
                         <p className='w-full block text-xl md:text-2xl font-medium text-[#1A1A1A] leading-8'>
@@ -205,7 +205,7 @@ function NewUser() {
                                             className="text-white font-medium flex items-center py-2 px-5 rounded-md bg-[#666666] text-sm leading-6 uppercase hover:bg-[#1A1A1A]/50"
                                             onClick={saveHotel}
                                         >
-                                            {isLoading ? <CircularProgress size={20} color="inherit" /> : 'Save'}
+                                            {isLoading ? <CircularProgress size={24} color="inherit" /> : 'Save'}
                                         </button>
                                         <button
                                             type="button"

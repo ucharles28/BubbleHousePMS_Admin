@@ -17,7 +17,7 @@ function RoomTypesPage() {
         setIsLoading(true)
         const response = await get('RoomType')
         if (response.successful) {
-            
+
             setRows(response.data)
         }
         setIsLoading(false)
@@ -28,7 +28,7 @@ function RoomTypesPage() {
         getAllRoomTypes()
     }, [])
 
-   const handleChangePage = (event, newPage) => {
+    const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
 
@@ -54,7 +54,7 @@ function RoomTypesPage() {
                         <div className='flex justify-between items-center w-full'>
                             <div className='justify-start item-center m-4 text-xl font-medium leading-8'>
                                 <span>All Room Types</span>
-                                </div>
+                            </div>
                             <div className='flex ml-96 justify-end item-center p-3 gap-4'>
                                 <TextField size='small' id="outlined-basic" className="text-base leading-6 font-normal" label='Search Room Type' variant="outlined"
                                 />
@@ -63,7 +63,7 @@ function RoomTypesPage() {
                                     className="text-white font-medium flex items-center py-[7px] px-[22px] rounded-[5px] bg-[#666666] text-sm leading-6 uppercase hover:bg-[#1A1A1A]/50"
                                 >
                                     <Link href='roomtypes/new'>
-                                    Add Room Type
+                                        Add Room Type
                                     </Link>
                                 </button>
                             </div>
@@ -72,7 +72,17 @@ function RoomTypesPage() {
                         <TableContainer sx={{ maxHeight: 440 }}>
                             <Table >
                                 <TableHead>
-                                    <TableRow className='text-sm leading-6 font-medium uppercase text-[#1a1a1a]/80'>
+                                    <TableRow
+                                        sx={{
+                                            color: "#1A1A1A",
+                                            "& th": {
+                                                fontSize: "12px",
+                                                fontWeight: "550",
+                                                letterSpacing: "0.20px"
+                                            }
+                                        }}
+                                        className='text-xs leading-6 font-[600] uppercase text-[#1a1a1a]'
+                                    >
                                         <TableCell className=""></TableCell>
                                         <TableCell className="">Name</TableCell>
                                         <TableCell className="">Price </TableCell>
@@ -103,7 +113,7 @@ function RoomTypesPage() {
                                             .map((row, index) => {
                                                 return (
                                                     <TableRow key={index}>
-                                                        
+
                                                         <TableCell>
                                                             {index + 1}
                                                         </TableCell>

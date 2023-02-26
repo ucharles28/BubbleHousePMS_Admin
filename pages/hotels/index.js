@@ -49,7 +49,7 @@ function HotelsPage() {
         <div className='h-full font-poppins'>
             <Layout>
 
-                <div className='w-full h-screen py-6 flex flex-col gap-6'>
+                <div className='w-full h-screen py-6 pb-8 flex flex-col gap-6'>
 
                     <div className='flex w-full'>
                         <p className='w-full block text-xl md:text-2xl font-medium text-[#1A1A1A] leading-8'>
@@ -77,11 +77,21 @@ function HotelsPage() {
                         </div>
                     </div>
 
-                    <div className='bg-white border border-gray-50 shadow rounded-lg w-full overflow-auto h-auto py-1 px-2'>
+                    <div className='bg-white border border-gray-50 shadow rounded-lg w-full h-auto py-1 px-2'>
                         <TableContainer >
                             <Table >
                                 <TableHead>
-                                    <TableRow className='text-sm leading-6 font-[600] uppercase text-[#1a1a1a]'>
+                                    <TableRow
+                                        sx={{
+                                            color: "#1A1A1A",
+                                            "& th": {
+                                                fontSize: "12px",
+                                                fontWeight: "550",
+                                                letterSpacing: "0.20px"
+                                            }
+                                        }}
+                                        className='text-xs leading-6 font-[600] uppercase text-[#1a1a1a]'
+                                    >
                                         <TableCell className="w-10">S/N</TableCell>
                                         <TableCell className="">Hotel Name</TableCell>
                                         <TableCell className="">Email</TableCell>
@@ -89,12 +99,12 @@ function HotelsPage() {
                                         {/* <TableCell className="">MANAGER</TableCell> */}
                                         <TableCell className="">Number of Rooms</TableCell>
                                         <TableCell className="">Available Rooms</TableCell>
-                                        <TableCell className="w-28">Action</TableCell>
+                                        <TableCell className="w-20">Action</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
                                     {isLoading ? (
-                                        <TableRow  >
+                                        <TableRow>
                                             <TableCell></TableCell>
 
                                             <TableCell></TableCell>
@@ -133,7 +143,7 @@ function HotelsPage() {
                                                         <TableCell className='text-center'>
                                                             {row.availableRooms}
                                                         </TableCell>
-                                                        <TableCell className='w-28'>
+                                                        <TableCell className='w-20'>
                                                             {/* <p className="text-gray-500 flex items-center gap-2"> */}
                                                             <Link href={{
                                                                 pathname: `/hotels/details`,

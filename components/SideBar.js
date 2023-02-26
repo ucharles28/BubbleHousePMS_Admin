@@ -254,7 +254,7 @@ const SideBar = forwardRef(({ showNav }, ref) => {
                     </div>
                 </Link>
 
-                <Link href="/dashboard">
+                {/* <Link href="/dashboard">
                     <div
                         className={`px-5 py-3 text-center cursor-pointer flex items-center gap-3 transition-colors ${router.pathname == "/oard"
                             ? "bg-[#fff7d8] text-[#D4AA00] rounded-xl"
@@ -264,7 +264,7 @@ const SideBar = forwardRef(({ showNav }, ref) => {
                         <Notepad2 className="h-5 w-5" variant="Bold" />
                         <p className="">Book room</p>
                     </div>
-                </Link>
+                </Link> */}
 
                 <Link href="/chats">
                     <div

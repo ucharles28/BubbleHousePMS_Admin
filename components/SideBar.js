@@ -194,7 +194,7 @@ import { forwardRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from 'next/image';
-import { Home2, Setting2, Profile2User, Notification, Buildings2, Notepad2, Calendar, Note, Messages2 } from 'iconsax-react';
+import { Setting2, Profile2User, Notification, Buildings2, Note, Calendar, Messages2, Category } from 'iconsax-react';
 
 const SideBar = forwardRef(({ showNav }, ref) => {
     const router = useRouter();
@@ -206,14 +206,14 @@ const SideBar = forwardRef(({ showNav }, ref) => {
             </div>
 
             <div className="flex flex-col gap-y-3 px-2">
-                <Link href="/dashboard">
+                <Link href="/">
                     <div
-                        className={`px-5 py-3 text-center cursor-pointer flex items-center gap-3 transition-colors ${router.pathname == "/dashboard"
+                        className={`px-5 py-3 text-center cursor-pointer flex items-center gap-3 transition-colors ${router.pathname == "/"
                             ? "bg-[#fff7d8] text-[#D4AA00] rounded-xl"
                             : "text-[#636363] hover:bg-[#FFF7D8] hover:text-[#D4AA00] rounded-xl"
                             }`}
                     >
-                        <Home2 className="h-5 w-5" variant="Bold" />
+                        <Category className="h-5 w-5" variant="Bold" />
                         <p className="">Dashboard</p>
                     </div>
                 </Link>
@@ -242,9 +242,9 @@ const SideBar = forwardRef(({ showNav }, ref) => {
                     </div>
                 </Link>
 
-                <Link href="/rooms">
+                <Link href="/bookings">
                     <div
-                        className={`px-5 py-3 text-center cursor-pointer flex items-center gap-3 transition-colors ${router.pathname == "/rooms"
+                        className={`px-5 py-3 text-center cursor-pointer flex items-center gap-3 transition-colors ${router.pathname == "/bookings"
                             ? "bg-[#fff7d8] text-[#D4AA00] rounded-xl"
                             : "text-[#636363] hover:bg-[#FFF7D8] hover:text-[#D4AA00] rounded-xl"
                             }`}
@@ -290,9 +290,9 @@ const SideBar = forwardRef(({ showNav }, ref) => {
                     </div>
                 </Link>
 
-                <Link href="/dashboard">
+                <Link href="/">
                     <div
-                        className={`px-5 py-3 text-center cursor-pointer flex items-center gap-3 transition-colors ${router.pathname == "/oard"
+                        className={`px-5 py-3 text-center cursor-pointer flex items-center gap-3 transition-colors ${router.pathname == "/"
                             ? "bg-[#fff7d8] text-[#D4AA00] rounded-xl"
                             : "text-[#636363] hover:bg-[#FFF7D8] hover:text-[#D4AA00] rounded-xl"
                             }`}

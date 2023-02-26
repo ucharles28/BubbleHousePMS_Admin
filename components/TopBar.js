@@ -112,8 +112,11 @@ export default function TopBar({ showNav, setShowNav }) {
                                 className="rounded-full object-cover w-8 h-8 border border-yellow-300 shadow-sm"
                                 alt="avatar"
                             />
-                            <p className="hidden md:block font-normal text-sm text-[#1a1a1a] gap-1 md:flex items-center">
-                                Super Admin
+                            <p className="hidden text-left font-medium text-sm text-[#1a1a1a] md:flex md:flex-col">
+                                Uzoma Charles
+                                <p className="text-xs text-[#636363] font-normal">
+                                    Admin
+                                </p>
                                 {/* <ArrowDown2 className="h-4 w-4 text-gray-800" /> */}
                             </p>
                         </Menu.Button>

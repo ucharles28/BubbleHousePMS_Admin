@@ -1,99 +1,219 @@
-import { Checkbox, FormControlLabel, TextField, Button, CircularProgress, Snackbar, MuiAlert } from '@mui/material'
-import { useRouter } from 'next/router';
-import { forwardRef, useState } from 'react';
-import { post } from '../helpers/ApiRequest';
-import styles from '../styles/Home.module.css';
-import Image from "next/image";
-import { logo } from "../public/logo.png";
+import { Checkbox, FormControlLabel, TextField, Button, Card, CardContent, FormControl, InputLabel, Select, MenuItem, CircularProgress, Snackbar } from '@mui/material';
+import { People, Buildings, Buliding, Book, Notepad2, Calendar, Slash, Money2, CalendarAdd, StatusUp, Profile2User, MessageEdit } from 'iconsax-react';
+import { forwardRef, useEffect, useRef, useState } from 'react';
+import Sidebar from '../components/SideBar';
+import { get, postData } from '../helpers/ApiRequest';
+import MuiAlert from '@mui/material/Alert';
+import Layout from '../components/Layout';
 
-export default function Login() {
+function Dashboard() {
 
-    const router = useRouter()
-    const [isLoading, setIsLoading] = useState(false);
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('')
-    const [alertMessage, setAlertMessage] = useState('');
+    // const Alert = forwardRef(function Alert(props, ref) {
+    //     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+    // });
 
-    const Alert = forwardRef(function Alert(props, ref) {
-        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-    });
-    const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
+    // const saveHotel = async () => {
+    //     setIsLoading(true)
+    //     const formData = new FormData()
+    //     formData.append("FullName", fullName)
+    //     formData.append("City", city)
+    //     formData.append("Gender", gender)
+    //     formData.append("Email", email)
+    //     formData.append("PhoneNumber", phone)
+    //     formData.append("ProfileImageFile", userImageFile)
+    //     formData.append("AccountType", role)
 
-        setOpen(false);
-    };
-    const handleLogin = async () => {
-        setIsLoading(true)
-        const request = {
-            email,
-            password
-        }
-        const response = await post('Auth/User/SignIn', request)
-        if (response.successful) {
-            router.push('dashboard')
-        } else {
-            alert(response.data)
-        }
-        setIsLoading(false)
-    }
+    //     const response = await postData('User/Create', formData)
+    //     if (response.successful) {
+    //         showAlert('User saved successfully', 'success')
+    //     } else {
+    //         showAlert(response.data, 'error')
+    //     }
+    //     setIsLoading(false)
+    // }
 
-    const showAlert = (alertMessage) => {
-        setAlertMessage(alertMessage)
-        setOpen(true)
-    }
+    // const handleClick = () => {
+    //     // 👇️ open file input box on click of other element
+    //     inputRef.current.click();
+    // };
+
+    // const handleChange = (event) => {
+    //     setSelectedManager(event.target.value)
+    // }
+
+    // const clearImage = (event) => {
+    //     setUserImageFile('')
+    //     setUserImageSrc('')
+    // }
+
+    // const handleFileChange = e => {
+    //     setUserImageFile(e.target.files[0])
+    //     const reader = new FileReader();
+    //     reader.onload = function (e) {
+    //         setUserImageSrc(e.target.result);
+    //     };
+    //     reader.readAsDataURL(e.target.files[0]);
+    // };
+
+    // const handleClose = (event, reason) => {
+    //     if (reason === 'clickaway') {
+    //         return;
+    //     }
+
+    //     setOpen(false);
+    // };
+
+
+    // const showAlert = (alertMessage, alertType) => {
+    //     setAlertMessage(alertMessage)
+    //     setOpen(true)
+    //     setAlertType(alertType)
+    // }
+
+    // //states
+    // const inputRef = useRef(null);
+    // const [fullName, setFullName] = useState('');
+    // const [city, setCity] = useState('');
+    // const [gender, setGender] = useState('');
+    // const [genders, setGenders] = useState(['Male', 'Female']);
+    // const [userRoles, setUserRoles] = useState(['Admin', 'Manager', 'Staff']);
+    // const [email, setEmail] = useState('');
+    // const [phone, setPhone] = useState('');
+    // const [role, setRole] = useState('');
+    // const [userImageFile, setUserImageFile] = useState();
+    // const [userImageSrc, setUserImageSrc] = useState();
+    // const [isLoading, setIsLoading] = useState(false);
+    // const [open, setOpen] = useState(false);
+    // const [alertType, setAlertType] = useState('');
+    // const [alertMessage, setAlertMessage] = useState('');
+
+
     return (
-        <div className='h-screen font-poppins'>
-            {/* <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                        {alertMessage}
-                    </Alert>
-                </Snackbar> */}
-            <div className='flex space-x-3 w-full h-full'>
+        <div className='h-full font-poppins'>
+            <Layout>
+                <div className='w-full h-screen py-6 flex flex-col gap-6'>
+                    <p className='w-full block text-xl font-medium text-[#1A1A1A] leading-8'>
+                        Overview
+                    </p>
 
-                {/* Background Image and Overlay */}
-                <div className='item w-full h-full bg-[url(https://interiordesign.net/wp-content/uploads/2021/03/Interior-Design-Ace-Hotel-Kyoto-Kengo-Kuma-Associates-Commune-Design-idx210201_kk01.jpg)] object-fill'>
-                    <div className='w-full h-full flex bg-gradient-to-t from-[#1a1a1a]/90 to-[#1a1a1a]/20'>
-                        {/* <div className='text-sm font-normal leading-6 text-white fixed bottom-0 left-0 w-full p-8'>
-                            <p>Copyright Bcloud © 2022</p>
-                        </div> */}
-                    </div>
-                </div>
+                    <div className='grid md:grid-cols-4 grid-cols-2 w-full h-auto items-center gap-x-2 gap-y-3'>
 
-                {/* Input Field */}
-                <div className='item w-3/6 h-full bg-white'>
-                    <div className='flex justify-center items-center p-7 w-full h-full'>
-                        <div className='m-0'>
-
-                            <div className="block">
-                                <Image src="/logo.png" width={120} height={120} className="mb-10 m-auto" />
-                                <p className='block text-xl leading-8 font-medium text-[#1a1a1a}/90'>Welcome to BCloud! &#128075;</p>
-                                <span className='block text-sm leading-5 font-normal text-[#1a1a1a]/70'>Please sign-in to your account and start the adventure</span>
+                        <div className="box rounded-2xl bg-white border-[1.5px] border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
+                            <div className='p-4 bg-[#fff7d8] rounded-full justify-center'>
+                                <Buildings size={24} className='text-[#D4AA00]' variant='Bold' />
                             </div>
-
-                            <div className='flex flex-col mt-6 space-y-4 text-[#1a1a1a}'>
-                                <TextField id="outlined-basic" value={email} onChange={(e) => setEmail(e.target.value)} className='w-full' InputProps={{ sx: { height: 56 } }} label="Email" variant="outlined" />
-                                <TextField id="outlined-basic" type={'password'} value={password} onChange={(e) => setPassword(e.target.value)} className='w-full' InputProps={{ sx: { height: 56 } }} label="Password" variant="outlined" />
-                            </div>
-                            <div className='flex justify-between items-center'>
-                                <FormControlLabel control={<Checkbox size='small' />} label="Remember me" className='text-[12px]' />
-                                <p className='text-xs leading-6 font-normal text-[#1a1a1a]/50'>Forgot password?</p>
-                            </div>
-                            {isLoading ? <div className='flex justify-center'><CircularProgress /></div> :
-                                <button
-                                    type="button"
-                                    className="mt-7 w-full text-center justify-center font-medium flex items-center py-2 rounded-[5px] text-sm leading-6 uppercase bg-[#F5C400] hover:bg-[#ffcc00] text-[#1a1a1a]" onClick={handleLogin}>Login</button>}
-
-                            <div className='text-sm font-normal leading-6 w-full text-center mt-10'>
-                                <p>Copyright Bcloud © 2022</p>
+                            <div className='block text-center md:text-left gap-3'>
+                                <p className='text-sm leading-6 text-[#636363]'>Hotels</p>
+                                <p className='text-2xl leading-10 font-semibold text-[#1a1a1a]'>10</p>
                             </div>
                         </div>
 
+                        <div className="box rounded-2xl bg-white border-[1.5px] border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
+                            <div className='p-4 bg-[#fff7d8] rounded-full justify-center'>
+                                <Profile2User size={24} className='text-[#D4AA00]' variant='Bold' />
+                            </div>
+                            <div className='block text-center md:text-left gap-3'>
+                                <p className='text-sm leading-6 text-[#636363]'>Customers</p>
+                                <p className='text-2xl leading-10 font-semibold text-[#1a1a1a]'>900</p>
+                            </div>
+                        </div>
+
+                        <div className="box rounded-2xl bg-white border-[1.5px] border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
+                            <div className='p-4 bg-[#fff7d8] rounded-full justify-center'>
+                                <Profile2User size={24} className='text-[#D4AA00]' variant='Bold' />
+                            </div>
+                            <div className='block text-center md:text-left gap-3'>
+                                <p className='text-sm leading-6 text-[#636363]'>Managers</p>
+                                <p className='text-2xl leading-10 font-semibold text-[#1a1a1a]'>10</p>
+                            </div>
+                        </div>
+
+                        <div className="box rounded-2xl bg-white border-[1.5px] border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
+                            <div className='p-4 bg-[#fff7d8] rounded-full justify-center'>
+                                <Profile2User size={24} className='text-[#D4AA00]' variant='Bold' />
+                            </div>
+                            <div className='block text-center md:text-left gap-3'>
+                                <p className='text-sm leading-6 text-[#636363]'>Staff</p>
+                                <p className='text-2xl leading-10 font-semibold text-[#1a1a1a]'>100</p>
+                            </div>
+                        </div>
+
+                        <div className="box rounded-2xl bg-white border-[1.5px] border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
+                            <div className='p-4 bg-[#fff7d8] rounded-full justify-center'>
+                                <Book size={24} className='text-[#D4AA00]' variant='Bold' />
+                            </div>
+                            <div className='block text-center md:text-left gap-3'>
+                                <p className='text-sm leading-6 text-[#636363]'>Today Booked</p>
+                                <p className='text-2xl leading-10 font-semibold text-[#1a1a1a]'>12</p>
+                            </div>
+                        </div>
+
+                        <div className="box rounded-2xl bg-white border-[1.5px] border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
+                            <div className='p-4 bg-[#fff7d8] rounded-full justify-center'>
+                                <MessageEdit size={24} className='text-[#D4AA00]' variant='Bold' />
+                            </div>
+                            <div className='block text-center md:text-left gap-3'>
+                                <p className='text-sm leading-6 text-[#636363]'>Booking Request</p>
+                                <p className='text-2xl leading-10 font-semibold text-[#1a1a1a]'>3</p>
+                            </div>
+                        </div>
+
+                        <div className="box rounded-2xl bg-white border-[1.5px] border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
+                            <div className='p-4 bg-[#fff7d8] rounded-full justify-center'>
+                                <Calendar size={24} className='text-[#D4AA00]' variant='Bold' />
+                            </div>
+                            <div className='block text-center md:text-left gap-3'>
+                                <p className='text-sm leading-6 text-[#636363]'>Running Booking</p>
+                                <p className='text-2xl leading-10 font-semibold text-[#1a1a1a]'>21</p>
+                            </div>
+                        </div>
+
+                        <div className="box rounded-2xl bg-white border-[1.5px] border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
+                            <div className='p-4 bg-[#fff7d8] rounded-full justify-center'>
+                                <Slash size={24} className='text-[#D4AA00]' variant='Bold' />
+                                {/* <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" d="M12 22C17.5228 22 22 17.5228 22 12C22 9.65159 21.1905 7.49226 19.8353 5.78582L5.20261 19.3346C6.98664 20.9887 9.37523 22 12 22ZM4.18175 18.2356L18.8174 4.68402C17.0313 3.01884 14.6346 2 12 2C6.47715 2 2 6.47715 2 12C2 14.3582 2.8163 16.5258 4.18175 18.2356Z" fill="#D4AA00" fill-rule="evenodd" /></svg> */}
+                            </div>
+                            <div className='block text-center md:text-left gap-3'>
+                                <p className='text-xs md:text-sm leading-6 text-[#636363]'>Cancelled Booking</p>
+                                <p className='text-2xl leading-10 font-semibold text-[#1a1a1a]'>18</p>
+                            </div>
+                        </div>
+
+                        <div className="box rounded-2xl bg-white border-[1.5px] border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
+                            <div className='p-4 bg-[#fff7d8] rounded-full justify-center'>
+                                <Money2 size={24} className='text-[#D4AA00]' variant='Bold' />
+                            </div>
+                            <div className='block text-center md:text-left gap-3'>
+                                <p className='text-sm leading-6 text-[#636363]'>Total Payment</p>
+                                <p className='text-2xl leading-10 font-semibold text-[#1a1a1a]'>NGN 300K</p>
+                            </div>
+                        </div>
+
+                        <div className="box rounded-2xl bg-white border-[1.5px] border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
+                            <div className='p-4 bg-[#fff7d8] rounded-full justify-center'>
+                                <StatusUp size={24} className='text-[#D4AA00]' variant='Bold' />
+                            </div>
+                            <div className='block text-center md:text-left gap-3'>
+                                <p className='text-sm leading-6 text-[#636363]'>Transactions</p>
+                                <p className='text-2xl leading-10 font-semibold text-[#1a1a1a]'>21</p>
+                            </div>
+                        </div> 
+
+                        {/* <div className="box rounded-2xl bg-white border-[1.5px] border-[#FFDD55] w-full flex flex-col m-auto justify-center p-6 px-16 gap-5 h-auto">
+                            <div className='bg-[#fff7d8] flex justify-center mx-auto p-4 rounded-full'>
+                                <Book size={24} className='text-[#D4AA00]' variant='Bold' />
+                            </div>
+                            <div className='block text-center gap-3'>
+                                <p className='text-sm leading-6 text-[#636363]'>Today booked</p>
+                                <p className='text-2xl leading-10 font-semibold text-[#1a1a1a]'>10</p>
+                            </div>
+                        </div> */}
+
                     </div>
                 </div>
-
-            </div>
+            </Layout>
         </div>
     )
 }
+
+export default Dashboard;

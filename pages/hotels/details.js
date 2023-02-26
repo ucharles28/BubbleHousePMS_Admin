@@ -174,7 +174,7 @@ function HotelDetails() {
 
                 <div className='w-full h-full py-6 flex flex-col gap-4'>
                     <div className='flex justify-between w-full'>
-                        <p className='w-full block text-xl md:text-2xl font-medium text-[#1A1A1A] leading-8'>
+                        <p className='w-full block text-xl font-medium text-[#1A1A1A] leading-8'>
                             Hotel Details
                         </p>
 
@@ -184,7 +184,7 @@ function HotelDetails() {
                         </div>
                     </div>
 
-                    <div className='bg-white border border-gray-50 shadow rounded-lg w-full overflow-auto p-4 py-5'>
+                    <div className='bg-white border border-[#E4E4E4] shadow rounded-lg w-full overflow-auto p-4 py-5'>
                         <div className="flex md:flex-row flex-col items-center gap-3 w-full h-full">
 
                             <div className='item md:w-1/3 w-full md:h-screen h-full'>

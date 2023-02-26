@@ -100,7 +100,7 @@ function Notifications() {
             <Layout>
                 <div className='w-full h-screen py-6 flex flex-col gap-4'>
 
-                    <p className='w-full block text-xl md:text-2xl font-medium text-[#1A1A1A] leading-8'>
+                    <p className='w-full block text-xl font-medium text-[#1A1A1A] leading-8'>
                         Chats
                     </p>
 

@@ -72,11 +72,11 @@ function UsersPage() {
                 <div className='w-full h-screen py-6 flex flex-col gap-6'>
 
                     <div className='flex w-full'>
-                        <p className='w-full block text-xl md:text-2xl font-medium text-[#1A1A1A] leading-8'>
+                        <p className='w-full block text-xl font-medium text-[#1A1A1A] leading-8'>
                             Users
                         </p>
 
-                        <div className='flex item-center justify-end gap-4 w-full'>
+                        <div className='flex item-center justify-end gap-2 w-full'>
                             <TextField size='small' id="outlined-basic" className="z-0 bg-white text-sm leading-6 font-normal" label='Search Users' variant="outlined"
                             />
                             <Link href='users/new'>

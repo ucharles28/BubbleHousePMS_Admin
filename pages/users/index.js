@@ -91,8 +91,8 @@ function UsersPage() {
                     </div>
 
                     {/* <Paper sx={{ width: '100%', overflow: 'hidden' }}> */}
-                    <div className='bg-white border border-gray-50 shadow rounded-lg w-full overflow-hidden h-auto py-1 px-2'>
-                        <TableContainer sx={{ maxHeight: 440 }}>
+                    <div className='bg-white border border-gray-50 shadow rounded-lg w-full overflow-auto h-auto py-1 px-2'>
+                        <TableContainer>
                             <Table >
                                 <TableHead>
                                     <TableRow

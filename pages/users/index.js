@@ -4,7 +4,7 @@ import {
     TablePagination, TableRow, Table,
     TableContainer, TableHead, CircularProgress, TableBody, TextField
 } from '@mui/material'
-import { SidebarRight, Eye } from 'iconsax-react'
+import { Eye } from 'iconsax-react';
 import { get, postData } from '../../helpers/ApiRequest'
 import MuiAlert from '@mui/material/Alert'
 import Link from 'next/link'
@@ -77,7 +77,7 @@ function UsersPage() {
                         </p>
 
                         <div className='flex item-center justify-end gap-2 w-full'>
-                            <TextField size='small' id="outlined-basic" className="z-0 bg-white text-sm leading-6 font-normal" label='Search Users' variant="outlined"
+                            <TextField size='small' id="outlined-basic" className="z-0text-sm leading-6 font-normal" label='Search Users' variant="outlined"
                             />
                             <Link href='users/new'>
                                 <button

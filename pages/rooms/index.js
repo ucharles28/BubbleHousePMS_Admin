@@ -3,7 +3,7 @@ import {
     TablePagination, TableRow, Table,
     TableContainer, TableHead, CircularProgress, TableBody, TextField
 } from '@mui/material'
-import { SidebarRight, Eye } from 'iconsax-react'
+import { Eye } from 'iconsax-react'
 import { forwardRef, use, useEffect, useRef, useState } from 'react'
 import Layout from '../../components/Layout'
 import { get, postData } from '../../helpers/ApiRequest'
@@ -77,7 +77,7 @@ function RoomsPage() {
                         </p>
 
                         <div className='flex item-center justify-end gap-2 w-full'>
-                            <TextField size='small' id="outlined-basic" className="z-0 bg-white text-base leading-6 font-normal" label='Search Rooms' variant="outlined"
+                            <TextField size='small' id="outlined-basic" className="z-0text-base leading-6 font-normal" label='Search Rooms' variant="outlined"
                             />
                             {/* <button
                                 type="button"

@@ -57,7 +57,7 @@ function HotelsPage() {
                         </p>
 
                         <div className='flex item-center justify-end gap-2 w-full'>
-                            <TextField size='small' id="outlined-basic" className="z-0 bg-white text-base leading-6 font-normal" label='Search Hotels' variant="outlined"
+                            <TextField size='small' id="outlined-basic" className="z-0text-base leading-6 font-normal" label='Search Hotels' variant="outlined"
                             />
                             <button
                                 type="button"

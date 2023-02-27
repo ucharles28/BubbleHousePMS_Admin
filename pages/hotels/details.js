@@ -1,6 +1,6 @@
 import { Checkbox, FormControlLabel, TextField, Button, Card, CardContent, FormControl, InputLabel, Select, MenuItem, CircularProgress } from '@mui/material'
 import { ArrowLeft2, SidebarRight } from 'iconsax-react'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react'
 import Layout from '../../components/Layout'
 import Sidebar from '../../components/SideBar'

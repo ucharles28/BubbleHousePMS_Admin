@@ -5,6 +5,7 @@ import Sidebar from '../components/SideBar';
 import { get, postData } from '../helpers/ApiRequest';
 import MuiAlert from '@mui/material/Alert';
 import Layout from '../components/Layout';
+import { PieChart, Pie, Cell } from "recharts";
 
 function Dashboard() {
 
@@ -86,19 +87,75 @@ function Dashboard() {
     // const [open, setOpen] = useState(false);
     // const [alertType, setAlertType] = useState('');
     // const [alertMessage, setAlertMessage] = useState('');
+    const data = [
+        {
+            name: "Group A",
+            value: 390,
+        },
+        {
+            name: "Group B",
+            value: 120,
+        }
+    ];
+    const COLORS = [
+        "#FFCC00",
+        "#636363"
+    ];
 
 
     return (
         <div className='h-full font-poppins'>
             <Layout>
-                <div className='w-full h-screen py-6 flex flex-col gap-6'>
+                <div className='w-full h-full py-6 flex flex-col gap-6'>
                     <p className='w-full block text-xl font-medium text-[#1A1A1A] leading-8'>
                         Overview
                     </p>
 
-                    <div className='grid md:grid-cols-4 grid-cols-2 w-full h-auto items-center gap-x-2 gap-y-3'>
+                    <div className='flex flex-col md:flex-row w-full h-auto items-center gap-3 mb-3'>
 
-                        <div className="box rounded-2xl bg-white border-[1.5px] border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
+                        <div className="rounded-2xl bg-white  border border-[#FFDD55] w-full md:w-auto flex flex-col justify-center items-center p-4 md:p-6 gap-2 h-auto">
+                            <p className='text-lg leading-8 font-medium text-[#1a1a1a]'>
+                                Rooms Availability
+                            </p>
+
+                            <PieChart width={200} height={200}>
+                                <Pie
+                                    data={data}
+                                    innerRadius={60}
+                                    outerRadius={80}
+                                    fill="#8884d8"
+                                    paddingAngle={2}
+                                    dataKey="value"
+                                >
+                                    {data.map((entry, index) => (
+                                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                    ))}
+                                </Pie>
+                            </PieChart>
+
+                            <div className='flex flex-col w-full'>
+                                <div className='flex items-center w-full justify-between gap-2'>
+                                    <p className='text-xs font-normal leading-6 flex items-center gap-2 text-[#636363]'>
+                                        <span className='w-5 h-3 bg-[#FFCC00] rounded-sm'></span>
+                                        Available rooms
+                                    </p>
+                                    <p className='text-xs font-medium leading-6 text-[#1A1A1A]'> 120 </p>
+                                </div>
+                                <div className='flex items-center w-full justify-between gap-2'>
+                                    <p className='text-xs font-normal leading-6 flex items-center gap-2 text-[#636363]'>
+                                        <span className='w-5 h-3 bg-gray-600 rounded-sm'></span>
+                                        Booked rooms
+                                    </p>
+                                    <p className='text-xs font-medium leading-6 text-[#1A1A1A]'> 10 </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div className='grid md:grid-cols-4 grid-cols-2 w-full h-auto items-center gap-3'>
+
+                        <div className="box rounded-2xl bg-white  border border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
                             <div className='p-4 bg-[#fff7d8] rounded-full justify-center'>
                                 <Buildings size={24} className='text-[#D4AA00]' variant='Bold' />
                             </div>
@@ -108,7 +165,7 @@ function Dashboard() {
                             </div>
                         </div>
 
-                        <div className="box rounded-2xl bg-white border-[1.5px] border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
+                        <div className="box rounded-2xl bg-white  border border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
                             <div className='p-4 bg-[#fff7d8] rounded-full justify-center'>
                                 <Profile2User size={24} className='text-[#D4AA00]' variant='Bold' />
                             </div>
@@ -118,7 +175,7 @@ function Dashboard() {
                             </div>
                         </div>
 
-                        <div className="box rounded-2xl bg-white border-[1.5px] border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
+                        <div className="box rounded-2xl bg-white  border border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
                             <div className='p-4 bg-[#fff7d8] rounded-full justify-center'>
                                 <Profile2User size={24} className='text-[#D4AA00]' variant='Bold' />
                             </div>
@@ -128,7 +185,7 @@ function Dashboard() {
                             </div>
                         </div>
 
-                        <div className="box rounded-2xl bg-white border-[1.5px] border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
+                        <div className="box rounded-2xl bg-white  border border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
                             <div className='p-4 bg-[#fff7d8] rounded-full justify-center'>
                                 <Profile2User size={24} className='text-[#D4AA00]' variant='Bold' />
                             </div>
@@ -138,7 +195,7 @@ function Dashboard() {
                             </div>
                         </div>
 
-                        <div className="box rounded-2xl bg-white border-[1.5px] border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
+                        <div className="box rounded-2xl bg-white  border border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
                             <div className='p-4 bg-[#fff7d8] rounded-full justify-center'>
                                 <Book size={24} className='text-[#D4AA00]' variant='Bold' />
                             </div>
@@ -148,7 +205,7 @@ function Dashboard() {
                             </div>
                         </div>
 
-                        <div className="box rounded-2xl bg-white border-[1.5px] border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
+                        <div className="box rounded-2xl bg-white  border border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
                             <div className='p-4 bg-[#fff7d8] rounded-full justify-center'>
                                 <MessageEdit size={24} className='text-[#D4AA00]' variant='Bold' />
                             </div>
@@ -158,7 +215,7 @@ function Dashboard() {
                             </div>
                         </div>
 
-                        <div className="box rounded-2xl bg-white border-[1.5px] border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
+                        <div className="box rounded-2xl bg-white  border border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
                             <div className='p-4 bg-[#fff7d8] rounded-full justify-center'>
                                 <Calendar size={24} className='text-[#D4AA00]' variant='Bold' />
                             </div>
@@ -168,10 +225,9 @@ function Dashboard() {
                             </div>
                         </div>
 
-                        <div className="box rounded-2xl bg-white border-[1.5px] border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
+                        <div className="box rounded-2xl bg-white  border border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
                             <div className='p-4 bg-[#fff7d8] rounded-full justify-center'>
                                 <Slash size={24} className='text-[#D4AA00]' variant='Bold' />
-                                {/* <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" d="M12 22C17.5228 22 22 17.5228 22 12C22 9.65159 21.1905 7.49226 19.8353 5.78582L5.20261 19.3346C6.98664 20.9887 9.37523 22 12 22ZM4.18175 18.2356L18.8174 4.68402C17.0313 3.01884 14.6346 2 12 2C6.47715 2 2 6.47715 2 12C2 14.3582 2.8163 16.5258 4.18175 18.2356Z" fill="#D4AA00" fill-rule="evenodd" /></svg> */}
                             </div>
                             <div className='block text-center md:text-left gap-3'>
                                 <p className='text-xs md:text-sm leading-6 text-[#636363]'>Cancelled Booking</p>
@@ -179,7 +235,7 @@ function Dashboard() {
                             </div>
                         </div>
 
-                        <div className="box rounded-2xl bg-white border-[1.5px] border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
+                        <div className="box rounded-2xl bg-white  border border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
                             <div className='p-4 bg-[#fff7d8] rounded-full justify-center'>
                                 <Money2 size={24} className='text-[#D4AA00]' variant='Bold' />
                             </div>
@@ -189,7 +245,7 @@ function Dashboard() {
                             </div>
                         </div>
 
-                        <div className="box rounded-2xl bg-white border-[1.5px] border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
+                        <div className="box rounded-2xl bg-white  border border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
                             <div className='p-4 bg-[#fff7d8] rounded-full justify-center'>
                                 <StatusUp size={24} className='text-[#D4AA00]' variant='Bold' />
                             </div>
@@ -197,19 +253,10 @@ function Dashboard() {
                                 <p className='text-sm leading-6 text-[#636363]'>Transactions</p>
                                 <p className='text-2xl leading-10 font-semibold text-[#1a1a1a]'>21</p>
                             </div>
-                        </div> 
-
-                        {/* <div className="box rounded-2xl bg-white border-[1.5px] border-[#FFDD55] w-full flex flex-col m-auto justify-center p-6 px-16 gap-5 h-auto">
-                            <div className='bg-[#fff7d8] flex justify-center mx-auto p-4 rounded-full'>
-                                <Book size={24} className='text-[#D4AA00]' variant='Bold' />
-                            </div>
-                            <div className='block text-center gap-3'>
-                                <p className='text-sm leading-6 text-[#636363]'>Today booked</p>
-                                <p className='text-2xl leading-10 font-semibold text-[#1a1a1a]'>10</p>
-                            </div>
-                        </div> */}
+                        </div>
 
                     </div>
+
                 </div>
             </Layout>
         </div>

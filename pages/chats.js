@@ -1,8 +1,12 @@
-import { ArrowLeft2, Call, Send2 } from 'iconsax-react';
-import { forwardRef, useEffect, useRef, useState } from 'react';
+import { ArrowLeft2, Call, DirectNotification, Notification, Send2 } from 'iconsax-react';
+import { FiMoreVertical } from 'react-icons/fi';
+import { forwardRef, Fragment, useEffect, useRef, useState } from 'react';
 import { get, postData } from '../helpers/ApiRequest';
 import Layout from '../components/Layout';
+import { Checkbox, FormControlLabel, TextField, Button, Card, CardContent, FormControl, InputLabel, Select, MenuItem, CircularProgress, Snackbar } from '@mui/material';
 import Link from 'next/link';
+import { Menu, Transition, Popover } from "@headlessui/react";
+import { useRouter } from 'next/router';
 import { Drawer } from 'antd';
 
 
@@ -14,6 +18,39 @@ function Notifications() {
     const onClose = () => {
         setOpen(false);
     };
+
+    const { query } = useRouter();
+    const id = query.id;
+
+    const getAllManagers = async () => {
+        const response = await get('User/GetAllManagers')
+        if (response.successful) {
+            setManagers(response.data)
+        }
+    }
+
+    const getHotelById = async () => {
+        // setIsLoading(true)
+        const response = await get(`Hotel/${id}`)
+        if (response.successful) {
+            // console.log(response.data)
+            // setHotelName(response.data.name)
+            // setDescription(response.data.description)
+            // setEmail(response.data.email)
+            // setPhone(response.data.phoneNumber)
+            // setAltPhone(response.data.altPhoneNumber)
+            // setNumberOfRooms(response.data.numberOfRooms)
+            setSelectedManager(response.data.managerId)
+            // setHotelImageSrc(response.data.imageUrl)
+            // setCity(response.data.city)
+            // setAddress(response.data.address.line)
+            // setIsFeatured(response.data.isFeatured ? "Yes" : "No")
+            console.log(selectedManager)
+        } else {
+
+        }
+        // setIsLoading(false)
+    }
 
     // const Alert = forwardRef(function Alert(props, ref) {
     //     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -93,7 +130,18 @@ function Notifications() {
     // const [open, setOpen] = useState(false);
     // const [alertType, setAlertType] = useState('');
     // const [alertMessage, setAlertMessage] = useState('');
+    const [managers, setManagers] = useState([]);
+    const [selectedManager, setSelectedManager] = useState();
+    const handleChange = (event) => {
+        setSelectedManager(event.target.value)
+    }
 
+    useEffect(() => {
+        getAllManagers();
+        if (id) {
+            getHotelById()
+        }
+    }, [id])
 
     return (
         <div className='h-full font-poppins'>
@@ -124,28 +172,34 @@ function Notifications() {
                                 <div className="h-[32rem] scrollbar-thin scrollbar-track-white scroll-smooth scrollbar-thumb-[#ffde59] scrollbar-rounded-full scrollbar-thumb-rounded-full overflow-y-scroll">
 
                                     <div className='flex items-center md:p-3 p-2 text-xs transition duration-150 ease-in-out border-b-[1.5px] border-[#E4E4E4] cursor-pointer bg-[#fff7d8]'>
-                                        <div className='flex gap-3 items-start w-full'>
+                                        <div className='flex gap-2 items-start w-full'>
 
-                                            <img className="object-cover shadow-sm w-9 h-9 rounded-full border border-[#E4E4E4]" src='/logo.png' alt="africanvo" />
+                                            <img className="object-cover shadow-sm w-10 h-10 rounded-full border border-[#E4E4E4]" src='/logo.png' alt="africanvo" />
 
                                             <div className="w-full flex flex-col gap-0.5">
-                                                <p className="block font-medium hover:text-[#D4AA00] text-gray-900">Chijioke Emechebe</p>
+                                                <p className="flex items-center gap-x-1 font-medium hover:text-[#D4AA00] text-gray-900">
+                                                    Chijioke Emechebe
+                                                    <span className='font-medium text-[#636363] leading-5'>29 July 2023</span>
+                                                </p>
 
-                                                <div className="block text-xs font-normal text-gray-600 italic">Last message</div>
+                                                <div className="block text-xs font-medium text-[#636363]">Last message</div>
                                             </div>
 
                                         </div>
                                     </div>
 
                                     <div className='flex items-center md:p-3 p-2 text-xs transition duration-150 ease-in-out border-b-[1.5px] border-[#E4E4E4] cursor-pointer hover:bg-[#fff7d8]'>
-                                        <div className='flex gap-3 items-start w-full'>
+                                        <div className='flex gap-2 items-start w-full'>
 
-                                            <img className="object-cover shadow-sm w-9 h-9 rounded-full border border-[#E4E4E4]" src='/logo.png' alt="africanvo" />
+                                            <img className="object-cover shadow-sm w-10 h-10 rounded-full border border-[#E4E4E4]" src='/logo.png' alt="africanvo" />
 
                                             <div className="w-full flex flex-col gap-0.5">
-                                                <p className="block font-medium hover:text-[#D4AA00] text-gray-900">Chijioke Emechebe</p>
+                                                <p className="flex items-center gap-x-1 font-medium hover:text-[#D4AA00] text-gray-900">
+                                                    Chijioke Emechebe
+                                                    <span className='font-medium text-[#636363] leading-5'>29 July 2023</span>
+                                                </p>
 
-                                                <div className="block text-xs font-normal text-gray-600 italic">Last message</div>
+                                                <div className="block text-xs font-medium text-[#636363]">Last message</div>
                                             </div>
 
                                         </div>
@@ -170,6 +224,49 @@ function Notifications() {
                                     <div className='text-[#636363] p-2 rounded-md hover:text-[#D4AA00] cursor-pointer hover:transition hover:bg-[#fff7d8] hover:ease-in duration-300'>
                                         <Call className="h-5 w-5" variant='Bold' />
                                     </div>
+
+                                    <Popover className="relative">
+                                        <Popover.Button className='outline-none text-[#636363] p-2 rounded-md hover:text-[#D4AA00] cursor-pointer hover:transition hover:bg-[#fff7d8] hover:ease-in duration-300'>
+                                            <FiMoreVertical className='h-5 w-5' />
+                                        </Popover.Button>
+                                        <Transition
+                                            as={Fragment}
+                                            enter="transition ease-out duration-100"
+                                            enterFrom="transform scale-95"
+                                            enterTo="transform scale-100"
+                                            leave="transition ease-in duration=75"
+                                            leaveFrom="transform scale-100"
+                                            leaveTo="transform scale-95"
+                                        >
+                                            <Popover.Panel className="absolute -right-16 sm:right-4 z-50 mt-2 gap-3 p-4 bg-white border border-[#E4E4E4] shadow-sm rounded-md max-w-xs sm:max-w-sm w-screen">
+                                                <div className='flex flex-col w-full gap-y-3'>
+                                                    <FormControl fullWidth>
+                                                        <InputLabel id="Manager Assigned">Manager Assigned</InputLabel>
+                                                        <Select
+                                                            labelId="Manager Assigned"
+                                                            id="outlined-basic"
+                                                            value={selectedManager}
+                                                            onChange={handleChange}
+                                                        >
+                                                            {managers.map((manager) => <MenuItem value={manager.id}>{manager.fullName}</MenuItem>)}
+                                                        </Select>
+                                                    </FormControl>
+
+                                                    <div className="flex items-center w-full gap-4">
+                                                        <button
+                                                            type="button"
+                                                            className="text-white font-medium flex items-center py-2 px-5 rounded-md bg-[#666666] text-sm leading-6 uppercase hover:bg-[#1A1A1A]/50"
+                                                        // onClick={saveHotel}
+                                                        // disabled={!hotelName || !description || !address || !email || !phone || !numberOfRooms || !selectedManager}
+                                                        >
+                                                            {/* {isLoading ? <CircularProgress size={20} color="inherit" /> : 'Save Changes'} */}
+                                                            Assign
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </Popover.Panel>
+                                        </Transition>
+                                    </Popover>
 
                                 </div>
 
@@ -233,28 +330,38 @@ function Notifications() {
                                         className='flex items-center md:p-3 p-2 text-xs transition duration-150 ease-in-out border-b-[1.5px] border-[#E4E4E4] cursor-pointer bg-[#fff7d8]'
                                         onClick={showDrawer}
                                     >
-                                        <div className='flex gap-3 items-start w-full'>
+                                        <div className='flex gap-2 items-start w-full'>
 
-                                            <img className="object-cover shadow-sm w-9 h-9 rounded-full border border-[#E4E4E4]" src='/logo.png' alt="africanvo" />
+                                            <img className="object-cover shadow-sm w-10 h-10 rounded-full border border-[#E4E4E4]" src='/logo.png' alt="africanvo" />
 
                                             <div className="w-full flex flex-col gap-0.5">
-                                                <p className="block font-medium hover:text-[#D4AA00] text-gray-900">Chijioke Emechebe</p>
+                                                <p className="flex items-center gap-x-1 font-semibold hover:text-[#D4AA00] text-gray-900">
+                                                    Chijioke Emechebe
+                                                    <span className='font-medium text-[#636363] leading-5'>29 July 2023</span>
+                                                </p>
 
-                                                <div className="block text-xs font-normal text-gray-600 italic">Last message</div>
+                                                <div className="block text-xs font-medium text-[#636363]">Last message</div>
                                             </div>
 
                                         </div>
+
+                                        {/* <div className='tracking-widest text-lg font-bold leading-6 text-[#636363]'>
+                                            ...
+                                        </div> */}
                                     </div>
 
                                     <div className='flex items-center md:p-3 p-2 text-xs transition duration-150 ease-in-out border-b-[1.5px] border-[#E4E4E4] cursor-pointer hover:bg-[#fff7d8]'>
-                                        <div className='flex gap-3 items-start w-full'>
+                                        <div className='flex gap-2 items-start w-full'>
 
-                                            <img className="object-cover shadow-sm w-9 h-9 rounded-full border border-[#E4E4E4]" src='/logo.png' alt="africanvo" />
+                                            <img className="object-cover shadow-sm w-10 h-10 rounded-full border border-[#E4E4E4]" src='/logo.png' alt="africanvo" />
 
                                             <div className="w-full flex flex-col gap-0.5">
-                                                <p className="block font-medium hover:text-[#D4AA00] text-gray-900">Chijioke Emechebe</p>
+                                                <p className="flex items-center gap-x-1 font-medium hover:text-[#D4AA00] text-gray-900">
+                                                    Chijioke Emechebe
+                                                    <span className='font-medium text-[#636363] leading-5'>29 July 2023</span>
+                                                </p>
 
-                                                <div className="block text-xs font-normal text-gray-600 italic">Last message</div>
+                                                <div className="block text-xs font-medium text-[#636363]">Last message</div>
                                             </div>
 
                                         </div>

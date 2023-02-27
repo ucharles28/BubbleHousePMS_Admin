@@ -17,9 +17,9 @@ export default function TopBar({ showNav, setShowNav }) {
                 <svg className="h-7 w-7 text-gray-700 cursor-pointer" onClick={() => setShowNav(!showNav)} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="style=linear">
                         <g id="menu-hotdog">
-                            <path id="vector" d="M5 6H19" stroke="#000000" strokeWidth="1.5" stroke-linecap="round" />
-                            <path id="vector_2" d="M3 12H21" stroke="#000000" strokeWidth="1.5" stroke-linecap="round" />
-                            <path id="vector_3" d="M5 18H19" stroke="#000000" strokeWidth="1.5" stroke-linecap="round" />
+                            <path id="vector" d="M5 6H19" stroke="#1A1A1A" strokeWidth="1.5" stroke-linecap="round" />
+                            <path id="vector_2" d="M3 12H21" stroke="#1A1A1A" strokeWidth="1.5" stroke-linecap="round" />
+                            <path id="vector_3" d="M5 18H19" stroke="#1A1A1A" strokeWidth="1.5" stroke-linecap="round" />
                         </g>
                     </g>
                 </svg>
@@ -109,7 +109,7 @@ export default function TopBar({ showNav, setShowNav }) {
                         <Menu.Button className="inline-flex w-full justify-center items-center gap-2">
                             <img
                                 src="/logo.png"
-                                className="rounded-full object-cover w-8 h-8 border border-yellow-300 shadow-sm"
+                                className="rounded-full object-cover w-9 h-9 border border-yellow-300 shadow-sm"
                                 alt="avatar"
                             />
                             <p className="hidden text-left font-medium text-sm text-[#1a1a1a] md:flex md:flex-col">

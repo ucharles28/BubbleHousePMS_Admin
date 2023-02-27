@@ -91,15 +91,15 @@ function AllBookings() {
     return (
         <div className='h-full font-poppins'>
             <Layout>
-                <div className='w-full h-screen py-6 flex flex-col gap-6'>
+                <div className='w-full md:h-screen py-6 flex flex-col gap-6'>
                     <p className='w-full block text-xl font-medium text-[#1A1A1A] leading-8'>
                         Bookings
                     </p>
 
-                    <div className='grid md:grid-cols-4 grid-cols-2 w-full h-auto items-center gap-x-2 gap-y-3'>
+                    <div className='grid md:grid-cols-4 grid-cols-2 w-full h-auto items-center gap-3'>
 
                         <Link href='/bookings/todaybooked' >
-                            <div className="hover:shadow-sm box rounded-2xl bg-white border-[1.5px] border-[#E4E4E4] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-4 h-auto">
+                            <div className="hover:shadow-sm box rounded-2xl bg-white border border-[#E4E4E4] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-4 h-auto">
                                 <div className='p-4 bg-[#F6F6F6] rounded-full justify-center'>
                                     <Book size={24} className='text-[#636363]' variant='Bold' />
                                 </div>
@@ -112,7 +112,7 @@ function AllBookings() {
 
 
                         <Link href='/bookings/running' >
-                            <div className="hover:shadow-sm box rounded-2xl bg-white border-[1.5px] border-[#E4E4E4] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-4 h-auto">
+                            <div className="hover:shadow-sm box rounded-2xl bg-white border border-[#E4E4E4] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-4 h-auto">
                                 <div className='p-4 bg-[#F6F6F6] rounded-full justify-center'>
                                     <Calendar size={24} className='text-[#636363]' variant='Bold' />
                                 </div>
@@ -125,7 +125,7 @@ function AllBookings() {
 
 
                         <Link href='/bookings/request' >
-                            <div className="hover:shadow-sm box rounded-2xl bg-white border-[1.5px] border-[#E4E4E4] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-4 h-auto">
+                            <div className="hover:shadow-sm box rounded-2xl bg-white border border-[#E4E4E4] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-4 h-auto">
                                 <div className='p-4 bg-[#F6F6F6] rounded-full justify-center'>
                                     <MessageEdit size={24} className='text-[#636363]' variant='Bold' />
                                 </div>
@@ -138,7 +138,7 @@ function AllBookings() {
 
 
                         <Link href='/bookings/available'>
-                            <div className="hover:shadow-sm box rounded-2xl bg-white border-[1.5px] border-[#E4E4E4] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-4 h-auto">
+                            <div className="hover:shadow-sm box rounded-2xl bg-white border border-[#E4E4E4] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-4 h-auto">
                                 <div className='p-4 bg-[#F6F6F6] rounded-full justify-center'>
                                     <Buliding size={24} className='text-[#636363]' variant='Bold' />
                                 </div>
@@ -151,7 +151,7 @@ function AllBookings() {
 
 
                         <Link href='/bookings/cancelled' >
-                            <div className="hover:shadow-sm box rounded-2xl bg-white border-[1.5px] border-[#E4E4E4] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-4 h-auto">
+                            <div className="hover:shadow-sm box rounded-2xl bg-white border border-[#E4E4E4] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-4 h-auto">
                                 <div className='p-4 bg-[#F6F6F6] rounded-full justify-center'>
                                     <Slash size={24} className='text-[#636363]' variant='Bold' />
                                 </div>
@@ -164,7 +164,7 @@ function AllBookings() {
 
 
                         <Link href='/' >
-                            <div className="hover:shadow-sm box rounded-2xl bg-white border-[1.5px] border-[#E4E4E4] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-4 h-auto">
+                            <div className="hover:shadow-sm box rounded-2xl bg-white border border-[#E4E4E4] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-4 h-auto">
                                 <div className='p-4 bg-[#F6F6F6] rounded-full justify-center'>
                                     <CalendarTick size={24} className='text-[#636363]' variant='Bold' />
                                 </div>
@@ -177,7 +177,7 @@ function AllBookings() {
 
 
                         <Link href='/' >
-                            <div className="hover:shadow-sm box rounded-2xl bg-white border-[1.5px] border-[#E4E4E4] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-4 h-auto">
+                            <div className="hover:shadow-sm box rounded-2xl bg-white border border-[#E4E4E4] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-4 h-auto">
                                 <div className='p-4 bg-[#F6F6F6] rounded-full justify-center'>
                                     <Money2 size={24} className='text-[#636363]' variant='Bold' />
                                 </div>
@@ -188,7 +188,7 @@ function AllBookings() {
                             </div>
                         </Link>
 
-                        {/* <div className="box rounded-2xl bg-white border-[1.5px] border-[#E4E4E4] w-full flex flex-col m-auto justify-center p-6 px-16 gap-4 h-auto">
+                        {/* <div className="box rounded-2xl bg-white border border-[#E4E4E4] w-full flex flex-col m-auto justify-center p-6 px-16 gap-4 h-auto">
                             <div className='bg-[#F6F6F6] flex justify-center mx-auto p-4 rounded-full'>
                                 <Book size={24} className='text-[#636363]' variant='Bold' />
                             </div>

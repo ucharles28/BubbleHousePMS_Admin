@@ -290,9 +290,9 @@ const SideBar = forwardRef(({ showNav }, ref) => {
                     </div>
                 </Link>
 
-                <Link href="/">
+                <Link href="/settings">
                     <div
-                        className={`px-5 py-3 text-center cursor-pointer flex items-center gap-3 transition-colors ${router.pathname == "/"
+                        className={`px-5 py-3 text-center cursor-pointer flex items-center gap-3 transition-colors ${router.pathname == "/settings"
                             ? "bg-[#fff7d8] text-[#D4AA00] rounded-xl"
                             : "text-[#636363] hover:bg-[#FFF7D8] hover:text-[#D4AA00] rounded-xl"
                             }`}

@@ -8,90 +8,35 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import TodayBookedCard from '../../components/TodayBookedCard';
 import AvailableForBookingCard from '../../components/AvailableForBookingCard';
+import { BounceLoader } from "react-spinners";
 
 function TodayBooked() {
-
-    // const Alert = forwardRef(function Alert(props, ref) {
-    //     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-    // });
-
-    // const saveHotel = async () => {
-    //     setIsLoading(true)
-    //     const formData = new FormData()
-    //     formData.append("FullName", fullName)
-    //     formData.append("City", city)
-    //     formData.append("Gender", gender)
-    //     formData.append("Email", email)
-    //     formData.append("PhoneNumber", phone)
-    //     formData.append("ProfileImageFile", userImageFile)
-    //     formData.append("AccountType", role)
-
-    //     const response = await postData('User/Create', formData)
-    //     if (response.successful) {
-    //         showAlert('User saved successfully', 'success')
-    //     } else {
-    //         showAlert(response.data, 'error')
-    //     }
-    //     setIsLoading(false)
-    // }
-
-    // const handleClick = () => {
-    //     // 👇️ open file input box on click of other element
-    //     inputRef.current.click();
-    // };
-
-    // const handleChange = (event) => {
-    //     setSelectedManager(event.target.value)
-    // }
-
-    // const clearImage = (event) => {
-    //     setUserImageFile('')
-    //     setUserImageSrc('')
-    // }
-
-    // const handleFileChange = e => {
-    //     setUserImageFile(e.target.files[0])
-    //     const reader = new FileReader();
-    //     reader.onload = function (e) {
-    //         setUserImageSrc(e.target.result);
-    //     };
-    //     reader.readAsDataURL(e.target.files[0]);
-    // };
-
-    // const handleClose = (event, reason) => {
-    //     if (reason === 'clickaway') {
-    //         return;
-    //     }
-
-    //     setOpen(false);
-    // };
-
-
-    // const showAlert = (alertMessage, alertType) => {
-    //     setAlertMessage(alertMessage)
-    //     setOpen(true)
-    //     setAlertType(alertType)
-    // }
-
-    // //states
-    // const inputRef = useRef(null);
-    // const [fullName, setFullName] = useState('');
-    // const [city, setCity] = useState('');
-    // const [gender, setGender] = useState('');
-    // const [genders, setGenders] = useState(['Male', 'Female']);
-    // const [userRoles, setUserRoles] = useState(['Admin', 'Manager', 'Staff']);
-    // const [email, setEmail] = useState('');
-    // const [phone, setPhone] = useState('');
-    // const [role, setRole] = useState('');
-    // const [userImageFile, setUserImageFile] = useState();
-    // const [userImageSrc, setUserImageSrc] = useState();
-    // const [isLoading, setIsLoading] = useState(false);
-    // const [open, setOpen] = useState(false);
-    // const [alertType, setAlertType] = useState('');
-    // const [alertMessage, setAlertMessage] = useState('');
+    const [bookedRooms, setBookedRooms] = useState([])
+    const [availableRooms, setAvailableRooms] = useState([])
+    const [isLoading, setIsLoading] = useState(true);
 
     const goBack = () => {
         router.back()
+    }
+
+    useEffect(() => {
+        getBookedRooms()
+    }, [])
+
+    const getBookedRooms = async() => {
+        const responses = await Promise.all([
+            get(`Booking/Today`),
+            get(`Room/Available`)
+        ])
+
+        if (responses[0].successful) {
+            setBookedRooms(responses[0].data)
+        }
+
+        if (responses[1].successful) {
+            setAvailableRooms(responses[1].data)
+        }
+        setIsLoading(false)
     }
 
     const router = useRouter()
@@ -100,7 +45,20 @@ function TodayBooked() {
     return (
         <div className='h-full font-poppins'>
             <Layout>
-                <div className='w-full h-auto py-6 flex flex-col gap-6'>
+                {isLoading ? <div className="w-full">
+                        <div className="flex flex-col items-center justify-center">
+                            <div className="lg:w-2/5 md:w-1/2 pt-10 pl-4 pr-4 justify-center lg:my-16 sm:my-5">
+                                <div className="m-12 pt-14 flex flex-col items-center justify-center">
+                                    <BounceLoader
+                                        heigth={200}
+                                        width={200}
+                                        color="#FFCC00"
+                                        ariaLabel="loading-indicator"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div> : <><div className='w-full h-auto py-6 flex flex-col gap-6'>
                     <div className='flex justify-between w-full'>
                         <p className='w-full block text-xl font-medium text-[#1A1A1A] leading-8'>
                             Today Booked
@@ -114,29 +72,9 @@ function TodayBooked() {
                         </div>
                     </div>
 
-                    {/* <div className='grid md:grid-cols-3 grid-cols-2 w-full h-auto items-center gap-x-2 gap-y-3'> */}
 
-                    <TodayBookedCard />
-                    {/* <div className='flex flex-col w-full box rounded-2xl bg-white border-[1.5px] border-[#E4E4E4] items-center md:items-start p-4 md:px-4 py-6 h-auto'>
-                            <div className='hidden group cursor-pointer -mt-3 md:flex justify-end w-full'>
-                                <p className='text-xs font-normal cursor-pointer leading-5 tracking-wide hover:underline text-[#636363] bg-[#e4e4e4] rounded-md items-end px-1 w-auto'>
-                                    View
-                                </p>
-                            </div>
-                            <div className="md:-mt-4 w-full box flex md:flex-row flex-col md:items-start items-center gap-4">
-                                <div className='p-4 bg-[#FFF7D8] text-[#D4AA00] text-base tracking-wide leading-6 text-center font-medium border-[1.5px] border-[#ffcc00] rounded-full justify-center'>
-                                    102
-                                </div>
-                                <div className='w-full text-center md:text-left'>
-                                    <p className='text-base leading-8 font-medium text-[#1a1a1a]'>Uzoma Chijioke Samuel </p>
-                                    <p className='text-xs leading-6 font-normal text-[#636363]'>Booking Number: SCRWAQJ1C3PG </p>
-                                    <p className='text-xs leading-6 font-normal text-[#636363]'>Room Type: Mini </p>
-                                    <p className='text-xs leading-6 font-normal text-[#636363]'>Hotel: Gold Range Hotel & Suites </p>
-                                </div>
-                            </div>
-                        </div> */}
-
-                    {/* </div> */}
+                    <TodayBookedCard rooms={bookedRooms}/>
+                    
                 </div>
 
                 <div className='w-full h-screen py-6 flex flex-col gap-6'>
@@ -146,21 +84,8 @@ function TodayBooked() {
                         </p>
                     </div>
 
-                    {/* <div className='grid md:grid-cols-3 grid-cols-2 w-full h-auto items-center gap-x-2 gap-y-3'> */}
-                        <AvailableForBookingCard />
-
-                        {/* <div className="box rounded-2xl bg-white border-[1.5px] border-[#E4E4E4] flex flex-col items-center p-4 md:p-6 gap-4 h-auto">
-                            <div className='p-4 bg-[#F6F6F6] text-[#636363] text-base tracking-wide leading-6 text-center font-medium rounded-full justify-center'>
-                                102
-                            </div>
-                            <div className='block text-center'>
-                                <p className='text-xs leading-6 font-normal text-[#636363]'>Room Type: Mini </p>
-                                <p className='text-xs leading-6 font-normal text-[#636363]'>Hotel: Gold Range Hotel & Suites </p>
-                            </div>
-                        </div> */}
-
-                    {/* </div> */}
-                </div>
+                    <AvailableForBookingCard rooms={availableRooms}/>
+                </div></>}
 
             </Layout>
         </div>

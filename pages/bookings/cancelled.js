@@ -10,10 +10,12 @@ import MuiAlert from '@mui/material/Alert'
 import Link from 'next/link'
 import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
+import { BounceLoader } from "react-spinners";
 
 
 function RunningBookings() {
     const [bookings, setBookings] = useState([])
+    const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
         getCancelledBookings()
     }, [])
@@ -26,6 +28,7 @@ function RunningBookings() {
         if (response.successful) {
             setBookings(response.data)
         }
+        setIsLoading(false)
     }
 
     const router = useRouter()
@@ -51,8 +54,20 @@ function RunningBookings() {
                         </div>
                     </div>
 
-                    {/* <Paper sx={{ width: '100%', overflow: 'hidden' }}> */}
-                    <div className='bg-white border border-gray-50 shadow rounded-lg w-full overflow-hidden h-auto py-1 px-2'>
+                    {isLoading ? <div className="w-full">
+                        <div className="flex flex-col items-center justify-center">
+                            <div className="lg:w-2/5 md:w-1/2 pt-10 pl-4 pr-4 justify-center lg:my-16 sm:my-5">
+                                <div className="m-12 pt-14 flex flex-col items-center justify-center">
+                                    <BounceLoader
+                                        heigth={200}
+                                        width={200}
+                                        color="#FFCC00"
+                                        ariaLabel="loading-indicator"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div> : <div className='bg-white border border-gray-50 shadow rounded-lg w-full overflow-hidden h-auto py-1 px-2'>
                         <TableContainer sx={{ maxHeight: 440 }}>
                             <Table >
                                 <TableHead>
@@ -124,8 +139,7 @@ function RunningBookings() {
                             onPageChange={handleChangePage}
                             onRowsPerPageChange={handleChangeRowsPerPage}
                         /> */}
-                    </div>
-                    {/* </Paper> */}
+                    </div>}
                 </div>
             </Layout>
         </div>

@@ -7,90 +7,25 @@ import Layout from '../../components/Layout';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import AvailableForBookingCard from '../../components/AvailableForBookingCard';
+import { BounceLoader } from 'react-spinners';
 
 function TodayBooked() {
-
-    // const Alert = forwardRef(function Alert(props, ref) {
-    //     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-    // });
-
-    // const saveHotel = async () => {
-    //     setIsLoading(true)
-    //     const formData = new FormData()
-    //     formData.append("FullName", fullName)
-    //     formData.append("City", city)
-    //     formData.append("Gender", gender)
-    //     formData.append("Email", email)
-    //     formData.append("PhoneNumber", phone)
-    //     formData.append("ProfileImageFile", userImageFile)
-    //     formData.append("AccountType", role)
-
-    //     const response = await postData('User/Create', formData)
-    //     if (response.successful) {
-    //         showAlert('User saved successfully', 'success')
-    //     } else {
-    //         showAlert(response.data, 'error')
-    //     }
-    //     setIsLoading(false)
-    // }
-
-    // const handleClick = () => {
-    //     // 👇️ open file input box on click of other element
-    //     inputRef.current.click();
-    // };
-
-    // const handleChange = (event) => {
-    //     setSelectedManager(event.target.value)
-    // }
-
-    // const clearImage = (event) => {
-    //     setUserImageFile('')
-    //     setUserImageSrc('')
-    // }
-
-    // const handleFileChange = e => {
-    //     setUserImageFile(e.target.files[0])
-    //     const reader = new FileReader();
-    //     reader.onload = function (e) {
-    //         setUserImageSrc(e.target.result);
-    //     };
-    //     reader.readAsDataURL(e.target.files[0]);
-    // };
-
-    // const handleClose = (event, reason) => {
-    //     if (reason === 'clickaway') {
-    //         return;
-    //     }
-
-    //     setOpen(false);
-    // };
-
-
-    // const showAlert = (alertMessage, alertType) => {
-    //     setAlertMessage(alertMessage)
-    //     setOpen(true)
-    //     setAlertType(alertType)
-    // }
-
-    // //states
-    // const inputRef = useRef(null);
-    // const [fullName, setFullName] = useState('');
-    // const [city, setCity] = useState('');
-    // const [gender, setGender] = useState('');
-    // const [genders, setGenders] = useState(['Male', 'Female']);
-    // const [userRoles, setUserRoles] = useState(['Admin', 'Manager', 'Staff']);
-    // const [email, setEmail] = useState('');
-    // const [phone, setPhone] = useState('');
-    // const [role, setRole] = useState('');
-    // const [userImageFile, setUserImageFile] = useState();
-    // const [userImageSrc, setUserImageSrc] = useState();
-    // const [isLoading, setIsLoading] = useState(false);
-    // const [open, setOpen] = useState(false);
-    // const [alertType, setAlertType] = useState('');
-    // const [alertMessage, setAlertMessage] = useState('');
-
+    const [isLoading, setIsLoading] = useState(true);
+    const [availableRooms, setAvailableRooms] = useState([])
     const goBack = () => {
         router.back()
+    }
+
+    useEffect(() => {
+        getAvailableRooms()
+    }, [])
+
+    const getAvailableRooms = async() => {
+        const response = await get(`Room/Available`)
+        if (response.successful) {
+            setAvailableRooms(response.data)
+        }
+        setIsLoading(false)
     }
 
     const router = useRouter()
@@ -99,7 +34,20 @@ function TodayBooked() {
     return (
         <div className='h-full font-poppins'>
             <Layout>
-                <div className='w-full h-screen py-6 flex flex-col gap-6'>
+                {isLoading ? <div className="w-full">
+                        <div className="flex flex-col items-center justify-center">
+                            <div className="lg:w-2/5 md:w-1/2 pt-10 pl-4 pr-4 justify-center lg:my-16 sm:my-5">
+                                <div className="m-12 pt-14 flex flex-col items-center justify-center">
+                                    <BounceLoader
+                                        heigth={200}
+                                        width={200}
+                                        color="#FFCC00"
+                                        ariaLabel="loading-indicator"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div> : <div className='w-full h-screen py-6 flex flex-col gap-6'>
                     <div className='flex justify-between w-full'>
                         <p className='w-full block text-xl font-medium text-[#1A1A1A] leading-8'>
                         Available for boking
@@ -113,9 +61,9 @@ function TodayBooked() {
                         </div>
                     </div>
 
-                    <AvailableForBookingCard />
+                    <AvailableForBookingCard rooms={availableRooms}/>
 
-                </div>
+                </div>}
 
             </Layout>
         </div>

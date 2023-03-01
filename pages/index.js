@@ -6,87 +6,10 @@ import { get, postData } from '../helpers/ApiRequest';
 import MuiAlert from '@mui/material/Alert';
 import Layout from '../components/Layout';
 import { PieChart, Pie, Cell } from "recharts";
+import Link from 'next/link';
 
 function Dashboard() {
 
-    // const Alert = forwardRef(function Alert(props, ref) {
-    //     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-    // });
-
-    // const saveHotel = async () => {
-    //     setIsLoading(true)
-    //     const formData = new FormData()
-    //     formData.append("FullName", fullName)
-    //     formData.append("City", city)
-    //     formData.append("Gender", gender)
-    //     formData.append("Email", email)
-    //     formData.append("PhoneNumber", phone)
-    //     formData.append("ProfileImageFile", userImageFile)
-    //     formData.append("AccountType", role)
-
-    //     const response = await postData('User/Create', formData)
-    //     if (response.successful) {
-    //         showAlert('User saved successfully', 'success')
-    //     } else {
-    //         showAlert(response.data, 'error')
-    //     }
-    //     setIsLoading(false)
-    // }
-
-    // const handleClick = () => {
-    //     // 👇️ open file input box on click of other element
-    //     inputRef.current.click();
-    // };
-
-    // const handleChange = (event) => {
-    //     setSelectedManager(event.target.value)
-    // }
-
-    // const clearImage = (event) => {
-    //     setUserImageFile('')
-    //     setUserImageSrc('')
-    // }
-
-    // const handleFileChange = e => {
-    //     setUserImageFile(e.target.files[0])
-    //     const reader = new FileReader();
-    //     reader.onload = function (e) {
-    //         setUserImageSrc(e.target.result);
-    //     };
-    //     reader.readAsDataURL(e.target.files[0]);
-    // };
-
-    // const handleClose = (event, reason) => {
-    //     if (reason === 'clickaway') {
-    //         return;
-    //     }
-
-    //     setOpen(false);
-    // };
-
-
-    // const showAlert = (alertMessage, alertType) => {
-    //     setAlertMessage(alertMessage)
-    //     setOpen(true)
-    //     setAlertType(alertType)
-    // }
-
-    // //states
-    // const inputRef = useRef(null);
-    // const [fullName, setFullName] = useState('');
-    // const [city, setCity] = useState('');
-    // const [gender, setGender] = useState('');
-    // const [genders, setGenders] = useState(['Male', 'Female']);
-    // const [userRoles, setUserRoles] = useState(['Admin', 'Manager', 'Staff']);
-    // const [email, setEmail] = useState('');
-    // const [phone, setPhone] = useState('');
-    // const [role, setRole] = useState('');
-    // const [userImageFile, setUserImageFile] = useState();
-    // const [userImageSrc, setUserImageSrc] = useState();
-    // const [isLoading, setIsLoading] = useState(false);
-    // const [open, setOpen] = useState(false);
-    // const [alertType, setAlertType] = useState('');
-    // const [alertMessage, setAlertMessage] = useState('');
     const data = [
         {
             name: "Group A",
@@ -205,15 +128,18 @@ function Dashboard() {
                             </div>
                         </div>
 
-                        <div className="box rounded-2xl bg-white  border border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
-                            <div className='p-4 bg-[#fff7d8] rounded-full justify-center'>
-                                <MessageEdit size={24} className='text-[#D4AA00]' variant='Bold' />
+                        <Link href="/bookings/all">
+                            <div className="box rounded-2xl bg-white  border border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
+                                <div className='p-4 bg-[#fff7d8] rounded-full justify-center'>
+                                    <MessageEdit size={24} className='text-[#D4AA00]' variant='Bold' />
+                                </div>
+                                <div className='block text-center md:text-left gap-3'>
+                                    <p className='text-sm leading-6 text-[#636363]'>Booking Request</p>
+                                    <p className='text-2xl leading-10 font-semibold text-[#1a1a1a]'>3</p>
+                                </div>
                             </div>
-                            <div className='block text-center md:text-left gap-3'>
-                                <p className='text-sm leading-6 text-[#636363]'>Booking Request</p>
-                                <p className='text-2xl leading-10 font-semibold text-[#1a1a1a]'>3</p>
-                            </div>
-                        </div>
+                        </Link>
+
 
                         <div className="box rounded-2xl bg-white  border border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
                             <div className='p-4 bg-[#fff7d8] rounded-full justify-center'>

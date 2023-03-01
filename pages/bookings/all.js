@@ -10,10 +10,13 @@ import MuiAlert from '@mui/material/Alert'
 import Link from 'next/link'
 import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
+import { BounceLoader } from "react-spinners";
 
 
 function TotalBookings() {
     const [bookings, setBookings] = useState([])
+    const [isLoading, setIsLoading] = useState(true);
+
     useEffect(() => {
         getCancelledBookings()
     }, [])
@@ -26,6 +29,7 @@ function TotalBookings() {
         if (response.successful) {
             setBookings(response.data)
         }
+        setIsLoading(false)
     }
 
     const router = useRouter()
@@ -51,8 +55,20 @@ function TotalBookings() {
                         </div>
                     </div>
 
-                    {/* <Paper sx={{ width: '100%', overflow: 'hidden' }}> */}
-                    <div className='bg-white border border-gray-50 shadow rounded-lg w-full overflow-hidden h-auto py-1 px-2'>
+                    {isLoading ? <div className="w-full">
+                        <div className="flex flex-col items-center justify-center">
+                            <div className="lg:w-2/5 md:w-1/2 pt-10 pl-4 pr-4 justify-center lg:my-16 sm:my-5">
+                                <div className="m-12 pt-14 flex flex-col items-center justify-center">
+                                    <BounceLoader
+                                        heigth={200}
+                                        width={200}
+                                        color="#FFCC00"
+                                        ariaLabel="loading-indicator"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div> : <div className='bg-white border border-gray-50 shadow rounded-lg w-full overflow-hidden h-auto py-1 px-2'>
                         <TableContainer sx={{ maxHeight: 440 }}>
                             <Table >
                                 <TableHead>
@@ -93,7 +109,7 @@ function TotalBookings() {
                                                 {booking.dateRangeString}
                                             </TableCell>
                                             <TableCell>
-                                                {booking.status === 0 && <span className='text-xs mx-auto text-center font-medium rounded-full p-2 px-3 leading-6 bg-[#FFF1F1] text-[#FF4C51]'>
+                                                {booking.status === 0 && <span className='text-xs mx-auto text-center font-medium rounded-full p-2 px-3 leading-6 bg-[#EDEDED] text-[#636363]'>
                                                     Pending
                                                 </span>}
                                                 {booking.status === 1 && <span className='text-xs mx-auto text-center font-medium rounded-full p-2 px-3 leading-6 bg-[#F1FBEB] text-[#56CA00]'>
@@ -102,7 +118,7 @@ function TotalBookings() {
                                                 {booking.status === 2 && <span className='text-xs mx-auto text-center font-medium rounded-full p-2 px-3 leading-6 bg-[#F1FBEB] text-[#56CA00]'>
                                                     Completed
                                                 </span>}
-                                                {booking.status === 3 && <span className='text-xs mx-auto text-center font-medium rounded-full p-2 px-3 leading-6 bg-[#F1FBEB] text-[#56CA00]'>
+                                                {booking.status === 3 && <span className='text-xs mx-auto text-center font-medium rounded-full p-2 px-3 leading-6 bg-[#FFF1F1] text-[#FF4C51]'>
                                                     Cancelled
                                                 </span>}
                                             </TableCell>
@@ -133,8 +149,7 @@ function TotalBookings() {
                             onPageChange={handleChangePage}
                             onRowsPerPageChange={handleChangeRowsPerPage}
                         /> */}
-                    </div>
-                    {/* </Paper> */}
+                    </div>}
                 </div>
             </Layout>
         </div>

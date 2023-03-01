@@ -234,9 +234,7 @@ function HotelDetails() {
 
                                     <TextField className='w-full' id="outlined-basic" label="Description" multiline rows={3} variant="outlined"
                                         value={description} onChange={(e) => setDescription(e.target.value)} />
-
-                                    {/* <TextField className='w-full' id="outlined-basic" label="Address" variant="outlined"
-                                            value={address} onChange={(e) => setAddress(e.target.value)} /> */}
+                                        
                                     <input type="text"
                                         value={address}
                                         onChange={event => setAddress(event.target.value)} ref={textboxRef} className='w-full border-2 text-md p-3 rounded focus:border-blue-400' placeholder='Enter address...' />

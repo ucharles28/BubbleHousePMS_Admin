@@ -90,16 +90,16 @@ function Dashboard() {
     const data = [
         {
             name: "Group A",
-            value: 390,
+            value: 150,
         },
         {
             name: "Group B",
-            value: 120,
+            value: 390,
         }
     ];
     const COLORS = [
-        "#FFCC00",
-        "#636363"
+        "#636363",
+        "#FFCC00"
     ];
 
 
@@ -115,16 +115,16 @@ function Dashboard() {
 
                         <div className="rounded-2xl bg-white  border border-[#FFDD55] w-full md:w-auto flex flex-col justify-center items-center p-4 md:p-6 gap-2 h-auto">
                             <p className='text-lg leading-8 font-medium text-[#1a1a1a]'>
-                                Rooms Availability
+                                Available RoomS Today
                             </p>
 
-                            <PieChart width={200} height={200}>
+                            <PieChart width={180} height={180}>
                                 <Pie
                                     data={data}
-                                    innerRadius={60}
+                                    innerRadius={55}
                                     outerRadius={80}
                                     fill="#8884d8"
-                                    paddingAngle={2}
+                                    paddingAngle={1}
                                     dataKey="value"
                                 >
                                     {data.map((entry, index) => (
@@ -146,7 +146,7 @@ function Dashboard() {
                                         <span className='w-5 h-3 bg-gray-600 rounded-sm'></span>
                                         Booked rooms
                                     </p>
-                                    <p className='text-xs font-medium leading-6 text-[#1A1A1A]'> 10 </p>
+                                    <p className='text-xs font-medium leading-6 text-[#1A1A1A]'> 38 </p>
                                 </div>
                             </div>
                         </div>

@@ -66,7 +66,7 @@ export default function Login() {
                 </Snackbar> */}
             <div className='flex md:p-6 p-3 justify-center w-full h-full bg-[#FFE580]/30'>
 
-                <div className='flex flex-col justify-center items-center md:p-7 p-4 m-auto bg-white rounded-lg shadow border border-[#E4E4E4]'>
+                <div className='flex flex-col justify-center items-center md:p-7 p-4 m-auto bg-white rounded-lg shadow-md'>
                     {/* <div className='flex justify-center items-center p-7'> */}
                     <div className='m-0'>
 

@@ -163,7 +163,7 @@ function AllBookings() {
                         </Link>
 
 
-                        <Link href='/' >
+                        <Link href='/bookings/all' >
                             <div className="hover:shadow-sm box rounded-2xl bg-white border border-[#E4E4E4] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-4 h-auto">
                                 <div className='p-4 bg-[#F6F6F6] rounded-full justify-center'>
                                     <CalendarTick size={24} className='text-[#636363]' variant='Bold' />

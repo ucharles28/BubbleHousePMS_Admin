@@ -13,60 +13,19 @@ import Layout from '../../components/Layout';
 
 
 function RunningBookings() {
-
-    // const getAllUsers = async () => {
-    //     setIsLoading(true)
-    //     const response = await get('User')
-    //     if (response.successful) {
-    //         var list = response.data.map((user) => {
-    //             const obj = {
-    //                 user: user.fullName,
-    //                 email: user.email,
-    //                 joined: user.createdDate,
-    //                 id: user.id,
-    //             }
-    //             switch (user.accountType) {
-    //                 case 0:
-    //                     obj.role = 'Customer'
-    //                     break;
-    //                 case 1:
-    //                     obj.role = 'Admin'
-    //                     break;
-    //                 case 2:
-    //                     obj.role = 'Manager'
-    //                     break;
-    //                 case 3:
-    //                     obj.role = 'Staff'
-    //                     break;
-    //             }
-    //             return obj;
-    //         })
-    //         setRows(list)
-    //     }
-    //     setIsLoading(false)
-
-    // }
-
-    // useEffect(() => {
-    //     getAllUsers()
-    // }, [])
-
-    // const handleChangePage = (event, newPage) => {
-    //     setPage(newPage);
-    // };
-
-    // const handleChangeRowsPerPage = (event) => {
-    //     setRowsPerPage(event.target.value);
-    //     setPage(0);
-    // };
-
-    // //states
-    // const [page, setPage] = useState(0);
-    // const [rowsPerPage, setRowsPerPage] = useState(10);
-    // const [rows, setRows] = useState([]);
-    // const [isLoading, setIsLoading] = useState(false);
+    const [bookings, setBookings] = useState([])
+    useEffect(() => {
+        getRunningBookings()
+    }, [])
     const goBack = () => {
         router.back()
+    }
+
+    const getRunningBookings = async() => {
+        const response = await get('Booking/Running')
+        if (response.successful) {
+            setBookings(response.data)
+        }
     }
 
     const router = useRouter()
@@ -141,62 +100,43 @@ function RunningBookings() {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {/* {isLoading ? ( */}
-                                    {/* <TableRow  >
-                                        <TableCell></TableCell>
-
-                                        <TableCell></TableCell>
-
-                                        <TableCell >
-                                            <div className="flex items-center justify-center tableLoadingProgressDiv">
-                                                <CircularProgress color="inherit" />
-                                            </div>
-                                        </TableCell>
-
-                                        <TableCell></TableCell>
-                                    </TableRow> */}
-                                    {/* ) :
-                                        rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                            .map((row, index) => {
-                                                return ( */}
-                                    <TableRow
-                                    // key={index}
-                                    >
-                                        <TableCell className='w-10'>
-                                            {/* {index + 1} */}
-                                            1
-                                        </TableCell>
-                                        <TableCell>
-                                            SCRWAQJ1C3PG
-                                        </TableCell>
-                                        <TableCell >
-                                            Uzoma Charles
-                                        </TableCell>
-                                        <TableCell>
-                                            31-10-2022 to 31-10-2022
-                                        </TableCell>
-                                        <TableCell>
-                                            <span className='text-xs mx-auto text-center font-medium rounded-full p-2 px-3 leading-6 bg-[#F1FBEB] text-[#56CA00]'>
-                                                Running
-                                            </span>
-                                        </TableCell>
-                                        <TableCell className='w-20'>
-                                            <Link
-                                                href='/bookings'
-                                            // href={{
-                                            //     pathname: `/users/details`,
-                                            //     query: {
-                                            //         id: row.id
-                                            //     }
-                                            // }}
-                                            >
-                                                <Eye className='text-[#636363]' />
-                                            </Link>
-
-                                        </TableCell>
-                                    </TableRow>
-                                    {/* );
-                                            })} */}
+                                    
+                                    {bookings.map((booking, index) => (
+                                        <TableRow
+                                        key={index}
+                                        >
+                                            <TableCell className='w-10'>
+                                                {index + 1}
+                                            </TableCell>
+                                            <TableCell>
+                                                {booking.code}
+                                            </TableCell>
+                                            <TableCell >
+                                                {booking.fullName}
+                                            </TableCell>
+                                            <TableCell>
+                                                {booking.dateRangeString}
+                                            </TableCell>
+                                            <TableCell>
+                                                <span className='text-xs mx-auto text-center font-medium rounded-full p-2 px-3 leading-6 bg-[#F1FBEB] text-[#56CA00]'>
+                                                    Running
+                                                </span>
+                                            </TableCell>
+                                            <TableCell className='w-20'>
+                                                <Link
+                                                    href={{
+                                                        pathname: `/bookings/details`,
+                                                        query: {
+                                                            id: booking.id
+                                                        }
+                                                    }}
+                                                >
+                                                    <Eye className='text-[#636363]' />
+                                                </Link>
+    
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
                                 </TableBody>
                             </Table>
                         </TableContainer>

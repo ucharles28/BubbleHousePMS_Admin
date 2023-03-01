@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import Layout from '../../../components/Layout';
+import Layout from '../../components/Layout';
 import { ArrowLeft2 } from 'iconsax-react';
 
 function RequestDetails() {

@@ -1,9 +1,15 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Notification, ArrowDown2, HambergerMenu, DirectNotification, Edit2, Setting2 } from 'iconsax-react';
 import { Menu, Transition, Popover } from "@headlessui/react";
 import Link from "next/link";
 
 export default function TopBar({ showNav, setShowNav }) {
+    const [user, setUser] = useState()
+    useEffect(() => {
+      
+        setUser(JSON.parse(localStorage.getItem('user')))
+    }, [])
+
     return (
         <div
             className={`bg-white z-10 border-b-[1.5px] border-[#E4E4E4] fixed w-full h-16 flex justify-between items-center transition-all duration-[400ms] ${showNav ? "pl-72" : ""
@@ -113,7 +119,7 @@ export default function TopBar({ showNav, setShowNav }) {
                                 alt="avatar"
                             />
                             <p className="hidden text-left font-medium text-sm text-[#1a1a1a] md:flex md:flex-col">
-                                Uzoma Charles
+                                {user && user.fullName}
                                 <p className="text-xs text-[#636363] font-normal">
                                     Admin
                                 </p>

@@ -22,6 +22,7 @@ function NewHotel() {
         formData.append("Address", address)
         formData.append("Email", email)
         formData.append("PhoneNumber", phone)
+        formData.append("AccountCode", accNo)
         formData.append("AltPhoneNumber", altPhone)
         formData.append("ImageFile", hotelImageFile)
         formData.append("NumberOfRooms", numberOfRooms ? numberOfRooms : 0)
@@ -130,6 +131,7 @@ function NewHotel() {
     const [city, setCity] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
+    const [accNo, setAccNo] = useState('');
     const [altPhone, setAltPhone] = useState('');
     const [numberOfRooms, setNumberOfRooms] = useState('');
     const [managers, setManagers] = useState([]);
@@ -224,6 +226,9 @@ function NewHotel() {
                                     <TextField className='w-full' id="outlined-basic" label="Alternative Phone Number" variant="outlined"
                                         value={altPhone} onChange={(e) => setAltPhone(e.target.value)} />
 
+                                    <TextField className='w-full' id="outlined-basic" label="Hotel Account Number" variant="outlined"
+                                        value={accNo} onChange={(e) => setAccNo(e.target.value)} />
+
                                     <TextField className='w-full' type="number" id="outlined-basic" label="Number of Rooms" variant="outlined"
                                         value={numberOfRooms} onChange={(e) => setNumberOfRooms(e.target.value)} />
 
@@ -257,11 +262,11 @@ function NewHotel() {
                                             type="button"
                                             className="text-white font-medium flex items-center py-2 px-5 rounded-md bg-[#666666] text-sm leading-6 uppercase hover:bg-[#1A1A1A]/50"
                                             onClick={saveHotel}
-                                            disabled={!hotelName || !description || !address || !email || !phone || !numberOfRooms || !selectedManager}
+                                            disabled={!hotelName || !description || !address || !email || !phone || !accNo || !numberOfRooms || !selectedManager}
                                         >
                                             {isLoading ? <CircularProgress size={24} color="inherit" /> : 'Save'}
                                         </button>
-                                        
+
                                         <button
                                             type="button"
                                             className="text-[#666666] font-medium flex items-center py-2 px-5 rounded-md border-[#666666] border-[1.2px] text-sm leading-6 uppercase hover:bg-[#666666] hover:text-white"

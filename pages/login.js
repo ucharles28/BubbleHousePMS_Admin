@@ -1,11 +1,10 @@
-import { CircularProgress, Snackbar, MuiAlert } from '@mui/material'
+import { CircularProgress } from '@mui/material'
 import { useRouter } from 'next/router';
 import { forwardRef, useState } from 'react';
 import { post } from '../helpers/ApiRequest';
 import styles from '../styles/Home.module.css';
 import Image from "next/image";
 import { logo } from "../public/logo.png";
-// import Form from 'react-bootstrap/Form';
 import Cookies from 'universal-cookie';
 
 export default function Login() {
@@ -109,7 +108,7 @@ export default function Login() {
                                 id='check'
                                 label='Remember me'
                             />
-                            <label className='text-xs font-normal leading-5 text-gray-700 cursor-pointer' for="check">Remember me</label>
+                            <label className='text-xs font-normal leading-5 text-gray-700 cursor-pointer' htmlFor="check">Remember me</label>
                         </div>
 
                         <div className='flex flex-row w-full mt-3'>

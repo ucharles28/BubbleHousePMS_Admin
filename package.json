@@ -23,6 +23,7 @@
     "antd": "^5.2.2",
     "bootstrap": "^5.2.2",
     "classnames": "^2.3.2",
+    "date-fns": "^2.29.3",
     "env": "^0.0.2",
     "env-cmd": "^10.1.0",
     "iconsax-react": "^0.0.8",

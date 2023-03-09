@@ -84,6 +84,7 @@ function RunningBookings() {
                                         <TableCell className="w-10">S/N</TableCell>
                                         <TableCell className=" ">Booking Number</TableCell>
                                         <TableCell className=" ">Booked By</TableCell>
+                                        <TableCell className=" ">Hotel Booked</TableCell>
                                         <TableCell className=" ">Date</TableCell>
                                         <TableCell className=" ">Status</TableCell>
                                         <TableCell className="w-20">Action</TableCell>
@@ -103,6 +104,9 @@ function RunningBookings() {
                                             </TableCell>
                                             <TableCell >
                                                 {booking.fullName}
+                                            </TableCell>
+                                            <TableCell >
+                                            {booking.hotelName}
                                             </TableCell>
                                             <TableCell>
                                                 {booking.dateRangeString}

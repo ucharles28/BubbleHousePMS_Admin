@@ -112,6 +112,18 @@ function AllBookings() {
                             </div>
                         </Link>
 
+                        <Link href='/bookings/confirmed' >
+                            <div className="hover:shadow-sm box rounded-2xl bg-white border border-[#E4E4E4] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-4 h-auto">
+                                <div className='p-4 bg-[#F6F6F6] rounded-full justify-center'>
+                                    <Slash size={24} className='text-[#636363]' variant='Bold' />
+                                </div>
+                                <div className='block text-center md:text-left gap-3'>
+                                    <p className='text-xs md:text-sm leading-6 text-[#636363]'>Confirmed Bookings</p>
+                                    <p className='text-2xl leading-10 font-semibold text-[#1a1a1a]'>{bookingsOverview ? bookingsOverview.confirmedBookings : 0}</p>
+                                </div>
+                            </div>
+                        </Link>
+
 
                         <Link href='/bookings/all' >
                             <div className="hover:shadow-sm box rounded-2xl bg-white border border-[#E4E4E4] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-4 h-auto">

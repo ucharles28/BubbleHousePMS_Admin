@@ -86,6 +86,7 @@ function TotalBookings() {
                                         <TableCell className="w-10">S/N</TableCell>
                                         <TableCell className=" ">Booking Number</TableCell>
                                         <TableCell className=" ">Booked By</TableCell>
+                                        <TableCell className=" ">Hotel Booked</TableCell>
                                         <TableCell className=" ">Date</TableCell>
                                         <TableCell className=" ">Status</TableCell>
                                         <TableCell className="w-20">Action</TableCell>
@@ -105,6 +106,9 @@ function TotalBookings() {
                                             <TableCell >
                                                 {booking.fullName}
                                             </TableCell>
+                                            <TableCell >
+                                            {booking.hotelName}
+                                            </TableCell>
                                             <TableCell>
                                                 {booking.dateRangeString}
                                             </TableCell>
@@ -120,6 +124,9 @@ function TotalBookings() {
                                                 </span>}
                                                 {booking.status === 3 && <span className='text-xs mx-auto text-center font-medium rounded-full p-2 px-3 leading-6 bg-[#FFF1F1] text-[#FF4C51]'>
                                                     Cancelled
+                                                </span>}
+                                                {booking.status === 1 && <span className='text-xs mx-auto text-center font-medium rounded-full p-2 px-3 leading-6 bg-[#F1FBEB] text-[#56CA00]'>
+                                                    Confirmed
                                                 </span>}
                                             </TableCell>
                                             <TableCell className='w-20'>

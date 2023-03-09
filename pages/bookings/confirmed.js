@@ -13,18 +13,18 @@ import Layout from '../../components/Layout';
 import { BounceLoader } from "react-spinners";
 
 
-function CancelledBookings() {
+function ConfirmedBookings() {
     const [bookings, setBookings] = useState([])
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
-        getCancelledBookings()
+        getRunningBookings()
     }, [])
     const goBack = () => {
         router.back()
     }
 
-    const getCancelledBookings = async () => {
-        const response = await get('Booking/Cancelled')
+    const getRunningBookings = async() => {
+        const response = await get('Booking/Confirmed')
         if (response.successful) {
             setBookings(response.data)
         }
@@ -38,10 +38,9 @@ function CancelledBookings() {
         <div className='h-screen font-poppins'>
             <Layout>
                 <div className='w-full h-screen py-6 flex flex-col gap-6'>
-
                     <div className='flex justify-between w-full'>
                         <p className='w-full block text-xl font-medium text-[#1A1A1A] leading-8'>
-                            Cancelled Bookings
+                            Confirmed Bookings
                         </p>
 
                         <div className='flex item-center justify-end gap-2 w-full'>
@@ -92,9 +91,10 @@ function CancelledBookings() {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
+                                    
                                     {bookings.map((booking, index) => (
                                         <TableRow
-                                            key={index}
+                                        key={index}
                                         >
                                             <TableCell className='w-10'>
                                                 {index + 1}
@@ -106,14 +106,14 @@ function CancelledBookings() {
                                                 {booking.fullName}
                                             </TableCell>
                                             <TableCell >
-                                                {booking.fullName}
+                                            {booking.hotelName}
                                             </TableCell>
                                             <TableCell>
                                                 {booking.dateRangeString}
                                             </TableCell>
                                             <TableCell>
-                                                <span className='text-xs mx-auto text-center font-medium rounded-full p-2 px-3 leading-6 bg-[#FFF1F1] text-[#FF4C51]'>
-                                                    Cancelled
+                                                <span className='text-xs mx-auto text-center font-medium rounded-full p-2 px-3 leading-6 bg-[#F1FBEB] text-[#56CA00]'>
+                                                    Confirmed
                                                 </span>
                                             </TableCell>
                                             <TableCell className='w-20'>
@@ -127,7 +127,7 @@ function CancelledBookings() {
                                                 >
                                                     <Eye className='text-[#636363]' />
                                                 </Link>
-
+    
                                             </TableCell>
                                         </TableRow>
                                     ))}
@@ -150,4 +150,4 @@ function CancelledBookings() {
     )
 }
 
-export default CancelledBookings;
+export default ConfirmedBookings;

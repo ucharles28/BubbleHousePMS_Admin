@@ -14,19 +14,19 @@ import { BounceLoader } from "react-spinners";
 
 
 function CancelledBookings() {
-    const [bookings, setBookings] = useState([])
+    const [staffs, setStaffs] = useState([])
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
-        getCancelledBookings()
+        getStaffs()
     }, [])
     const goBack = () => {
         router.back()
     }
 
-    const getCancelledBookings = async () => {
-        const response = await get('Booking/Cancelled')
+    const getStaffs = async () => {
+        const response = await get('User/GetAllStaffs')
         if (response.successful) {
-            setBookings(response.data)
+            setStaffs(response.data)
         }
         setIsLoading(false)
     }
@@ -40,8 +40,8 @@ function CancelledBookings() {
                 <div className='w-full h-screen py-6 flex flex-col gap-6'>
 
                     <div className='flex justify-between w-full'>
-                        <p className='w-full block text-xl font-medium text-[#1A1A1A] leading-8'>
-                            Cancelled Bookings
+                        <p className='w-full block text-xl font-poppins font-medium text-[#1A1A1A] leading-8'>
+                            Managers
                         </p>
 
                         <div className='flex item-center justify-end gap-2 w-full'>
@@ -83,16 +83,16 @@ function CancelledBookings() {
                                         className='text-xs leading-6 font-[600] uppercase text-[#1a1a1a]'
                                     >
                                         <TableCell className="w-10">S/N</TableCell>
-                                        <TableCell className=" ">Booking Number</TableCell>
-                                        <TableCell className=" ">Booked By</TableCell>
-                                        <TableCell className=" ">Hotel Booked</TableCell>
-                                        <TableCell className=" ">Date</TableCell>
-                                        <TableCell className=" ">Status</TableCell>
-                                        <TableCell className="w-20">Action</TableCell>
+                                        <TableCell className=" ">Full Name</TableCell>
+                                        <TableCell className=" ">Email</TableCell>
+                                        <TableCell className=" ">Phone</TableCell>
+                                        <TableCell className=" ">Hotel</TableCell>
+                                        {/* <TableCell className=" ">Status</TableCell>
+                                        <TableCell className="w-20">Action</TableCell> */}
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {bookings.map((booking, index) => (
+                                    {staffs.map((staff, index) => (
                                         <TableRow
                                             key={index}
                                         >
@@ -100,18 +100,18 @@ function CancelledBookings() {
                                                 {index + 1}
                                             </TableCell>
                                             <TableCell>
-                                                {booking.code}
+                                                {staff.fullName}                                                
                                             </TableCell>
                                             <TableCell >
-                                                {booking.fullName}
+                                                {staff.email}
                                             </TableCell>
                                             <TableCell >
-                                                {booking.fullName}
+                                                {staff.phone}
                                             </TableCell>
                                             <TableCell>
-                                                {booking.dateRangeString}
+                                                {staff.hotelName}
                                             </TableCell>
-                                            <TableCell>
+                                            {/* <TableCell>
                                                 <span className='text-xs mx-auto text-center font-medium rounded-full p-2 px-3 leading-6 bg-[#FFF1F1] text-[#FF4C51]'>
                                                     Cancelled
                                                 </span>
@@ -121,14 +121,14 @@ function CancelledBookings() {
                                                     href={{
                                                         pathname: `/bookings/details`,
                                                         query: {
-                                                            id: booking.id
+                                                            id: manager.id
                                                         }
                                                     }}
                                                 >
                                                     <Eye className='text-[#636363]' />
                                                 </Link>
 
-                                            </TableCell>
+                                            </TableCell> */}
                                         </TableRow>
                                     ))}
                                 </TableBody>

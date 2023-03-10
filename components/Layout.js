@@ -74,7 +74,7 @@ export default function Layout({ children }) {
       <div className="w-full h-full flex-1 flex-col justify-between ">
         <TopBar showNav={showNav} setShowNav={setShowNav} />
         <main
-          className={`pt-16 transition-all duration-[400ms] ${showNav && !isMobile ? "pl-72" : ""
+          className={`pt-16 transition-all duration-[400ms] ${showNav && !isMobile ? "md:pl-72" : ""
             }`}
         >
           <div className="px-4 bg-[#f6f6f6] h-full">

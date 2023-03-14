@@ -105,29 +105,30 @@ function NewUser() {
 
                 <div className='w-full h-screen py-6 flex flex-col gap-4'>
 
-                    <div className='flex justify-between w-full'>
-                        <p className='w-full block text-xl font-medium text-[#1A1A1A] leading-8'>
-                            Add User
+                    <div className='flex items-end justify-between w-full'>
+
+                        <p className='w-full block text-lg font-medium text-[#1A1A1A] leading-6'>
+                            Add New User
                         </p>
 
                         <div onClick={goBack} className="px-2 py-1 rounded-lg flex items-center cursor-pointer bg-white hover:bg-[#f9f9f9] border-2 border-[#E4E4E4] text-gray-600 hover:text-gray-800">
-                            <ArrowLeft2 size={17} />
-                            <span className="text-sm font-medium leading-6">Back</span>
+                            <ArrowLeft2 size={14} />
+                            <span className="text-xs font-medium leading-6">Back</span>
                         </div>
                     </div>
 
-                    <div className='bg-white border border-gray-50 shadow rounded-lg w-full overflow-auto h-auto p-4 py-5'>
+                    <div className='bg-white drop-shadow-sm rounded-lg w-full overflow-auto p-4'>
                         <div className="flex md:flex-row flex-col items-center gap-3 w-full h-full">
 
                             <div className='item md:w-1/3 w-full h-full'>
-                                <div className='flex flex-col gap-4 items-center'>
+                                <div className='flex flex-col gap-3 items-center'>
 
-                                    <div className="rounded-lg h-36 w-36 bg-[#1A1A1A]/25 flex items-center cursor-pointer" onClick={handleClick} >
+                                    <div className="rounded-lg h-28 w-28 bg-[#1A1A1A]/25 flex items-center cursor-pointer" onClick={handleClick}>
 
                                         {!userImageFile ? <span className='flex items-center justify-center m-auto'>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5.74 16c.11-.49-.09-1.19-.44-1.54l-2.43-2.43c-.76-.76-1.06-1.57-.84-2.27.23-.7.94-1.18 2-1.36l3.12-.52c.45-.08 1-.48 1.21-.89l1.72-3.45C10.58 2.55 11.26 2 12 2s1.42.55 1.92 1.54l1.72 3.45c.13.26.4.51.69.68L5.56 18.44c-.14.14-.38.01-.34-.19L5.74 16ZM18.7 14.462c-.36.36-.56 1.05-.44 1.54l.69 3.01c.29 1.25.11 2.19-.51 2.64a1.5 1.5 0 0 1-.9.27c-.51 0-1.11-.19-1.77-.58l-2.93-1.74c-.46-.27-1.22-.27-1.68 0l-2.93 1.74c-1.11.65-2.06.76-2.67.31-.23-.17-.4-.4-.51-.7l12.16-12.16c.46-.46 1.11-.67 1.74-.56l1.01.17c1.06.18 1.77.66 2 1.36.22.7-.08 1.51-.84 2.27l-2.42 2.43Z" fill="#666666"></path></svg>
                                         </span> :
-                                            <img src={userImageSrc} className='rounded-lg h-36 w-36 bg-[#1A1A1A]/25 object-cover' />}
+                                            <img src={userImageSrc} className='rounded-lg h-28 w-28 bg-[#1A1A1A]/25 object-fill' />}
                                     </div>
 
                                     <input
@@ -139,7 +140,7 @@ function NewUser() {
 
                                     <button
                                         type="button"
-                                        className="text-white font-medium flex items-center py-2 px-5 rounded-md bg-[#666666] text-sm leading-6 uppercase hover:bg-[#1A1A1A]/50 tracking-wide"
+                                        className="text-white font-medium flex items-center px-3 py-2 rounded-md bg-[#1a1a1a]/50 text-xs leading-6 uppercase hover:bg-[#636363]"
                                         onClick={handleClick}
                                     >
                                         Upload photo
@@ -147,7 +148,7 @@ function NewUser() {
 
                                     <button
                                         type="button"
-                                        className="text-[#666666] font-medium flex items-center py-2 px-5 rounded-md border-[#666666] border-[1.2px] text-sm leading-6 uppercase hover:bg-[#666666] hover:text-white"
+                                        className="text-[#666666] font-medium flex items-center px-3 py-1.5 rounded-md border-[#1a1a1a]/50 border text-xs leading-6 uppercase hover:bg-[#636363] hover:text-white"
                                         onClick={clearImage}
                                     >
                                         Reset
@@ -156,63 +157,96 @@ function NewUser() {
                                     <span className="text-xs leading-5 font-normal">
                                         Allow JPEG, GIF, or PNG. Max size of 800KB
                                     </span>
-
                                 </div>
                             </div>
 
                             <div className='item w-full h-full'>
                                 <div className='flex flex-col gap-4 w-full'>
 
-                                    <TextField className='w-full' id="outlined-basic" label="Full Name" variant="outlined"
-                                        value={fullName} onChange={(e) => setFullName(e.target.value)} />
+                                    <div className="flex flex-col space-y-1" >
+                                        <label className='text-xs font-medium leading-5 text-gray-700'>Full Name</label>
+                                        <input
+                                            type='text'
+                                            placeholder='Full Name'
+                                            className='w-full border border-[#666666]/50 placeholder:text-[#636363] text-xs font-normal p-3 pl-2 focus:outline-0 bg-transparent rounded-md'
+                                            value={fullName}
+                                            onChange={(e) => setFullName(e.target.value)}
+                                        />
+                                    </div>
 
-                                    <TextField className='w-full' id="outlined-basic" label="Email Address" variant="outlined"
-                                        value={email} onChange={(e) => setEmail(e.target.value)} />
+                                    <div className="flex flex-col space-y-1" >
+                                        <label className='text-xs font-medium leading-5 text-gray-700'>Email Address</label>
+                                        <input
+                                            type='email'
+                                            placeholder='Email Address'
+                                            className='w-full border border-[#666666]/50 placeholder:text-[#636363] text-xs font-normal p-3 pl-2 focus:outline-0 bg-transparent rounded-md'
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                        />
+                                    </div>
 
-                                    <TextField className='w-full' id="outlined-basic" label="Phone Number" variant="outlined"
-                                        value={phone} onChange={(e) => setPhone(e.target.value)} />
+                                    <div className="flex flex-col space-y-1" >
+                                        <label className='text-xs font-medium leading-5 text-gray-700'>Phone Number</label>
+                                        <input
+                                            type='phone'
+                                            placeholder='Phone Number'
+                                            className='w-full border border-[#666666]/50 placeholder:text-[#636363] text-xs font-normal p-3 pl-2 focus:outline-0 bg-transparent rounded-md'
+                                            value={phone}
+                                            onChange={(e) => setPhone(e.target.value)}
+                                        />
+                                    </div>
 
-                                    <TextField className='w-full' id="outlined-basic" label="State/City" variant="outlined"
-                                        value={city} onChange={(e) => setCity(e.target.value)} />
+                                    <div className="flex flex-col space-y-1" >
+                                        <label className='text-xs font-medium leading-5 text-gray-700'>State/City</label>
+                                        <input
+                                            type='text'
+                                            placeholder='State/City'
+                                            className='w-full border border-[#666666]/50 placeholder:text-[#636363] text-xs font-normal p-3 pl-2 focus:outline-0 bg-transparent rounded-md'
+                                            value={city}
+                                            onChange={(e) => setCity(e.target.value)}
+                                        />
+                                    </div>
 
-                                    <FormControl fullWidth>
-                                        <InputLabel id="demo-simple-select-label">Gender</InputLabel>
-                                        <Select
-                                            labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
+                                    <div className="flex flex-col space-y-1" >
+                                        <label className='text-xs font-medium leading-5 text-gray-700'>Gender</label>
+                                        <select
+                                            className='w-full border border-[#666666]/50 placeholder:text-[#636363] text-xs font-normal p-3 pl-2 focus:outline-0 bg-transparent rounded-md'
                                             value={gender}
                                             onChange={(e) => setGender(e.target.value)}
                                         >
-                                            {genders.map((gen) => <MenuItem value={gen}>{gen}</MenuItem>)}
-                                        </Select>
-                                    </FormControl>
+                                            {genders.map((gen) => <option>{gen}</option>)}
+                                        </select>
+                                    </div>
 
-                                    <FormControl fullWidth>
-                                        <InputLabel id="demo-simple-select-label">User Role</InputLabel>
-                                        <Select
-                                            labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
+                                    <div className="flex flex-col space-y-1" >
+                                        <label className='text-xs font-medium leading-5 text-gray-700'>User Role</label>
+                                        <select
+                                            className='w-full border border-[#666666]/50 placeholder:text-[#636363] text-xs font-normal p-3 pl-2 focus:outline-0 bg-transparent rounded-md'
                                             value={role}
                                             onChange={(e) => setRole(e.target.value)}
                                         >
-                                            {userRoles.map((rol) => <MenuItem value={rol}>{rol}</MenuItem>)}
-                                        </Select>
-                                    </FormControl>
+                                            {userRoles.map((rol) => <option>{rol}</option>)}
+                                        </select>
+                                    </div>
+
 
                                     <div className="flex items-center w-full gap-4">
                                         <button
                                             type="button"
-                                            className="text-white font-medium flex items-center py-2 px-5 rounded-md bg-[#666666] text-sm leading-6 uppercase hover:bg-[#1A1A1A]/50"
+                                            className="text-white font-medium flex items-center px-3 py-2 rounded-md bg-[#1a1a1a]/50 text-xs leading-6 uppercase hover:bg-[#636363]"
                                             onClick={saveHotel}
                                         >
                                             {isLoading ? <CircularProgress size={24} color="inherit" /> : 'Save'}
                                         </button>
+
                                         <button
                                             type="button"
-                                            className="text-[#666666] font-medium flex items-center py-2 px-5 rounded-md border-[#666666] border-[1.2px] text-sm leading-6 uppercase hover:bg-[#666666] hover:text-white"
+                                            className="text-[#666666] font-medium flex items-center px-3 py-1.5 rounded-md border-[#1a1a1a]/50 border text-xs leading-6 uppercase hover:bg-[#636363] hover:text-white"
+                                            onClick={goBack}
                                         >
                                             Cancel
                                         </button>
+
                                     </div>
                                 </div>
 

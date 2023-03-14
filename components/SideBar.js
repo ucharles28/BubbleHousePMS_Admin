@@ -105,12 +105,13 @@ const SideBar = forwardRef(({ showNav }, ref) => {
                     </div>
                 </Link>
 
-                <Link href="/l">
+                <Link href="/#">
                     <div
-                        className={`px-5 py-3 text-center cursor-pointer flex items-center gap-3 transition-colors ${router.pathname == "/l"
+                        className={`px-5 py-3 text-center cursor-pointer flex items-center gap-3 transition-colors ${router.pathname == "/#"
                             ? "bg-red-500 text-white rounded-xl"
                             : "text-[#636363] hover:bg-red-500 hover:text-white rounded-xl"
                             }`}
+                        onClick={logOut}
                     >
                         <LogoutCurve className="h-5 w-5" variant="Bold" />
                         <p className="">Log Out</p>

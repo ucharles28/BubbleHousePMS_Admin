@@ -68,14 +68,15 @@ function UserDetails() {
 
                 <div className='w-full h-full py-6 flex flex-col gap-4'>
 
-                    <div className='flex justify-between w-full items-end'>
-                        <p className='w-full block text-xl font-medium text-[#1A1A1A] leading-8'>
+                    <div className='flex items-end justify-between w-full'>
+
+                        <p className='w-full block text-lg font-medium text-[#1A1A1A] leading-6'>
                             User Details
                         </p>
 
                         <div onClick={goBack} className="px-2 py-1 rounded-lg flex items-center cursor-pointer bg-white hover:bg-[#f9f9f9] border-2 border-[#E4E4E4] text-gray-600 hover:text-gray-800">
-                            <ArrowLeft2 size={17} />
-                            <span className="text-sm font-medium leading-6">Back</span>
+                            <ArrowLeft2 size={14} />
+                            <span className="text-xs font-medium leading-6">Back</span>
                         </div>
                     </div>
 
@@ -157,7 +158,7 @@ function UserDetails() {
                                             </div>
 
                                             <div className='flex flex-col gap-2'>
-                                                
+
                                                 <p className='text-sm leading-5 font-medium'>Username: <span className='text-sm font-normal leading-5 text-[#1a1a1a]/70'>{selectedUser.username}</span></p>
 
                                                 <p className='text-sm leading-5 font-medium'>Billing Email: <span className='text-sm font-normal leading-5 text-[#1a1a1a]/70'>{selectedUser.email}</span></p>

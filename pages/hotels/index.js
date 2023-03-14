@@ -1,13 +1,12 @@
-import {
-    Card, CardContent, CardHeader, Paper, TableCell,
-    TablePagination, TableRow, Table,
+import { 
+    TableCell, TablePagination, TableRow, Table,
     TableContainer, TableHead, CircularProgress, TableBody, TextField
-} from '@mui/material'
-import { Edit2, Export } from 'iconsax-react'
+} from '@mui/material';
+import { Edit2, Export } from 'iconsax-react';
 import { forwardRef, use, useEffect, useRef, useState } from 'react';
-import { get, postData } from '../../helpers/ApiRequest'
-import MuiAlert from '@mui/material/Alert'
-import Link from 'next/link'
+import { get, postData } from '../../helpers/ApiRequest';
+import MuiAlert from '@mui/material/Alert';
+import Link from 'next/link';
 import { FiEdit3 } from 'react-icons/fi';
 import Layout from '../../components/Layout';
 import styled from "@emotion/styled";
@@ -43,14 +42,14 @@ function HotelsPage() {
     const [isLoading, setIsLoading] = useState(false);
 
     const TableRowStyled = styled(TableRow)`
-  &:nth-of-type(odd) {
-    background-color: #f8f8f8;
-  }
-  & > td {
-    color: #1a1a1a;
-  }
-`;
-
+        &:nth-of-type(odd) {
+            background-color: #f8f8f8;
+        }
+        & > td {
+            color: #636363;
+            font-size: 0.75rem;
+        }
+    `;
 
     return (
         <div className='h-full font-poppins'>
@@ -58,20 +57,17 @@ function HotelsPage() {
 
                 <div className='w-full h-screen py-6 pb-8 flex flex-col gap-6'>
 
-                    <div className='flex flex-col gap-y-1 md:flex-row w-full'>
+                    <div className='flex flex-col items-end gap-y-1 md:flex-row w-full'>
                         <p className='block w-full text-lg font-medium text-[#1A1A1A] leading-6'>
                             Hotels
                         </p>
 
                         <div className='flex justify-end gap-2 w-full'>
 
-                            {/* <TextField size='small' id="outlined-basic" label='Search Hotels' variant="outlined"
-                            /> */}
-
-                            <input 
-                            type='text'
-                            placeholder='Search Hotels'
-                            className='w-1/2 h-9 border border-[#1a1a1a]/50 text-xs font-normal pl-2 focus:outline-0 bg-transparent rounded-md'
+                            <input
+                                type='text'
+                                placeholder='Search Hotels'
+                                className='w-1/2 h-9 border border-[#1a1a1a]/50 text-xs font-normal pl-2 focus:outline-0 bg-transparent rounded-md'
                             />
 
                             <Link href='#'>
@@ -91,7 +87,7 @@ function HotelsPage() {
                                     Add Hotel
                                 </button>
                             </Link>
-                            
+
                         </div>
                     </div>
 
@@ -103,7 +99,7 @@ function HotelsPage() {
                                         sx={{
                                             color: "#1A1A1A",
                                             "& th": {
-                                                fontSize: "12px",
+                                                fontSize: "0.75rem",
                                                 fontWeight: "550",
                                                 letterSpacing: "0.20px"
                                             }

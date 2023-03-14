@@ -222,60 +222,60 @@ export default function TopBar({ showNav, setShowNav }) {
                     >
                         <Popover.Panel className="absolute -right-16 sm:right-4 z-50 mt-2 bg-white border border-[#E4E4E4] shadow-sm rounded-lg max-w-xs sm:max-w-sm w-screen">
                             <div className="relative p-3 flex flex-col gap-4">
-                                <div className="flex justify-between items-center w-full">
+                                {/* <div className="flex justify-between items-center w-full">
                                     <p className="text-[#1a1a1a] font-medium">Notifications</p>
                                     <Link href="/notifications">
                                         <p className="text-sm text-gray-500 hover:underline">
                                             View all
                                         </p>
                                     </Link>
-                                </div>
+                                </div> */}
                                 <div className="grid grid-cols-1 overflow-hidden w-full h-auto gap-3">
 
                                     <Link href='/notifications'>
-                                        <div className='bg:white w-full rounded-md flex items-start gap-2 cursor-pointer'>
-                                            <div className="rounded-full shrink-0 bg-green-200 h-8 w-8 flex items-center justify-center">
+                                        <div className='bg:white w-full rounded-md flex items-center gap-2 cursor-pointer border-b pb-2'>
+                                            <div className="rounded-full shrink-0 bg-green-200 h-9 w-9 flex items-center justify-center">
                                                 <DirectNotification className="h-4 w-4 text-green-600" />
                                             </div>
-                                            <div className='flex flex-col w-full '>
-                                                <p className='text-sm text-[#1a1a1a] hover:text-[#D4AA00] font-medium italic leading-6'>New Notification</p>
-                                                <p className='text-xs text-[#636363] leading-5'>Ipsum ad pariatur voluptate elit sunt.</p>
+                                            <div className='flex flex-col w-full'>
+                                                <p className='text-xs text-[#1a1a1a] hover:text-[#D4AA00] font-medium leading-6'>New Notification</p>
+                                                <p className='text-[10px] text-[#636363]'>29 July 2023 - 11:02 PM</p>
                                             </div>
                                         </div>
                                     </Link>
 
                                     <Link href='/notifications'>
-                                        <div className='bg:white w-full rounded-md flex items-start gap-2 cursor-pointer'>
-                                            <div className="rounded-full shrink-0 bg-green-200 h-8 w-8 flex items-center justify-center">
+                                        <div className='bg:white w-full rounded-md flex items-center gap-2 cursor-pointer border-b pb-2'>
+                                            <div className="rounded-full shrink-0 bg-green-200 h-9 w-9 flex items-center justify-center">
                                                 <DirectNotification className="h-4 w-4 text-green-600" />
                                             </div>
-                                            <div className='flex flex-col w-full '>
-                                                <p className='text-sm text-[#1a1a1a] hover:text-[#D4AA00] font-medium italic leading-6'>New Notification</p>
-                                                <p className='text-xs text-[#636363] leading-5'>Ipsum ad pariatur voluptate elit sunt.</p>
+                                            <div className='flex flex-col w-full'>
+                                                <p className='text-xs text-[#1a1a1a] hover:text-[#D4AA00] font-medium leading-6'>New Notification</p>
+                                                <p className='text-[10px] text-[#636363]'>29 July 2023 - 11:02 PM</p>
                                             </div>
                                         </div>
                                     </Link>
 
                                     <Link href='/notifications'>
-                                        <div className='bg:white w-full rounded-md flex items-start gap-2 cursor-pointer'>
-                                            <div className="rounded-full shrink-0 bg-green-200 h-8 w-8 flex items-center justify-center">
+                                        <div className='bg:white w-full rounded-md flex items-center gap-2 cursor-pointer border-b pb-2'>
+                                            <div className="rounded-full shrink-0 bg-green-200 h-9 w-9 flex items-center justify-center">
                                                 <DirectNotification className="h-4 w-4 text-green-600" />
                                             </div>
-                                            <div className='flex flex-col w-full '>
-                                                <p className='text-sm text-[#1a1a1a] hover:text-[#D4AA00] font-medium italic leading-6'>New Notification</p>
-                                                <p className='text-xs text-[#636363] leading-5'>Ipsum ad pariatur voluptate elit sunt.</p>
+                                            <div className='flex flex-col w-full'>
+                                                <p className='text-xs text-[#1a1a1a] hover:text-[#D4AA00] font-medium leading-6'>New Notification</p>
+                                                <p className='text-[10px] text-[#636363]'>29 July 2023 - 11:02 PM</p>
                                             </div>
                                         </div>
                                     </Link>
 
                                     <Link href='/notifications'>
-                                        <div className='bg:white w-full rounded-md flex items-start gap-2 cursor-pointer'>
-                                            <div className="rounded-full shrink-0 bg-green-200 h-8 w-8 flex items-center justify-center">
+                                        <div className='bg:white w-full rounded-md flex items-center gap-2 cursor-pointer border-b pb-2'>
+                                            <div className="rounded-full shrink-0 bg-green-200 h-9 w-9 flex items-center justify-center">
                                                 <DirectNotification className="h-4 w-4 text-green-600" />
                                             </div>
-                                            <div className='flex flex-col w-full '>
-                                                <p className='text-sm text-[#1a1a1a] hover:text-[#D4AA00] font-medium italic leading-6'>New Notification</p>
-                                                <p className='text-xs text-[#636363] leading-5'>Ipsum ad pariatur voluptate elit sunt.</p>
+                                            <div className='flex flex-col w-full'>
+                                                <p className='text-xs text-[#1a1a1a] hover:text-[#D4AA00] font-medium leading-6'>New Notification</p>
+                                                <p className='text-[10px] text-[#636363]'>29 July 2023 - 11:02 PM</p>
                                             </div>
                                         </div>
                                     </Link>
@@ -291,16 +291,15 @@ export default function TopBar({ showNav, setShowNav }) {
                         <Menu.Button className="inline-flex w-full justify-center items-center gap-2">
                             <img
                                 src="/logo.png"
-                                className="rounded-full object-cover w-9 h-9 border border-yellow-300 shadow-sm"
+                                className="bg-gray-200/50 rounded-full object-cover w-8 h-8 border border-yellow-300 shadow-sm"
                                 alt="avatar"
                             />
-                            <p className="hidden text-left font-medium text-sm text-[#1a1a1a] md:flex md:flex-col">
+                            {/* <p className="hidden text-left font-medium text-xs text-[#1a1a1a] md:flex md:flex-col">
                                 {user && user.fullName}
-                                <p className="text-xs text-[#636363] font-normal">
+                                <p className="text-[10px] text-[#636363] font-normal">
                                     Admin
                                 </p>
-                                {/* <ArrowDown2 className="h-4 w-4 text-gray-800" /> */}
-                            </p>
+                            </p> */}
                         </Menu.Button>
                     </div>
                     <Transition
@@ -325,7 +324,7 @@ export default function TopBar({ showNav, setShowNav }) {
                                 </Menu.Item> */}
                                 <Menu.Item>
                                     <Link
-                                        href="#"
+                                        href="/settings"
                                         className="flex hover:bg-[#FFF7D8] hover:text-[#D4AA00] text-[#636363] rounded-lg p-2 text-sm group transition-colors items-center"
                                     >
                                         <Setting2 className="h-4 w-4 mr-2" variant="Bold" />

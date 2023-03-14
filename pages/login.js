@@ -69,12 +69,12 @@ export default function Login() {
         <div className='h-screen font-poppins'>
             <div className='grid grid-rows-3 md:p-10 p-2 mx-auto w-full h-full bg-[#f8f8fb]'>
 
-                <div className='row-span-2 flex flex-col justify-center p-4 space-y-5 m-auto bg-white rounded-md drop-shadow-sm shadow-sm md:w-[25%] w-full h-auto'>
+                <div className='row-span-2 flex flex-col justify-center p-4 space-y-5 m-auto bg-white rounded-md drop-shadow-sm md:w-[25%] w-full h-auto'>
 
                     <div className="block">
                         <Image src="/logo.png" width={100} height={100} className="mb-2 m-auto" />
-                        <p className='block text-lg leading-8 font-medium text-gray-800'>Welcome Back !</p>
-                        <span className='block text-sm leading-5 font-normal text-gray-500'>Sign in to continue to Bcloud.</span>
+                        <p className='block text-base leading-6 font-medium text-gray-800'>Welcome Back !</p>
+                        <span className='block text-xs leading-5 font-normal text-gray-500'>Sign in to continue to Bcloud.</span>
                     </div>
 
                     <div className='flex flex-col gap-3'>
@@ -101,14 +101,14 @@ export default function Login() {
                             />
                         </div>
 
-                        <div className='flex flex-row space-x-1' >
+                        <div className='flex items-center space-x-1' >
                             <input
                                 type="checkbox"
-                                className='text-xs leading-5 font-normal text-gray-700'
+                                className='text-xs h-[10px] w-[10px] border leading-5 font-normal text-gray-700'
                                 id='check'
                                 label='Remember me'
                             />
-                            <label className='text-xs font-normal leading-5 text-gray-700 cursor-pointer' htmlFor="check">Remember me</label>
+                            <label className='text-[10px] font-normal leading-5 text-gray-700 cursor-pointer' htmlFor="check">Remember me</label>
                         </div>
 
                         <div className='flex flex-row w-full mt-3'>

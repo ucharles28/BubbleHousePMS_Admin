@@ -47,13 +47,13 @@ function Dashboard() {
     return (
         <div className='h-full font-poppins'>
             <Layout>
-                {isLoading ? <div className="w-full">
+                {isLoading ? <div className="w-full h-screen">
                     <div className="flex flex-col items-center justify-center">
                         <div className="lg:w-2/5 md:w-1/2 pt-10 pl-4 pr-4 justify-center lg:my-16 sm:my-5">
                             <div className="m-12 pt-14 flex flex-col items-center justify-center">
                                 <BounceLoader
-                                    heigth={200}
-                                    width={200}
+                                    heigth={220}
+                                    width={220}
                                     color="#FFCC00"
                                     ariaLabel="loading-indicator"
                                 />
@@ -61,7 +61,7 @@ function Dashboard() {
                         </div>
                     </div>
                 </div> : <div className='w-full h-full py-6 flex flex-col gap-6'>
-                    <p className='w-full block text-xl font-medium text-[#1A1A1A] leading-8'>
+                    <p className='w-full block text-lg font-medium text-[#1A1A1A] leading-6'>
                         Overview
                     </p>
 
@@ -120,6 +120,26 @@ function Dashboard() {
                             </div>
                         </Link>
 
+
+                        <Link href='/users/manager' >
+                            <div className="box rounded-2xl bg-white  border border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
+                                <div className='p-4 bg-[#fff7d8] rounded-full justify-center'>
+                                    {/* <Profile2User size={24} className='text-[#D4AA00]' variant='Bold' /> */}
+                                    <svg fill="#D4AA00" height="24px" width="24px" version="1.1" viewBox="0 0 297 297" enable-background="new 0 0 297 297">
+                                        <g>
+                                            <path d="M148.51,117.216c32.317,0,58.608-26.291,58.608-58.608S180.827,0,148.51,0c-32.317,0-58.608,26.291-58.608,58.608   S116.193,117.216,148.51,117.216z" />
+                                            <path d="m227.154,145.618c-0.025-0.008-0.073-0.026-0.098-0.032-7.631-1.864-30.999-5.133-30.999-5.133-2.638-0.812-5.457,0.585-6.406,3.188l-35.174,96.509c-2.029,5.567-9.903,5.567-11.932,0l-35.174-96.509c-0.766-2.102-2.75-3.42-4.876-3.42-0.504,0-24.531,3.369-32.53,5.358-21.858,5.435-35.645,26.929-35.645,49.329v80.302c0,12.034 9.756,21.79 21.79,21.79h184.782c12.034,0 21.79-9.756 21.79-21.79v-80.569c-0.001-22.303-14.328-42.096-35.528-49.023z" />
+                                            <path d="m161.775,138.613c-1.404-1.53-3.456-2.299-5.532-2.299h-15.485c-2.076,0-4.129,0.77-5.532,2.299-2.173,2.368-2.489,5.789-0.946,8.462l8.278,12.479-3.875,32.69 7.631,20.3c0.744,2.042 3.631,2.042 4.375,0l7.631-20.3-3.875-32.69 8.278-12.479c1.541-2.673 1.225-6.094-0.948-8.462z" />
+                                        </g>
+                                    </svg>
+                                </div>
+                                <div className='block text-center md:text-left gap-3'>
+                                    <p className='text-sm leading-6 text-[#636363]'>Managers</p>
+                                    <p className='text-2xl leading-10 font-semibold text-[#1a1a1a]'>{dashboardOverview ? dashboardOverview.noOfManager : 0}</p>
+                                </div>
+                            </div>
+                        </Link>
+
                         <Link href='/users' >
                             <div className="box rounded-2xl bg-white  border border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
                                 <div className='p-4 bg-[#fff7d8] rounded-full justify-center'>
@@ -131,20 +151,7 @@ function Dashboard() {
                                 </div>
                             </div>
                         </Link>
-
-                        <Link href='/users/manager' >
-                            <div className="box rounded-2xl bg-white  border border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
-                                <div className='p-4 bg-[#fff7d8] rounded-full justify-center'>
-                                    <Profile2User size={24} className='text-[#D4AA00]' variant='Bold' />
-                                </div>
-                                <div className='block text-center md:text-left gap-3'>
-                                    <p className='text-sm leading-6 text-[#636363]'>Managers</p>
-                                    <p className='text-2xl leading-10 font-semibold text-[#1a1a1a]'>{dashboardOverview ? dashboardOverview.noOfManager : 0}</p>
-                                </div>
-                            </div>
-                        </Link>
-
-                        <Link href='/users/staffs' >
+                        {/* <Link href='/users/staffs' >
                             <div className="box rounded-2xl bg-white  border border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
                                 <div className='p-4 bg-[#fff7d8] rounded-full justify-center'>
                                     <Profile2User size={24} className='text-[#D4AA00]' variant='Bold' />
@@ -152,6 +159,17 @@ function Dashboard() {
                                 <div className='block text-center md:text-left gap-3'>
                                     <p className='text-sm leading-6 text-[#636363]'>Staff</p>
                                     <p className='text-2xl leading-10 font-semibold text-[#1a1a1a]'>{dashboardOverview ? dashboardOverview.noOfStaffs : 0}</p>
+                                </div>
+                            </div>
+                        </Link> */}
+                        <Link href="/bookings/request">
+                            <div className="box rounded-2xl bg-white  border border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
+                                <div className='p-4 bg-[#fff7d8] rounded-full justify-center'>
+                                    <MessageEdit size={24} className='text-[#D4AA00]' variant='Bold' />
+                                </div>
+                                <div className='block text-center md:text-left gap-3'>
+                                    <p className='text-sm leading-6 text-[#636363]'>Booking Request</p>
+                                    <p className='text-2xl leading-10 font-semibold text-[#1a1a1a]'>{dashboardOverview ? dashboardOverview.bookingRequests : 0}</p>
                                 </div>
                             </div>
                         </Link>
@@ -164,18 +182,6 @@ function Dashboard() {
                                 <div className='block text-center md:text-left gap-3'>
                                     <p className='text-sm leading-6 text-[#636363]'>Today Booked</p>
                                     <p className='text-2xl leading-10 font-semibold text-[#1a1a1a]'>{dashboardOverview ? dashboardOverview.todayBooked : 0}</p>
-                                </div>
-                            </div>
-                        </Link>
-
-                        <Link href="/bookings/request">
-                            <div className="box rounded-2xl bg-white  border border-[#FFDD55] flex md:flex-row flex-col items-center md:items-start p-4 md:p-6 pb-6 md:pb-8 gap-5 h-auto">
-                                <div className='p-4 bg-[#fff7d8] rounded-full justify-center'>
-                                    <MessageEdit size={24} className='text-[#D4AA00]' variant='Bold' />
-                                </div>
-                                <div className='block text-center md:text-left gap-3'>
-                                    <p className='text-sm leading-6 text-[#636363]'>Booking Request</p>
-                                    <p className='text-2xl leading-10 font-semibold text-[#1a1a1a]'>{dashboardOverview ? dashboardOverview.bookingRequests : 0}</p>
                                 </div>
                             </div>
                         </Link>

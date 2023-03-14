@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
-import { ArrowDown2, HambergerMenu, DirectNotification, Edit2, Setting2, LogoutCurve, Profile2User, Notification, Buildings2, Note, Calendar, Messages2, Category } from 'iconsax-react';
+import { HambergerMenu, DirectNotification, Setting2, LogoutCurve, Profile2User, Notification, Buildings2, Calendar, Messages2, Category } from 'iconsax-react';
 import { Menu, Transition, Popover } from "@headlessui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -44,9 +44,9 @@ export default function TopBar({ showNav, setShowNav }) {
                 {/* <svg className="h-7 w-7 text-gray-700 cursor-pointer" onClick={() => setShowNav(!showNav)} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="style=linear">
                         <g id="menu-hotdog">
-                            <path id="vector" d="M5 6H19" stroke="#1A1A1A" strokeWidth="1.5" stroke-linecap="round" />
-                            <path id="vector_2" d="M3 12H21" stroke="#1A1A1A" strokeWidth="1.5" stroke-linecap="round" />
-                            <path id="vector_3" d="M5 18H19" stroke="#1A1A1A" strokeWidth="1.5" stroke-linecap="round" />
+                            <path id="vector" d="M5 6H19" stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round" />
+                            <path id="vector_2" d="M3 12H21" stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round" />
+                            <path id="vector_3" d="M5 18H19" stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round" />
                         </g>
                     </g>
                 </svg> */}
@@ -56,8 +56,8 @@ export default function TopBar({ showNav, setShowNav }) {
                     onClick={() => setShowNav(!showNav)}
                 >
                     <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
                         d="M2.14645 11.1464C1.95118 11.3417 1.95118 11.6583 2.14645 11.8536C2.34171 12.0488 2.65829 12.0488 2.85355 11.8536L6.85355 7.85355C7.04882 7.65829 7.04882 7.34171 6.85355 7.14645L2.85355 3.14645C2.65829 2.95118 2.34171 2.95118 2.14645 3.14645C1.95118 3.34171 1.95118 3.65829 2.14645 3.85355L5.79289 7.5L2.14645 11.1464ZM8.14645 11.1464C7.95118 11.3417 7.95118 11.6583 8.14645 11.8536C8.34171 12.0488 8.65829 12.0488 8.85355 11.8536L12.8536 7.85355C13.0488 7.65829 13.0488 7.34171 12.8536 7.14645L8.85355 3.14645C8.65829 2.95118 8.34171 2.95118 8.14645 3.14645C7.95118 3.34171 7.95118 3.65829 8.14645 3.85355L11.7929 7.5L8.14645 11.1464Z"
                         fill="#000000"
                     />
@@ -72,9 +72,9 @@ export default function TopBar({ showNav, setShowNav }) {
                 <svg className="h-7 w-7 text-gray-700 cursor-pointer" onClick={showDrawer} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="style=linear">
                         <g id="menu-hotdog">
-                            <path id="vector" d="M5 6H19" stroke="#1A1A1A" strokeWidth="1.5" stroke-linecap="round" />
-                            <path id="vector_2" d="M3 12H21" stroke="#1A1A1A" strokeWidth="1.5" stroke-linecap="round" />
-                            <path id="vector_3" d="M5 18H19" stroke="#1A1A1A" strokeWidth="1.5" stroke-linecap="round" />
+                            <path id="vector" d="M5 6H19" stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round" />
+                            <path id="vector_2" d="M3 12H21" stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round" />
+                            <path id="vector_3" d="M5 18H19" stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round" />
                         </g>
                     </g>
                 </svg>
@@ -314,7 +314,7 @@ export default function TopBar({ showNav, setShowNav }) {
                     >
                         <Menu.Items className="absolute right-0 w-56 z-50 mt-2 origin-top-right bg-white border border-[#E4E4E4] rounded-md shadow-lg">
                             <div className="p-1">
-                                <Menu.Item>
+                                {/* <Menu.Item>
                                     <Link
                                         href="#"
                                         className="flex hover:bg-orange-500 hover:text-white text-gray-700 rounded p-2 text-sm group transition-colors items-center"
@@ -322,23 +322,23 @@ export default function TopBar({ showNav, setShowNav }) {
                                         <Edit2 className="h-4 w-4 mr-2" />
                                         Edit
                                     </Link>
-                                </Menu.Item>
+                                </Menu.Item> */}
                                 <Menu.Item>
                                     <Link
                                         href="#"
-                                        className="flex hover:bg-orange-500 hover:text-white text-gray-700 rounded p-2 text-sm group transition-colors items-center"
+                                        className="flex hover:bg-[#FFF7D8] hover:text-[#D4AA00] text-[#636363] rounded-lg p-2 text-sm group transition-colors items-center"
                                     >
-                                        <Setting2 className="h-4 w-4 mr-2" />
+                                        <Setting2 className="h-4 w-4 mr-2" variant="Bold" />
                                         Settings
                                     </Link>
                                 </Menu.Item>
                                 <Menu.Item>
                                     <Link
                                         href="#"
-                                        className="flex hover:bg-red-500 hover:text-white text-gray-700 rounded p-2 text-sm group transition-colors items-center"
+                                        className="flex hover:bg-red-500 hover:text-white text-[#636363] rounded-lg p-2 text-sm group transition-colors items-center"
                                         onClick={logOut}
                                     >
-                                        <LogoutCurve className="h-4 w-4 mr-2" />
+                                        <LogoutCurve className="h-4 w-4 mr-2" variant="Bold" />
                                         Log Out
                                     </Link>
                                 </Menu.Item>

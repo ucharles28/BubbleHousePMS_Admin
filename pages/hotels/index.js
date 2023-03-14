@@ -77,7 +77,7 @@ function HotelsPage() {
                             <Link href='#'>
                                 <button
                                     type="button"
-                                    className="w-auto border-[#1a1a1a]/50 border hover:bg-[#636363] uppercase text-[#666666] hover:border-0 hover:text-white font-medium leading-6 rounded-md text-xs text-center px-2.5 py-1.5"
+                                    className="w-auto border-[#1a1a1a]/50 border hover:bg-[#636363] uppercase text-[#666666] hover:border hover:text-white font-medium leading-6 rounded-md text-xs text-center px-2.5 py-1.5"
                                 >
                                     Export
                                 </button>
@@ -86,7 +86,7 @@ function HotelsPage() {
                             <Link href='hotels/new'>
                                 <button
                                     type="button"
-                                    className="w-auto bg-[#1a1a1a]/50 hover:bg-[#1a1a1a] uppercase text-white font-medium leading-6 rounded-md text-xs text-center px-2.5 py-1.5"
+                                    className="w-auto bg-[#1a1a1a]/50 hover:bg-[#636363] uppercase text-white font-medium leading-6 rounded-md text-xs text-center px-2.5 py-1.5"
                                 >
                                     Add Hotel
                                 </button>

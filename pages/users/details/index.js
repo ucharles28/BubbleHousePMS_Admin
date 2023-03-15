@@ -56,7 +56,7 @@ function UserDetails() {
     const router = useRouter()
 
     return (
-        <div className='h-screen font-poppins'>
+        <div className='min-h-screen font-poppins'>
             <Layout>
                 {/* <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                     <Alert onClose={handleClose} severity={alertType} sx={{ width: '100%' }}>
@@ -97,7 +97,7 @@ function UserDetails() {
                                     {selectedUser && <p className='block font-medium leading-8 text-lg'>{selectedUser.fullName}</p>}
 
                                     <div className="px-[10px] py-1 rounded-md bg-[#1a1a1a]/10 flex justify-center">
-                                        <span className='text-xs font-normal leading-4 text-[#666666] text-center'>Customer</span>
+                                        <span className='text-xs font-normal leading-4 text-[#666666] text-center'>{getRole(selectedUser.accountType)}</span>
                                     </div>
 
                                 </div>

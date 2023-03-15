@@ -90,16 +90,6 @@ export default function TopBar({ showNav, setShowNav }) {
                 footerStyle={{ position: "fixed" }}
                 headerStyle={{ padding: "0", borderBottom: "0" }}
                 title={
-                    // <div className="flex justify-between items-center px-4 py-3 border-b-[1.5px] border-[#E4E4E4]">
-                    //     <div className="flex items-center gap-3">
-                    //         <img src="/logo.png" alt="" className="h-8 w-8" />
-                    //         <p className="text-[#D4AA00] font-bold text-lg">Kasirku</p>
-                    //     </div>
-                    //     <div className="flex items-center gap-3">
-                    //         <Category className="h-5 w-5 text-[#D4AA00]" />
-                    //         <img src="/logo.png" alt="" className="h-8 w-8 rounded-full" />
-                    //     </div>
-                    // </div>
                     <div className="flex justify-center mt-4 mb-12" >
                         <Image src="/logo.png" width={90} height={90} />
                     </div>
@@ -107,7 +97,7 @@ export default function TopBar({ showNav, setShowNav }) {
             >
 
 
-                <div className="flex flex-col gap-y-3 px-2">
+                <div className="flex flex-col gap-y-3 px-2 text-sm">
                     <Link href="/">
                         <div
                             className={`px-5 py-3 text-center cursor-pointer flex items-center gap-3 transition-colors ${router.pathname == "/"
@@ -155,18 +145,6 @@ export default function TopBar({ showNav, setShowNav }) {
                             <p className="">Bookings</p>
                         </div>
                     </Link>
-
-                    {/* <Link href="/dashboard">
-                    <div
-                        className={`px-5 py-3 text-center cursor-pointer flex items-center gap-3 transition-colors ${router.pathname == "/oard"
-                            ? "bg-[#fff7d8] text-[#D4AA00] rounded-xl"
-                            : "text-[#636363] hover:bg-[#FFF7D8] hover:text-[#D4AA00] rounded-xl"
-                            }`}
-                    >
-                        <Notepad2 className="h-5 w-5" variant="Bold" />
-                        <p className="">Book room</p>
-                    </div>
-                </Link> */}
 
                     <Link href="/chats">
                         <div

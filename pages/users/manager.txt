@@ -13,7 +13,7 @@ import styled from "@emotion/styled";
 import { BounceLoader } from "react-spinners";
 
 
-function CancelledBookings() {
+function Managers() {
     const [managers, setManagers] = useState([])
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
@@ -56,9 +56,9 @@ function CancelledBookings() {
 `;
 
     return (
-        <div className='h-screen font-poppins'>
+        <div className='min-h-screen font-poppins'>
             <Layout>
-                <div className='w-full h-screen py-6 flex flex-col gap-6'>
+                <div className='w-full h-full py-6 flex flex-col gap-6'>
 
                     <div className='flex flex-col items-end gap-y-1 md:flex-row w-full'>
                         <p className='block w-full text-lg font-medium text-[#1A1A1A] leading-6'>
@@ -178,4 +178,4 @@ function CancelledBookings() {
     )
 }
 
-export default CancelledBookings;
+export default Managers;

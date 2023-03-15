@@ -77,7 +77,7 @@ export default function Layout({ children }) {
           className={`pt-16 transition-all duration-[400ms] ${showNav && !isMobile ? "md:pl-72" : ""
             }`}
         >
-          <div className="px-4 bg-[#f6f6f6] h-full">
+          <div className="px-4 bg-[#f6f6f6] min-h-screen">
             {children}
           </div>
         </main>

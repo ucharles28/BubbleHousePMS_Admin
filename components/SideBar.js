@@ -20,7 +20,7 @@ const SideBar = forwardRef(({ showNav }, ref) => {
                 <Image src="/logo.png" width={100} height={100} />
             </div>
 
-            <div className="flex flex-col gap-y-2 px-2">
+            <div className="flex flex-col gap-y-2 px-2 text-sm">
                 <Link href="/">
                     <div
                         className={`px-5 py-3 text-center cursor-pointer flex items-center gap-3 transition-colors ${router.pathname == "/"

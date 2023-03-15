@@ -1,5 +1,5 @@
 import { forwardRef, use, useEffect, useRef, useState } from 'react';
-import { 
+import {
     TableCell, TablePagination, TableRow, Table,
     TableContainer, TableHead, CircularProgress, TableBody, TextField
 } from '@mui/material'
@@ -8,6 +8,7 @@ import { get, postData } from '../../helpers/ApiRequest';
 import MuiAlert from '@mui/material/Alert';
 import Link from 'next/link';
 import Layout from '../../components/Layout';
+import { BounceLoader } from "react-spinners";
 import styled from "@emotion/styled";
 
 
@@ -76,13 +77,13 @@ function UsersPage() {
     `;
 
     return (
-        <div className='h-screen font-poppins'>
+        <div className='min-h-screen font-poppins'>
             <Layout>
-                <div className='w-full h-screen py-6 flex flex-col gap-6'>
+                <div className='w-full h-full py-6 flex flex-col gap-6'>
 
-                    <div className='flex flex-col items-end gap-y-1 md:flex-row w-full'>
+                    <div className='flex flex-col items-end gap-y-1 md:flex-row w-full '>
                         <p className='block w-full text-lg font-medium text-[#1A1A1A] leading-6'>
-                            Users
+                            Customers
                         </p>
 
                         <div className='flex justify-end gap-2 w-full'>
@@ -98,14 +99,27 @@ function UsersPage() {
                                     type="button"
                                     className="w-auto bg-[#1a1a1a]/50 hover:bg-[#636363] uppercase text-white font-medium leading-6 rounded-md text-xs text-center px-2.5 py-1.5"
                                 >
-                                    Add User
+                                    Add New
                                 </button>
                             </Link>
 
                         </div>
                     </div>
 
-                    <div className='bg-white border border-gray-50 drop-shadow-sm rounded-lg w-full h-auto py-1 px-2'>
+                    {isLoading ? <div className="w-full">
+                        <div className="flex flex-col items-center justify-center">
+                            <div className="lg:w-2/5 md:w-1/2 pt-10 pl-4 pr-4 justify-center lg:my-16 sm:my-5">
+                                <div className="m-12 pt-14 flex flex-col items-center justify-center">
+                                    <BounceLoader
+                                        heigth={200}
+                                        width={200}
+                                        color="#FFCC00"
+                                        ariaLabel="loading-indicator"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div> : <div className='bg-white border border-gray-50 drop-shadow-sm rounded-lg w-full h-auto py-1 px-2'>
                         <TableContainer>
                             <Table >
                                 <TableHead>
@@ -129,55 +143,40 @@ function UsersPage() {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {isLoading ? (
-                                        <TableRow  >
-                                            <TableCell></TableCell>
+                                    {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                        .map((row, index) => {
+                                            return (
+                                                <TableRowStyled key={index}>
+                                                    <TableCell className='w-10'>
+                                                        {index + 1}
+                                                    </TableCell>
+                                                    <TableCell>
+                                                        {row.user}
+                                                    </TableCell>
+                                                    <TableCell >
+                                                        {row.email}
+                                                    </TableCell>
+                                                    <TableCell>{row.role}</TableCell>
+                                                    <TableCell>{row.joined}</TableCell>
+                                                    <TableCell className='w-20'>
+                                                        <Link href={{
+                                                            pathname: `/users/details`,
+                                                            query: {
+                                                                id: row.id
+                                                            }
+                                                        }}>
+                                                            <Eye size={18} className='text-[#636363] hover:text-[#1a1a1a]' />
+                                                        </Link>
 
-                                            <TableCell></TableCell>
-
-                                            <TableCell >
-                                                <div className="flex items-center justify-center tableLoadingProgressDiv">
-                                                    <CircularProgress color="inherit" />
-                                                </div>
-                                            </TableCell>
-
-                                            <TableCell></TableCell>
-                                        </TableRow>
-                                    ) :
-                                        rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                            .map((row, index) => {
-                                                return (
-                                                    <TableRowStyled key={index}>
-                                                        <TableCell className='w-10'>
-                                                            {index + 1}
-                                                        </TableCell>
-                                                        <TableCell>
-                                                            {row.user}
-                                                        </TableCell>
-                                                        <TableCell >
-                                                            {row.email}
-                                                        </TableCell>
-                                                        <TableCell>{row.role}</TableCell>
-                                                        <TableCell>{row.joined}</TableCell>
-                                                        <TableCell className='w-20'>
-                                                            <Link href={{
-                                                                pathname: `/users/details`,
-                                                                query: {
-                                                                    id: row.id
-                                                                }
-                                                            }}>
-                                                                <Eye size={18} className='text-[#636363] hover:text-[#1a1a1a]' />
-                                                            </Link>
-
-                                                        </TableCell>
-                                                    </TableRowStyled>
-                                                );
-                                            })}
+                                                    </TableCell>
+                                                </TableRowStyled>
+                                            );
+                                        })}
                                 </TableBody>
                             </Table>
                         </TableContainer>
                         <TablePagination
-                            rowsPerPageOptions={[5, 10, 25, 50, 100]}
+                            rowsPerPageOptions={[5, 10, 15, 25, 50, 100]}
                             component="div"
                             count={rows.length}
                             rowsPerPage={rowsPerPage}
@@ -185,7 +184,7 @@ function UsersPage() {
                             onPageChange={handleChangePage}
                             onRowsPerPageChange={handleChangeRowsPerPage}
                         />
-                    </div>
+                    </div>}
                 </div>
             </Layout>
         </div>

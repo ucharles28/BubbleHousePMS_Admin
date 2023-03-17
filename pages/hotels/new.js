@@ -22,6 +22,7 @@ function NewHotel() {
         formData.append("Address", address)
         formData.append("Email", email)
         formData.append("PhoneNumber", phone)
+        formData.append("City", city)
         formData.append("AccountCode", accNo)
         formData.append("AltPhoneNumber", altPhone)
         formData.append("ImageFile", hotelImageFile)
@@ -262,7 +263,7 @@ function NewHotel() {
                                             type="button"
                                             className="text-white font-medium flex items-center py-2 px-5 rounded-md bg-[#666666] text-sm leading-6 uppercase hover:bg-[#1A1A1A]/50"
                                             onClick={saveHotel}
-                                            disabled={!hotelName || !description || !address || !email || !phone || !accNo || !numberOfRooms || !selectedManager}
+                                            disabled={!hotelName || !description || !address || !email || !phone || !accNo || !numberOfRooms || !selectedManager || !city }
                                         >
                                             {isLoading ? <CircularProgress size={24} color="inherit" /> : 'Save'}
                                         </button>

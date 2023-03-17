@@ -28,7 +28,7 @@ function HotelDetails() {
             setPhone(response.data.phoneNumber)
             setAltPhone(response.data.altPhoneNumber)
             setNumberOfRooms(response.data.numberOfRooms)
-            setSelectedManager(response.data.managerId)
+            setSelectedManager(response.data.staffs[0].staffId)
             setHotelImageSrc(response.data.imageUrl)
             setCity(response.data.city)
             setAddress(response.data.address.line)

@@ -3,53 +3,35 @@ import {
     TableCell, TablePagination, TableRow, Table,
     TableContainer, TableHead, CircularProgress, TableBody, TextField
 } from '@mui/material'
-import { Eye } from 'iconsax-react';
-import { get, postData } from '../../helpers/ApiRequest';
-import MuiAlert from '@mui/material/Alert';
-import Link from 'next/link';
+import { Eye, ArrowLeft2 } from 'iconsax-react'
+import { get, postData } from '../../helpers/ApiRequest'
+import MuiAlert from '@mui/material/Alert'
+import Link from 'next/link'
+import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
-import { BounceLoader } from "react-spinners";
 import styled from "@emotion/styled";
+import { BounceLoader } from "react-spinners";
 
 
-function UsersPage() {
-
-    const getAllUsers = async () => {
-        setIsLoading(true)
-        const response = await get('User')
-        if (response.successful) {
-            var list = response.data.map((user) => {
-                const obj = {
-                    user: user.fullName,
-                    email: user.email,
-                    joined: user.createdDate,
-                    id: user.id,
-                }
-                switch (user.accountType) {
-                    case 0:
-                        obj.role = 'Customer'
-                        break;
-                    case 1:
-                        obj.role = 'Admin'
-                        break;
-                    case 2:
-                        obj.role = 'Manager'
-                        break;
-                    case 3:
-                        obj.role = 'Staff'
-                        break;
-                }
-                return obj;
-            })
-            setRows(list)
-        }
-        setIsLoading(false)
-
+function Managers() {
+    const [managers, setManagers] = useState([])
+    const [isLoading, setIsLoading] = useState(true);
+    useEffect(() => {
+        getManagers()
+    }, [])
+    const goBack = () => {
+        router.back()
     }
 
-    useEffect(() => {
-        getAllUsers()
-    }, [])
+    const getManagers = async () => {
+        const response = await get('User/GetAllManagers')
+        if (response.successful) {
+            setManagers(response.data)
+        }
+        setIsLoading(false)
+    }
+
+    const router = useRouter();
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -59,49 +41,42 @@ function UsersPage() {
         setRowsPerPage(event.target.value);
         setPage(0);
     };
-
     //states
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [rows, setRows] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
-
     const TableRowStyled = styled(TableRow)`
-        &:nth-of-type(odd) {
-            background-color: #f8f8f8;
-        }
-        & > td {
-            color: #636363;
-            font-size: 0.75rem;
-        }
-    `;
+    &:nth-of-type(odd) {
+        background-color: #f8f8f8;
+    }
+    & > td {
+        color: #636363;
+        font-size: 0.75rem;
+    }
+`;
 
     return (
         <div className='min-h-screen font-poppins'>
             <Layout>
                 <div className='w-full h-full py-6 flex flex-col gap-6'>
 
-                    <div className='flex flex-col items-end gap-y-1 md:flex-row w-full '>
+                    <div className='flex flex-col items-end gap-y-1 md:flex-row w-full'>
                         <p className='block w-full text-lg font-medium text-[#1A1A1A] leading-6'>
-                            Customers
+                            Managers
                         </p>
 
                         <div className='flex justify-end gap-2 w-full'>
 
                             <input
                                 type='text'
-                                placeholder='Search Users'
+                                placeholder='Search Managers'
                                 className='w-1/2 h-9 border border-[#1a1a1a]/50 text-xs font-normal pl-2 focus:outline-0 bg-transparent rounded-md'
                             />
 
-                            <Link href='users/new'>
-                                <button
-                                    type="button"
-                                    className="w-auto bg-[#1a1a1a]/50 hover:bg-[#636363] uppercase text-white font-medium leading-6 rounded-md text-xs text-center px-2.5 py-1.5"
-                                >
-                                    Add New
-                                </button>
-                            </Link>
+                            <div onClick={goBack} className="px-2 py-1 rounded-lg flex items-center cursor-pointer bg-white hover:bg-[#f9f9f9] border-2 border-[#E4E4E4] text-gray-600 hover:text-gray-800">
+                                <ArrowLeft2 size={14} />
+                                <span className="text-xs font-medium leading-6">Back</span>
+                            </div>
 
                         </div>
                     </div>
@@ -135,50 +110,62 @@ function UsersPage() {
                                         className='text-xs leading-6 font-[600] uppercase text-[#1a1a1a]'
                                     >
                                         <TableCell className="w-10">S/N</TableCell>
-                                        <TableCell className=" ">User</TableCell>
+                                        <TableCell className=" ">Full Name</TableCell>
                                         <TableCell className=" ">Email</TableCell>
+                                        <TableCell className=" ">Phone</TableCell>
                                         <TableCell className=" ">Role</TableCell>
-                                        <TableCell className=" ">Joined</TableCell>
+                                        {/* <TableCell className=" ">Status</TableCell>*/}
                                         <TableCell className="w-20">Action</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                        .map((row, index) => {
-                                            return (
-                                                <TableRowStyled key={index}>
-                                                    <TableCell className='w-10'>
-                                                        {index + 1}
-                                                    </TableCell>
-                                                    <TableCell>
-                                                        {row.user}
-                                                    </TableCell>
-                                                    <TableCell >
-                                                        {row.email}
-                                                    </TableCell>
-                                                    <TableCell>{row.role}</TableCell>
-                                                    <TableCell>{row.joined}</TableCell>
-                                                    <TableCell className='w-20'>
-                                                        <Link href={{
+                                    {managers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                        .map((manager, index) => (
+                                            <TableRowStyled
+                                                key={index}
+                                            >
+                                                <TableCell className='w-10'>
+                                                    {index + 1}
+                                                </TableCell>
+                                                <TableCell>
+                                                    {manager.fullName}
+                                                </TableCell>
+                                                <TableCell >
+                                                    {manager.email}
+                                                </TableCell>
+                                                <TableCell >
+                                                    {manager.phoneNumber}
+                                                </TableCell>
+                                                <TableCell>
+                                                    Manager
+                                                </TableCell>
+                                                {/* <TableCell>
+                                                <span className='text-xs mx-auto text-center font-medium rounded-full p-2 px-3 leading-6 bg-[#FFF1F1] text-[#FF4C51]'>
+                                                    Cancelled
+                                                </span>
+                                            </TableCell>*/}
+                                                <TableCell className='w-20'>
+                                                    <Link
+                                                        href={{
                                                             pathname: `/users/details`,
                                                             query: {
-                                                                id: row.id
+                                                                id: manager.id
                                                             }
-                                                        }}>
-                                                            <Eye size={18} className='text-[#636363] hover:text-[#1a1a1a]' />
-                                                        </Link>
+                                                        }}
+                                                    >
+                                                        <Eye size={18} className='text-[#636363] hover:text-[#1a1a1a]' />
+                                                    </Link>
 
-                                                    </TableCell>
-                                                </TableRowStyled>
-                                            );
-                                        })}
+                                                </TableCell>
+                                            </TableRowStyled>
+                                        ))}
                                 </TableBody>
                             </Table>
                         </TableContainer>
                         <TablePagination
-                            rowsPerPageOptions={[5, 10, 15, 25, 50, 100]}
+                            rowsPerPageOptions={[5, 10, 25, 50, 100]}
                             component="div"
-                            count={rows.length}
+                            count={managers.length}
                             rowsPerPage={rowsPerPage}
                             page={page}
                             onPageChange={handleChangePage}
@@ -191,4 +178,4 @@ function UsersPage() {
     )
 }
 
-export default UsersPage;
+export default Managers;

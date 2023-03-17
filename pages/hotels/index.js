@@ -1,18 +1,15 @@
-import {
-    Card, CardContent, CardHeader, Paper, TableCell,
-    TablePagination, TableRow, Table,
+import { 
+    TableCell, TablePagination, TableRow, Table,
     TableContainer, TableHead, CircularProgress, TableBody, TextField
-} from '@mui/material'
-import { Edit2, Export } from 'iconsax-react'
+} from '@mui/material';
+import { Edit2, Export } from 'iconsax-react';
 import { forwardRef, use, useEffect, useRef, useState } from 'react';
-import { get, postData } from '../../helpers/ApiRequest'
-import MuiAlert from '@mui/material/Alert'
-import Link from 'next/link'
+import { get, postData } from '../../helpers/ApiRequest';
+import MuiAlert from '@mui/material/Alert';
+import Link from 'next/link';
 import { FiEdit3 } from 'react-icons/fi';
 import Layout from '../../components/Layout';
-
-
-
+import styled from "@emotion/styled";
 
 function HotelsPage() {
 
@@ -44,6 +41,15 @@ function HotelsPage() {
     const [rows, setRows] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
+    const TableRowStyled = styled(TableRow)`
+        &:nth-of-type(odd) {
+            background-color: #f8f8f8;
+        }
+        & > td {
+            color: #636363;
+            font-size: 0.75rem;
+        }
+    `;
 
     return (
         <div className='h-full font-poppins'>
@@ -51,33 +57,41 @@ function HotelsPage() {
 
                 <div className='w-full h-screen py-6 pb-8 flex flex-col gap-6'>
 
-                    <div className='flex w-full'>
-                        <p className='w-full block text-xl font-medium text-[#1A1A1A] leading-8'>
+                    <div className='flex flex-col items-end gap-y-1 md:flex-row w-full'>
+                        <p className='block w-full text-lg font-medium text-[#1A1A1A] leading-6'>
                             Hotels
                         </p>
 
-                        <div className='flex item-center justify-end gap-2 w-full'>
-                            <TextField size='small' id="outlined-basic" className="z-0text-base leading-6 font-normal" label='Search Hotels' variant="outlined"
+                        <div className='flex justify-end gap-2 w-full'>
+
+                            <input
+                                type='text'
+                                placeholder='Search Hotels'
+                                className='w-1/2 h-9 border border-[#1a1a1a]/50 text-xs font-normal pl-2 focus:outline-0 bg-transparent rounded-md'
                             />
-                            <button
-                                type="button"
-                                className="text-[#666666] font-medium flex gap-1 items-center py-2 px-5 rounded-md border-[#666666] border-[1.2px] text-xs md:text-sm leading-6 uppercase hover:bg-[#666666] hover:text-white"
-                            >
-                                <Export size={18} />
-                                Export
-                            </button>
+
+                            <Link href='#'>
+                                <button
+                                    type="button"
+                                    className="w-auto border-[#1a1a1a]/50 border hover:bg-[#636363] uppercase text-[#666666] hover:border hover:text-white font-medium leading-6 rounded-md text-xs text-center px-2.5 py-1.5"
+                                >
+                                    Export
+                                </button>
+                            </Link>
+
                             <Link href='hotels/new'>
                                 <button
                                     type="button"
-                                    className="bg-[#666666] hover:bg-[#1A1A1A]/50 uppercase text-white font-medium leading-6 rounded-md text-xs md:text-sm py-2.5 px-5 text-center"
+                                    className="w-auto bg-[#1a1a1a]/50 hover:bg-[#636363] uppercase text-white font-medium leading-6 rounded-md text-xs text-center px-2.5 py-1.5"
                                 >
                                     Add Hotel
                                 </button>
                             </Link>
+
                         </div>
                     </div>
 
-                    <div className='bg-white border border-gray-50 shadow rounded-lg w-full h-auto py-1 px-2'>
+                    <div className='bg-white border border-gray-50 drop-shadow-sm rounded-lg w-full h-auto py-1 px-2'>
                         <TableContainer >
                             <Table >
                                 <TableHead>
@@ -85,7 +99,7 @@ function HotelsPage() {
                                         sx={{
                                             color: "#1A1A1A",
                                             "& th": {
-                                                fontSize: "12px",
+                                                fontSize: "0.75rem",
                                                 fontWeight: "550",
                                                 letterSpacing: "0.20px"
                                             }
@@ -123,7 +137,7 @@ function HotelsPage() {
                                         rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                             .map((row, index) => {
                                                 return (
-                                                    <TableRow key={index}>
+                                                    <TableRowStyled key={index}>
                                                         <TableCell className='w-10'>
                                                             {index + 1}
                                                         </TableCell>
@@ -144,18 +158,16 @@ function HotelsPage() {
                                                             {row.availableRooms}
                                                         </TableCell>
                                                         <TableCell className='w-20'>
-                                                            {/* <p className="text-gray-500 flex items-center gap-2"> */}
                                                             <Link href={{
                                                                 pathname: `/hotels/details`,
                                                                 query: {
                                                                     id: row.id
                                                                 }
                                                             }}>
-                                                                <Edit2 size={18} className='text-[#636363]' />
+                                                                <Edit2 size={18} className='text-[#636363] hover:text-[#1a1a1a]' />
                                                             </Link>
-                                                            {/* </p> */}
                                                         </TableCell>
-                                                    </TableRow>
+                                                    </TableRowStyled>
                                                 );
                                             })}
                                 </TableBody>

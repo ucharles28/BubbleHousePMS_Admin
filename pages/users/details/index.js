@@ -2,6 +2,7 @@ import { CircularProgress } from '@mui/material'
 import { Money2, Book, Calendar, Notepad2, ArrowLeft2, MessageEdit } from 'iconsax-react'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import { BounceLoader } from 'react-spinners'
 import Layout from '../../../components/Layout'
 import { get } from '../../../helpers/ApiRequest'
 // import MuiAlert from '@mui/material/Alert';
@@ -66,7 +67,20 @@ function UserDetails() {
                 {/* <Card>
                     <CardContent> */}
 
-                <div className='w-full h-full py-6 flex flex-col gap-4'>
+                {isLoading ? <div className="w-full">
+                        <div className="flex flex-col items-center justify-center">
+                            <div className="lg:w-2/5 md:w-1/2 pt-10 pl-4 pr-4 justify-center lg:my-16 sm:my-5">
+                                <div className="m-12 pt-14 flex flex-col items-center justify-center">
+                                    <BounceLoader
+                                        heigth={200}
+                                        width={200}
+                                        color="#FFCC00"
+                                        ariaLabel="loading-indicator"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div> : <div className='w-full h-full py-6 flex flex-col gap-4'>
 
                     <div className='flex items-end justify-between w-full'>
 
@@ -188,7 +202,7 @@ function UserDetails() {
 
                     </div>
 
-                </div>
+                </div>}
 
             </Layout>
         </div>

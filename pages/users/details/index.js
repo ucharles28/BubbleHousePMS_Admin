@@ -117,7 +117,7 @@ function UserDetails() {
                                 </div>
                                 {!isLoading ?
                                     selectedUser && <>
-                                        <div className='flex flew-row justify-between gap-3 px-1'>
+                                        {/* <div className='flex flew-row justify-between gap-3 px-1'>
 
                                             <div className='flex items-start gap-2'>
                                                 <div className='p-3 bg-[#1a1a1a]/10 text-[#636363] rounded-lg justify-center'>
@@ -163,7 +163,7 @@ function UserDetails() {
                                                 </div>
                                             </div>
 
-                                        </div>
+                                        </div> */}
 
                                         <div className=' flex flex-col gap-3 px-1'>
 

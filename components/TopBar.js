@@ -211,7 +211,7 @@ export default function TopBar({ showNav, setShowNav }) {
                                 <div className="grid grid-cols-1 overflow-hidden w-full h-auto gap-3">
 
                                     <Link href='/notifications'>
-                                        <div className='bg:white w-full rounded-md flex items-center gap-2 cursor-pointer border-b pb-2'>
+                                        <div className='w-full flex items-center gap-2 cursor-pointer border-b pb-2'>
                                             <div className="rounded-full shrink-0 bg-green-200 h-9 w-9 flex items-center justify-center">
                                                 <DirectNotification className="h-4 w-4 text-green-600" />
                                             </div>
@@ -223,7 +223,7 @@ export default function TopBar({ showNav, setShowNav }) {
                                     </Link>
 
                                     <Link href='/notifications'>
-                                        <div className='bg:white w-full rounded-md flex items-center gap-2 cursor-pointer border-b pb-2'>
+                                        <div className='w-full flex items-center gap-2 cursor-pointer border-b pb-2'>
                                             <div className="rounded-full shrink-0 bg-green-200 h-9 w-9 flex items-center justify-center">
                                                 <DirectNotification className="h-4 w-4 text-green-600" />
                                             </div>
@@ -235,7 +235,7 @@ export default function TopBar({ showNav, setShowNav }) {
                                     </Link>
 
                                     <Link href='/notifications'>
-                                        <div className='bg:white w-full rounded-md flex items-center gap-2 cursor-pointer border-b pb-2'>
+                                        <div className='w-full flex items-center gap-2 cursor-pointer border-b pb-2'>
                                             <div className="rounded-full shrink-0 bg-green-200 h-9 w-9 flex items-center justify-center">
                                                 <DirectNotification className="h-4 w-4 text-green-600" />
                                             </div>
@@ -247,7 +247,7 @@ export default function TopBar({ showNav, setShowNav }) {
                                     </Link>
 
                                     <Link href='/notifications'>
-                                        <div className='bg:white w-full rounded-md flex items-center gap-2 cursor-pointer border-b pb-2'>
+                                        <div className='w-full flex items-center gap-2 cursor-pointer border-b pb-2'>
                                             <div className="rounded-full shrink-0 bg-green-200 h-9 w-9 flex items-center justify-center">
                                                 <DirectNotification className="h-4 w-4 text-green-600" />
                                             </div>

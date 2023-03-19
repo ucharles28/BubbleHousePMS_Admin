@@ -77,7 +77,7 @@ const SideBar = forwardRef(({ showNav }, ref) => {
                             }`}
                     >
                         <Messages2 className="h-5 w-5" variant="Bold" />
-                        <p className="">Chats</p>
+                        <p className="">Messages</p>
                     </div>
                 </Link>
 

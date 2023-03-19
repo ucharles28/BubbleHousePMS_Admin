@@ -69,7 +69,7 @@ export default function Layout({ children }) {
   }, []);
 
   return (
-    <div className="h-screen flex flex-row justify-start ">
+    <div className="h-screen flex flex-row justify-start">
 
       <div className="w-full h-full flex-1 flex-col justify-between ">
         <TopBar showNav={showNav} setShowNav={setShowNav} />

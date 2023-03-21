@@ -176,7 +176,7 @@ function UsersPage() {
                             </Table>
                         </TableContainer>
                         <TablePagination
-                            rowsPerPageOptions={[5, 10, 15, 25, 50, 100]}
+                            rowsPerPageOptions={[5, 10, 25, 50, 100]}
                             component="div"
                             count={rows.length}
                             rowsPerPage={rowsPerPage}

@@ -23,7 +23,7 @@ function TodayBooked() {
         getBookedRooms()
     }, [])
 
-    const getBookedRooms = async() => {
+    const getBookedRooms = async () => {
         const responses = await Promise.all([
             get(`Booking/Today`),
             get(`Room/Available`)
@@ -43,9 +43,37 @@ function TodayBooked() {
 
 
     return (
-        <div className='h-full font-poppins'>
+        <div className='min-h-full font-poppins'>
             <Layout>
-                {isLoading ? <div className="w-full">
+                {/* {isLoading ? <div className="w-full">
+                    <div className="flex flex-col items-center justify-center">
+                        <div className="lg:w-2/5 md:w-1/2 pt-10 pl-4 pr-4 justify-center lg:my-16 sm:my-5">
+                            <div className="m-12 pt-14 flex flex-col items-center justify-center">
+                                <BounceLoader
+                                    heigth={200}
+                                    width={200}
+                                    color="#FFCC00"
+                                    ariaLabel="loading-indicator"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div> : <> */}
+                <div className='w-full h-auto py-6 flex flex-col gap-6'>
+                    <div className='flex items-end justify-between w-full'>
+
+                        <p className='w-full block text-base font-medium text-[#1A1A1A] leading-6'>
+                            Today Booked
+                        </p>
+
+                        <div onClick={goBack} className="px-2 py-1 rounded-lg flex items-center cursor-pointer bg-white hover:bg-[#f9f9f9] border-2 border-[#E4E4E4] text-gray-600 hover:text-gray-800">
+                            <ArrowLeft2 size={14} />
+                            <span className="text-xs font-medium leading-6">Back</span>
+                        </div>
+                    </div>
+
+
+                    {isLoading ? <div className="w-full">
                         <div className="flex flex-col items-center justify-center">
                             <div className="lg:w-2/5 md:w-1/2 pt-10 pl-4 pr-4 justify-center lg:my-16 sm:my-5">
                                 <div className="m-12 pt-14 flex flex-col items-center justify-center">
@@ -58,34 +86,33 @@ function TodayBooked() {
                                 </div>
                             </div>
                         </div>
-                    </div> : <><div className='w-full h-auto py-6 flex flex-col gap-6'>
-                    <div className='flex justify-between w-full'>
-                        <p className='w-full block text-xl font-medium text-[#1A1A1A] leading-8'>
-                            Today Booked
-                        </p>
+                    </div> : <TodayBookedCard rooms={bookedRooms} />}
 
-                        <div className='flex item-center justify-end gap-2 w-full'>
-                            <div onClick={goBack} className="px-2 py-1 rounded-lg flex items-center cursor-pointer bg-white hover:bg-[#f9f9f9] border-2 border-[#E4E4E4] text-gray-600 hover:text-gray-800">
-                                <ArrowLeft2 size={17} />
-                                <span className="text-sm font-medium leading-6">Back</span>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <TodayBookedCard rooms={bookedRooms}/>
-                    
                 </div>
 
-                <div className='w-full h-screen py-6 flex flex-col gap-6'>
+                <div className='w-full h-full py-6 flex flex-col gap-6'>
                     <div className='flex justify-between w-full'>
-                        <p className='w-full block text-xl font-medium text-[#1A1A1A] leading-8'>
-                            Available for boking
+                        <p className='w-full block text-base font-medium text-[#1A1A1A] leading-6'>
+                            Available for booking
                         </p>
                     </div>
 
-                    <AvailableForBookingCard rooms={availableRooms}/>
-                </div></>}
+                    {isLoading ? <div className="w-full">
+                        <div className="flex flex-col items-center justify-center">
+                            <div className="lg:w-2/5 md:w-1/2 pt-10 pl-4 pr-4 justify-center lg:my-16 sm:my-5">
+                                <div className="m-12 pt-14 flex flex-col items-center justify-center">
+                                    <BounceLoader
+                                        heigth={200}
+                                        width={200}
+                                        color="#FFCC00"
+                                        ariaLabel="loading-indicator"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div> : <AvailableForBookingCard rooms={availableRooms} />}
+                </div>
+                {/* </>} */}
 
             </Layout>
         </div>

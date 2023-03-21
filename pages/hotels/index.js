@@ -1,4 +1,4 @@
-import { 
+import {
     TableCell, TablePagination, TableRow, Table,
     TableContainer, TableHead, CircularProgress, TableBody, TextField
 } from '@mui/material';
@@ -66,25 +66,16 @@ function HotelsPage() {
 
                             <input
                                 type='text'
-                                placeholder='Search Hotels'
+                                placeholder='Search Hotel'
                                 className='w-1/2 h-9 border border-[#1a1a1a]/50 text-xs font-normal pl-2 focus:outline-0 bg-transparent rounded-md'
                             />
-
-                            <Link href='#'>
-                                <button
-                                    type="button"
-                                    className="w-auto border-[#1a1a1a]/50 border hover:bg-[#636363] uppercase text-[#666666] hover:border hover:text-white font-medium leading-6 rounded-md text-xs text-center px-2.5 py-1.5"
-                                >
-                                    Export
-                                </button>
-                            </Link>
 
                             <Link href='hotels/new'>
                                 <button
                                     type="button"
                                     className="w-auto bg-[#1a1a1a]/50 hover:bg-[#636363] uppercase text-white font-medium leading-6 rounded-md text-xs text-center px-2.5 py-1.5"
                                 >
-                                    Add Hotel
+                                    Add New
                                 </button>
                             </Link>
 

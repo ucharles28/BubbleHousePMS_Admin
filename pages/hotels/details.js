@@ -367,7 +367,7 @@ function HotelDetails() {
                                             type="button"
                                             className="text-white font-medium flex items-center px-3 py-2 rounded-md bg-[#1a1a1a]/50 text-xs leading-6 uppercase hover:bg-[#636363]"
                                             onClick={saveHotel}
-                                            disabled={!hotelName || !description || !address || !email || !phone || !accNo || !numberOfRooms || !selectedManager}
+                                            disabled={!hotelName || !description || !address || !email || !phone || !numberOfRooms || !selectedManager}
                                         >
                                             {isLoading ? <CircularProgress size={20} color="inherit" /> : 'Save Changes'}
                                         </button>

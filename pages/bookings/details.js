@@ -111,7 +111,7 @@ function RequestDetails() {
                         <div className='flex flex-col gap-2'>
                             <p className='text-sm font-normal text-[#636363]'>Check-Out</p>
                             <p className='text-sm tracking-widest font-medium text-[#1A1A1A]'>
-                            {booking && format(new Date(booking.checkInDate), 'dd-MM-yyyy')}
+                            {booking && format(new Date(booking.checkOutDate), 'dd-MM-yyyy')}
                             </p>
                         </div>
 

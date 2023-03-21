@@ -3,8 +3,8 @@ import { FiCheck, FiMoreHorizontal } from 'react-icons/fi';
 import { forwardRef, Fragment, useEffect, useRef, useState } from 'react';
 import { get, postData } from '../helpers/ApiRequest';
 import Layout from '../components/Layout';
-import { Checkbox, FormControlLabel, TextField, Button, Card, CardContent, FormControl, InputLabel, Select, MenuItem, CircularProgress, Snackbar } from '@mui/material';
-import { Tabs } from 'antd';
+import { CircularProgress, Snackbar } from '@mui/material';
+import { Tabs, Drawer } from 'antd';
 import Link from 'next/link';
 import { Menu, Transition, Popover } from "@headlessui/react";
 import { useRouter } from 'next/router';
@@ -167,8 +167,7 @@ function Notifications() {
                     <p className='block w-full text-lg font-medium text-[#1A1A1A] leading-6'>
                         Messages
                     </p>
-
-                    {/* <div className='w-full h-screen'> */}
+                    
                     <div className="h-full w-full grid grid-cols-1 md:grid-cols-3">
                         <div className='col-span-1 py-1 h-full text-sm'>
                             <Tabs defaultActiveKey="active">
@@ -186,9 +185,7 @@ function Notifications() {
                                                 </div>
                                             </div> */}
 
-                                        {/* <div className='w-full flex flex-col items-start overflow-hidden h-screen scrollbar-thin scrollbar-track-gray-200 scroll-smooth scrollbar-thumb-gray-300 scrollbar-rounded-full scrollbar-thumb-rounded-full'> */}
-
-                                        <div className='flex flex-col w-full active:bg-white border-b border-gray-200 p-3 cursor-pointer'>
+                                        <div className='hidden md:flex flex-col w-full active:bg-white border-b border-gray-200 p-3 cursor-pointer'>
 
                                             <div className='flex items-start justify-between w-full'>
                                                 <div className='flex items-start gap-x-2'>
@@ -210,7 +207,10 @@ function Notifications() {
 
                                         </div>
 
-                                        <div className='flex flex-col w-full active:bg-white border-b border-gray-200 p-3 cursor-pointer'>
+                                        <div
+                                            className='md:hidden flex flex-col w-full active:bg-white border-b border-gray-200 p-3 cursor-pointer'
+                                            onClick={showDrawer}
+                                        >
 
                                             <div className='flex items-start justify-between w-full'>
                                                 <div className='flex items-start gap-x-2'>
@@ -231,215 +231,12 @@ function Notifications() {
                                             </div>
 
                                         </div>
-
-                                        <div className='flex flex-col w-full active:bg-white border-b border-gray-200 p-3 cursor-pointer'>
-
-                                            <div className='flex items-start justify-between w-full'>
-                                                <div className='flex items-start gap-x-2'>
-                                                    <div className='flex justify-center rounded-full tracking-wide relative items-center w-10 h-10 bg-blue-400 text-white text-sm font-semibold'>
-                                                        <p>SE</p>
-                                                    </div>
-                                                    <p className='text-sm text-gray-600 font-semibold leading-4'>Abu Ibn Ishtiak</p>
-                                                </div>
-
-                                                <p className='text-xs text-gray-600 font-normal'>12 Jan 2023</p>
-                                            </div>
-
-                                            <div className='-mt-5 leading-6 flex flex-col ml-12'>
-                                                <p className='text-[15px] text-gray-800 font-semibold'>Unable to select currency</p>
-                                                <p className='text-xs text-gray-700 font-normal'>
-                                                    Hello team, I am facing problems as i can not select
-                                                </p>
-                                            </div>
-
-                                        </div>
-
-                                        <div className='flex flex-col w-full active:bg-white border-b border-gray-200 p-3 cursor-pointer'>
-
-                                            <div className='flex items-start justify-between w-full'>
-                                                <div className='flex items-start gap-x-2'>
-                                                    <div className='flex justify-center rounded-full tracking-wide relative items-center w-10 h-10 bg-blue-400 text-white text-sm font-semibold'>
-                                                        <p>SE</p>
-                                                    </div>
-                                                    <p className='text-sm text-gray-600 font-semibold leading-4'>Abu Ibn Ishtiak</p>
-                                                </div>
-
-                                                <p className='text-xs text-gray-600 font-normal'>12 Jan 2023</p>
-                                            </div>
-
-                                            <div className='-mt-5 leading-6 flex flex-col ml-12'>
-                                                <p className='text-[15px] text-gray-800 font-semibold'>Unable to select currency</p>
-                                                <p className='text-xs text-gray-700 font-normal'>
-                                                    Hello team, I am facing problems as i can not select
-                                                </p>
-                                            </div>
-
-                                        </div>
-
-                                        <div className='flex flex-col w-full active:bg-white border-b border-gray-200 p-3 cursor-pointer'>
-
-                                            <div className='flex items-start justify-between w-full'>
-                                                <div className='flex items-start gap-x-2'>
-                                                    <div className='flex justify-center rounded-full tracking-wide relative items-center w-10 h-10 bg-blue-400 text-white text-sm font-semibold'>
-                                                        <p>SE</p>
-                                                    </div>
-                                                    <p className='text-sm text-gray-600 font-semibold leading-4'>Abu Ibn Ishtiak</p>
-                                                </div>
-
-                                                <p className='text-xs text-gray-600 font-normal'>12 Jan 2023</p>
-                                            </div>
-
-                                            <div className='-mt-5 leading-6 flex flex-col ml-12'>
-                                                <p className='text-[15px] text-gray-800 font-semibold'>Unable to select currency</p>
-                                                <p className='text-xs text-gray-700 font-normal'>
-                                                    Hello team, I am facing problems as i can not select
-                                                </p>
-                                            </div>
-
-                                        </div>
-
-                                        <div className='flex flex-col w-full active:bg-white border-b border-gray-200 p-3 cursor-pointer'>
-
-                                            <div className='flex items-start justify-between w-full'>
-                                                <div className='flex items-start gap-x-2'>
-                                                    <div className='flex justify-center rounded-full tracking-wide relative items-center w-10 h-10 bg-blue-400 text-white text-sm font-semibold'>
-                                                        <p>SE</p>
-                                                    </div>
-                                                    <p className='text-sm text-gray-600 font-semibold leading-4'>Abu Ibn Ishtiak</p>
-                                                </div>
-
-                                                <p className='text-xs text-gray-600 font-normal'>12 Jan 2023</p>
-                                            </div>
-
-                                            <div className='-mt-5 leading-6 flex flex-col ml-12'>
-                                                <p className='text-[15px] text-gray-800 font-semibold'>Unable to select currency</p>
-                                                <p className='text-xs text-gray-700 font-normal'>
-                                                    Hello team, I am facing problems as i can not select
-                                                </p>
-                                            </div>
-
-                                        </div>
-
-                                        <div className='flex flex-col w-full active:bg-white border-b border-gray-200 p-3 cursor-pointer'>
-
-                                            <div className='flex items-start justify-between w-full'>
-                                                <div className='flex items-start gap-x-2'>
-                                                    <div className='flex justify-center rounded-full tracking-wide relative items-center w-10 h-10 bg-blue-400 text-white text-sm font-semibold'>
-                                                        <p>SE</p>
-                                                    </div>
-                                                    <p className='text-sm text-gray-600 font-semibold leading-4'>Abu Ibn Ishtiak</p>
-                                                </div>
-
-                                                <p className='text-xs text-gray-600 font-normal'>12 Jan 2023</p>
-                                            </div>
-
-                                            <div className='-mt-5 leading-6 flex flex-col ml-12'>
-                                                <p className='text-[15px] text-gray-800 font-semibold'>Unable to select currency</p>
-                                                <p className='text-xs text-gray-700 font-normal'>
-                                                    Hello team, I am facing problems as i can not select
-                                                </p>
-                                            </div>
-
-                                        </div>
-
-                                        <div className='flex flex-col w-full active:bg-white border-b border-gray-200 p-3 cursor-pointer'>
-
-                                            <div className='flex items-start justify-between w-full'>
-                                                <div className='flex items-start gap-x-2'>
-                                                    <div className='flex justify-center rounded-full tracking-wide relative items-center w-10 h-10 bg-blue-400 text-white text-sm font-semibold'>
-                                                        <p>SE</p>
-                                                    </div>
-                                                    <p className='text-sm text-gray-600 font-semibold leading-4'>Abu Ibn Ishtiak</p>
-                                                </div>
-
-                                                <p className='text-xs text-gray-600 font-normal'>12 Jan 2023</p>
-                                            </div>
-
-                                            <div className='-mt-5 leading-6 flex flex-col ml-12'>
-                                                <p className='text-[15px] text-gray-800 font-semibold'>Unable to select currency</p>
-                                                <p className='text-xs text-gray-700 font-normal'>
-                                                    Hello team, I am facing problems as i can not select
-                                                </p>
-                                            </div>
-
-                                        </div>
-
-                                        <div className='flex flex-col w-full active:bg-white border-b border-gray-200 p-3 cursor-pointer'>
-
-                                            <div className='flex items-start justify-between w-full'>
-                                                <div className='flex items-start gap-x-2'>
-                                                    <div className='flex justify-center rounded-full tracking-wide relative items-center w-10 h-10 bg-blue-400 text-white text-sm font-semibold'>
-                                                        <p>SE</p>
-                                                    </div>
-                                                    <p className='text-sm text-gray-600 font-semibold leading-4'>Abu Ibn Ishtiak</p>
-                                                </div>
-
-                                                <p className='text-xs text-gray-600 font-normal'>12 Jan 2023</p>
-                                            </div>
-
-                                            <div className='-mt-5 leading-6 flex flex-col ml-12'>
-                                                <p className='text-[15px] text-gray-800 font-semibold'>Unable to select currency</p>
-                                                <p className='text-xs text-gray-700 font-normal'>
-                                                    Hello team, I am facing problems as i can not select
-                                                </p>
-                                            </div>
-
-                                        </div>
-
-                                        <div className='flex flex-col w-full active:bg-white border-b border-gray-200 p-3 cursor-pointer'>
-
-                                            <div className='flex items-start justify-between w-full'>
-                                                <div className='flex items-start gap-x-2'>
-                                                    <div className='flex justify-center rounded-full tracking-wide relative items-center w-10 h-10 bg-blue-400 text-white text-sm font-semibold'>
-                                                        <p>SE</p>
-                                                    </div>
-                                                    <p className='text-sm text-gray-600 font-semibold leading-4'>Abu Ibn Ishtiak</p>
-                                                </div>
-
-                                                <p className='text-xs text-gray-600 font-normal'>12 Jan 2023</p>
-                                            </div>
-
-                                            <div className='-mt-5 leading-6 flex flex-col ml-12'>
-                                                <p className='text-[15px] text-gray-800 font-semibold'>Unable to select currency</p>
-                                                <p className='text-xs text-gray-700 font-normal'>
-                                                    Hello team, I am facing problems as i can not select
-                                                </p>
-                                            </div>
-
-                                        </div>
-
-                                        <div className='flex flex-col w-full active:bg-white border-b border-gray-200 p-3 cursor-pointer'>
-
-                                            <div className='flex items-start justify-between w-full'>
-                                                <div className='flex items-start gap-x-2'>
-                                                    <div className='flex justify-center rounded-full tracking-wide relative items-center w-10 h-10 bg-blue-400 text-white text-sm font-semibold'>
-                                                        <p>SE</p>
-                                                    </div>
-                                                    <p className='text-sm text-gray-600 font-semibold leading-4'>Abu Ibn Ishtiak</p>
-                                                </div>
-
-                                                <p className='text-xs text-gray-600 font-normal'>12 Jan 2023</p>
-                                            </div>
-
-                                            <div className='-mt-5 leading-6 flex flex-col ml-12'>
-                                                <p className='text-[15px] text-gray-800 font-semibold'>Unable to select currency</p>
-                                                <p className='text-xs text-gray-700 font-normal'>
-                                                    Hello team, I am facing problems as i can not select
-                                                </p>
-                                            </div>
-
-                                        </div>
-
-                                        {/* </div> */}
 
                                     </div>
                                 </TabPane>
                                 <TabPane tab="Closed" key="close">
                                     Closed Message
                                 </TabPane>
-                                {/* <TabPane tab="Starred" key="starred">
-                                        Starred Message
-                                    </TabPane> */}
                                 <TabPane tab="All" key="all">
                                     All Messages
                                 </TabPane>
@@ -559,94 +356,6 @@ function Notifications() {
                                     </p>
                                 </div>
 
-                                <div className='flex flex-col w-full'>
-                                    <div className='flex items-center justify-between w-full gap-y-2'>
-                                        <div className='flex items-center gap-x-2'>
-                                            <div className='flex justify-center rounded-full tracking-wide relative items-center w-10 h-10 bg-blue-400 text-white text-sm font-semibold'>
-                                                <p>SE</p>
-                                            </div>
-                                            <p className='text-sm text-gray-600 font-semibold leading-4'>Abu Ibn Ishtiak</p>
-                                        </div>
-                                        <p className='text-xs text-gray-600 font-normal'>12 Jan 2023</p>
-                                    </div>
-
-                                    <p className='text-xs text-gray-700 font-normal leading-6 ml-12'>
-                                        Hey!
-                                        <br />
-                                        I recently bought bitcoin from you. But still have not recieved any of it yet
-                                        <br />
-                                        Could you please send it as soon as possible
-                                        <br />
-                                        Customer,
-                                        <br />
-                                        Thank you
-                                    </p>
-                                </div>
-                                <div className='flex flex-col w-full'>
-                                    <div className='flex items-center justify-between w-full gap-y-2'>
-                                        <div className='flex items-center gap-x-2'>
-                                            <div className='flex justify-center rounded-full tracking-wide relative items-center w-10 h-10 bg-blue-400 text-white text-sm font-semibold'>
-                                                <p>SE</p>
-                                            </div>
-                                            <p className='text-sm text-gray-600 font-semibold leading-4'>Abu Ibn Ishtiak</p>
-                                        </div>
-                                        <p className='text-xs text-gray-600 font-normal'>12 Jan 2023</p>
-                                    </div>
-
-                                    <p className='text-xs text-gray-700 font-normal leading-6 ml-12'>
-                                        Hey!
-                                        <br />
-                                        I recently bought bitcoin from you. But still have not recieved any of it yet
-                                        <br />
-                                        Could you please send it as soon as possible
-                                        <br />
-                                        Customer,
-                                        <br />
-                                        Thank you
-                                    </p>
-                                </div>
-
-                                <div className='flex flex-col w-full'>
-                                    <div className='flex items-center justify-between w-full gap-y-2'>
-                                        <div className='flex items-center gap-x-2'>
-                                            <div className='flex justify-center rounded-full tracking-wide relative items-center w-10 h-10 bg-blue-400 text-white text-sm font-semibold'>
-                                                <p>SE</p>
-                                            </div>
-                                            <p className='text-sm text-gray-600 font-semibold leading-4'>Abu Ibn Ishtiak</p>
-                                        </div>
-                                        <p className='text-xs text-gray-600 font-normal'>12 Jan 2023</p>
-                                    </div>
-
-                                    <p className='text-xs text-gray-700 font-normal leading-6 ml-12'>
-                                        Hey!
-                                        <br />
-                                        I recently bought bitcoin from you. But still have not recieved any of it yet
-                                        <br />
-                                        Could you please send it as soon as possible
-                                        <br />
-                                        Customer,
-                                        <br />
-                                        Thank you
-                                    </p>
-                                </div>
-
-                                {/* <div className='flex text-center'>
-                                        <div className='overflow-hidden'>
-                                            <div className='text-gray-600 flex justify-center text-xs relative leading-6 px-1'>
-
-                                                <span className='before:bg-gray-300 before:h-px before:absolute before:w-screen before:top-1/2 before:content-["."] before:right-full'></span>
-
-                                                <p
-                                                    className='text-xs font-normal leading-6 text-gray-500'>
-                                                    Iliash Hossian assigned user: Saiful Islam at 14 Jan, 2020 at 11:34 AM
-                                                </p>
-
-                                                <span className='after:bg-gray-300 after:h-px after:absolute after:w-screen after:top-1/2 after:content-["."] after:left-full'></span>
-
-                                            </div>
-                                        </div>
-                                    </div> */}
-
                                 <div className='flex items-start gap-x-3 justify-between w-full'>
                                     <div className='w-full flex flex-col gap-y-2'>
                                         <textarea
@@ -670,11 +379,245 @@ function Notifications() {
                             </div>
 
                         </div>
+                        <Drawer
+                            placement="right"
+                            onClose={onClose}
+                            closable={true}
+                            open={open}
+                            closeIcon={<ArrowLeft2 size={16} className='text-gray-600' />}
+                            bodyStyle={{ padding: "0" }}
+                            title={
+                                <div className='flex items-center justify-end gap-x-2'>
+                                    <div className='cursor-pointer flex items-center gap-x-2 text-gray-500 rounded-md px-2 py-1 border border-[#E4E4E4] bg-gray-50 hover:bg-gray-100'>
+                                        <FiCheck size={14} />
+                                        <p className='text-xs font-normal leading-6'>Mark as Closed</p>
+                                    </div>
+
+                                    {/* When Message has been closed */}
+                                    {/* <div className='flex items-center gap-x-2 text-[#1ee0ac] rounded-md px-2 py-1 border border-[#e6fcf6] bg-[#e6fcf6]'>
+                                                <FiCheck size={14} />
+                                                <p className='text-xs font-normal leading-6'>Closed</p>
+                                            </div> */}
+                                    <Popover as="div" className="relative inline-block">
+                                        <div>
+                                            <Popover.Button className='text-gray-500 p-1 border rounded-md hover:bg-gray-100' >
+                                                <FiMoreHorizontal size={20} />
+                                            </Popover.Button>
+                                        </div>
+                                        <Transition
+                                            as={Fragment}
+                                            enter="transition ease-out duration-100"
+                                            enterFrom="transform scale-95"
+                                            enterTo="transform scale-100"
+                                            leave="transition ease-in duration=75"
+                                            leaveFrom="transform scale-100"
+                                            leaveTo="transform scale-95"
+                                        >
+                                            <Popover.Panel className="absolute right-0 w-48 z-50 mt-2 origin-top-right bg-white border border-[#E4E4E4] rounded-md shadow-lg">
+                                                <div className='flex flex-col w-full gap-y-3 px-1 py-2'>
+                                                    <div
+                                                        className='flex items-center gap-x-2 p-2 hover:bg-[#FFF7D8] hover:text-[#D4AA00] rounded-md text-xs font-normal text-gray-500 cursor-pointer'
+                                                        onClick={handleClickOpen}
+                                                    >
+                                                        <Profile2User size={16} />
+                                                        Assign To Member
+                                                    </div>
+                                                    <div className='flex items-center gap-x-2 p-2 hover:bg-[#FFF7D8] hover:text-[#D4AA00] rounded-md text-xs font-normal text-gray-500 cursor-pointer'>
+                                                        <FiCheck size={16} />
+                                                        Mark as Closed
+                                                    </div>
+                                                </div>
+                                            </Popover.Panel>
+                                        </Transition>
+                                    </Popover>
+                                    <Dialog open={openDialog} onClose={handleClose}>
+                                        <DialogTitle
+                                            className='font-poppins'
+                                            sx={{
+                                                padding: "16px",
+                                                fontSize: "1rem",
+                                                letterSpacing: "0rem",
+                                                fontWeight: "600",
+                                                width: "300px",
+                                                color: "#364a63",
+                                            }}
+                                        >
+                                            Assign users to this message
+                                        </DialogTitle>
+                                        <DialogContent
+                                            sx={{
+                                                padding: "0px 12px 16px 12px",
+                                            }}
+                                        >
+                                            <DialogContentText>
+                                                {managers.map((manager) => <div
+                                                    className='flex gap-x-2 px-1 items-center border-b border-[#E4E4E4] py-2 cursor-pointer hover:bg-gray-50 hover:rounded-md'
+                                                    value={manager.id}
+                                                >
+                                                    <img src={manager.userImageFile} className='w-9 h-9 border bg-blue-400 rounded-full object-cover' />
+                                                    <p className='text-sm font-medium leading-6 text-gray-500'>{manager.fullName}</p>
+                                                </div>)}
+                                            </DialogContentText>
+                                        </DialogContent>
+                                    </Dialog>
+                                </div>
+                            }
+                        >
+                            <div className='flex flex-col px-5 pb-5 gap-y-10 overflow-hidden h-screen scrollbar-thin scroll-smooth scrollbar-thumb-gray-300 scrollbar-rounded-full scrollbar-thumb-rounded-full'>
+
+                                <div className='bg-white drop-shadow-sm flex flex-col gap-y-2 py-7 w-full border-b'>
+                                    <p className='text-gray-800 font-semibold leading-6 text-lg'> Unable to select currency when order</p>
+                                    <div className='flex gap-x-2 items-center'>
+                                        <Flag variant='Bold' size={16} className='text-blue-400' />
+                                        <p className='text-xs leading-5 font-normal text-gray-500'>Technical Problem</p>
+                                    </div>
+                                </div>
+
+                                <div className='flex flex-col w-full'>
+                                    <div className='flex items-center justify-between w-full gap-y-2'>
+                                        <div className='flex items-center gap-x-2'>
+                                            <div className='flex justify-center rounded-full tracking-wide relative items-center w-10 h-10 bg-blue-400 text-white text-sm font-semibold'>
+                                                <p>SE</p>
+                                            </div>
+                                            <p className='text-sm text-gray-600 font-semibold leading-4'>Abu Ibn Ishtiak</p>
+                                        </div>
+                                        <p className='text-xs text-gray-600 font-normal'>12 Jan 2023</p>
+                                    </div>
+
+                                    <p className='text-xs text-gray-700 font-normal leading-6 ml-12'>
+                                        Hey!
+                                        <br />
+                                        I recently bought bitcoin from you. But still have not recieved any of it yet
+                                        <br />
+                                        Could you please send it as soon as possible
+                                        <br />
+                                        Customer,
+                                        <br />
+                                        Thank you
+                                    </p>
+                                </div>
+
+                                <div className='flex flex-col w-full'>
+                                    <div className='flex items-center justify-between w-full gap-y-2'>
+                                        <div className='flex items-center gap-x-2'>
+                                            <div className='flex justify-center rounded-full tracking-wide relative items-center w-10 h-10 bg-blue-400 text-white text-sm font-semibold'>
+                                                <p>SE</p>
+                                            </div>
+                                            <p className='text-sm text-gray-600 font-semibold leading-4'>Abu Ibn Ishtiak</p>
+                                        </div>
+                                        <p className='text-xs text-gray-600 font-normal'>12 Jan 2023</p>
+                                    </div>
+
+                                    <p className='text-xs text-gray-700 font-normal leading-6 ml-12'>
+                                        Hey!
+                                        <br />
+                                        I recently bought bitcoin from you. But still have not recieved any of it yet
+                                        <br />
+                                        Could you please send it as soon as possible
+                                        <br />
+                                        Customer,
+                                        <br />
+                                        Thank you
+                                    </p>
+                                </div>
+
+                                <div className='flex flex-col w-full'>
+                                    <div className='flex items-center justify-between w-full gap-y-2'>
+                                        <div className='flex items-center gap-x-2'>
+                                            <div className='flex justify-center rounded-full tracking-wide relative items-center w-10 h-10 bg-blue-400 text-white text-sm font-semibold'>
+                                                <p>SE</p>
+                                            </div>
+                                            <p className='text-sm text-gray-600 font-semibold leading-4'>Abu Ibn Ishtiak</p>
+                                        </div>
+                                        <p className='text-xs text-gray-600 font-normal'>12 Jan 2023</p>
+                                    </div>
+
+                                    <p className='text-xs text-gray-700 font-normal leading-6 ml-12'>
+                                        Hey!
+                                        <br />
+                                        I recently bought bitcoin from you. But still have not recieved any of it yet
+                                        <br />
+                                        Could you please send it as soon as possible
+                                        <br />
+                                        Customer,
+                                        <br />
+                                        Thank you
+                                    </p>
+                                </div>
+
+                                <div className='flex flex-col w-full'>
+                                    <div className='flex items-center justify-between w-full gap-y-2'>
+                                        <div className='flex items-center gap-x-2'>
+                                            <div className='flex justify-center rounded-full tracking-wide relative items-center w-10 h-10 bg-blue-400 text-white text-sm font-semibold'>
+                                                <p>SE</p>
+                                            </div>
+                                            <p className='text-sm text-gray-600 font-semibold leading-4'>Abu Ibn Ishtiak</p>
+                                        </div>
+                                        <p className='text-xs text-gray-600 font-normal'>12 Jan 2023</p>
+                                    </div>
+
+                                    <p className='text-xs text-gray-700 font-normal leading-6 ml-12'>
+                                        Hey!
+                                        <br />
+                                        I recently bought bitcoin from you. But still have not recieved any of it yet
+                                        <br />
+                                        Could you please send it as soon as possible
+                                        <br />
+                                        Customer,
+                                        <br />
+                                        Thank you
+                                    </p>
+                                </div>
+                                <div className='flex flex-col w-full'>
+                                    <div className='flex items-center justify-between w-full gap-y-2'>
+                                        <div className='flex items-center gap-x-2'>
+                                            <div className='flex justify-center rounded-full tracking-wide relative items-center w-10 h-10 bg-blue-400 text-white text-sm font-semibold'>
+                                                <p>SE</p>
+                                            </div>
+                                            <p className='text-sm text-gray-600 font-semibold leading-4'>Abu Ibn Ishtiak</p>
+                                        </div>
+                                        <p className='text-xs text-gray-600 font-normal'>12 Jan 2023</p>
+                                    </div>
+
+                                    <p className='text-xs text-gray-700 font-normal leading-6 ml-12'>
+                                        Hey!
+                                        <br />
+                                        I recently bought bitcoin from you. But still have not recieved any of it yet
+                                        <br />
+                                        Could you please send it as soon as possible
+                                        <br />
+                                        Customer,
+                                        <br />
+                                        Thank you
+                                    </p>
+                                </div>
+
+                                <div className='flex items-start gap-x-3 justify-between w-full'>
+                                    <div className='w-full flex flex-col gap-y-2'>
+                                        <textarea
+                                            spellCheck='true'
+                                            placeholder='Start Typing..'
+                                            rows={4}
+                                            className='w-full border border-[#666666]/50 placeholder:text-[#808080] text-xs font-normal p-3 pl-2 focus:outline-0 bg-transparent rounded-md'
+                                        >
+                                        </textarea>
+                                        <div>
+                                            <button
+                                                type="button"
+                                                className="text-white font-medium flex items-center px-3 py-2 rounded-md bg-[#1a1a1a]/50 text-xs leading-6 hover:bg-[#636363]"
+                                            >
+                                                Reply
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </Drawer>
                     </div>
-                    {/* </div> */}
                 </div>
-            </Layout >
-        </div >
+            </Layout>
+        </div>
     )
 }
 

@@ -4,7 +4,7 @@ import { ArrowLeft2 } from 'iconsax-react';
 import { get } from '../../helpers/ApiRequest';
 import { useState, useEffect } from 'react';
 import { BounceLoader } from 'react-spinners';
-import { format } from "date-fns"
+import { format } from "date-fns";
 
 function RequestDetails() {
     const [booking, setBooking] = useState();

@@ -55,54 +55,6 @@ function Settings() {
 
           <div className='bg-white border border-gray-50 shadow rounded-lg w-full overflow-auto h-auto p-2'>
 
-            {/* <div className="md:grid md:grid-cols-3 md:gap-6">
-
-              <div className="md:col-span-1">
-                <p className="text-base font-medium leading-6 text-gray-800">Photo</p>
-              </div>
-
-              <div className="md:col-span-2">
-                <div className="space-y-3">
-
-                  <div className='space-y-1'>
-                    <div className="flex items-center space-x-4">
-
-                      <span className="inline-block h-12 w-12 overflow-hidden rounded-full bg-gray-100">
-                        <svg className="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg>
-                      </span>
-
-                      <button
-                        type="button"
-                        className="rounded-md border border-gray-300 bg-white py-1.5 px-2.5 text-xs font-semibold text-gray-900 shadow-sm hover:bg-gray-50"
-                      >
-                        Change
-                      </button>
-
-                    </div>
-                  </div>
-
-                  <div className="flex justify-end w-full">
-                    <button
-                      type="submit"
-                      className="inline-flex justify-center rounded-md bg-yellow-500 py-2 px-3 text-sm font-medium text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-                    >
-                      Save
-                    </button>
-                  </div>
-
-                </div>
-              </div>
-
-            </div>
-
-            <div className="hidden sm:block" aria-hidden="true">
-              <div className="py-5">
-                <div className="border-t border-gray-200" />
-              </div>
-            </div> */}
-
             <div className="md:grid md:grid-cols-3 md:gap-6">
 
               <div className="md:col-span-1">
@@ -133,7 +85,7 @@ function Settings() {
                   <div className="space-y-1">
                     <div className="grid grid-cols-6 gap-6">
                       <div className="col-span-6 sm:col-span-3">
-                        <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">
+                        <label htmlFor="first-name" className="text-xs font-medium leading-5 text-gray-700">
                           First name
                         </label>
                         <input
@@ -141,12 +93,12 @@ function Settings() {
                           name="first-name"
                           id="first-name"
                           autoComplete="given-name"
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          className="border border-gray-300 p-1 pl-2 text-xs text-gray-700 rounded-sm leading-5 placeholder:text-xs focus:outline-0 w-full"
                         />
                       </div>
 
                       <div className="col-span-6 sm:col-span-3">
-                        <label htmlFor="last-name" className="block text-sm font-medium leading-6 text-gray-900">
+                        <label htmlFor="last-name" className="text-xs font-medium leading-5 text-gray-700">
                           Last name
                         </label>
                         <input
@@ -154,12 +106,12 @@ function Settings() {
                           name="last-name"
                           id="last-name"
                           autoComplete="family-name"
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          className="border border-gray-300 p-1 pl-2 text-xs text-gray-700 rounded-sm leading-5 placeholder:text-xs focus:outline-0 w-full"
                         />
                       </div>
 
                       <div className="col-span-6">
-                        <label htmlFor="email-address" className="block text-sm font-medium leading-6 text-gray-900">
+                        <label htmlFor="email-address" className="text-xs font-medium leading-5 text-gray-700">
                           Email address
                         </label>
                         <input
@@ -167,7 +119,7 @@ function Settings() {
                           name="email-address"
                           id="email-address"
                           autoComplete="email"
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          className="border border-gray-300 p-1 pl-2 text-xs text-gray-700 rounded-sm leading-5 placeholder:text-xs focus:outline-0 w-full"
                         />
                       </div>
 

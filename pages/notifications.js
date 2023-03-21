@@ -4,10 +4,23 @@ import { forwardRef, useEffect, useRef, useState } from 'react'
 import Sidebar from '../components/SideBar'
 import { get, postData } from '../helpers/ApiRequest'
 import MuiAlert from '@mui/material/Alert';
-import Layout from '../components/Layout'
+import Layout from '../components/Layout';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 
 function Notifications() {
+    const [openDialog, setOpenDialog] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpenDialog(true);
+    };
+
+    const handleClose = () => {
+        setOpenDialog(false);
+    };
 
     // const Alert = forwardRef(function Alert(props, ref) {
     //     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -93,53 +106,62 @@ function Notifications() {
         <div className='h-full font-poppins'>
             <Layout>
                 <div className='w-full h-screen py-6 flex flex-col gap-4'>
-                    
+
                     <p className='w-full block text-xl font-medium text-[#1A1A1A] leading-8'>
                         Notifications
                     </p>
 
                     <div className='w-full h-auto flex flex-col items-center gap-3'>
 
-                        <div className='bg-white w-full rounded-md p-2 px-3 flex items-start border border-[#E4E4E4] gap-2'>
-                            <div className="rounded-full shrink-0 bg-green-200 h-8 w-8 flex items-center justify-center">
+                        <div className='cursor-pointer bg-white w-full rounded-md p-2 px-3 flex items-start border border-[#E4E4E4] gap-2'
+                            onClick={handleClickOpen}
+                        >
+                            <div className="rounded-full shrink-0 bg-green-200 h-9 w-9 flex items-center justify-center">
                                 <DirectNotification className="h-4 w-4 text-green-600" />
                             </div>
-                            <div className='flex flex-col w-full '>
-                                <p className='text-sm text-[#1a1a1a] font-medium italic leading-6'>New Notification</p>
-                                <p className='text-xs text-[#636363] leading-5'>Ipsum ad pariatur voluptate elit sunt.</p>
+                            <div className='flex flex-col w-full'>
+                                <p className='text-sm text-[#1a1a1a] text-justify hover:text-[#D4AA00] truncate md:w-1/2 w-3/4 font-medium leading-6'>Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. </p>
+                                <p className='text-xs text-[#636363]'>29 July 2023 - 11:02 PM</p>
                             </div>
                         </div>
 
-                        <div className='bg-white w-full rounded-md p-2 px-3 flex items-start border border-[#E4E4E4] gap-2'>
-                            <div className="rounded-full shrink-0 bg-green-200 h-8 w-8 flex items-center justify-center">
-                                <DirectNotification className="h-4 w-4 text-green-600" />
-                            </div>
-                            <div className='flex flex-col w-full '>
-                                <p className='text-sm text-[#1a1a1a] font-medium italic leading-6'>New Notification</p>
-                                <p className='text-xs text-[#636363] leading-5'>Ipsum ad pariatur voluptate elit sunt.</p>
-                            </div>
-                        </div>
-
-                        <div className='bg-white w-full rounded-md p-2 px-3 flex items-start border border-[#E4E4E4] gap-2'>
-                            <div className="rounded-full shrink-0 bg-green-200 h-8 w-8 flex items-center justify-center">
-                                <DirectNotification className="h-4 w-4 text-green-600" />
-                            </div>
-                            <div className='flex flex-col w-full '>
-                                <p className='text-sm text-[#1a1a1a] font-medium italic leading-6'>New Notification</p>
-                                <p className='text-xs text-[#636363] leading-5'>Ipsum ad pariatur voluptate elit sunt.</p>
-                            </div>
-                        </div>
-
-                        <div className='bg-white w-full rounded-md p-2 px-3 flex items-start border border-[#E4E4E4] gap-2'>
-                            <div className="rounded-full shrink-0 bg-green-200 h-8 w-8 flex items-center justify-center">
-                                <DirectNotification className="h-4 w-4 text-green-600" />
-                            </div>
-                            <div className='flex flex-col w-full '>
-                                <p className='text-sm text-[#1a1a1a] font-medium italic leading-6'>New Notification</p>
-                                <p className='text-xs text-[#636363] leading-5'>Ipsum ad pariatur voluptate elit sunt.</p>
-                            </div>
-                        </div>
-
+                        <Dialog open={openDialog} onClose={handleClose}>
+                            <DialogTitle
+                                className='font-poppins'
+                                sx={{
+                                    padding: "16px",
+                                    fontSize: "1rem",
+                                    letterSpacing: "0rem",
+                                    fontWeight: "600",
+                                    width: "auto",
+                                    color: "#364a63",
+                                }}
+                            >
+                                Notification
+                            </DialogTitle>
+                            <DialogContent
+                                sx={{
+                                    padding: "16px",
+                                    textAlign: 'justify',
+                                }}
+                                className='scrollbar-thin scroll-smooth scrollbar-thumb-gray-300 scrollbar-rounded-full scrollbar-thumb-rounded-full'
+                            >
+                                <DialogContentText className='text-sm font-normal leading-5 text-gray-600'>
+                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
+                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
+                                    <br />
+                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
+                                    <br />
+                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
+                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
+                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
+                                    <br />
+                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
+                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
+                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
+                                </DialogContentText>
+                            </DialogContent>
+                        </Dialog>
 
                     </div>
                 </div>

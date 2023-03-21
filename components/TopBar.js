@@ -216,7 +216,7 @@ export default function TopBar({ showNav, setShowNav }) {
                                                 <DirectNotification className="h-4 w-4 text-green-600" />
                                             </div>
                                             <div className='flex flex-col w-full'>
-                                                <p className='text-xs text-[#1a1a1a] hover:text-[#D4AA00] font-medium leading-6'>New Notification</p>
+                                                <p className='text-xs text-[#1a1a1a] hover:text-[#D4AA00] font-medium leading-6 truncate md:w-1/2 w-3/4'>Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea.</p>
                                                 <p className='text-[10px] text-[#636363]'>29 July 2023 - 11:02 PM</p>
                                             </div>
                                         </div>
@@ -228,7 +228,7 @@ export default function TopBar({ showNav, setShowNav }) {
                                                 <DirectNotification className="h-4 w-4 text-green-600" />
                                             </div>
                                             <div className='flex flex-col w-full'>
-                                                <p className='text-xs text-[#1a1a1a] hover:text-[#D4AA00] font-medium leading-6'>New Notification</p>
+                                                <p className='text-xs text-[#1a1a1a] hover:text-[#D4AA00] font-medium leading-6 truncate md:w-1/2 w-3/4'>Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea.</p>
                                                 <p className='text-[10px] text-[#636363]'>29 July 2023 - 11:02 PM</p>
                                             </div>
                                         </div>
@@ -240,7 +240,7 @@ export default function TopBar({ showNav, setShowNav }) {
                                                 <DirectNotification className="h-4 w-4 text-green-600" />
                                             </div>
                                             <div className='flex flex-col w-full'>
-                                                <p className='text-xs text-[#1a1a1a] hover:text-[#D4AA00] font-medium leading-6'>New Notification</p>
+                                                <p className='text-xs text-[#1a1a1a] hover:text-[#D4AA00] font-medium leading-6 truncate md:w-1/2 w-3/4'>Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea.</p>
                                                 <p className='text-[10px] text-[#636363]'>29 July 2023 - 11:02 PM</p>
                                             </div>
                                         </div>
@@ -252,7 +252,7 @@ export default function TopBar({ showNav, setShowNav }) {
                                                 <DirectNotification className="h-4 w-4 text-green-600" />
                                             </div>
                                             <div className='flex flex-col w-full'>
-                                                <p className='text-xs text-[#1a1a1a] hover:text-[#D4AA00] font-medium leading-6'>New Notification</p>
+                                                <p className='text-xs text-[#1a1a1a] hover:text-[#D4AA00] font-medium leading-6 truncate md:w-1/2 w-3/4'>Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea.</p>
                                                 <p className='text-[10px] text-[#636363]'>29 July 2023 - 11:02 PM</p>
                                             </div>
                                         </div>

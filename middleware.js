@@ -1,15 +1,18 @@
 import { NextResponse } from "next/server"
+import { MiddlewareRequest } from "@netlify/next";
 
 
 export default function middleware(req) {
+    const request = new MiddlewareRequest(nextRequest);
+    
     var myCookie = req.cookies.get('bcloudCookie')
 
     if (//req.nextUrl.pathname.startsWith('/jobs') || 
     req.nextUrl.pathname === '/') {
         if (!myCookie) {
-            const url = req.nextUrl.clone()
+            const url = request.nextUrl.clone()// req.nextUrl.clone()
             url.pathname = '/login'
-            return NextResponse.redirect(url)
+            return request.redirect(url)
         }
     }
 

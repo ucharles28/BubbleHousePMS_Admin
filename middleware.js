@@ -3,7 +3,7 @@ import { MiddlewareRequest } from "@netlify/next";
 
 
 export default function middleware(req) {
-    const request = new MiddlewareRequest(nextRequest);
+    const request = new MiddlewareRequest(req);
     
     var myCookie = req.cookies.get('bcloudCookie')
 

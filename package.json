@@ -16,6 +16,7 @@
     "@emotion/styled": "^11.10.5",
     "@headlessui/react": "^1.7.11",
     "@heroicons/react": "^2.0.16",
+    "@microsoft/signalr": "^7.0.4",
     "@mui/material": "^5.10.12",
     "@mui/styled-engine-sc": "^5.10.6",
     "@netlify/next": "^1.4.4",

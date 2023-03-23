@@ -13,13 +13,61 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { HubConnection, HubConnectionBuilder } from "@microsoft/signalr";
 
 
 function Notifications() {
+    const [connection, setConnection] = useState(null);
+    const [messageText, setMessageText] = useState('');
+
+    useEffect(() => {
+        const connect = new HubConnectionBuilder()
+          .withUrl("https://localhost:7298/chat")
+          .withAutomaticReconnect()
+          .build();
+    
+        setConnection(connect);
+      }, []);
+    
+      useEffect(() => {
+        if (connection) {
+          connection
+            .start()
+            .then(() => {
+              connection.on("ReceiveMessage", (message) => {
+                console.log(message)
+              });
+            })
+            .catch((error) => console.log(error));
+        }
+      }, [connection]);
+
     const [openDialog, setOpenDialog] = useState(false);
 
     const handleClickOpen = () => {
         setOpenDialog(true);
+    };
+
+    const sendMessage = async() => {
+        const messageObj = {
+            senderId: 'a05d746d-95b1-45a2-b1cb-b495932b1cd3',
+            text: messageText
+        }
+
+        console.log(connection)
+
+        await connection.send('GetCustomerChatHistory', 'a05d746d-95b1-45a2-b1cb-b495932b1cd3');
+        // if (connection._connectionStarted) {
+        //     try {
+        //         await connection.send('SendMessage2', messageObj);
+        //     }
+        //     catch(e) {
+        //         console.log(e);
+        //     }
+        // }
+        // else {
+        //     alert('No connection to server yet.');
+        // }
     };
 
     const handleClose = () => {
@@ -49,18 +97,7 @@ function Notifications() {
         // setIsLoading(true)
         const response = await get(`Hotel/${id}`)
         if (response.successful) {
-            // console.log(response.data)
-            // setHotelName(response.data.name)
-            // setDescription(response.data.description)
-            // setEmail(response.data.email)
-            // setPhone(response.data.phoneNumber)
-            // setAltPhone(response.data.altPhoneNumber)
-            // setNumberOfRooms(response.data.numberOfRooms)
             setSelectedManager(response.data.managerId)
-            // setHotelImageSrc(response.data.imageUrl)
-            // setCity(response.data.city)
-            // setAddress(response.data.address.line)
-            // setIsFeatured(response.data.isFeatured ? "Yes" : "No")
             console.log(selectedManager)
         } else {
 
@@ -68,84 +105,6 @@ function Notifications() {
         // setIsLoading(false)
     }
 
-    // const Alert = forwardRef(function Alert(props, ref) {
-    //     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-    // });
-
-    // const saveHotel = async () => {
-    //     setIsLoading(true)
-    //     const formData = new FormData()
-    //     formData.append("FullName", fullName)
-    //     formData.append("City", city)
-    //     formData.append("Gender", gender)
-    //     formData.append("Email", email)
-    //     formData.append("PhoneNumber", phone)
-    //     formData.append("ProfileImageFile", userImageFile)
-    //     formData.append("AccountType", role)
-
-    //     const response = await postData('User/Create', formData)
-    //     if (response.successful) {
-    //         showAlert('User saved successfully', 'success')
-    //     } else {
-    //         showAlert(response.data, 'error')
-    //     }
-    //     setIsLoading(false)
-    // }
-
-    // const handleClick = () => {
-    //     // 👇️ open file input box on click of other element
-    //     inputRef.current.click();
-    // };
-
-    // const handleChange = (event) => {
-    //     setSelectedManager(event.target.value)
-    // }
-
-    // const clearImage = (event) => {
-    //     setUserImageFile('')
-    //     setUserImageSrc('')
-    // }
-
-    // const handleFileChange = e => {
-    //     setUserImageFile(e.target.files[0])
-    //     const reader = new FileReader();
-    //     reader.onload = function (e) {
-    //         setUserImageSrc(e.target.result);
-    //     };
-    //     reader.readAsDataURL(e.target.files[0]);
-    // };
-
-    // const handleClose = (event, reason) => {
-    //     if (reason === 'clickaway') {
-    //         return;
-    //     }
-
-    //     setOpen(false);
-    // };
-
-
-    // const showAlert = (alertMessage, alertType) => {
-    //     setAlertMessage(alertMessage)
-    //     setOpen(true)
-    //     setAlertType(alertType)
-    // }
-
-    // //states
-    // const inputRef = useRef(null);
-    // const [fullName, setFullName] = useState('');
-    // const [city, setCity] = useState('');
-    // const [gender, setGender] = useState('');
-    // const [genders, setGenders] = useState(['Male', 'Female']);
-    // const [userRoles, setUserRoles] = useState(['Admin', 'Manager', 'Staff']);
-    // const [email, setEmail] = useState('');
-    // const [phone, setPhone] = useState('');
-    // const [role, setRole] = useState('');
-    // const [userImageFile, setUserImageFile] = useState();
-    // const [userImageSrc, setUserImageSrc] = useState();
-    // const [isLoading, setIsLoading] = useState(false);
-    // const [open, setOpen] = useState(false);
-    // const [alertType, setAlertType] = useState('');
-    // const [alertMessage, setAlertMessage] = useState('');
     const [managers, setManagers] = useState([]);
     const [selectedManager, setSelectedManager] = useState();
     const handleChange = (event) => {
@@ -359,6 +318,8 @@ function Notifications() {
                                 <div className='flex items-start gap-x-3 justify-between w-full'>
                                     <div className='w-full flex flex-col gap-y-2'>
                                         <textarea
+                                            value={messageText}
+                                            onChange={(e) => setMessageText(e.target.value)}
                                             spellCheck='true'
                                             placeholder='Start Typing..'
                                             rows={4}
@@ -368,6 +329,7 @@ function Notifications() {
                                         <div>
                                             <button
                                                 type="button"
+                                                onClick={sendMessage}
                                                 className="text-white font-medium flex items-center px-3 py-2 rounded-md bg-[#1a1a1a]/50 text-xs leading-6 hover:bg-[#636363]"
                                             >
                                                 Reply

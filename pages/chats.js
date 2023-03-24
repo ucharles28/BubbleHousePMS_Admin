@@ -198,8 +198,9 @@ function Notifications() {
 
     const [openAlert, setOpenAlert] = useState(false);
     const [open, setOpen] = useState(false);
-    const showDrawer = () => {
+    const showDrawer = (chat) => {
         setOpen(true);
+        selectChat(chat)
     };
 
     const selectChat = async (chat) => {
@@ -364,10 +365,10 @@ function Notifications() {
                                                             <Profile2User size={16} />
                                                             Assign To Member
                                                         </div>
-                                                        <div className='flex items-center gap-x-2 p-2 hover:bg-[#FFF7D8] hover:text-[#D4AA00] rounded-md text-xs font-normal text-gray-500 cursor-pointer'>
+                                                        {/* <div className='flex items-center gap-x-2 p-2 hover:bg-[#FFF7D8] hover:text-[#D4AA00] rounded-md text-xs font-normal text-gray-500 cursor-pointer'>
                                                             <FiCheck size={16} />
                                                             Mark as Closed
-                                                        </div>
+                                                        </div> */}
                                                     </div>
                                                 </Popover.Panel>
                                             </Transition>
@@ -480,10 +481,10 @@ function Notifications() {
                             bodyStyle={{ padding: "0" }}
                             title={
                                 <div className='flex items-center justify-end gap-x-2'>
-                                    <div className='cursor-pointer flex items-center gap-x-2 text-gray-500 rounded-md px-2 py-1 border border-[#E4E4E4] bg-gray-50 hover:bg-gray-100'>
+                                    {/* <div className='cursor-pointer flex items-center gap-x-2 text-gray-500 rounded-md px-2 py-1 border border-[#E4E4E4] bg-gray-50 hover:bg-gray-100'>
                                         <FiCheck size={14} />
                                         <p className='text-xs font-normal leading-6'>Mark as Closed</p>
-                                    </div>
+                                    </div> */}
 
                                     {/* When Message has been closed */}
                                     {/* <div className='flex items-center gap-x-2 text-[#1ee0ac] rounded-md px-2 py-1 border border-[#e6fcf6] bg-[#e6fcf6]'>
@@ -514,10 +515,10 @@ function Notifications() {
                                                         <Profile2User size={16} />
                                                         Assign To Member
                                                     </div>
-                                                    <div className='flex items-center gap-x-2 p-2 hover:bg-[#FFF7D8] hover:text-[#D4AA00] rounded-md text-xs font-normal text-gray-500 cursor-pointer'>
+                                                    {/* <div className='flex items-center gap-x-2 p-2 hover:bg-[#FFF7D8] hover:text-[#D4AA00] rounded-md text-xs font-normal text-gray-500 cursor-pointer'>
                                                         <FiCheck size={16} />
                                                         Mark as Closed
-                                                    </div>
+                                                    </div> */}
                                                 </div>
                                             </Popover.Panel>
                                         </Transition>

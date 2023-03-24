@@ -109,10 +109,16 @@ function Notifications() {
                         // });
 
                         var chatsResponse = await connection.invoke("GetChats", user.id);
+                        console.log(chatsResponse)
                         setChats(chatsResponse.map((chat) => {
                             //Get abbrevated version of the customer's name
                             const splitName = chat.customer.fullName.split(' ')
-                            chat.abbreviatedName = `${splitName[0].substring(0, 1).toUpperCase()}${splitName[1].substring(0, 1).toUpperCase()}`
+                            if (splitName.length > 1) {
+                                chat.abbreviatedName = `${splitName[0].substring(0, 1).toUpperCase()}${splitName[1].substring(0, 1).toUpperCase()}`
+                            } else {
+                                chat.abbreviatedName = `${splitName[0].substring(0, 1).toUpperCase()}`
+                            }
+                            
                             return chat
                         }))
                         //Subscribe chat 

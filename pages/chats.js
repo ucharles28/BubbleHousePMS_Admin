@@ -152,7 +152,6 @@ function Notifications() {
     };
 
     const reassignChat = async (admin) => {
-        debugger
         const req = {
             adminId: admin.id,
             chatId: currentChat.id
@@ -162,13 +161,17 @@ function Notifications() {
             var chatId = await connection.invoke('ReAssignChat', req);
             let list = [...chats]
 
-            list.splice(list.findIndex(function (chat) {
-                return chat.id === chatId;
-            }), 1);
+            list = list.map((chat) => {
+                if (chat.id == chatId){
+                    chat.adminId = admin.id
+                }
+                return chat
+            })
             console.log(list)
+            debugger
             setChats(list)
             setMessages([])
-            setCurrentChat('')
+            setCurrentChat((prev) => ({...prev, adminId: admin.id}))
             setOpenDialog(false);
             showAlert('Chat has been reassigned successfully', 'success')
         }
@@ -209,7 +212,8 @@ function Notifications() {
         selectChat(chat)
     };
 
-    const selectChat = async (chat) => {
+    const selectChat = async (chat) => {        
+        console.log(chat)
         setCurrentChat(chat)
         const messagesResponse = await connection.invoke("GetChatHistory", chat.id);
         setMessages(messagesResponse)
@@ -293,7 +297,7 @@ function Notifications() {
                                         {chats.map((chat) => (<div
                                             key={chat.id}
                                             className='md:hidden flex flex-col w-full active:bg-white border-b border-gray-200 p-3 cursor-pointer'
-                                            onClick={showDrawer}
+                                            onClick={() => showDrawer(chat)}
                                         >
 
                                             <div className='flex items-start justify-between w-full'>
@@ -452,7 +456,7 @@ function Notifications() {
                                     })}
                                 </div>
 
-                                <div className='flex items-start gap-x-3 justify-between w-full'>
+                                {(currentChat.adminId == user.id || currentChat.adminId === null) && <div className='flex items-start gap-x-3 justify-between w-full'>
                                     <div className='w-full flex flex-col gap-y-2'>
                                         <textarea
                                             value={messageText}
@@ -473,7 +477,7 @@ function Notifications() {
                                             </button>
                                         </div>
                                     </div>
-                                </div>
+                                </div>}
 
                             </div>}
 
@@ -563,7 +567,7 @@ function Notifications() {
                                 </div>
                             }
                         >
-                            <div className='flex flex-col px-5 pb-5 gap-y-10 overflow-hidden h-screen scrollbar-thin scroll-smooth scrollbar-thumb-gray-300 scrollbar-rounded-full scrollbar-thumb-rounded-full'>
+                            {currentChat && <div className='flex flex-col px-5 pb-5 gap-y-10 overflow-hidden h-screen scrollbar-thin scroll-smooth scrollbar-thumb-gray-300 scrollbar-rounded-full scrollbar-thumb-rounded-full'>
 
                                 <div className='bg-white drop-shadow-sm flex flex-col gap-y-2 py-7 w-full border-b'>
                                     <div className='flex gap-x-2 items-center'>
@@ -606,7 +610,7 @@ function Notifications() {
                                     }
                                 })}
 
-                                <div className='flex items-start gap-x-3 justify-between w-full'>
+                                {(currentChat.adminId == user.id || currentChat.adminId === null) && <div className='flex items-start gap-x-3 justify-between w-full'>
                                     <div className='w-full flex flex-col gap-y-2'>
                                         <textarea
                                             spellCheck='true'
@@ -627,9 +631,9 @@ function Notifications() {
                                             </button>
                                         </div>
                                     </div>
-                                </div>
+                                </div>}
 
-                            </div>
+                            </div>}
                         </Drawer>
                     </div>
                 </div>

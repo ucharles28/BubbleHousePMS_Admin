@@ -9,12 +9,15 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { BounceLoader } from "react-spinners";
+import { format } from 'date-fns'
 
 
 function Notifications() {
     const [openDialog, setOpenDialog] = useState(false);
 
-    const handleClickOpen = () => {
+    const handleOpenNotification = (notification) => {
+        setSelectedNotification(notification);
         setOpenDialog(true);
     };
 
@@ -22,90 +25,43 @@ function Notifications() {
         setOpenDialog(false);
     };
 
-    // const Alert = forwardRef(function Alert(props, ref) {
-    //     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-    // });
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem('user'))
+        getNotifications(user.id)
+    }, [])
 
-    // const saveHotel = async () => {
-    //     setIsLoading(true)
-    //     const formData = new FormData()
-    //     formData.append("FullName", fullName)
-    //     formData.append("City", city)
-    //     formData.append("Gender", gender)
-    //     formData.append("Email", email)
-    //     formData.append("PhoneNumber", phone)
-    //     formData.append("ProfileImageFile", userImageFile)
-    //     formData.append("AccountType", role)
+    const getNotifications = async(id) => {
+        const response = await get(`Notification/${id}`)
+        console.log(response)
+        // const response = await get(`Notification/${id}`)
+        if (response.successful) {
+            setNotifications(response.data)
+        }
+        setIsLoading(false)
+    };
 
-    //     const response = await postData('User/Create', formData)
-    //     if (response.successful) {
-    //         showAlert('User saved successfully', 'success')
-    //     } else {
-    //         showAlert(response.data, 'error')
-    //     }
-    //     setIsLoading(false)
-    // }
-
-    // const handleClick = () => {
-    //     // 👇️ open file input box on click of other element
-    //     inputRef.current.click();
-    // };
-
-    // const handleChange = (event) => {
-    //     setSelectedManager(event.target.value)
-    // }
-
-    // const clearImage = (event) => {
-    //     setUserImageFile('')
-    //     setUserImageSrc('')
-    // }
-
-    // const handleFileChange = e => {
-    //     setUserImageFile(e.target.files[0])
-    //     const reader = new FileReader();
-    //     reader.onload = function (e) {
-    //         setUserImageSrc(e.target.result);
-    //     };
-    //     reader.readAsDataURL(e.target.files[0]);
-    // };
-
-    // const handleClose = (event, reason) => {
-    //     if (reason === 'clickaway') {
-    //         return;
-    //     }
-
-    //     setOpen(false);
-    // };
-
-
-    // const showAlert = (alertMessage, alertType) => {
-    //     setAlertMessage(alertMessage)
-    //     setOpen(true)
-    //     setAlertType(alertType)
-    // }
-
-    // //states
-    // const inputRef = useRef(null);
-    // const [fullName, setFullName] = useState('');
-    // const [city, setCity] = useState('');
-    // const [gender, setGender] = useState('');
-    // const [genders, setGenders] = useState(['Male', 'Female']);
-    // const [userRoles, setUserRoles] = useState(['Admin', 'Manager', 'Staff']);
-    // const [email, setEmail] = useState('');
-    // const [phone, setPhone] = useState('');
-    // const [role, setRole] = useState('');
-    // const [userImageFile, setUserImageFile] = useState();
-    // const [userImageSrc, setUserImageSrc] = useState();
-    // const [isLoading, setIsLoading] = useState(false);
-    // const [open, setOpen] = useState(false);
-    // const [alertType, setAlertType] = useState('');
-    // const [alertMessage, setAlertMessage] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
+    const [selectedNotification, setSelectedNotification] = useState('');
+    const [notifications, setNotifications] = useState([]);
 
 
     return (
         <div className='h-full font-poppins'>
             <Layout>
-                <div className='w-full h-screen py-6 flex flex-col gap-4'>
+                {isLoading ? <div className="w-full">
+                    <div className="flex flex-col items-center justify-center">
+                        <div className="lg:w-2/5 md:w-1/2 pt-10 pl-4 pr-4 justify-center lg:my-16 sm:my-5">
+                            <div className="m-12 pt-14 flex flex-col items-center justify-center">
+                                <BounceLoader
+                                    heigth={200}
+                                    width={200}
+                                    color="#FFCC00"
+                                    ariaLabel="loading-indicator"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div> : <div className='w-full h-screen py-6 flex flex-col gap-4'>
 
                     <p className='w-full block text-xl font-medium text-[#1A1A1A] leading-8'>
                         Notifications
@@ -113,17 +69,17 @@ function Notifications() {
 
                     <div className='w-full h-auto flex flex-col items-center gap-3'>
 
-                        <div className='cursor-pointer bg-white w-full rounded-md p-2 px-3 flex items-start border border-[#E4E4E4] gap-2'
-                            onClick={handleClickOpen}
+                        {notifications.map((notification) => (<div className='cursor-pointer bg-white w-full rounded-md p-2 px-3 flex items-start border border-[#E4E4E4] gap-2'
+                            onClick={() => handleOpenNotification(notification)}
                         >
                             <div className="rounded-full shrink-0 bg-green-200 h-9 w-9 flex items-center justify-center">
                                 <DirectNotification className="h-4 w-4 text-green-600" />
                             </div>
                             <div className='flex flex-col w-full'>
-                                <p className='text-sm text-[#1a1a1a] text-justify hover:text-[#D4AA00] truncate md:w-1/2 w-3/4 font-medium leading-6'>Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. </p>
-                                <p className='text-xs text-[#636363]'>29 July 2023 - 11:02 PM</p>
+                                <p className='text-sm text-[#1a1a1a] text-justify hover:text-[#D4AA00] truncate md:w-1/2 w-3/4 font-medium leading-6'>{notification.body}</p>
+                                <p className='text-xs text-[#636363]'>{format(new Date(notification.createdDate), 'dd MMMM yyyy - HH:mm')}</p>
                             </div>
-                        </div>
+                        </div>))}
 
                         <Dialog open={openDialog} onClose={handleClose}>
                             <DialogTitle
@@ -137,7 +93,7 @@ function Notifications() {
                                     color: "#364a63",
                                 }}
                             >
-                                Notification
+                                {selectedNotification.title}
                             </DialogTitle>
                             <DialogContent
                                 sx={{
@@ -147,24 +103,13 @@ function Notifications() {
                                 className='scrollbar-thin scroll-smooth scrollbar-thumb-gray-300 scrollbar-rounded-full scrollbar-thumb-rounded-full'
                             >
                                 <DialogContentText className='text-sm font-normal leading-5 text-gray-600'>
-                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
-                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
-                                    <br />
-                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
-                                    <br />
-                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
-                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
-                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
-                                    <br />
-                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
-                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
-                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
+                                    {selectedNotification.body}
                                 </DialogContentText>
                             </DialogContent>
                         </Dialog>
 
                     </div>
-                </div>
+                </div>}
             </Layout>
         </div>
     )

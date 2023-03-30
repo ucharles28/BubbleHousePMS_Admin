@@ -30,6 +30,23 @@ function RunningBookings() {
         setIsLoading(false)
     }
 
+    const handleSearch = async (text) => {
+        setIsLoading(true)
+        if (text) {
+            filterRunningBookings(text)
+        } else {
+            getRunningBookings()
+        }
+    }
+
+    const filterRunningBookings = async (text) => {
+        const response = await get(`Booking/FilterByStatus?queryText=${text}&status=${1}`)
+        if (response.successful) {
+            setBookings(response.data)
+        }
+        setIsLoading(false)
+    }
+
     const router = useRouter()
 
     const handleChangePage = (event, newPage) => {
@@ -69,6 +86,7 @@ function RunningBookings() {
                             <input
                                 type='text'
                                 placeholder='Search Bookings'
+                                onChange={(e) => handleSearch(e.target.value)}
                                 className='w-1/2 h-9 border border-[#1a1a1a]/50 text-xs font-normal pl-2 focus:outline-0 bg-transparent rounded-md'
                             />
 

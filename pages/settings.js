@@ -1,20 +1,101 @@
 import { Alert, CircularProgress, Snackbar } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Layout from '../components/Layout';
+import { post, postData } from '../helpers/ApiRequest';
 
 function Settings() {
   const [open, setOpen] = useState(false);
   const [alertType, setAlertType] = useState('');
   const [alertMessage, setAlertMessage] = useState('');
-  const [fullName, setFullName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [oldPassword, setOldPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [profileButtonIsLoading, setProfileButtonIsLoading] = useState(false);
   const [notifButtonIsLoading, setNotifButtonIsLoading] = useState(false);
+  const [userImageFile, setUserImageFile] = useState();
+  const [userImageSrc, setUserImageSrc] = useState();
+  const [user, setUser] = useState();
+  const inputRef = useRef(null);
+
 
   useEffect(() => {
-
+    const userObj = JSON.parse(localStorage.getItem('user'))
+    setUserImageSrc(userObj.profileImageUrl)
+    const splitStr = userObj.fullName.split(' ')
+    setUserImageSrc(userObj.profileImageUrl)
+    setFirstName(splitStr[0])
+    setEmail(userObj.email)
+    setLastName(splitStr.length > 1 ? splitStr[1] : '')
+    setUser(userObj)
   }, [])
+
+  const handleClick = () => {
+    // 👇️ open file input box on click of other element
+    inputRef.current.click();
+  };
+
+  const handleFileChange = e => {
+    setUserImageFile(e.target.files[0])
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      setUserImageSrc(e.target.result);
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  };
+
+  const handleUpdateProfile = async () => {
+    setProfileButtonIsLoading(true)
+    const formData = new FormData()
+    formData.append("FullName", `${firstName} ${lastName}`)
+    formData.append("Email", email)
+    formData.append("ProfileImage", userImageFile)
+    formData.append("UserId", user.id)
+
+    const response = await postData('User/UpdateProfile', formData)
+    if (response.successful) {
+      user.email = response.data.email
+      user.fullName = response.data.fullName
+      user.profileImageUrl = response.data.profileImageUrl
+      localStorage.setItem('user', JSON.stringify(user))
+      showAlert('Profile saved successfully', 'success')
+    } else {
+      showAlert(response.data, 'error')
+    }
+    setProfileButtonIsLoading(false)
+  }
+
+  const handleChangePassword = async () => {
+    if (newPassword != confirmPassword) {
+      showAlert("Your new password and confirm password don't match, kindly try again", "error")
+      return;
+    }
+    if (newPassword.length < 8) {
+      showAlert("Your password should be at least 8 characters long", "error")
+      return;
+    }
+
+    setNotifButtonIsLoading(true)
+    const req = {
+      newPassword,
+      oldPassword,
+      userId: user.id
+    }
+
+    const response = await post('User/ChangePassword', req)
+    if (response.successful) {
+      showAlert('Password changed successfully', 'success')
+      setOldPassword('')
+      setNewPassword('')
+      setConfirmPassword('')
+    } else {
+      showAlert(response.data, 'error')
+    }
+    setNotifButtonIsLoading(false)
+  }
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -29,7 +110,7 @@ function Settings() {
 
     setTimeout(() => {
       setProfileButtonIsLoading(false)
-      
+
     }, 3000);
   };
 
@@ -37,7 +118,7 @@ function Settings() {
     setAlertMessage(alertMessage)
     setOpen(true)
     setAlertType(alertType)
-}
+  }
 
 
   return (
@@ -66,13 +147,21 @@ function Settings() {
                   <div className="flex items-center space-x-4">
 
                     <span className="inline-block h-12 w-12 overflow-hidden rounded-full bg-gray-100">
-                      <svg className="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                      {!userImageSrc ? <svg className="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                      </svg>
+                      </svg> : <img className='object-cover' src={userImageSrc} />}
                     </span>
+
+                    <input
+                      style={{ display: 'none' }}
+                      ref={inputRef}
+                      type="file"
+                      onChange={handleFileChange}
+                    />
 
                     <button
                       type="button"
+                      onClick={handleClick}
                       className="rounded-md border border-gray-300 bg-white py-1.5 px-2.5 text-xs font-semibold text-gray-900 shadow-sm hover:bg-gray-50"
                     >
                       Change
@@ -90,6 +179,8 @@ function Settings() {
                         </label>
                         <input
                           type="text"
+                          value={firstName}
+                          onChange={(e) => setFirstName(e.target.value)}
                           name="first-name"
                           id="first-name"
                           autoComplete="given-name"
@@ -103,6 +194,8 @@ function Settings() {
                         </label>
                         <input
                           type="text"
+                          value={lastName}
+                          onChange={(e) => setLastName(e.target.value)}
                           name="last-name"
                           id="last-name"
                           autoComplete="family-name"
@@ -111,11 +204,13 @@ function Settings() {
                       </div>
 
                       <div className="col-span-6">
-                        <label htmlFor="email-address" className="text-xs font-medium leading-5 text-gray-700">
+                        <label htmlFor="Confirm password" className="text-xs font-medium leading-5 text-gray-700">
                           Email address
                         </label>
                         <input
                           type="text"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
                           name="email-address"
                           id="email-address"
                           autoComplete="email"
@@ -129,6 +224,8 @@ function Settings() {
                   <div className="flex justify-end w-full">
                     <button
                       type="submit"
+                      onClick={handleUpdateProfile}
+                      disabled={!firstName || !lastName || !email}
                       className="inline-flex justify-center rounded-md bg-yellow-500 py-2 px-3 text-sm font-medium text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
                     >
                       {profileButtonIsLoading ? <CircularProgress size={24} color="inherit" /> : 'Save'}
@@ -149,126 +246,69 @@ function Settings() {
             <div className="md:grid md:grid-cols-3 md:gap-6">
 
               <div className="md:col-span-1">
-                <p className="text-base font-medium leading-6 text-gray-800">Notifications</p>
+                <p className="text-base font-medium leading-6 text-gray-800">Change Password</p>
               </div>
 
               <div className="md:col-span-2">
                 <div className="space-y-3">
 
                   <div className="space-y-1">
-                    <fieldset>
+                    <div className="grid grid-cols-6 gap-6">
                       {/* <legend className="sr-only">By Email</legend>
                       <div className="text-sm font-semibold leading-6 text-gray-900" aria-hidden="true">
                         By Email
                       </div> */}
-                      <div className="mt-4 space-y-4">
-                        <div className="flex items-start">
-                          <div className="flex h-6 items-center">
-                            <input
-                              id="comments"
-                              name="comments"
-                              type="checkbox"
-                              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                            />
-                          </div>
-                          <div className="ml-3 text-sm leading-6">
-                            <label htmlFor="comments" className="font-medium text-gray-900">
-                              New Customer
-                            </label>
-                            <p className="text-gray-500">Get notified when someones posts a comment on a posting.</p>
-                          </div>
-                        </div>
-                        <div className="flex items-start">
-                          <div className="flex h-6 items-center">
-                            <input
-                              id="comments"
-                              name="comments"
-                              type="checkbox"
-                              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                            />
-                          </div>
-                          <div className="ml-3 text-sm leading-6">
-                            <label htmlFor="comments" className="font-medium text-gray-900">
-                              New Booking
-                            </label>
-                            <p className="text-gray-500">Get notified when someones posts a comment on a posting.</p>
-                          </div>
-                        </div>
-                        <div className="flex items-start">
-                          <div className="flex h-6 items-center">
-                            <input
-                              id="candidates"
-                              name="candidates"
-                              type="checkbox"
-                              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                            />
-                          </div>
-                          <div className="ml-3 text-sm leading-6">
-                            <label htmlFor="candidates" className="font-medium text-gray-900">
-                              Booking confirmation
-                            </label>
-                            <p className="text-gray-500">Get notified when a candidate applies for a job.</p>
-                          </div>
-                        </div>
-                        <div className="flex items-start">
-                          <div className="flex h-6 items-center">
-                            <input
-                              id="offers"
-                              name="offers"
-                              type="checkbox"
-                              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                            />
-                          </div>
-                          <div className="ml-3 text-sm leading-6">
-                            <label htmlFor="offers" className="font-medium text-gray-900">
-                              Check-In & Check-Out Notifications
-                            </label>
-                            <p className="text-gray-500">Get notified when a candidate accepts or rejects an offer.</p>
-                          </div>
-                        </div>
-                        <div className="flex items-start">
-                          <div className="flex h-6 items-center">
-                            <input
-                              id="offers"
-                              name="offers"
-                              type="checkbox"
-                              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                            />
-                          </div>
-                          <div className="ml-3 text-sm leading-6">
-                            <label htmlFor="offers" className="font-medium text-gray-900">
-                              Booking cancellation
-                            </label>
-                            <p className="text-gray-500">Get notified when a candidate accepts or rejects an offer.</p>
-                          </div>
-                        </div>
-                        <div className="flex items-start">
-                          <div className="flex h-6 items-center">
-                            <input
-                              id="comments"
-                              name="comments"
-                              type="checkbox"
-                              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                            />
-                          </div>
-                          <div className="ml-3 text-sm leading-6">
-                            <label htmlFor="comments" className="font-medium text-gray-900">
-                              New Message
-                            </label>
-                            <p className="text-gray-500">Get notified when someones posts a comment on a posting.</p>
-                          </div>
-                        </div>
+                      <div className="col-span-6">
+                        <label htmlFor="old-password" className="text-xs font-medium leading-5 text-gray-700">
+                          Old password
+                        </label>
+                        <input
+                          type="password"
+                          value={oldPassword}
+                          onChange={(e) => setOldPassword(e.target.value)}
+                          name="old-password"
+                          id="old-password"
+                          className="border border-gray-300 p-1 pl-2 text-xs text-gray-700 rounded-sm leading-5 placeholder:text-xs focus:outline-0 w-full"
+                        />
                       </div>
-                    </fieldset>
+                      <div className="col-span-6">
+                        <label htmlFor="new-password" className="text-xs font-medium leading-5 text-gray-700">
+                          New password
+                        </label>
+                        <input
+                          type="password"
+                          name="new-password"
+                          id="new-password"
+                          value={newPassword}
+                          onChange={(e) => setNewPassword(e.target.value)}
+                          className="border border-gray-300 p-1 pl-2 text-xs text-gray-700 rounded-sm leading-5 placeholder:text-xs focus:outline-0 w-full"
+                        />
+                      </div>
+                      <div className="col-span-6">
+                        <label htmlFor="confirm-password" className="text-xs font-medium leading-5 text-gray-700">
+                          Confirm password
+                        </label>
+                        <input
+                          type="password"
+                          name="confirm-password"
+                          id="confirm-password"
+                          value={confirmPassword}
+                          onChange={(e) => setConfirmPassword(e.target.value)}
+                          className="border border-gray-300 p-1 pl-2 text-xs text-gray-700 rounded-sm leading-5 placeholder:text-xs focus:outline-0 w-full"
+                        />
+                      </div>
+                    </div>
 
                   </div>
 
                   <div className="flex justify-end w-full">
                     <button
                       type="submit"
+                      onClick={handleChangePassword}
+                      disabled={!oldPassword || !newPassword || !confirmPassword}
                       className="inline-flex justify-center rounded-md bg-yellow-500 py-2 px-3 text-sm font-medium text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
                     >
-                      Save
+                      {notifButtonIsLoading ? <CircularProgress size={24} color="inherit" /> : 'Save'}
                     </button>
                   </div>
 

@@ -130,6 +130,7 @@ function Settings() {
           </Alert>
         </Snackbar>
         <div className='w-full h-full py-6 flex flex-col gap-4'>
+          
           <p className='w-full block text-lg font-medium text-[#1A1A1A] leading-6'>
             Settings
           </p>

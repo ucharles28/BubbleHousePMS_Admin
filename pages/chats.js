@@ -8,7 +8,6 @@ import { Tabs, Drawer } from 'antd';
 import Link from 'next/link';
 import { Menu, Transition, Popover } from "@headlessui/react";
 import { useRouter } from 'next/router';
-// import { Drawer } from 'antd';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
@@ -118,7 +117,7 @@ function Notifications() {
                             } else {
                                 chat.abbreviatedName = `${splitName[0].substring(0, 1).toUpperCase()}`
                             }
-                            
+
                             return chat
                         }))
                         //Subscribe chat 
@@ -162,7 +161,7 @@ function Notifications() {
             let list = [...chats]
 
             list = list.map((chat) => {
-                if (chat.id == chatId){
+                if (chat.id == chatId) {
                     chat.adminId = admin.id
                 }
                 return chat
@@ -171,7 +170,7 @@ function Notifications() {
             debugger
             setChats(list)
             setMessages([])
-            setCurrentChat((prev) => ({...prev, adminId: admin.id}))
+            setCurrentChat((prev) => ({ ...prev, adminId: admin.id }))
             setOpenDialog(false);
             showAlert('Chat has been reassigned successfully', 'success')
         }
@@ -212,7 +211,7 @@ function Notifications() {
         selectChat(chat)
     };
 
-    const selectChat = async (chat) => {        
+    const selectChat = async (chat) => {
         console.log(chat)
         setCurrentChat(chat)
         const messagesResponse = await connection.invoke("GetChatHistory", chat.id);
@@ -287,7 +286,7 @@ function Notifications() {
                                             </div>
 
                                             <div className='-mt-5 leading-6 flex flex-col ml-12'>
-                                                <p className='text-xs text-gray-700 font-normal'>
+                                                <p className='text-xs text-gray-700 font-normal truncate block'>
                                                     {chat.lastMessageSent}
                                                 </p>
                                             </div>
@@ -312,7 +311,7 @@ function Notifications() {
                                             </div>
 
                                             <div className='-mt-5 leading-6 flex flex-col ml-12'>
-                                                <p className='text-xs text-gray-700 font-normal'>
+                                                <p className='text-xs text-gray-700 font-normal truncate block'>
                                                     {chat.lastMessageSent}
                                                 </p>
                                             </div>
@@ -408,7 +407,9 @@ function Notifications() {
                                                         key={admin.id}
                                                         onClick={(e) => reassignChat(admin)}
                                                     >
-                                                        <img src='' className='w-9 h-9 border bg-blue-400 rounded-full object-cover' />
+                                                        <div className='flex justify-center rounded-full tracking-wide relative items-center w-10 h-10 bg-blue-400 text-white text-sm font-semibold'>
+                                                            <p>{admin.abbreviatedName}</p>
+                                                        </div>
                                                         <p className='text-sm font-medium leading-6 text-gray-500'>{admin.fullName}</p>
                                                     </div>))}
                                                 </DialogContentText>
@@ -418,38 +419,54 @@ function Notifications() {
                                 </div>
                             </div>
 
-                            {currentChat && <div className='flex flex-col gap-y-10 p-7 overflow-hidden h-[85vh] scrollbar-thin scroll-smooth scrollbar-thumb-gray-300 scrollbar-rounded-full scrollbar-thumb-rounded-full'>
+                            {currentChat && <div className='flex flex-col gap-y-10 py-7 px-5 overflow-hidden h-[85vh] scrollbar-thin scroll-smooth scrollbar-thumb-gray-300 scrollbar-rounded-full scrollbar-thumb-rounded-full'>
 
                                 <div className='flex flex-col w-full'>
                                     {messages.map((message) => {
                                         if (message.senderId != user.id) {
                                             return (
-                                                <div className='flex items-center mb-3 justify-between w-full gap-y-2'>
-                                                    <div className='flex items-start gap-x-2'>
-                                                        <div className='flex justify-center rounded-full tracking-wide relative items-center w-10 h-10 bg-blue-400 text-white text-sm font-semibold'>
-                                                            <p>{currentChat.abbreviatedName}</p>
+                                                <div className='flex items-center mb-6 justify-between w-full gap-y-2'>
+                                                    <div className='flex items-start gap-x-2 w-full'>
+                                                        {/* <div className='flex justify-center rounded-full tracking-wide relative items-center w-10 h-10 bg-blue-400 text-white text-sm font-semibold'> */}
+                                                        <p className='flex justify-center rounded-full tracking-wide relative items-center p-2.5 bg-blue-400 text-white text-sm font-semibold'>{currentChat.abbreviatedName}</p>
+                                                        {/* </div> */}
+                                                        <div className='flex flex-col w-full'>
+                                                            <div className='flex justify-between w-full'>
+                                                                <p className='text-xs text-gray-600 font-medium leading-4'>{currentChat.customer.fullName}</p>
+                                                                <p className='text-xs text-gray-600 font-normal'>{format(new Date(message.createdDate), 'dd MMM yyyy')}</p>
+                                                            </div>
+                                                            <p className='text-xs text-gray-700 font-normal leading-6'>
+                                                                {message.text}
+                                                            </p>
                                                         </div>
-                                                        {/* <p className='text-sm text-gray-600 font-semibold leading-4'>Abu Ibn Ishtiak</p> */}
-                                                        <p className='text-xs text-gray-700 font-normal leading-6 ml-12'>
-                                                            {message.text}
-                                                        </p>
                                                     </div>
-                                                    <p className='text-xs text-gray-600 font-normal'>{format(new Date(message.createdDate), 'dd MMM yyyy')}</p>
+                                                    {/* <p className='text-xs text-gray-600 font-normal'>{format(new Date(message.createdDate), 'dd MMM yyyy')}</p> */}
                                                 </div>
                                             )
                                         } else {
                                             return (
-                                                <div className='flex items-center mb-3 justify-end w-full gap-y-2'>
-                                                    <div className='flex justify-end items-start gap-x-2'>
-                                                        {/* <div className='flex justify-center rounded-full tracking-wide relative items-center w-10 h-10 bg-blue-400 text-white text-sm font-semibold'>
-                                                            <p>{currentChat.abbreviatedName}</p>
-                                                        </div> */}
-                                                        {/* <p className='text-sm text-gray-600 font-semibold leading-4'>Abu Ibn Ishtiak</p> */}
-                                                        <p className='text-xs text-gray-700 font-normal leading-6 ml-12'>
-                                                            {message.text}
+                                                <div className='flex items-center mb-6 justify-end w-full gap-y-2'>
+                                                    <div className='flex items-start gap-x-2 w-full'>
+                                                        {/* <div className='flex justify-center rounded-full tracking-wide relative items-center w-10 h-10 bg-blue-400 text-white text-sm font-semibold'> */}
+                                                        <p className='flex justify-center rounded-full tracking-wide relative items-center p-2.5 bg-blue-400 text-white text-sm font-semibold'>
+                                                            {/* {currentChat.abbreviatedName} */}
+                                                            CA
                                                         </p>
-                                                        <p className='text-xs text-gray-600 font-normal'>{format(new Date(message.createdDate), 'dd MMM yyyy')}</p>
+                                                        {/* </div> */}
+                                                        <div className='flex flex-col w-full'>
+                                                            <div className='flex justify-between w-full'>
+                                                                <p className='text-xs text-gray-600 font-medium leading-4'>
+                                                                    {/* {currentChat.customer.fullName} */}
+                                                                    Admin Name
+                                                                </p>
+                                                                <p className='text-xs text-gray-600 font-normal'>{format(new Date(message.createdDate), 'dd MMM yyyy')}</p>
+                                                            </div>
+                                                            <p className='text-xs text-gray-700 font-normal leading-6'>
+                                                                {message.text}
+                                                            </p>
+                                                        </div>
                                                     </div>
+                                                    {/* <p className='text-xs text-gray-600 font-normal'>{format(new Date(message.createdDate), 'dd MMM yyyy')}</p> */}
                                                 </div>
                                             )
                                         }
@@ -569,42 +586,58 @@ function Notifications() {
                         >
                             {currentChat && <div className='flex flex-col px-5 pb-5 gap-y-10 overflow-hidden h-screen scrollbar-thin scroll-smooth scrollbar-thumb-gray-300 scrollbar-rounded-full scrollbar-thumb-rounded-full'>
 
-                                <div className='bg-white drop-shadow-sm flex flex-col gap-y-2 py-7 w-full border-b'>
+                                {/* <div className='bg-white flex flex-col gap-y-2 py-7 w-full border-b'>
                                     <div className='flex gap-x-2 items-center'>
                                         <Flag variant='Bold' size={16} className='text-blue-400' />
                                         <p className='text-xs leading-5 font-normal text-gray-500'>Technical Problem</p>
                                     </div>
-                                </div>
+                                </div> */}
 
                                 {messages.map((message) => {
                                     if (message.senderId != user.id) {
                                         return (
-                                            <div className='flex items-center mb-3 justify-between w-full gap-y-2'>
-                                                <div className='flex items-start gap-x-2'>
-                                                    <div className='flex justify-center rounded-full tracking-wide relative items-center w-10 h-10 bg-blue-400 text-white text-sm font-semibold'>
-                                                        <p>{currentChat.abbreviatedName}</p>
+                                            <div className='flex items-center mb-6 justify-between w-full gap-y-2'>
+                                                <div className='flex items-start gap-x-2 w-full'>
+                                                    {/* <div className='flex justify-center rounded-full tracking-wide relative items-center w-10 h-10 bg-blue-400 text-white text-sm font-semibold'> */}
+                                                    <p className='flex justify-center rounded-full tracking-wide relative items-center p-2.5 bg-blue-400 text-white text-sm font-semibold'>{currentChat.abbreviatedName}</p>
+                                                    {/* </div> */}
+                                                    <div className='flex flex-col w-full'>
+                                                        <div className='flex justify-between w-full'>
+                                                            <p className='text-xs text-gray-600 font-medium leading-4'>{currentChat.customer.fullName}</p>
+                                                            <p className='text-xs text-gray-600 font-normal'>{format(new Date(message.createdDate), 'dd MMM yyyy')}</p>
+                                                        </div>
+                                                        <p className='text-xs text-gray-700 font-normal leading-6'>
+                                                            {message.text}
+                                                        </p>
                                                     </div>
-                                                    {/* <p className='text-sm text-gray-600 font-semibold leading-4'>Abu Ibn Ishtiak</p> */}
-                                                    <p className='text-xs text-gray-700 font-normal leading-6 ml-12'>
-                                                        {message.text}
-                                                    </p>
                                                 </div>
-                                                <p className='text-xs text-gray-600 font-normal'>{format(new Date(message.createdDate), 'dd MMM yyyy')}</p>
+                                                {/* <p className='text-xs text-gray-600 font-normal'>{format(new Date(message.createdDate), 'dd MMM yyyy')}</p> */}
                                             </div>
                                         )
                                     } else {
                                         return (
-                                            <div className='flex items-center mb-3 justify-end w-full gap-y-2'>
-                                                <div className='flex justify-end items-start gap-x-2'>
-                                                    {/* <div className='flex justify-center rounded-full tracking-wide relative items-center w-10 h-10 bg-blue-400 text-white text-sm font-semibold'>
-                                                            <p>{currentChat.abbreviatedName}</p>
-                                                        </div> */}
-                                                    {/* <p className='text-sm text-gray-600 font-semibold leading-4'>Abu Ibn Ishtiak</p> */}
-                                                    <p className='text-xs text-gray-700 font-normal leading-6 ml-12'>
-                                                        {message.text}
+                                            <div className='flex items-center mb-6 justify-end w-full gap-y-2'>
+                                                <div className='flex items-start gap-x-2 w-full'>
+                                                    {/* <div className='flex justify-center rounded-full tracking-wide relative items-center w-10 h-10 bg-blue-400 text-white text-sm font-semibold'> */}
+                                                    <p className='flex justify-center rounded-full tracking-wide relative items-center p-2.5 bg-blue-400 text-white text-sm font-semibold'>
+                                                        {/* {currentChat.abbreviatedName} */}
+                                                        CA
                                                     </p>
-                                                    <p className='text-xs text-gray-600 font-normal'>{format(new Date(message.createdDate), 'dd MMM yyyy')}</p>
+                                                    {/* </div> */}
+                                                    <div className='flex flex-col w-full'>
+                                                        <div className='flex justify-between w-full'>
+                                                            <p className='text-xs text-gray-600 font-medium leading-4'>
+                                                                {/* {currentChat.customer.fullName} */}
+                                                                Admin Name
+                                                            </p>
+                                                            <p className='text-xs text-gray-600 font-normal'>{format(new Date(message.createdDate), 'dd MMM yyyy')}</p>
+                                                        </div>
+                                                        <p className='text-xs text-gray-700 font-normal leading-6'>
+                                                            {message.text}
+                                                        </p>
+                                                    </div>
                                                 </div>
+                                                {/* <p className='text-xs text-gray-600 font-normal'>{format(new Date(message.createdDate), 'dd MMM yyyy')}</p> */}
                                             </div>
                                         )
                                     }

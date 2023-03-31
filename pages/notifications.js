@@ -30,7 +30,7 @@ function Notifications() {
         getNotifications(user.id)
     }, [])
 
-    const getNotifications = async(id) => {
+    const getNotifications = async (id) => {
         const response = await get(`Notification/${id}`)
         console.log(response)
         // const response = await get(`Notification/${id}`)
@@ -46,28 +46,28 @@ function Notifications() {
 
 
     return (
-        <div className='h-full font-poppins'>
+        <div className='min-h-screen font-poppins'>
             <Layout>
-                {isLoading ? <div className="w-full">
-                    <div className="flex flex-col items-center justify-center">
-                        <div className="lg:w-2/5 md:w-1/2 pt-10 pl-4 pr-4 justify-center lg:my-16 sm:my-5">
-                            <div className="m-12 pt-14 flex flex-col items-center justify-center">
-                                <BounceLoader
-                                    heigth={200}
-                                    width={200}
-                                    color="#FFCC00"
-                                    ariaLabel="loading-indicator"
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </div> : <div className='w-full h-screen py-6 flex flex-col gap-4'>
+                <div className='w-full h-full py-6 flex flex-col gap-4'>
 
-                    <p className='w-full block text-xl font-medium text-[#1A1A1A] leading-8'>
+                    <p className='w-full block text-lg font-medium text-[#1A1A1A] leading-6'>
                         Notifications
                     </p>
 
-                    <div className='w-full h-auto flex flex-col items-center gap-3'>
+                    {isLoading ? <div className="w-full">
+                        <div className="flex flex-col items-center justify-center">
+                            <div className="lg:w-2/5 md:w-1/2 pt-10 pl-4 pr-4 justify-center lg:my-16 sm:my-5">
+                                <div className="m-12 pt-14 flex flex-col items-center justify-center">
+                                    <BounceLoader
+                                        heigth={200}
+                                        width={200}
+                                        color="#FFCC00"
+                                        ariaLabel="loading-indicator"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div> : <div className='w-full h-auto flex flex-col items-center gap-3'>
 
                         {notifications.map((notification) => (<div className='cursor-pointer bg-white w-full rounded-md p-2 px-3 flex items-start border border-[#E4E4E4] gap-2'
                             onClick={() => handleOpenNotification(notification)}
@@ -76,7 +76,7 @@ function Notifications() {
                                 <DirectNotification className="h-4 w-4 text-green-600" />
                             </div>
                             <div className='flex flex-col w-full'>
-                                <p className='text-sm text-[#1a1a1a] text-justify hover:text-[#D4AA00] truncate md:w-1/2 w-3/4 font-medium leading-6'>{notification.body}</p>
+                                <p className='text-sm text-[#1a1a1a]/80 text-justify hover:text-[#D4AA00] truncate md:w-3/5 w-3/4 font-medium leading-6'>{notification.body}</p>
                                 <p className='text-xs text-[#636363]'>{format(new Date(notification.createdDate), 'dd MMMM yyyy - HH:mm')}</p>
                             </div>
                         </div>))}
@@ -98,7 +98,6 @@ function Notifications() {
                             <DialogContent
                                 sx={{
                                     padding: "16px",
-                                    textAlign: 'justify',
                                 }}
                                 className='scrollbar-thin scroll-smooth scrollbar-thumb-gray-300 scrollbar-rounded-full scrollbar-thumb-rounded-full'
                             >
@@ -108,8 +107,9 @@ function Notifications() {
                             </DialogContent>
                         </Dialog>
 
-                    </div>
-                </div>}
+                    </div>}
+
+                </div>
             </Layout>
         </div>
     )

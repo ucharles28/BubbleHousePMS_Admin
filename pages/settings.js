@@ -129,12 +129,12 @@ function Settings() {
             {alertMessage}
           </Alert>
         </Snackbar>
-        <div className='w-full h-full py-6 flex flex-col gap-6'>
+        <div className='w-full h-full py-6 flex flex-col gap-4'>
           <p className='w-full block text-lg font-medium text-[#1A1A1A] leading-6'>
             Settings
           </p>
 
-          <div className='bg-white border border-gray-50 shadow rounded-lg w-full overflow-auto h-auto p-2'>
+          <div className='bg-white border border-[#E4E4E4] p-4 py-5 rounded-lg w-full overflow-auto h-auto'>
 
             <div className="md:grid md:grid-cols-3 md:gap-6">
 

@@ -14,7 +14,6 @@ import styled from "@emotion/styled";
 function HotelsPage() {
 
     const getAllHotels = async () => {
-        setIsLoading(true)
         const response = await get('Hotel')
         if (response.successful) {
             setRows(response.data)
@@ -25,6 +24,23 @@ function HotelsPage() {
     useEffect(() => {
         getAllHotels()
     }, [])
+
+    const handleSearch = async (text) => {
+        setIsLoading(true)
+        if (text) {
+            filterHotel(text)
+        } else {
+            getAllHotels()
+        }
+    }
+
+    const filterHotel = async (text) => {
+        const response = await get(`Hotel/Filter?queryText=${text}`)
+        if (response.successful) {
+            setRows(response.data)
+        }
+        setIsLoading(false)
+    }
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -39,7 +55,7 @@ function HotelsPage() {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [rows, setRows] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     const TableRowStyled = styled(TableRow)`
         &:nth-of-type(odd) {
@@ -66,6 +82,7 @@ function HotelsPage() {
 
                             <input
                                 type='text'
+                                onChange={(e) => handleSearch(e.target.value)}
                                 placeholder='Search Hotel'
                                 className='w-1/2 h-9 border border-[#1a1a1a]/50 text-xs font-normal pl-2 focus:outline-0 bg-transparent rounded-md'
                             />

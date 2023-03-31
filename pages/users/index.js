@@ -10,41 +10,61 @@ import Link from 'next/link';
 import Layout from '../../components/Layout';
 import { BounceLoader } from "react-spinners";
 import styled from "@emotion/styled";
+import { format } from "date-fns";
 
 
 function UsersPage() {
 
     const getAllUsers = async () => {
-        setIsLoading(true)
         const response = await get('User')
         if (response.successful) {
-            var list = response.data.map((user) => {
-                const obj = {
-                    user: user.fullName,
-                    email: user.email,
-                    joined: user.createdDate,
-                    id: user.id,
-                }
-                switch (user.accountType) {
-                    case 0:
-                        obj.role = 'Customer'
-                        break;
-                    case 1:
-                        obj.role = 'Admin'
-                        break;
-                    case 2:
-                        obj.role = 'Manager'
-                        break;
-                    case 3:
-                        obj.role = 'Staff'
-                        break;
-                }
-                return obj;
-            })
-            setRows(list)
+            populateRows(response.data)
         }
         setIsLoading(false)
+    }
 
+    const handleSearch = async (text) => {
+        setIsLoading(true)
+        if (text) {
+            filterUsers(text)
+        } else {
+            getAllUsers()
+        }
+    }
+
+    const filterUsers = async (text) => {
+        const response = await get(`User/Filter?queryText=${text}&accountType=${0}`)
+        if (response.successful) {
+            populateRows(response.data)
+        }
+        setIsLoading(false)
+    }
+
+    const populateRows = (users) => {
+        var list = users.map((user) => {
+            const obj = {
+                user: user.fullName,
+                email: user.email,
+                joined: format(new Date(user.createdDate), 'dd-MM-yyyy'),
+                id: user.id,
+            }
+            switch (user.accountType) {
+                case 0:
+                    obj.role = 'Customer'
+                    break;
+                case 1:
+                    obj.role = 'Admin'
+                    break;
+                case 2:
+                    obj.role = 'Manager'
+                    break;
+                case 3:
+                    obj.role = 'Staff'
+                    break;
+            }
+            return obj;
+        })
+        setRows(list)
     }
 
     useEffect(() => {
@@ -64,7 +84,7 @@ function UsersPage() {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [rows, setRows] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     const TableRowStyled = styled(TableRow)`
         &:nth-of-type(odd) {
@@ -90,6 +110,7 @@ function UsersPage() {
 
                             <input
                                 type='text'
+                                onChange={(e) => handleSearch(e.target.value)}
                                 placeholder='Search Users'
                                 className='w-1/2 h-9 border border-[#1a1a1a]/50 text-xs font-normal pl-2 focus:outline-0 bg-transparent rounded-md'
                             />

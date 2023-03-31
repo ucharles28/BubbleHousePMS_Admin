@@ -60,7 +60,7 @@ function Dashboard() {
                                         heigth={220}
                                         width={220}
                                         color="#FFCC00"
-                                        ariaLabel="loading-indicator"
+                                        aria-label="loading-indicator"
                                     />
                                 </div>
                             </div>
@@ -195,7 +195,7 @@ function Dashboard() {
                                         <Slash size={24} className='text-[#D4AA00]' variant='Bold' />
                                     </div>
                                     <div className='block text-center md:text-left gap-3'>
-                                        <p className='text-xs md:text-sm leading-6 text-[#636363]'>Cancelled Booking</p>
+                                        <p className='md:text-[0.75rem] text-xs sm:text-sm leading-6 text-[#636363]'>Cancelled Booking</p>
                                         <p className='text-xl leading-10 font-semibold text-[#1a1a1a]'>{dashboardOverview ? dashboardOverview.cancelledBookings : 0}</p>
                                     </div>
                                 </div>
@@ -207,7 +207,7 @@ function Dashboard() {
                                         <Slash size={24} className='text-[#D4AA00]' variant='Bold' />
                                     </div>
                                     <div className='block text-center md:text-left gap-3'>
-                                        <p className='text-xs md:text-sm leading-6 text-[#636363]'>Confirmed Booking</p>
+                                        <p className='md:text-[0.75rem] text-xs sm:text-sm leading-6 text-[#636363]'>Confirmed Booking</p>
                                         <p className='text-xl leading-10 font-semibold text-[#1a1a1a]'>{dashboardOverview ? dashboardOverview.confirmedBookings : 0}</p>
                                     </div>
                                 </div>

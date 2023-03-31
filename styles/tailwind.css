@@ -5,3 +5,7 @@
 .ant-tabs-nav {
     margin: 0px !important;
 }
+
+.ant-switch.ant-switch-checked {
+    background: #ffcc00 !important;
+}

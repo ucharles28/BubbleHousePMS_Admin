@@ -103,6 +103,15 @@ function UsersPage() {
                                 </button>
                             </Link>
 
+                            <Link href='users/manager'>
+                                <button
+                                    type="button"
+                                    className="w-auto bg-[#1a1a1a]/50 hover:bg-[#636363] uppercase text-white font-medium leading-6 rounded-md text-xs text-center px-2.5 py-1.5"
+                                >
+                                    Managers
+                                </button>
+                            </Link>
+
                         </div>
                     </div>
 

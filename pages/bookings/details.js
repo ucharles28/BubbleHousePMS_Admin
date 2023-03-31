@@ -5,8 +5,22 @@ import { get } from '../../helpers/ApiRequest';
 import { useState, useEffect } from 'react';
 import { BounceLoader } from 'react-spinners';
 import { format } from "date-fns";
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 function RequestDetails() {
+    const [openDialog, setOpenDialog] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpenDialog(true);
+    };
+
+    const handleClose = () => {
+        setOpenDialog(false);
+    };
+
     const [booking, setBooking] = useState();
     const [isLoading, setIsLoading] = useState(true);
     const router = useRouter()
@@ -21,10 +35,10 @@ function RequestDetails() {
         }
     }, [id])
 
-    const getBookingDetails = async() => {
+    const getBookingDetails = async () => {
         const response = await get(`Booking/${id}`);
 
-        if (response.successful){
+        if (response.successful) {
             console.log(response.data.roomTypes)
             setBooking(response.data)
         }
@@ -33,9 +47,23 @@ function RequestDetails() {
 
 
     return (
-        <div className='h-full font-poppins'>
+        <div className='min-h-screen font-poppins'>
             <Layout>
-                {isLoading ? <div className="w-full">
+                <div className='w-full h-screen py-6 flex flex-col gap-6'>
+
+                    <div className='flex items-end justify-between w-full'>
+
+                        <p className='w-full block text-lg font-medium text-[#1A1A1A] leading-6'>
+                            Request Details for {booking && booking.code}
+                        </p>
+
+                        <div onClick={goBack} className="px-2 py-1 rounded-lg flex items-center cursor-pointer bg-white hover:bg-[#f9f9f9] border-2 border-[#E4E4E4] text-gray-600 hover:text-gray-800">
+                            <ArrowLeft2 size={14} />
+                            <span className="text-xs font-medium leading-6">Back</span>
+                        </div>
+                    </div>
+
+                    {isLoading ? <div className="w-full">
                         <div className="flex flex-col items-center justify-center">
                             <div className="lg:w-2/5 md:w-1/2 pt-10 pl-4 pr-4 justify-center lg:my-16 sm:my-5">
                                 <div className="m-12 pt-14 flex flex-col items-center justify-center">
@@ -48,22 +76,7 @@ function RequestDetails() {
                                 </div>
                             </div>
                         </div>
-                    </div> : <div className='w-full h-screen py-6 flex flex-col gap-6'>
-
-                    <div className='flex justify-between w-full'>
-                        <p className='w-full block text-xl font-medium text-[#1A1A1A] leading-8'>
-                            Request Details for {booking && booking.code}
-                        </p>
-
-                        <div className='flex item-center justify-end gap-2 w-full'>
-                            <div onClick={goBack} className="px-2 py-1 rounded-lg flex items-center cursor-pointer bg-white hover:bg-[#f9f9f9] border-2 border-[#E4E4E4] text-gray-600 hover:text-gray-800">
-                                <ArrowLeft2 size={17} />
-                                <span className="text-sm font-medium leading-6">Back</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div className='grid grid-cols-1 md:grid-cols-3 justify-between gap-6 md:gap-8 w-full h-auto bg-white border border-[#E4E4E4] p-4 py-5 rounded-lg'>
+                    </div> : <div className='grid grid-cols-1 md:grid-cols-3 justify-between gap-6 md:gap-8 w-full h-auto bg-white border border-[#E4E4E4] p-4 py-5 rounded-lg'>
 
                         <div className='flex flex-col gap-2'>
                             <p className='text-sm font-normal text-[#636363]'>Booking Number</p>
@@ -83,7 +96,7 @@ function RequestDetails() {
                         <div className='flex flex-col gap-2'>
                             <p className='text-sm font-normal text-[#636363]'>Guest Email</p>
                             <p className='text-sm font-medium text-[#1A1A1A]'>
-                            {booking && booking.email}
+                                {booking && booking.email}
                             </p>
                         </div>
 
@@ -97,35 +110,35 @@ function RequestDetails() {
                         <div className='flex flex-col gap-2'>
                             <p className='text-sm font-normal text-[#636363]'>Number of Rooms</p>
                             <p className='text-sm font-medium text-[#1A1A1A]'>
-                            {booking && booking.roomTypes.map(roomType => roomType.numberBookedRooms).reduce((prev, next) => prev + next)}
+                                {booking && booking.roomTypes.map(roomType => roomType.numberBookedRooms).reduce((prev, next) => prev + next)}
                             </p>
                         </div>
 
                         <div className='flex flex-col gap-2'>
                             <p className='text-sm font-normal text-[#636363]'>Check-In</p>
                             <p className='text-sm tracking-widest font-medium text-[#1A1A1A]'>
-                               {booking && format(new Date(booking.checkInDate), 'dd-MM-yyyy')}
+                                {booking && format(new Date(booking.checkInDate), 'dd-MM-yyyy')}
                             </p>
                         </div>
 
                         <div className='flex flex-col gap-2'>
                             <p className='text-sm font-normal text-[#636363]'>Check-Out</p>
                             <p className='text-sm tracking-widest font-medium text-[#1A1A1A]'>
-                            {booking && format(new Date(booking.checkOutDate), 'dd-MM-yyyy')}
+                                {booking && format(new Date(booking.checkOutDate), 'dd-MM-yyyy')}
                             </p>
                         </div>
 
                         <div className='flex flex-col gap-2'>
                             <p className='text-sm font-normal text-[#636363]'>Adults</p>
                             <p className='text-sm font-medium text-[#1A1A1A]'>
-                            {booking && booking.totalAdults}
+                                {booking && booking.totalAdults}
                             </p>
                         </div>
 
                         <div className='flex flex-col gap-2'>
                             <p className='text-sm font-normal text-[#636363]'>Children</p>
                             <p className='text-sm font-medium text-[#1A1A1A]'>
-                            {booking && booking.totalChildren}
+                                {booking && booking.totalChildren}
                             </p>
                         </div>
 
@@ -139,27 +152,89 @@ function RequestDetails() {
                         <div className='flex flex-col gap-2'>
                             <p className='text-sm font-normal text-[#636363]'>Total Paid</p>
                             <p className='text-sm font-medium text-[#1A1A1A]'>
-                            {booking && booking.isPaid ? `NGN ${Number(booking.totalAmount).toLocaleString()}` : 'None'}
+                                {booking && booking.isPaid ? `NGN ${Number(booking.totalAmount).toLocaleString()}` : 'None'}
                             </p>
                         </div>
 
                         <div className='flex flex-col gap-2'>
                             <p className='text-sm font-normal text-[#636363]'>Payment Method</p>
                             <p className='text-sm font-medium text-[#1A1A1A]'>
-                            {booking && booking.isReservation ? 'Premise' : 'Online'}
+                                {booking && booking.isReservation ? 'Premise' : 'Online'}
                             </p>
                         </div>
 
                         <div className='flex flex-col gap-2'>
                             <p className='text-sm font-normal text-[#636363]'>Payment Status</p>
                             <p className='text-sm font-medium text-[#1A1A1A]'>
-                            {booking && booking.isPaid ? 'Paid' : 'Not paid'}
+                                {booking && booking.isPaid ? 'Paid' : 'Not paid'}
                             </p>
                         </div>
 
-                    </div>
+                        <div className='flex flex-col gap-2'>
+                            <p className='text-sm font-normal text-[#636363]'>Identification Type</p>
+                            <p className='text-sm font-medium text-[#1A1A1A]'>
+                                {/* {booking && booking.identificationType} */}
+                            </p>
+                        </div>
 
-                </div>}
+                        <div className='flex flex-col gap-2'>
+                            <p className='text-sm font-normal text-[#636363]'>Estimated Arrival Time</p>
+                            <p className='text-sm font-medium text-[#1A1A1A]'>
+                                {/* {booking && booking.identificationType} */}
+                            </p>
+                        </div>
+
+                        <div className='flex flex-col gap-2'>
+                            <p className='text-sm font-normal text-[#636363]'>Special Request</p>
+                            <p
+                                className='text-sm font-medium text-[#D4AA00] hover:underline cursor-pointer'
+                                onClick={handleClickOpen}
+                            >
+                                View
+                            </p>
+                        </div>
+
+                        <Dialog open={openDialog} onClose={handleClose}>
+                            <DialogTitle
+                                className='font-poppins'
+                                sx={{
+                                    padding: "16px",
+                                    fontSize: "1rem",
+                                    letterSpacing: "0rem",
+                                    fontWeight: "600",
+                                    width: "auto",
+                                    color: "#364a63",
+                                }}
+                            >
+                                Special Request
+                            </DialogTitle>
+                            <DialogContent
+                                sx={{
+                                    padding: "16px",
+                                    textAlign: 'justify',
+                                }}
+                                className='scrollbar-thin scroll-smooth scrollbar-thumb-gray-300 scrollbar-rounded-full scrollbar-thumb-rounded-full'
+                            >
+                                <DialogContentText className='text-sm font-normal leading-5 text-gray-600'>
+                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
+                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
+                                    <br />
+                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
+                                    <br />
+                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
+                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
+                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
+                                    <br />
+                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
+                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
+                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
+                                </DialogContentText>
+                            </DialogContent>
+                        </Dialog>
+
+                    </div>}
+
+                </div>
             </Layout>
         </div>
     )

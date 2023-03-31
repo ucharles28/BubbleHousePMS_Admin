@@ -1,4 +1,5 @@
 import { Alert, CircularProgress, Snackbar } from '@mui/material';
+import { Switch } from 'antd';
 import React, { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 
@@ -29,7 +30,7 @@ function Settings() {
 
     setTimeout(() => {
       setProfileButtonIsLoading(false)
-      
+
     }, 3000);
   };
 
@@ -37,7 +38,7 @@ function Settings() {
     setAlertMessage(alertMessage)
     setOpen(true)
     setAlertType(alertType)
-}
+  }
 
 
   return (
@@ -157,34 +158,28 @@ function Settings() {
 
                   <div className="space-y-1">
                     <fieldset>
-                      {/* <legend className="sr-only">By Email</legend>
-                      <div className="text-sm font-semibold leading-6 text-gray-900" aria-hidden="true">
-                        By Email
-                      </div> */}
-                      <div className="mt-4 space-y-4">
-                        <div className="flex items-start">
-                          <div className="flex h-6 items-center">
-                            <input
-                              id="comments"
-                              name="comments"
-                              type="checkbox"
-                              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                            />
-                          </div>
-                          <div className="ml-3 text-sm leading-6">
+
+                      <div className="space-y-4">
+
+                        <div className="flex items-start w-full gap-x-2">
+                          <Switch
+                            className='bg-gray-300 hover:bg-gray-400 checked:bg-yellow-500'
+                          />
+                          <div className="text-sm leading-6">
                             <label htmlFor="comments" className="font-medium text-gray-900">
                               New Customer
                             </label>
                             <p className="text-gray-500">Get notified when someones posts a comment on a posting.</p>
                           </div>
                         </div>
+
                         <div className="flex items-start">
                           <div className="flex h-6 items-center">
                             <input
                               id="comments"
                               name="comments"
                               type="checkbox"
-                              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                              className="text-xs h-3 w-3 border leading-5 font-normal text-gray-700"
                             />
                           </div>
                           <div className="ml-3 text-sm leading-6">
@@ -200,7 +195,7 @@ function Settings() {
                               id="candidates"
                               name="candidates"
                               type="checkbox"
-                              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                              className="text-xs h-3 w-3 border leading-5 font-normal text-gray-700"
                             />
                           </div>
                           <div className="ml-3 text-sm leading-6">
@@ -216,7 +211,7 @@ function Settings() {
                               id="offers"
                               name="offers"
                               type="checkbox"
-                              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                              className="text-xs h-3 w-3 border leading-5 font-normal text-gray-700"
                             />
                           </div>
                           <div className="ml-3 text-sm leading-6">
@@ -232,7 +227,7 @@ function Settings() {
                               id="offers"
                               name="offers"
                               type="checkbox"
-                              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                              className="text-xs h-3 w-3 border leading-5 font-normal text-gray-700"
                             />
                           </div>
                           <div className="ml-3 text-sm leading-6">
@@ -248,7 +243,7 @@ function Settings() {
                               id="comments"
                               name="comments"
                               type="checkbox"
-                              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                              className="text-xs h-3 w-3 border leading-5 font-normal text-gray-700"
                             />
                           </div>
                           <div className="ml-3 text-sm leading-6">

@@ -91,7 +91,7 @@ export default function TopBar({ showNav, setShowNav }) {
                 headerStyle={{ padding: "0", borderBottom: "0" }}
                 title={
                     <div className="flex justify-center mt-4 mb-12" >
-                        <Image src="/logo.png" width={90} height={90} />
+                        <Image src={user ? user.profileImageUrl : "https://i.ibb.co/X5LP2MZ/avatar.png"} width={90} height={90} />
                     </div>
                 }
             >
@@ -268,7 +268,7 @@ export default function TopBar({ showNav, setShowNav }) {
                     <div>
                         <Menu.Button className="inline-flex w-full justify-center items-center gap-2">
                             <img
-                                src="/logo.png"
+                                src={user ? user.profileImageUrl : "https://i.ibb.co/X5LP2MZ/avatar.png"}
                                 className="bg-gray-200/50 rounded-full object-cover w-8 h-8 border border-yellow-300 shadow-sm"
                                 alt="avatar"
                             />

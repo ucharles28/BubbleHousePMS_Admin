@@ -16,14 +16,31 @@ function ConfirmedBookings() {
     const [bookings, setBookings] = useState([])
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
-        getRunningBookings()
+        getConfirmedBookings()
     }, [])
     const goBack = () => {
         router.back()
     }
 
-    const getRunningBookings = async () => {
+    const getConfirmedBookings = async () => {
         const response = await get('Booking/Confirmed')
+        if (response.successful) {
+            setBookings(response.data)
+        }
+        setIsLoading(false)
+    }
+
+    const handleSearch = async (text) => {
+        setIsLoading(true)
+        if (text) {
+            filterConfirmedBookings(text)
+        } else {
+            getConfirmedBookings()
+        }
+    }
+
+    const filterConfirmedBookings = async (text) => {
+        const response = await get(`Booking/FilterByStatus?queryText=${text}&status=${4}`)
         if (response.successful) {
             setBookings(response.data)
         }
@@ -68,6 +85,7 @@ function ConfirmedBookings() {
                             <input
                                 type='text'
                                 placeholder='Search Bookings'
+                                onChange={(e) => handleSearch(e.target.value)}
                                 className='w-1/2 h-9 border border-[#1a1a1a]/50 text-xs font-normal pl-2 focus:outline-0 bg-transparent rounded-md'
                             />
 

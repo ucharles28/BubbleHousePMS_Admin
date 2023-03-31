@@ -17,14 +17,31 @@ function TotalBookings() {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        getCancelledBookings()
+        getBookings()
     }, [])
     const goBack = () => {
         router.back()
     }
 
-    const getCancelledBookings = async () => {
+    const getBookings = async () => {
         const response = await get('Booking')
+        if (response.successful) {
+            setBookings(response.data)
+        }
+        setIsLoading(false)
+    }
+
+    const handleSearch = async (text) => {
+        setIsLoading(true)
+        if (text) {
+            filterBookings(text)
+        } else {
+            getBookings()
+        }
+    }
+
+    const filterBookings = async (text) => {
+        const response = await get(`Booking/Filter?queryText=${text}`)
         if (response.successful) {
             setBookings(response.data)
         }
@@ -68,6 +85,7 @@ function TotalBookings() {
 
                             <input
                                 type='text'
+                                onChange={(e) => handleSearch(e.target.value)}
                                 placeholder='Search Bookings'
                                 className='w-1/2 h-9 border border-[#1a1a1a]/50 text-xs font-normal pl-2 focus:outline-0 bg-transparent rounded-md'
                             />
@@ -151,7 +169,7 @@ function TotalBookings() {
                                                     {booking.status === 3 && <span className='text-xs mx-auto text-center font-medium rounded-full p-2 px-3 leading-6 bg-[#FFF1F1] text-[#FF4C51]'>
                                                         Cancelled
                                                     </span>}
-                                                    {booking.status === 1 && <span className='text-xs mx-auto text-center font-medium rounded-full p-2 px-3 leading-6 bg-[#F1FBEB] text-[#56CA00]'>
+                                                    {booking.status === 4 && <span className='text-xs mx-auto text-center font-medium rounded-full p-2 px-3 leading-6 bg-[#F1FBEB] text-[#56CA00]'>
                                                         Confirmed
                                                     </span>}
                                                 </TableCell>

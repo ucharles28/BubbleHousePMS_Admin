@@ -42,8 +42,8 @@ export default function Login() {
             var date = new Date();
             date.setDate(date.getDate() + 30)
             const cookies = new Cookies();
+            path: '/',
             cookies.set('bcloudCookie', response.data.token, {
-                path: '/',
                 expires: date
             });
             router.push('/')

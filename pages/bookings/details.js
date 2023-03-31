@@ -173,14 +173,14 @@ function RequestDetails() {
                         <div className='flex flex-col gap-2'>
                             <p className='text-sm font-normal text-[#636363]'>Identification Type</p>
                             <p className='text-sm font-medium text-[#1A1A1A]'>
-                                {/* {booking && booking.identificationType} */}
+                                {booking && booking.identificationType}
                             </p>
                         </div>
 
                         <div className='flex flex-col gap-2'>
                             <p className='text-sm font-normal text-[#636363]'>Estimated Arrival Time</p>
                             <p className='text-sm font-medium text-[#1A1A1A]'>
-                                {/* {booking && booking.identificationType} */}
+                                {booking && booking.estimatedArrivalTime}
                             </p>
                         </div>
 
@@ -216,18 +216,7 @@ function RequestDetails() {
                                 className='scrollbar-thin scroll-smooth scrollbar-thumb-gray-300 scrollbar-rounded-full scrollbar-thumb-rounded-full'
                             >
                                 <DialogContentText className='text-sm font-normal leading-5 text-gray-600'>
-                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
-                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
-                                    <br />
-                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
-                                    <br />
-                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
-                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
-                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
-                                    <br />
-                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
-                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
-                                    Cillum aliqua est veniam sunt dolore pariatur reprehenderit amet sint dolor commodo aliquip. Elit adipisicing ex cillum nisi reprehenderit qui occaecat proident deserunt eu pariatur duis. Do quis id nisi proident id ea. Excepteur aliquip in adipisicing occaecat cillum.
+                                    {booking && booking.specialRequest}
                                 </DialogContentText>
                             </DialogContent>
                         </Dialog>

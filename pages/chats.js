@@ -28,6 +28,7 @@ function Notifications() {
     const [currentChat, setCurrentChat] = useState();
     const [newMessage, setNewMessage] = useState();
     const [user, setUser] = useState();
+    const [userAbbreviated, setUserAbbreviated] = useState('');
     const [alertType, setAlertType] = useState('');
     const [alertMessage, setAlertMessage] = useState('');
 
@@ -40,7 +41,15 @@ function Notifications() {
 
     useEffect(() => {
         const userObj = JSON.parse(localStorage.getItem('user'))
+        const splitName = userObj.fullName.split(' ')
+        let result = ''
+        if (splitName.length > 1) {
+            result = `${splitName[0].substring(0, 1).toUpperCase()}${splitName[1].substring(0, 1).toUpperCase()}`
+        } else {
+            result = `${splitName[0].substring(0, 1).toUpperCase()}`
+        }
         setUser(userObj)
+        setUserAbbreviated(result)
 
         const connect = new HubConnectionBuilder()
             // .withUrl("https://localhost:7298/chat")
@@ -79,36 +88,9 @@ function Notifications() {
                 .start()
                 .then(async () => {
                     try {
-
-
-
-                        // setChats(chatResponse.map((chat) => {
-                        //     //Get abbrevated version of the customer's name
-                        //     const splitName = chat.customer.fullName.split(' ')
-                        //     chat.abbreviatedName = `${splitName[0].substring(0, 1).toUpperCase()}${splitName[1].substring(0, 1).toUpperCase()}`
-                        //     return chat
-                        // }))
-
-
-                        //SignalR Subscriptions
-                        // connection.on('ReceiveGetChats', (chatsResponse) => {
-                        //     setChats(chatsResponse.map((chat) => {
-                        //         //Get abbrevated version of the customer's name
-                        //         const splitName = chat.customer.fullName.split(' ')
-                        //         chat.abbreviatedName = `${splitName[0].substring(0, 1).toUpperCase()}${splitName[1].substring(0, 1).toUpperCase()}`
-                        //         return chat
-                        //     }))
-                        //     //Subscribe chat 
-                        //     for (let i = 0; i < chatsResponse.length; i++) {
-                        //         connection.off(chatsResponse[i].id)
-                        //         connection.on(chatsResponse[i].id, (message) => {
-                        //             setNewMessage(message)
-                        //         });
-                        //     }
-                        // });
-
+                        debugger
                         var chatsResponse = await connection.invoke("GetChats", user.id);
-                        console.log(chatsResponse)
+                        console.log('Chat response', chatsResponse)
                         setChats(chatsResponse.map((chat) => {
                             //Get abbrevated version of the customer's name
                             const splitName = chat.customer.fullName.split(' ')
@@ -124,6 +106,10 @@ function Notifications() {
                         for (let i = 0; i < chatsResponse.length; i++) {
                             connection.off(chatsResponse[i].id)
                             connection.on(chatsResponse[i].id, (message) => {
+                                if (typeof message === 'string' || message instanceof String) {
+                                    showAlert(message, 'error')
+                                    return
+                                }
                                 setNewMessage(message)
                             });
                         }
@@ -180,6 +166,7 @@ function Notifications() {
     };
 
     const sendMessage = async () => {
+        debugger
         if (!messageText) {
             return
         }
@@ -212,14 +199,25 @@ function Notifications() {
     };
 
     const selectChat = async (chat) => {
-        console.log(chat)
         setCurrentChat(chat)
         const messagesResponse = await connection.invoke("GetChatHistory", chat.id);
         setMessages(messagesResponse)
+        console.log(messagesResponse)
     };
 
     const onClose = () => {
         setOpen(false);
+    };
+
+    const getAbbreviatedName = (name) => {
+        const splitName = name.split(' ')
+        let result = ''
+        if (splitName.length > 1) {
+            result = `${splitName[0].substring(0, 1).toUpperCase()}${splitName[1].substring(0, 1).toUpperCase()}`
+        } else {
+            result = `${splitName[0].substring(0, 1).toUpperCase()}`
+        }
+        return result
     };
 
     const { query } = useRouter();
@@ -228,10 +226,23 @@ function Notifications() {
     const getAllManagers = async (userObj) => {
         const response = await get('User/GetAllAdmins')
         if (response.successful) {
-            console.log(response.data)
             setAdmins(response.data)
         }
     }
+
+    const handleKeyDown = event => {
+
+        console.log('User pressed: ', event.key);
+        console.log('pressed: ', event);
+
+        if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault();
+            sendMessage()
+        }
+
+        // if (event.key === 'Enter' && event.shiftKey) {
+        //   }
+    };
 
     const [admins, setAdmins] = useState([]);
     const [selectedManager, setSelectedManager] = useState();
@@ -423,7 +434,7 @@ function Notifications() {
 
                                 <div className='flex flex-col w-full'>
                                     {messages.map((message) => {
-                                        if (message.senderId != user.id) {
+                                        if (message.senderId === currentChat.customerId) {
                                             return (
                                                 <div className='flex items-center mb-6 justify-between w-full gap-y-2'>
                                                     <div className='flex items-start gap-x-2 w-full'>
@@ -449,15 +460,15 @@ function Notifications() {
                                                     <div className='flex items-start gap-x-2 w-full'>
                                                         {/* <div className='flex justify-center rounded-full tracking-wide relative items-center w-10 h-10 bg-blue-400 text-white text-sm font-semibold'> */}
                                                         <p className='flex justify-center rounded-full tracking-wide relative items-center p-2.5 bg-blue-400 text-white text-sm font-semibold'>
-                                                            {/* {currentChat.abbreviatedName} */}
-                                                            CA
+                                                            {message.sender ? getAbbreviatedName(message.sender.fullName) : userAbbreviated}
                                                         </p>
                                                         {/* </div> */}
                                                         <div className='flex flex-col w-full'>
                                                             <div className='flex justify-between w-full'>
                                                                 <p className='text-xs text-gray-600 font-medium leading-4'>
                                                                     {/* {currentChat.customer.fullName} */}
-                                                                    Admin Name
+                                                                    {/* Admin Name */}
+                                                                    {message.sender ? message.sender.fullName : user.fullName}
                                                                 </p>
                                                                 <p className='text-xs text-gray-600 font-normal'>{format(new Date(message.createdDate), 'dd MMM yyyy')}</p>
                                                             </div>
@@ -479,6 +490,7 @@ function Notifications() {
                                             value={messageText}
                                             onChange={(e) => setMessageText(e.target.value)}
                                             spellCheck='true'
+                                            onKeyDown={handleKeyDown}
                                             placeholder='Start Typing..'
                                             rows={4}
                                             className='w-full border border-[#666666]/50 placeholder:text-[#808080] text-xs font-normal p-3 pl-2 focus:outline-0 bg-transparent rounded-md'
@@ -495,6 +507,7 @@ function Notifications() {
                                         </div>
                                     </div>
                                 </div>}
+
 
                             </div>}
 
@@ -594,7 +607,7 @@ function Notifications() {
                                 </div> */}
 
                                 {messages.map((message) => {
-                                    if (message.senderId != user.id) {
+                                    if (message.senderId === currentChat.customerId) {
                                         return (
                                             <div className='flex items-center mb-6 justify-between w-full gap-y-2'>
                                                 <div className='flex items-start gap-x-2 w-full'>
@@ -620,15 +633,13 @@ function Notifications() {
                                                 <div className='flex items-start gap-x-2 w-full'>
                                                     {/* <div className='flex justify-center rounded-full tracking-wide relative items-center w-10 h-10 bg-blue-400 text-white text-sm font-semibold'> */}
                                                     <p className='flex justify-center rounded-full tracking-wide relative items-center p-2.5 bg-blue-400 text-white text-sm font-semibold'>
-                                                        {/* {currentChat.abbreviatedName} */}
-                                                        CA
+                                                        {message.sender ? getAbbreviatedName(message.sender.fullName) : userAbbreviated}
                                                     </p>
                                                     {/* </div> */}
                                                     <div className='flex flex-col w-full'>
                                                         <div className='flex justify-between w-full'>
                                                             <p className='text-xs text-gray-600 font-medium leading-4'>
-                                                                {/* {currentChat.customer.fullName} */}
-                                                                Admin Name
+                                                                {message.sender ? message.sender.fullName : user.fullName}
                                                             </p>
                                                             <p className='text-xs text-gray-600 font-normal'>{format(new Date(message.createdDate), 'dd MMM yyyy')}</p>
                                                         </div>
@@ -649,6 +660,7 @@ function Notifications() {
                                             spellCheck='true'
                                             placeholder='Start Typing..'
                                             rows={4}
+                                            onKeyDown={handleKeyDown}
                                             value={messageText}
                                             onChange={(e) => setMessageText(e.target.value)}
                                             className='w-full border border-[#666666]/50 placeholder:text-[#808080] text-xs font-normal p-3 pl-2 focus:outline-0 bg-transparent rounded-md'

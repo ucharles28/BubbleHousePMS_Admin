@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next -p 3000",
-    "build": "next build",
+    "build": "env-cmd -f .env next build",
+    "build:prod": "env-cmd -f .env.production next build",
     "start": "next start -p ${PORT:-3000}",
     "test": "NODE_ENV=test jest --watch",
     "export": "npm run build && next export -o _static",

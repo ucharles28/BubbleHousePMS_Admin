@@ -4,8 +4,9 @@ import { forwardRef, useState } from 'react';
 import { post } from '../helpers/ApiRequest';
 import styles from '../styles/Home.module.css';
 import Image from "next/image";
-import { logo } from "../public/logo.png";
+import logo from "../public/logo.png";
 import Cookies from 'universal-cookie';
+import Image from "next/image";
 
 export default function Login() {
 
@@ -72,7 +73,7 @@ export default function Login() {
                 <div className='row-span-2 flex flex-col justify-center p-4 space-y-5 m-auto bg-white rounded-md drop-shadow-sm md:w-[25%] w-full h-auto'>
 
                     <div className="block">
-                        <Image src="/logo.png" width={100} height={100} className="mb-2 m-auto" />
+                        <Image src={logo} width={100} height={100} className="mb-2 m-auto" />
                         <p className='block text-base leading-6 font-medium text-gray-800'>Welcome Back !</p>
                         <span className='block text-xs leading-5 font-normal text-gray-500'>Sign in to continue to Bcloud.</span>
                     </div>

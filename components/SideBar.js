@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from 'next/image';
 import Cookies from 'universal-cookie';
+import logo from '../public/logo.png'
 import { Setting2, Profile2User, Notification, Buildings2, Calendar, Messages2, Category, LogoutCurve } from 'iconsax-react';
 
 const SideBar = forwardRef(({ showNav }, ref) => {
@@ -17,7 +18,7 @@ const SideBar = forwardRef(({ showNav }, ref) => {
     return (
         <div ref={ref} className="md:flex hidden flex-col fixed z-20 w-72 h-full bg-white shadow-sm border-dashed border-r-[1.5px] border-[#E4E4E4]">
             <div className="flex justify-center mt-4 mb-14">
-                <Image src="/logo.png" width={100} height={100} />
+                <Image src={logo} width={100} height={100} />
             </div>
 
             <div className="flex flex-col gap-y-2 px-2 text-sm">

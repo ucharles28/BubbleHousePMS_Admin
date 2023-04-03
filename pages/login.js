@@ -6,7 +6,6 @@ import styles from '../styles/Home.module.css';
 import Image from "next/image";
 import logo from "../public/logo.png";
 import Cookies from 'universal-cookie';
-import Image from "next/image";
 
 export default function Login() {
 

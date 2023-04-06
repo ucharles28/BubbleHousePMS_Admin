@@ -1,5 +1,5 @@
 // const baseUrl = 'https://localhost:7298/api/'
-const baseUrl = 'https://mybcloud.com/doc/api/'
+const baseUrl = process.env.NEXT_PUBLIC_REACT_API_BASE_URL
 export async function post(url = '', request = {}, token) {
   const response = await fetch(`${baseUrl}${url}`, {
     method: 'POST',

@@ -79,7 +79,7 @@ function NewUser() {
     const inputRef = useRef(null);
     const [fullName, setFullName] = useState('');
     const [city, setCity] = useState('');
-    const [gender, setGender] = useState('');
+    const [gender, setGender] = useState('Male');
     const [genders, setGenders] = useState(['Male', 'Female']);
     const [userRoles, setUserRoles] = useState(['Admin', 'Manager', 'Staff', 'Customer']);
     const [email, setEmail] = useState('');

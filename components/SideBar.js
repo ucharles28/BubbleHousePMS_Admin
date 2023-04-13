@@ -10,7 +10,7 @@ const SideBar = forwardRef(({ showNav }, ref) => {
     const logOut = () => {
         localStorage.setItem('user', null)
         const cookies = new Cookies();
-        cookies.remove('africanVoCookie');
+        cookies.remove('bcloudCookie');
         router.push('/login');
     }
     const router = useRouter();

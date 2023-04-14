@@ -84,7 +84,7 @@ function NewUser() {
     const [userRoles, setUserRoles] = useState(['Admin', 'Manager', 'Staff', 'Customer']);
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
-    const [role, setRole] = useState('');
+    const [role, setRole] = useState('Admin');
     const [userImageFile, setUserImageFile] = useState();
     const [userImageSrc, setUserImageSrc] = useState();
     const [isLoading, setIsLoading] = useState(false);
@@ -235,6 +235,7 @@ function NewUser() {
                                             type="button"
                                             className="text-white font-medium flex items-center px-3 py-2 rounded-md bg-[#1a1a1a]/50 text-xs leading-6 uppercase hover:bg-[#636363]"
                                             onClick={saveHotel}
+                                            disabled={!fullName || !email || !phone || !city || !role || !gender}
                                         >
                                             {isLoading ? <CircularProgress size={24} color="inherit" /> : 'Save'}
                                         </button>

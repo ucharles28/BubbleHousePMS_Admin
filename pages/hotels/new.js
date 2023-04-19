@@ -15,6 +15,7 @@ function NewHotel() {
     }
 
     const saveHotel = async () => {
+        console.log(accNo)
         setIsLoading(true)
         const formData = new FormData()
         formData.append("Name", hotelName)

@@ -32,6 +32,7 @@ function HotelDetails() {
             setHotelImageSrc(response.data.imageUrl)
             setCity(response.data.city)
             setAddress(response.data.address.line)
+            setAccNo(response.data.accountCode)
             setIsFeatured(response.data.isFeatured ? "Yes" : "No")
             console.log(selectedManager)
         } else {
@@ -50,6 +51,7 @@ function HotelDetails() {
         formData.append("PhoneNumber", phone)
         formData.append("AltPhoneNumber", altPhone)
         formData.append("AccountCode", accNo)
+        formData.append("City", city)
         formData.append("ImageFile", hotelImageFile)
         formData.append("NumberOfRooms", numberOfRooms ? numberOfRooms : 0)
         formData.append("ManagerId", selectedManager)
@@ -367,7 +369,7 @@ function HotelDetails() {
                                             type="button"
                                             className="text-white font-medium flex items-center px-3 py-2 rounded-md bg-[#1a1a1a]/50 text-xs leading-6 uppercase hover:bg-[#636363]"
                                             onClick={saveHotel}
-                                            disabled={!hotelName || !description || !address || !email || !phone || !numberOfRooms || !selectedManager}
+                                            disabled={!hotelName || !description || !address || !email || !phone || !numberOfRooms || !selectedManager || !city || !accNo}
                                         >
                                             {isLoading ? <CircularProgress size={20} color="inherit" /> : 'Save Changes'}
                                         </button>

@@ -1,9 +1,10 @@
 import { Fragment, useEffect, useState } from "react";
-import { HambergerMenu, DirectNotification, Setting2, LogoutCurve, Profile2User, Notification, Buildings2, Calendar, Messages2, Category } from 'iconsax-react';
+import { HambergerMenu, DirectNotification, Setting2, LogoutCurve, Profile2User, Notification, Buildings2, Calendar, Messages2, Category, Money2 } from 'iconsax-react';
 import { Menu, Transition, Popover } from "@headlessui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from 'next/image';
+import logo from '../public/logo.png'
 import Cookies from 'universal-cookie';
 import { Drawer } from 'antd';
 
@@ -30,6 +31,25 @@ export default function TopBar({ showNav, setShowNav }) {
 
         setUser(JSON.parse(localStorage.getItem('user')))
     }, [])
+
+    // keep router.pathname alive when in sub pages
+    if (router.pathname.includes("/users")) {
+        router.pathname = "/users";
+    } else if (router.pathname.includes("/hotels")) {
+        router.pathname = "/hotels";
+    } else if (router.pathname.includes("/bookings")) {
+        router.pathname = "/bookings";
+    } else if (router.pathname.includes("/rewards")) {
+        router.pathname = "/rewards";
+    } else if (router.pathname.includes("/chats")) {
+        router.pathname = "/chats";
+    } else if (router.pathname.includes("/notifications")) {
+        router.pathname = "/notifications";
+    } else if (router.pathname.includes("/settings")) {
+        router.pathname = "/settings";
+    } else {
+        router.pathname = "/";
+    } 
 
     return (
         <div
@@ -91,7 +111,7 @@ export default function TopBar({ showNav, setShowNav }) {
                 headerStyle={{ padding: "0", borderBottom: "0" }}
                 title={
                     <div className="flex justify-center mt-4 mb-12" >
-                        <Image src={user ? user.profileImageUrl : "https://i.ibb.co/X5LP2MZ/avatar.png"} width={90} height={90} />
+                        <Image src={logo} alt='mybcloud logo' width={90} height={90} />
                     </div>
                 }
             >
@@ -146,6 +166,18 @@ export default function TopBar({ showNav, setShowNav }) {
                         </div>
                     </Link>
 
+                    <Link href="/rewards">
+                        <div
+                            className={`px-5 py-3 text-center cursor-pointer flex items-center gap-3 transition-colors ${router.pathname == "/rewards"
+                                ? "bg-[#fff7d8] text-[#D4AA00] rounded-xl"
+                                : "text-[#636363] hover:bg-[#FFF7D8] hover:text-[#D4AA00] rounded-xl"
+                                }`}
+                        >
+                            <Money2 className="h-5 w-5" variant="Bold" />
+                            <p className="">Bookings</p>
+                        </div>
+                    </Link>
+
                     <Link href="/chats">
                         <div
                             className={`px-5 py-3 text-center cursor-pointer flex items-center gap-3 transition-colors ${router.pathname == "/chats"
@@ -181,6 +213,19 @@ export default function TopBar({ showNav, setShowNav }) {
                             <p className="">Settings</p>
                         </div>
                     </Link>
+
+                    <Link href="/#">
+                    <div
+                        className={`px-5 py-3 text-center cursor-pointer flex items-center gap-3 transition-colors ${router.pathname == "/#"
+                            ? "bg-red-500 text-white rounded-xl"
+                            : "text-[#636363] hover:bg-red-500 hover:text-white rounded-xl"
+                            }`}
+                        onClick={logOut}
+                    >
+                        <LogoutCurve className="h-5 w-5" variant="Bold" />
+                        <p className="">Log Out</p>
+                    </div>
+                </Link>
                 </div>
             </Drawer>
 

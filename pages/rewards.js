@@ -15,13 +15,13 @@ import { format } from "date-fns";
 
 function Rewards() {
 
-    //     const getAllUsers = async () => {
-    //         const response = await get('User')
-    //         if (response.successful) {
-    //             populateRows(response.data)
-    //         }
-    //         setIsLoading(false)
-    //     }
+    const getAllPoints = async () => {
+        const response = await get('Point')
+        if (response.successful) {
+            setRows(response.data)
+        }
+        setIsLoading(false)
+    }
 
     //     const handleSearch = async (text) => {
     //         setIsLoading(true)
@@ -67,24 +67,24 @@ function Rewards() {
     //         setRows(list)
     //     }
 
-    //     useEffect(() => {
-    //         getAllUsers()
-    //     }, [])
+    useEffect(() => {
+        getAllPoints()
+    }, [])
 
-    //     const handleChangePage = (event, newPage) => {
-    //         setPage(newPage);
-    //     };
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
 
-    //     const handleChangeRowsPerPage = (event) => {
-    //         setRowsPerPage(event.target.value);
-    //         setPage(0);
-    //     };
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(event.target.value);
+        setPage(0);
+    };
 
     //states
-    // const [page, setPage] = useState(0);
-    // const [rowsPerPage, setRowsPerPage] = useState(10);
-    // const [rows, setRows] = useState([]);
-    // const [isLoading, setIsLoading] = useState(true);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
+    const [rows, setRows] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     const TableRowStyled = styled(TableRow)`
         &:nth-of-type(odd) {
@@ -136,7 +136,7 @@ function Rewards() {
                         </div> */}
                     </div>
 
-                    {/* {isLoading ? <div className="w-full">
+                    {isLoading ? <div className="w-full">
                         <div className="flex flex-col items-center justify-center">
                             <div className="lg:w-2/5 md:w-1/2 pt-10 pl-4 pr-4 justify-center lg:my-16 sm:my-5">
                                 <div className="m-12 pt-14 flex flex-col items-center justify-center">
@@ -149,80 +149,69 @@ function Rewards() {
                                 </div>
                             </div>
                         </div>
-                    </div> :  */}
-                    <div className='bg-white border border-gray-50 drop-shadow-sm rounded-lg w-full h-auto py-1 px-2'>
-                        <TableContainer>
-                            <Table >
-                                <TableHead>
-                                    <TableRow
-                                        sx={{
-                                            color: "#1A1A1A",
-                                            "& th": {
-                                                fontSize: "0.75rem",
-                                                fontWeight: "550",
-                                                letterSpacing: "0.20px"
-                                            }
-                                        }}
-                                        className='text-xs leading-6 font-[600] uppercase text-[#1a1a1a]'
-                                    >
-                                        <TableCell className="w-10">S/N</TableCell>
-                                        <TableCell className=" ">User</TableCell>
-                                        <TableCell className=" ">Rewards</TableCell>
-                                        <TableCell className=" ">Hotel</TableCell>
-                                        <TableCell className=" ">Date</TableCell>
-                                        {/* <TableCell className="w-20">Action</TableCell> */}
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {/* {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                        .map((row, index) => { 
-                                return (*/}
-                                    <TableRowStyled
-                                    // key={index}
-                                    >
-                                        <TableCell className='w-10'>
-                                            1
-                                        </TableCell>
-                                        <TableCell>
-                                            Uzoma Charles
-                                        </TableCell>
-                                        <TableCell >
-                                            +10BCP
-                                        </TableCell>
-                                        <TableCell>
-                                            Kings Hotel & Suites
-                                        </TableCell>
-                                        <TableCell>
-                                            11-05-2023 11:21:03
-                                        </TableCell>
-                                        {/* <TableCell className='w-20'>
-                                                        <Link href={{
-                                                            pathname: `/users/details`,
-                                                            query: {
-                                                                id: row.id
-                                                            }
-                                                        }}>
-                                                            <Eye size={18} className='text-[#636363] hover:text-[#1a1a1a]' />
-                                                        </Link>
-
-                                                    </TableCell> */}
-                                    </TableRowStyled>
-                                    {/* );
-                                 })} */}
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
-                        {/* <TablePagination
-                            rowsPerPageOptions={[5, 10, 25, 50, 100]}
-                            component="div"
-                            count={rows.length}
-                            rowsPerPage={rowsPerPage}
-                            page={page}
-                            onPageChange={handleChangePage}
-                            onRowsPerPageChange={handleChangeRowsPerPage}
-                        /> */}
-                    </div>
-                    {/* } */}
+                    </div> :
+                        <div className='bg-white border border-gray-50 drop-shadow-sm rounded-lg w-full h-auto py-1 px-2'>
+                            <TableContainer>
+                                <Table >
+                                    <TableHead>
+                                        <TableRow
+                                            sx={{
+                                                color: "#1A1A1A",
+                                                "& th": {
+                                                    fontSize: "0.75rem",
+                                                    fontWeight: "550",
+                                                    letterSpacing: "0.20px"
+                                                }
+                                            }}
+                                            className='text-xs leading-6 font-[600] uppercase text-[#1a1a1a]'
+                                        >
+                                            <TableCell className="w-10">S/N</TableCell>
+                                            <TableCell className=" ">User</TableCell>
+                                            <TableCell className=" ">Rewards</TableCell>
+                                            <TableCell className=" ">Hotel</TableCell>
+                                            <TableCell className=" ">Date</TableCell>
+                                            {/* <TableCell className="w-20">Action</TableCell> */}
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                            .map((row, index) => {
+                                                return (
+                                                    <TableRowStyled
+                                                        key={index}
+                                                    >
+                                                        <TableCell className='w-10'>
+                                                            {index + 1}
+                                                        </TableCell>
+                                                        <TableCell>
+                                                            {row.user.fullName}
+                                                        </TableCell>
+                                                        <TableCell >
+                                                            {row.isAdded ? `+${row.point}BCP` : `-${row.point}BCP`}
+                                                        </TableCell>
+                                                        <TableCell>
+                                                            {row.hotelName}
+                                                        </TableCell>
+                                                        <TableCell>
+                                                            {format(new Date(row.createdDate), 'dd-MM-yyyy HH:mm:ss')}
+                                                        </TableCell>
+                                                    </TableRowStyled>
+                                                );
+                                            })}
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                            <TablePagination
+                                rowsPerPageOptions={[5, 10, 25, 50, 100]}
+                                component="div"
+                                count={rows.length}
+                                rowsPerPage={rowsPerPage}
+                                page={page}
+                                onPageChange={handleChangePage}
+                                onRowsPerPageChange={handleChangeRowsPerPage}
+                            />
+                        </div>
+                    }
                 </div>
             </Layout>
         </div>

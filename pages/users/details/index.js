@@ -257,7 +257,7 @@ function UserDetails() {
                                             placeholder='Reward Points'
                                             className='w-full border border-[#666666]/50 placeholder:text-[#636363] text-xs font-normal p-3 pl-2 focus:outline-0 bg-transparent rounded-md'
                                             readOnly={true}
-                                            // value={user.city}
+                                            value={user.points}
                                         />
                                     </div>
 

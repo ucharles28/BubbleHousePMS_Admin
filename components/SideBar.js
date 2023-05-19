@@ -1,10 +1,10 @@
-import { forwardRef } from "react";
+import { forwardRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from 'next/image';
 import Cookies from 'universal-cookie';
 import logo from '../public/logo.png'
-import { Setting2, Profile2User, Notification, Buildings2, Calendar, Messages2, Category, LogoutCurve } from 'iconsax-react';
+import { Setting2, Profile2User, Notification, Buildings2, Calendar, Messages2, Category, LogoutCurve, Money2 } from 'iconsax-react';
 
 const SideBar = forwardRef(({ showNav }, ref) => {
     const logOut = () => {
@@ -14,6 +14,26 @@ const SideBar = forwardRef(({ showNav }, ref) => {
         router.push('/login');
     }
     const router = useRouter();
+    const [box5, setBox5] = useState(false);
+
+    // keep router.pathname alive when in sub pages
+    if (router.pathname.includes("/users")) {
+        router.pathname = "/users";
+    } else if (router.pathname.includes("/hotels")) {
+        router.pathname = "/hotels";
+    } else if (router.pathname.includes("/bookings")) {
+        router.pathname = "/bookings";
+    } else if (router.pathname.includes("/rewards")) {
+        router.pathname = "/rewards";
+    } else if (router.pathname.includes("/chats")) {
+        router.pathname = "/chats";
+    } else if (router.pathname.includes("/notifications")) {
+        router.pathname = "/notifications";
+    } else if (router.pathname.includes("/settings")) {
+        router.pathname = "/settings";
+    } else {
+        router.pathname = "/";
+    } 
 
     return (
         <div ref={ref} className="md:flex hidden flex-col fixed z-20 w-72 h-full bg-white shadow-sm border-dashed border-r-[1.5px] border-[#E4E4E4]">
@@ -34,7 +54,10 @@ const SideBar = forwardRef(({ showNav }, ref) => {
                     </div>
                 </Link>
 
-                <Link href="/users">
+                <Link
+                    href="/users"
+                // onClick={() => setBox5(!box5)}
+                >
                     <div
                         className={`px-5 py-3 text-center cursor-pointer flex items-center gap-3 transition-colors ${router.pathname == "/users"
                             ? "bg-[#fff7d8] text-[#D4AA00] rounded-xl"
@@ -45,6 +68,14 @@ const SideBar = forwardRef(({ showNav }, ref) => {
                         <p className="">Users</p>
                     </div>
                 </Link>
+
+                {/* {box5 && (
+                    <div className="bg-[#ffcc00]/20 rounded-md flex flex-col gap-2 text-sm font-normal leading-5">
+                        <p>All Users </p>
+                        <p>All Users </p>
+                        <p>All Users </p>
+                        <p>All Users </p>
+                    </div>)} */}
 
                 <Link href="/hotels">
                     <div
@@ -67,6 +98,18 @@ const SideBar = forwardRef(({ showNav }, ref) => {
                     >
                         <Calendar className="h-5 w-5" variant="Bold" />
                         <p className="">Bookings</p>
+                    </div>
+                </Link>
+
+                <Link href="/rewards">
+                    <div
+                        className={`px-5 py-3 text-center cursor-pointer flex items-center gap-3 transition-colors ${router.pathname == "/rewards"
+                            ? "bg-[#fff7d8] text-[#D4AA00] rounded-xl"
+                            : "text-[#636363] hover:bg-[#FFF7D8] hover:text-[#D4AA00] rounded-xl"
+                            }`}
+                    >
+                        <Money2 className="h-5 w-5" variant="Bold" />
+                        <p className="">Rewards</p>
                     </div>
                 </Link>
 

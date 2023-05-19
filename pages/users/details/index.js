@@ -105,20 +105,21 @@ function UserDetails() {
                     </Alert>
                 </Snackbar>
 
-                {isLoading ? <div className="w-full">
-                        <div className="flex flex-col items-center justify-center">
-                            <div className="lg:w-2/5 md:w-1/2 pt-10 pl-4 pr-4 justify-center lg:my-16 sm:my-5">
-                                <div className="m-12 pt-14 flex flex-col items-center justify-center">
-                                    <BounceLoader
-                                        heigth={200}
-                                        width={200}
-                                        color="#FFCC00"
-                                        ariaLabel="loading-indicator"
-                                    />
-                                </div>
+                {/* {isLoading ? <div className="w-full">
+                    <div className="flex flex-col items-center justify-center">
+                        <div className="lg:w-2/5 md:w-1/2 pt-10 pl-4 pr-4 justify-center lg:my-16 sm:my-5">
+                            <div className="m-12 pt-14 flex flex-col items-center justify-center">
+                                <BounceLoader
+                                    heigth={200}
+                                    width={200}
+                                    color="#FFCC00"
+                                    ariaLabel="loading-indicator"
+                                />
                             </div>
                         </div>
-                    </div> : <div className='w-full h-full py-6 flex flex-col gap-4'>
+                    </div>
+                </div> :  */}
+                <div className='w-full h-full py-6 flex flex-col gap-4'>
 
                     <div className='flex items-end justify-between w-full'>
 
@@ -154,13 +155,13 @@ function UserDetails() {
                                         style={{ display: 'none' }}
                                         ref={inputRef}
                                         type="file"
-                                    onChange={handleFileChange}
+                                        onChange={handleFileChange}
                                     />
 
                                     <button
                                         type="button"
                                         className="text-white font-medium flex items-center px-3 py-2 rounded-md bg-[#1a1a1a]/50 text-xs leading-6 uppercase hover:bg-[#636363]"
-                                    onClick={handleClick}
+                                        onClick={handleClick}
                                     >
                                         Upload photo
                                     </button>
@@ -264,7 +265,7 @@ function UserDetails() {
                                         <button
                                             type="button"
                                             className="text-white font-medium flex items-center px-3 py-2 rounded-md bg-[#1a1a1a]/50 text-xs leading-6 uppercase hover:bg-[#636363]"
-                                        onClick={updateManager}
+                                            onClick={updateManager}
                                         >
                                             {isButttonLoading ? <CircularProgress size={24} color="inherit" /> : 'Save'}
                                         </button>
@@ -277,14 +278,33 @@ function UserDetails() {
                                             Cancel
                                         </button>
 
-                                    </div>
-                                </div>
+                                        <div className='flex flex-col gap-2'>
 
+                                            <p className='text-sm leading-5 font-medium'>Username: <span className='text-sm font-normal leading-5 text-[#1a1a1a]/70'>{selectedUser.username}</span></p>
+
+                                            <p className='text-sm leading-5 font-medium'>Billing Email: <span className='text-sm font-normal leading-5 text-[#1a1a1a]/70'>{selectedUser.email}</span></p>
+
+                                            <p className='text-sm leading-5 font-medium'>Contact: <span className='text-sm font-normal leading-5 text-[#1a1a1a]/70'>{selectedUser.phoneNumber}</span></p>
+
+                                            <p className='text-sm leading-5 font-medium'>Gender: <span className='text-sm font-normal leading-5 text-[#1a1a1a]/70'>{selectedUser.gender}</span></p>
+
+                                            <p className='text-sm leading-5 font-medium'>Points: <span className='text-sm font-normal leading-5 text-[#1a1a1a]/70'>+100BCP</span></p>
+
+                                            {/* <p className='text-sm leading-5 font-medium'>Role: <span className='text-sm font-normal leading-5 text-[#1a1a1a]/70'>{getRole(selectedUser.accountType)}</span></p> */}
+
+                                        </div>
+
+                                    </div>
+
+                                </div> 
+                                {/* :
+                                <div className='flex justify-center'><CircularProgress /></div>} */}
                             </div>
                         </div>
-                    </div>
-                </div>}
 
+                    </div>
+                </div>
+                {/* } */}
             </Layout>
         </div>
     )

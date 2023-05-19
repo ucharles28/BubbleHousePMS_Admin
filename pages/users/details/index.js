@@ -195,6 +195,18 @@ function UserDetails() {
                                     </div>
 
                                     <div className="flex flex-col space-y-1" >
+                                        <label className='text-xs font-medium leading-5 text-gray-700'>Username</label>
+                                        <input
+                                            type='text'
+                                            placeholder='userName'
+                                            className='w-full border border-[#666666]/50 placeholder:text-[#636363] text-xs font-normal p-3 pl-2 focus:outline-0 bg-transparent rounded-md'
+                                            readOnly={true}
+                                            value={user.username}
+                                            // onChange={(e) => setUser((prev) => ({ ...prev, ['fullName']: e.target.value }))}
+                                        />
+                                    </div>
+
+                                    <div className="flex flex-col space-y-1" >
                                         <label className='text-xs font-medium leading-5 text-gray-700'>Email Address</label>
                                         <input
                                             type='email'
@@ -238,6 +250,17 @@ function UserDetails() {
                                         </select>
                                     </div>
 
+                                    <div className="flex flex-col space-y-1" >
+                                        <label className='text-xs font-medium leading-5 text-gray-700'>Points</label>
+                                        <input
+                                            type='text'
+                                            placeholder='Reward Points'
+                                            className='w-full border border-[#666666]/50 placeholder:text-[#636363] text-xs font-normal p-3 pl-2 focus:outline-0 bg-transparent rounded-md'
+                                            readOnly={true}
+                                            // value={user.city}
+                                        />
+                                    </div>
+
                                     {/* <div className="flex flex-col space-y-1" >
                                         <label className='text-xs font-medium leading-5 text-gray-700'>User Role</label>
                                         <select
@@ -277,22 +300,6 @@ function UserDetails() {
                                         >
                                             Cancel
                                         </button>
-
-                                        <div className='flex flex-col gap-2'>
-
-                                            <p className='text-sm leading-5 font-medium'>Username: <span className='text-sm font-normal leading-5 text-[#1a1a1a]/70'>{selectedUser.username}</span></p>
-
-                                            <p className='text-sm leading-5 font-medium'>Billing Email: <span className='text-sm font-normal leading-5 text-[#1a1a1a]/70'>{selectedUser.email}</span></p>
-
-                                            <p className='text-sm leading-5 font-medium'>Contact: <span className='text-sm font-normal leading-5 text-[#1a1a1a]/70'>{selectedUser.phoneNumber}</span></p>
-
-                                            <p className='text-sm leading-5 font-medium'>Gender: <span className='text-sm font-normal leading-5 text-[#1a1a1a]/70'>{selectedUser.gender}</span></p>
-
-                                            <p className='text-sm leading-5 font-medium'>Points: <span className='text-sm font-normal leading-5 text-[#1a1a1a]/70'>+100BCP</span></p>
-
-                                            {/* <p className='text-sm leading-5 font-medium'>Role: <span className='text-sm font-normal leading-5 text-[#1a1a1a]/70'>{getRole(selectedUser.accountType)}</span></p> */}
-
-                                        </div>
 
                                     </div>
 

@@ -10,7 +10,9 @@ function NewHotel() {
     const getAllManagers = async () => {
         const response = await get('User/GetAllManagers')
         if (response.successful) {
-            setManagers(response.data)
+            const hotels = [{id: '', fullName: ''}, ...response.data]
+            //setManagers(response.data)
+            setManagers(hotels);
         }
     }
 

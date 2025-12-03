@@ -1,16 +1,17 @@
 import { forwardRef, use, useEffect, useRef, useState } from 'react';
 import {
     TableCell, TablePagination, TableRow, Table,
-    TableContainer, TableHead, CircularProgress, TableBody, TextField
+    TableContainer, TableHead, CircularProgress, TableBody, TextField, Snackbar
 } from '@mui/material'
-import { Eye } from 'iconsax-react';
-import { get, postData } from '../../helpers/ApiRequest';
+import { Eye, Trash } from 'iconsax-react';
+import { get, postData, deleteData } from '../../helpers/ApiRequest';
 import MuiAlert from '@mui/material/Alert';
 import Link from 'next/link';
 import Layout from '../../components/Layout';
 import { BounceLoader } from "react-spinners";
 import styled from "@emotion/styled";
 import { format } from "date-fns";
+import DeleteConfirmationDialog from '../../components/DeleteConfirmationDialog';
 
 
 function UsersPage() {
@@ -18,7 +19,12 @@ function UsersPage() {
     const getAllUsers = async () => {
         const response = await get('User')
         if (response.successful) {
-            populateRows(response.data)
+            // Filter out soft-deleted users
+            const activeUsers = response.data.filter(user =>
+                !user.isDeleted && !user.IsDeleted && !user.deleted && !user.Deleted
+            );
+            console.log('Total users:', response.data.length, 'Active users:', activeUsers.length);
+            populateRows(activeUsers)
         }
         setIsLoading(false)
     }
@@ -35,7 +41,11 @@ function UsersPage() {
     const filterUsers = async (text) => {
         const response = await get(`User/Filter?queryText=${text}&accountType=${0}`)
         if (response.successful) {
-            populateRows(response.data)
+            // Filter out soft-deleted users
+            const activeUsers = response.data.filter(user =>
+                !user.isDeleted && !user.IsDeleted && !user.deleted && !user.Deleted
+            );
+            populateRows(activeUsers)
         }
         setIsLoading(false)
     }
@@ -80,11 +90,66 @@ function UsersPage() {
         setPage(0);
     };
 
+    const handleDeleteClick = (user) => {
+        setUserToDelete(user);
+        setDeleteDialogOpen(true);
+    };
+
+    const handleDeleteConfirm = async () => {
+        if (!userToDelete) return;
+
+        setIsDeleting(true);
+        try {
+            // Call the backend DELETE endpoint when available
+            // Expected endpoint: DELETE /api/User/{id}
+            const response = await deleteData(`User/${userToDelete.id}`);
+
+            if (response.successful) {
+                // Remove the user from the local state
+                setRows(rows.filter(row => row.id !== userToDelete.id));
+                setSnackbar({
+                    open: true,
+                    message: 'User deleted successfully',
+                    severity: 'success'
+                });
+            } else {
+                setSnackbar({
+                    open: true,
+                    message: response.data || 'Failed to delete user',
+                    severity: 'error'
+                });
+            }
+        } catch (error) {
+            setSnackbar({
+                open: true,
+                message: 'An error occurred while deleting the user',
+                severity: 'error'
+            });
+        } finally {
+            setIsDeleting(false);
+            setDeleteDialogOpen(false);
+            setUserToDelete(null);
+        }
+    };
+
+    const handleDeleteCancel = () => {
+        setDeleteDialogOpen(false);
+        setUserToDelete(null);
+    };
+
+    const handleSnackbarClose = () => {
+        setSnackbar({ ...snackbar, open: false });
+    };
+
     //states
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [rows, setRows] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+    const [userToDelete, setUserToDelete] = useState(null);
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
 
     const TableRowStyled = styled(TableRow)`
         &:nth-of-type(odd) {
@@ -189,15 +254,21 @@ function UsersPage() {
                                                     <TableCell>{row.role}</TableCell>
                                                     <TableCell>{row.joined}</TableCell>
                                                     <TableCell className='w-20'>
-                                                        <Link href={{
-                                                            pathname: `/users/details`,
-                                                            query: {
-                                                                id: row.id
-                                                            }
-                                                        }}>
-                                                            <Eye size={18} className='text-[#636363] hover:text-[#1a1a1a]' />
-                                                        </Link>
-
+                                                        <div className='flex items-center gap-3'>
+                                                            <Link href={{
+                                                                pathname: `/users/details`,
+                                                                query: {
+                                                                    id: row.id
+                                                                }
+                                                            }}>
+                                                                <Eye size={18} className='text-[#636363] hover:text-[#1a1a1a] cursor-pointer' />
+                                                            </Link>
+                                                            <Trash
+                                                                size={18}
+                                                                className='text-[#FF4C51] hover:text-[#ff3338] cursor-pointer'
+                                                                onClick={() => handleDeleteClick(row)}
+                                                            />
+                                                        </div>
                                                     </TableCell>
                                                 </TableRowStyled>
                                             );
@@ -216,6 +287,31 @@ function UsersPage() {
                         />
                     </div>}
                 </div>
+
+                <DeleteConfirmationDialog
+                    open={deleteDialogOpen}
+                    onClose={handleDeleteCancel}
+                    onConfirm={handleDeleteConfirm}
+                    title="Delete User"
+                    message={`Are you sure you want to delete ${userToDelete?.user}? This action cannot be undone.`}
+                    isDeleting={isDeleting}
+                />
+
+                <Snackbar
+                    open={snackbar.open}
+                    autoHideDuration={6000}
+                    onClose={handleSnackbarClose}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                >
+                    <MuiAlert
+                        elevation={6}
+                        variant="filled"
+                        onClose={handleSnackbarClose}
+                        severity={snackbar.severity}
+                    >
+                        {snackbar.message}
+                    </MuiAlert>
+                </Snackbar>
             </Layout>
         </div>
     )

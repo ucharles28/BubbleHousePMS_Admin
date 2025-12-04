@@ -1,16 +1,17 @@
 import { forwardRef, use, useEffect, useRef, useState } from 'react';
 import {
     TableCell, TablePagination, TableRow, Table,
-    TableContainer, TableHead, CircularProgress, TableBody, TextField
+    TableContainer, TableHead, CircularProgress, TableBody, TextField, Snackbar
 } from '@mui/material'
-import { Eye, ArrowLeft2 } from 'iconsax-react'
-import { get, postData } from '../../../helpers/ApiRequest'
+import { Eye, ArrowLeft2, Trash } from 'iconsax-react'
+import { get, postData, deleteData } from '../../../helpers/ApiRequest'
 import MuiAlert from '@mui/material/Alert'
 import Link from 'next/link'
 import { useRouter } from 'next/router';
 import Layout from '../../../components/Layout';
 import styled from "@emotion/styled";
 import { BounceLoader } from "react-spinners";
+import DeleteConfirmationDialog from '../../../components/DeleteConfirmationDialog';
 
 
 function Managers() {
@@ -26,7 +27,12 @@ function Managers() {
     const getManagers = async () => {
         const response = await get('User/GetAllManagers')
         if (response.successful) {
-            setManagers(response.data)
+            // Filter out soft-deleted managers
+            const activeManagers = response.data.filter(manager =>
+                !manager.isDeleted && !manager.IsDeleted && !manager.deleted && !manager.Deleted
+            );
+            console.log('Total managers:', response.data.length, 'Active managers:', activeManagers.length);
+            setManagers(activeManagers)
         }
         setIsLoading(false)
     }
@@ -43,7 +49,11 @@ function Managers() {
     const filterManagers = async (text) => {
         const response = await get(`User/Filter?queryText=${text}&accountType=${2}`)
         if (response.successful) {
-            setManagers(response.data)
+            // Filter out soft-deleted managers
+            const activeManagers = response.data.filter(manager =>
+                !manager.isDeleted && !manager.IsDeleted && !manager.deleted && !manager.Deleted
+            );
+            setManagers(activeManagers)
         }
         setIsLoading(false)
     }
@@ -58,10 +68,66 @@ function Managers() {
         setRowsPerPage(event.target.value);
         setPage(0);
     };
+
+    const handleDeleteClick = (manager) => {
+        setManagerToDelete(manager);
+        setDeleteDialogOpen(true);
+    };
+
+    const handleDeleteConfirm = async () => {
+        if (!managerToDelete) return;
+
+        setIsDeleting(true);
+        try {
+            // Call the backend DELETE endpoint when available
+            // Expected endpoint: DELETE /api/User/{id}
+            const response = await deleteData(`User/${managerToDelete.id}`);
+
+            if (response.successful) {
+                // Remove the manager from the local state
+                setManagers(managers.filter(manager => manager.id !== managerToDelete.id));
+                setSnackbar({
+                    open: true,
+                    message: 'Manager deleted successfully',
+                    severity: 'success'
+                });
+            } else {
+                setSnackbar({
+                    open: true,
+                    message: response.data || 'Failed to delete manager',
+                    severity: 'error'
+                });
+            }
+        } catch (error) {
+            setSnackbar({
+                open: true,
+                message: 'An error occurred while deleting the manager',
+                severity: 'error'
+            });
+        } finally {
+            setIsDeleting(false);
+            setDeleteDialogOpen(false);
+            setManagerToDelete(null);
+        }
+    };
+
+    const handleDeleteCancel = () => {
+        setDeleteDialogOpen(false);
+        setManagerToDelete(null);
+    };
+
+    const handleSnackbarClose = () => {
+        setSnackbar({ ...snackbar, open: false });
+    };
+
     //states
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [rows, setRows] = useState([]);
+    const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+    const [managerToDelete, setManagerToDelete] = useState(null);
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
     const TableRowStyled = styled(TableRow)`
     &:nth-of-type(odd) {
         background-color: #f8f8f8;
@@ -163,17 +229,23 @@ function Managers() {
                                                 </span>
                                             </TableCell>*/}
                                                 <TableCell className='w-20'>
-                                                    <Link
-                                                        href={{
-                                                            pathname: `/users/manager/details`,
-                                                            query: {
-                                                                id: manager.id
-                                                            }
-                                                        }}
-                                                    >
-                                                        <Eye size={18} className='text-[#636363] hover:text-[#1a1a1a]' />
-                                                    </Link>
-
+                                                    <div className='flex items-center gap-3'>
+                                                        <Link
+                                                            href={{
+                                                                pathname: `/users/manager/details`,
+                                                                query: {
+                                                                    id: manager.id
+                                                                }
+                                                            }}
+                                                        >
+                                                            <Eye size={18} className='text-[#636363] hover:text-[#1a1a1a] cursor-pointer' />
+                                                        </Link>
+                                                        <Trash
+                                                            size={18}
+                                                            className='text-[#FF4C51] hover:text-[#ff3338] cursor-pointer'
+                                                            onClick={() => handleDeleteClick(manager)}
+                                                        />
+                                                    </div>
                                                 </TableCell>
                                             </TableRowStyled>
                                         ))}
@@ -191,6 +263,31 @@ function Managers() {
                         />
                     </div>}
                 </div>
+
+                <DeleteConfirmationDialog
+                    open={deleteDialogOpen}
+                    onClose={handleDeleteCancel}
+                    onConfirm={handleDeleteConfirm}
+                    title="Delete Manager"
+                    message={`Are you sure you want to delete ${managerToDelete?.fullName}? This action cannot be undone.`}
+                    isDeleting={isDeleting}
+                />
+
+                <Snackbar
+                    open={snackbar.open}
+                    autoHideDuration={6000}
+                    onClose={handleSnackbarClose}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                >
+                    <MuiAlert
+                        elevation={6}
+                        variant="filled"
+                        onClose={handleSnackbarClose}
+                        severity={snackbar.severity}
+                    >
+                        {snackbar.message}
+                    </MuiAlert>
+                </Snackbar>
             </Layout>
         </div>
     )

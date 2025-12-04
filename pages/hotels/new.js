@@ -112,7 +112,7 @@ function NewHotel() {
     useEffect(() => {
         getAllManagers();
         loadScript(
-            `https://maps.googleapis.com/maps/api/js?key=AIzaSyB8QN-9BQ2Gto1h0GfSOG78AzL-qHhDyPg&libraries=places`,
+            `https://maps.googleapis.com/maps/api/js?key=AIzaSyBw8ucsDTRTHVwWrhqoc14KFqQNsaQJ6RM&libraries=places`,
             () => handleScriptLoad(setAddress, inputRef)
         );
     }, [])

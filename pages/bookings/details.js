@@ -39,7 +39,16 @@ function RequestDetails() {
         const response = await get(`Booking/${id}`);
 
         if (response.successful) {
-            console.log(response.data.roomTypes)
+            console.log('=== BOOKING DETAILS DEBUG ===')
+            console.log('Full booking data:', JSON.stringify(response.data, null, 2))
+            console.log('All property keys:', Object.keys(response.data))
+            console.log('Identification Type (camelCase):', response.data.identificationType)
+            console.log('Identification Type (PascalCase):', response.data.IdentificationType)
+            console.log('Estimated Arrival Time (camelCase):', response.data.estimatedArrivalTime)
+            console.log('Estimated Arrival Time (PascalCase):', response.data.EstimatedArrivalTime)
+            console.log('Special Request (camelCase):', response.data.specialRequest)
+            console.log('Special Request (PascalCase):', response.data.SpecialRequest)
+            console.log('=== END DEBUG ===')
             setBooking(response.data)
         }
         setIsLoading(false)
@@ -173,25 +182,29 @@ function RequestDetails() {
                         <div className='flex flex-col gap-2'>
                             <p className='text-sm font-normal text-[#636363]'>Identification Type</p>
                             <p className='text-sm font-medium text-[#1A1A1A]'>
-                                {booking && booking.identificationType}
+                                {booking && (booking.identificationType || booking.IdentificationType || 'N/A')}
                             </p>
                         </div>
 
                         <div className='flex flex-col gap-2'>
                             <p className='text-sm font-normal text-[#636363]'>Estimated Arrival Time</p>
                             <p className='text-sm font-medium text-[#1A1A1A]'>
-                                {booking && booking.estimatedArrivalTime}
+                                {booking && (booking.estimatedArrivalTime || booking.EstimatedArrivalTime || 'N/A')}
                             </p>
                         </div>
 
                         <div className='flex flex-col gap-2'>
                             <p className='text-sm font-normal text-[#636363]'>Special Request</p>
-                            <p
-                                className='text-sm font-medium text-[#D4AA00] hover:underline cursor-pointer'
-                                onClick={handleClickOpen}
-                            >
-                                View
-                            </p>
+                            {booking && (booking.specialRequest || booking.SpecialRequest) ? (
+                                <p
+                                    className='text-sm font-medium text-[#D4AA00] hover:underline cursor-pointer'
+                                    onClick={handleClickOpen}
+                                >
+                                    View
+                                </p>
+                            ) : (
+                                <p className='text-sm font-medium text-[#1A1A1A]'>N/A</p>
+                            )}
                         </div>
 
                         <Dialog open={openDialog} onClose={handleClose}>
@@ -216,7 +229,7 @@ function RequestDetails() {
                                 className='scrollbar-thin scroll-smooth scrollbar-thumb-gray-300 scrollbar-rounded-full scrollbar-thumb-rounded-full'
                             >
                                 <DialogContentText className='text-sm font-normal leading-5 text-gray-600'>
-                                    {booking && booking.specialRequest}
+                                    {booking && (booking.specialRequest || booking.SpecialRequest || 'No special request provided')}
                                 </DialogContentText>
                             </DialogContent>
                         </Dialog>

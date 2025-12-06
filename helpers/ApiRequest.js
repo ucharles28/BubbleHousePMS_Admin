@@ -174,6 +174,7 @@ export async function get(url = '', token) {
 }
 
 export async function deleteData(url = '', token) {
+  console.log('deleteData called with URL:', url, 'Full URL:', `${baseUrl}${url}`);
   const response  = await fetch(`${baseUrl}${url}`, {
     method: 'DELETE',
     // mode: 'cors',
@@ -185,17 +186,27 @@ export async function deleteData(url = '', token) {
     },
   })
     .then(async (res) => {
-      console.log('res', res)
+      console.log('DELETE response status:', res.status, 'OK:', res.ok);
+
+      // Try to parse JSON, but handle empty responses
+      let data;
+      try {
+        const text = await res.text();
+        data = text ? JSON.parse(text) : null;
+      } catch (e) {
+        console.log('Response is not JSON or empty, which is OK for DELETE');
+        data = null;
+      }
+
       const responseObject = {
         successful: res.ok,
-        data: await res?.json(),
+        data: data || (res.ok ? 'Deleted successfully' : 'Delete failed'),
       };
+      console.log('DELETE responseObject:', responseObject);
       return responseObject;
     })
-    // .then((data) => data)
     .catch((error) => {
-      console.log(error)
-      // return error;
+      console.error('DELETE request error:', error)
       const responseObject = {
         successful: false,
         data: 'Unable to send request. Please try again later',

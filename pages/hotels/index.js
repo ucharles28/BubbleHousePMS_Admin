@@ -1,22 +1,28 @@
 import {
     TableCell, TablePagination, TableRow, Table,
-    TableContainer, TableHead, CircularProgress, TableBody, TextField
+    TableContainer, TableHead, CircularProgress, TableBody, TextField, Snackbar
 } from '@mui/material';
-import { Edit2, Export } from 'iconsax-react';
+import { Edit2, Export, Trash } from 'iconsax-react';
 import { forwardRef, use, useEffect, useRef, useState } from 'react';
-import { get, postData } from '../../helpers/ApiRequest';
+import { get, postData, deleteData } from '../../helpers/ApiRequest';
 import MuiAlert from '@mui/material/Alert';
 import Link from 'next/link';
 import { FiEdit3 } from 'react-icons/fi';
 import Layout from '../../components/Layout';
 import styled from "@emotion/styled";
+import DeleteConfirmationDialog from '../../components/DeleteConfirmationDialog';
 
 function HotelsPage() {
 
     const getAllHotels = async () => {
         const response = await get('Hotel')
         if (response.successful) {
-            setRows(response.data)
+            // Filter out soft-deleted hotels
+            const activeHotels = response.data.filter(hotel =>
+                !hotel.isDeleted && !hotel.IsDeleted && !hotel.deleted && !hotel.Deleted
+            );
+            console.log('Total hotels:', response.data.length, 'Active hotels:', activeHotels.length);
+            setRows(activeHotels)
         }
         setIsLoading(false)
     }
@@ -37,7 +43,11 @@ function HotelsPage() {
     const filterHotel = async (text) => {
         const response = await get(`Hotel/Filter?queryText=${text}`)
         if (response.successful) {
-            setRows(response.data)
+            // Filter out soft-deleted hotels
+            const activeHotels = response.data.filter(hotel =>
+                !hotel.isDeleted && !hotel.IsDeleted && !hotel.deleted && !hotel.Deleted
+            );
+            setRows(activeHotels)
         }
         setIsLoading(false)
     }
@@ -51,11 +61,71 @@ function HotelsPage() {
         setPage(0);
     };
 
+    const handleDeleteClick = (hotel) => {
+        setHotelToDelete(hotel);
+        setDeleteDialogOpen(true);
+    };
+
+    const handleDeleteConfirm = async () => {
+        if (!hotelToDelete) return;
+
+        setIsDeleting(true);
+        console.log('Deleting hotel with ID:', hotelToDelete.id);
+        console.log('API endpoint will be: Hotel/' + hotelToDelete.id);
+
+        try {
+            // Call the backend DELETE endpoint: DELETE /api/Hotel/{hotelId}
+            const response = await deleteData(`Hotel/${hotelToDelete.id}`);
+            console.log('Delete response:', response);
+
+            if (response.successful) {
+                // Remove the hotel from the local state
+                setRows(rows.filter(row => row.id !== hotelToDelete.id));
+                setSnackbar({
+                    open: true,
+                    message: 'Hotel deleted successfully',
+                    severity: 'success'
+                });
+            } else {
+                console.error('Delete failed:', response.data);
+                setSnackbar({
+                    open: true,
+                    message: response.data || 'Failed to delete hotel',
+                    severity: 'error'
+                });
+            }
+        } catch (error) {
+            console.error('Delete error:', error);
+            setSnackbar({
+                open: true,
+                message: 'An error occurred while deleting the hotel',
+                severity: 'error'
+            });
+        } finally {
+            setIsDeleting(false);
+            setDeleteDialogOpen(false);
+            setHotelToDelete(null);
+        }
+    };
+
+    const handleDeleteCancel = () => {
+        setDeleteDialogOpen(false);
+        setHotelToDelete(null);
+    };
+
+    const handleSnackbarClose = () => {
+        setSnackbar({ ...snackbar, open: false });
+    };
+
     //states
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [rows, setRows] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+    const [hotelToDelete, setHotelToDelete] = useState(null);
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
 
     const TableRowStyled = styled(TableRow)`
         &:nth-of-type(odd) {
@@ -166,14 +236,21 @@ function HotelsPage() {
                                                             {row.availableRooms}
                                                         </TableCell>
                                                         <TableCell className='w-20'>
-                                                            <Link href={{
-                                                                pathname: `/hotels/details`,
-                                                                query: {
-                                                                    id: row.id
-                                                                }
-                                                            }}>
-                                                                <Edit2 size={18} className='text-[#636363] hover:text-[#1a1a1a]' />
-                                                            </Link>
+                                                            <div className='flex items-center gap-3'>
+                                                                <Link href={{
+                                                                    pathname: `/hotels/details`,
+                                                                    query: {
+                                                                        id: row.id
+                                                                    }
+                                                                }}>
+                                                                    <Edit2 size={18} className='text-[#636363] hover:text-[#1a1a1a] cursor-pointer' />
+                                                                </Link>
+                                                                <Trash
+                                                                    size={18}
+                                                                    className='text-[#FF4C51] hover:text-[#ff3338] cursor-pointer'
+                                                                    onClick={() => handleDeleteClick(row)}
+                                                                />
+                                                            </div>
                                                         </TableCell>
                                                     </TableRowStyled>
                                                 );
@@ -192,6 +269,31 @@ function HotelsPage() {
                         />
                     </div>
                 </div>
+
+                <DeleteConfirmationDialog
+                    open={deleteDialogOpen}
+                    onClose={handleDeleteCancel}
+                    onConfirm={handleDeleteConfirm}
+                    title="Delete Hotel"
+                    message={`Are you sure you want to delete ${hotelToDelete?.name}? This action cannot be undone.`}
+                    isDeleting={isDeleting}
+                />
+
+                <Snackbar
+                    open={snackbar.open}
+                    autoHideDuration={6000}
+                    onClose={handleSnackbarClose}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                >
+                    <MuiAlert
+                        elevation={6}
+                        variant="filled"
+                        onClose={handleSnackbarClose}
+                        severity={snackbar.severity}
+                    >
+                        {snackbar.message}
+                    </MuiAlert>
+                </Snackbar>
 
             </Layout>
         </div>

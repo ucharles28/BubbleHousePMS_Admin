@@ -85,7 +85,7 @@ function RequestDetails() {
 
                         <div className='flex flex-col gap-2'>
                             <p className='text-sm font-normal text-[#636363]'>Guest Name</p>
-                            <p className='text-sm font-medium text-[#1A1A1A]'>{booking && booking.fullName} </p>
+                            <p className='text-sm font-medium text-[#1A1A1A]'>{booking && booking.isMainGuest ? booking.fullName : booking.guestFullName} </p>
                         </div>
 
                         <div className='flex flex-col gap-2'>
@@ -96,7 +96,7 @@ function RequestDetails() {
                         <div className='flex flex-col gap-2'>
                             <p className='text-sm font-normal text-[#636363]'>Guest Email</p>
                             <p className='text-sm font-medium text-[#1A1A1A]'>
-                                {booking && booking.email}
+                                {booking && booking.isMainGuest ? booking.email : booking.guestEmail}
                             </p>
                         </div>
 
